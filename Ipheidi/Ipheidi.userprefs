@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{716424F3-778D-4B13-B692-F86FC161F125}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Info.plist">
+    <Files>
+      <File FileName="iOS/Main.cs" Line="1" Column="1" />
+      <File FileName="iOS/Info.plist" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Ipheidi.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.F5CBA9A5-B87C-4DC9-8648-6531E9F87D5C" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/developpeur/Projects/Ipheidi/iOS/Main.cs" relfile="iOS/Main.cs" line="18" column="1" />
+      <Breakpoint file="/Users/developpeur/Projects/Ipheidi/iOS/Main.cs" relfile="iOS/Main.cs" line="14" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
