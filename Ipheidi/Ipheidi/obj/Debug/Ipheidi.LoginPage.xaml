@@ -8,6 +8,7 @@
 		<Entry x:Name="passwordEntry" IsPassword="true" />
 		<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
 		<Label x:Name="messageLabel" />
+		<Switch x:Name="rememberCheckBox"/>
 	</StackLayout>
 	
 </ContentPage>

@@ -14,10 +14,12 @@ namespace Ipheidi
 		public LoginPage(App app)
 		{
 			_app = app;
-			Autologin();
+			//Autologin();
 			InitializeComponent();
 		}
-		public async Task Autologin()
+		public LoginPage() { InitializeComponent();}
+
+		public async void Autologin()
 		{
 			string username = UserInfo.credentialsManager.GetUsername();
 			string password = UserInfo.credentialsManager.GetPassword();
