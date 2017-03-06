@@ -14,7 +14,11 @@ namespace Ipheidi
 		public LoginPage(App app)
 		{
 			_app = app;
-			Autologin().Wait();
+
+			//Cache la nav bar
+			NavigationPage.SetHasNavigationBar(this, false);
+
+			//Autologin().Wait();
 			InitializeComponent();
 		}
 
@@ -42,6 +46,7 @@ namespace Ipheidi
 					{
 						Debug.WriteLine("Status: " + response.StatusCode.ToString());
 						Debug.WriteLine("Content: " + rc);
+
 					}
 				}
 				else
