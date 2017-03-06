@@ -18,18 +18,20 @@ namespace Ipheidi
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
 
-			//Autologin().Wait();
+			Autologin();
 			InitializeComponent();
 		}
 
 		//Méthode qui fait la connexion automatique de l'usager si les credentials de celui-ci sont stockés.
 		public async Task Autologin()
 		{
+			
 			string username = UserInfo.credentialsManager.GetUsername();
 			string password = UserInfo.credentialsManager.GetPassword();
 
 			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
+				
 				HttpResponseMessage response = await Login(username, password);
 				if(response != null)
 				{
@@ -79,9 +81,13 @@ namespace Ipheidi
 					
 						if (rc != null)		
 						{
-							if(rememberSwitch.IsToggled)
+							if (rememberSwitch.IsToggled)
 							{
 								UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
+							}
+							else
+							{
+								UserInfo.credentialsManager.DeleteCredentials();
 							}
 							_app.GetBrowserPage();
 						}
