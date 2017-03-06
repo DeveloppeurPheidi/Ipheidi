@@ -14,30 +14,40 @@ namespace Ipheidi
 		public LoginPage(App app)
 		{
 			_app = app;
-			Autologin();
+			Autologin().Wait();
 			InitializeComponent();
 		}
 		public async Task Autologin()
 		{
 			string username = UserInfo.credentialsManager.GetUsername();
 			string password = UserInfo.credentialsManager.GetPassword();
+
 			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
 				HttpResponseMessage response = await Login(username, password);
-				string rc = await response.Content.ReadAsStringAsync();
-				if (response.StatusCode == HttpStatusCode.OK)
+				if(response != null)
 				{
-					if (rc != null)
+					string rc = await response.Content.ReadAsStringAsync();
+					if (response.StatusCode == HttpStatusCode.OK)
 					{
-						UserInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = UserInfo.domain, Value = rc };
-						_app.GetBrowserPage();
+						if (rc != null)
+						{
+							UserInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = UserInfo.domain, Value = rc };
+							_app.GetBrowserPage();
+						}
+					}
+					else
+					{
+						Debug.WriteLine("Status: " + response.StatusCode.ToString());
+						Debug.WriteLine("Content: " + rc);
 					}
 				}
 				else
 				{
-					Debug.WriteLine("Status: " + response.StatusCode.ToString());
-					Debug.WriteLine("Content: " + rc);
+					messageLabel.TextColor = Color.Red;
+					messageLabel.Text = "Problème de connexion au serveur, veuillez réessayer plus tard";
 				}
+
 			}
 		}
 
@@ -52,22 +62,30 @@ namespace Ipheidi
 			else
 			{
 				HttpResponseMessage response = await Login(usernameEntry.Text, passwordEntry.Text);
-				if (response.StatusCode == HttpStatusCode.OK)
+				if(response != null)
 				{
-					string rc = await response.Content.ReadAsStringAsync();
-					Debug.WriteLine("WEBSESSION: " + rc);
-					UserInfo.webSession = new Cookie() { Name = "WEBSESSION",Domain = UserInfo.domain,  Value = rc };
-
-					if (rc != null)		
+					if (response.StatusCode == HttpStatusCode.OK)
 					{
-						UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
-						_app.GetBrowserPage();
+						string rc = await response.Content.ReadAsStringAsync();
+						Debug.WriteLine("WEBSESSION: " + rc);
+						UserInfo.webSession = new Cookie() { Name = "WEBSESSION",Domain = UserInfo.domain,  Value = rc };
+					
+						if (rc != null)		
+						{
+							UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
+							_app.GetBrowserPage();
+						}
+						else
+						{
+							messageLabel.TextColor = Color.Red;
+							messageLabel.Text = "L'adresse courriel ou le mot de passe saisi est incorrects";
+						}
 					}
-					else
-					{
-						messageLabel.TextColor = Color.Red;
-						messageLabel.Text = "L'adresse courriel ou le mot de passe saisi est incorrects";
-					}
+				}
+				else
+				{
+					messageLabel.TextColor = Color.Red;
+					messageLabel.Text = "Problème de connexion au serveur, veuillez réessayer plus tard";
 				}
 			}
 		}
