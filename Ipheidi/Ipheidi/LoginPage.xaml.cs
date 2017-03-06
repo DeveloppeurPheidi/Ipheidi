@@ -17,6 +17,8 @@ namespace Ipheidi
 			Autologin().Wait();
 			InitializeComponent();
 		}
+
+		//Méthode qui fait la connexion automatique de l'usager si les credentials de celui-ci sont stockés.
 		public async Task Autologin()
 		{
 			string username = UserInfo.credentialsManager.GetUsername();
@@ -51,7 +53,7 @@ namespace Ipheidi
 			}
 		}
 
-
+		//Évènement appelé lorsque l'on clique sur le bouton de connexion.
 		async void OnLoginButtonClicked(object sender, EventArgs e)
 		{
 			if (string.IsNullOrWhiteSpace(usernameEntry.Text) || string.IsNullOrWhiteSpace(passwordEntry.Text))
@@ -72,7 +74,10 @@ namespace Ipheidi
 					
 						if (rc != null)		
 						{
-							UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
+							if(rememberSwitch.IsToggled)
+							{
+								UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
+							}
 							_app.GetBrowserPage();
 						}
 						else
@@ -90,6 +95,7 @@ namespace Ipheidi
 			}
 		}
 
+		//Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
 		async Task<HttpResponseMessage> Login(string username, string password)
 		{
 			using (var httpClient = new HttpClient())

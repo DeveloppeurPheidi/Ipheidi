@@ -8,6 +8,8 @@
 		<Entry x:Name="passwordEntry" IsPassword="true" />
 		<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
 		<Label x:Name="messageLabel" />
+		<Label Text="Rester connecter"/>
+		<Switch x:Name="rememberSwitch"/>
 	</StackLayout>
 	
 </ContentPage>
