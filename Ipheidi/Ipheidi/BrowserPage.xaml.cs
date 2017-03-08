@@ -8,10 +8,8 @@ namespace Ipheidi
 {
 	public partial class BrowserPage : ContentPage
 	{
-		private App _app;
-		public BrowserPage(App app)
+		public BrowserPage()
 		{
-			_app = app;
 
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
@@ -23,16 +21,20 @@ namespace Ipheidi
 			}
 
 			//Évenement appelé lors de la navigation de page dans le WebView.
-			BrowserWeb.Navigating += (object sender, WebNavigatingEventArgs e) => CheckWebSession();
+			//BrowserWeb.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) => CheckWebSession();
 
+			AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
 			//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-			UserInfo.cookieManager.AddCookie(UserInfo.webSession);
-			BrowserWeb.Source = "http://" + UserInfo.domain + "/connect";
+			AppInfo.cookieManager.AddCookie(AppInfo.webSession);
+			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
 		}
-		public void CheckWebSession()
+
+
+		static public void CheckWebSession()
 		{ 
 			bool webSessionExistAndNotNull = false;
-			foreach (Cookie c in UserInfo.cookieManager.GetAllCookies().GetCookies(new Uri(UserInfo.url)))
+			Debug.WriteLine("=============================");
+			foreach (Cookie c in AppInfo.cookieManager.GetAllCookies().GetCookies(new Uri(AppInfo.url)))
 			{
 				Debug.WriteLine(c.Domain + " " + c.Name + " = " + c.Value);
 
@@ -42,10 +44,15 @@ namespace Ipheidi
 					webSessionExistAndNotNull = true;
 				}
 			}
+			Debug.WriteLine("=============================");
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
 			if (webSessionExistAndNotNull == false)
 			{
-				_app.GetLoginPage();
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					AppInfo.credentialsManager.DeleteCredentials();
+					AppInfo.app.GetLoginPage();
+				});
 			}
 		}
 			

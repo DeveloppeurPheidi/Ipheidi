@@ -15,12 +15,7 @@ namespace Ipheidi.Droid
 		{
 			string cookieValue = cookie.Name + "=" + cookie.Value + ";" + cookie.Domain;
 			CookieManager.Instance.SetAcceptCookie(true);
-			CookieManager.Instance.SetCookie(UserInfo.url, cookieValue);
-		}
-
-		public void ClearCookies()
-		{
-			
+			CookieManager.Instance.SetCookie(AppInfo.url, cookieValue);
 		}
 
 		public CookieContainer GetAllCookies()
@@ -39,7 +34,7 @@ namespace Ipheidi.Droid
 			{
 				// .GetCookie returns ALL cookies related to the URL as a single, long          
 				// string which we have to split and parse         
-				var allCookiesForUrl = CookieManager.Instance.GetCookie(UserInfo.url);
+				var allCookiesForUrl = CookieManager.Instance.GetCookie(AppInfo.url);
 
 				if (string.IsNullOrWhiteSpace(allCookiesForUrl))
 				{
@@ -67,7 +62,7 @@ namespace Ipheidi.Droid
 								Name = cookiePieces[0],
 								Value = cookiePieces[1],
 								Path = "/",
-								Domain = new Uri(UserInfo.url).DnsSafeHost,
+								Domain = new Uri(AppInfo.url).DnsSafeHost,
 							};
 						}
 					}

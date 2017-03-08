@@ -20,9 +20,9 @@ namespace Ipheidi.Droid
 
 			base.OnCreate(bundle);
 			global::Xamarin.Forms.Forms.Init(this, bundle);
-			UserInfo.cookieManager = new AndroidCookieManager();
-			UserInfo.ipAddressManager = new AndroidIpAddressManager();
-			UserInfo.credentialsManager = new AndroidCredentialsManager();
+			AppInfo.cookieManager = new AndroidCookieManager();
+			AppInfo.ipAddressManager = new AndroidIpAddressManager();
+			AppInfo.credentialsManager = new AndroidCredentialsManager();
 			LoadApplication(new App());
 		}
 	}

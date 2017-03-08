@@ -6,10 +6,6 @@ namespace Ipheidi.iOS
 {
 	public class IOSIpAddressManager:IIPAddressManager
 	{
-		public IOSIpAddressManager()
-		{
-		}
-
 		public string GetIPAddress()
 		{
 			String ipAddress = "";

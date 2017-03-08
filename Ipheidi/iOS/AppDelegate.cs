@@ -14,9 +14,9 @@ namespace Ipheidi.iOS
 		{
 			
 			global::Xamarin.Forms.Forms.Init();
-			UserInfo.cookieManager = new IOSCookieManager();
-			UserInfo.ipAddressManager = new IOSIpAddressManager();
-			UserInfo.credentialsManager = new IOSCredentialsManager();
+			AppInfo.cookieManager = new IOSCookieManager();
+			AppInfo.ipAddressManager = new IOSIpAddressManager();
+			AppInfo.credentialsManager = new IOSCredentialsManager();
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);

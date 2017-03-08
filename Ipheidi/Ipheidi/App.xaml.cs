@@ -8,19 +8,20 @@ namespace Ipheidi
 		public App()
 		{
 			InitializeComponent();
-			UserInfo.url = "http://10.1.50.213/default.aspx";
-			UserInfo.domain = "10.1.50.213";
+			AppInfo.url = "http://10.1.50.213/default.aspx";
+			AppInfo.domain = "10.1.50.213";
+			AppInfo.app = this;
 			GetLoginPage();
 
 		}
 
 		public void GetBrowserPage()
 		{
-			MainPage = new NavigationPage(new BrowserPage(this));
+			MainPage = new NavigationPage(new BrowserPage());
 		}
 		public void GetLoginPage()
 		{
-			MainPage = new NavigationPage(new LoginPage(this));
+			MainPage = new NavigationPage(new LoginPage());
 		}
 
 		protected override void OnStart()

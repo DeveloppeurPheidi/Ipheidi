@@ -15,11 +15,6 @@ namespace Ipheidi.iOS
 			NSHttpCookieStorage.SharedStorage.SetCookie(new NSHttpCookie(cookie));
 		}
 
-		public void ClearCookies()
-		{
-			
-		}
-
 		public CookieContainer GetAllCookies()
 		{
 			CookieContainer cookies = new CookieContainer();

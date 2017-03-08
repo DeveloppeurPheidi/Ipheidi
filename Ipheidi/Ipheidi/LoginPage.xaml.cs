@@ -10,11 +10,8 @@ namespace Ipheidi
 {
 	public partial class LoginPage : ContentPage
 	{
-		private App _app;
-		public LoginPage(App app)
+		public LoginPage()
 		{
-			_app = app;
-
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
 
@@ -26,8 +23,8 @@ namespace Ipheidi
 		public async Task Autologin()
 		{
 			
-			string username = UserInfo.credentialsManager.GetUsername();
-			string password = UserInfo.credentialsManager.GetPassword();
+			string username = AppInfo.credentialsManager.GetUsername();
+			string password = AppInfo.credentialsManager.GetPassword();
 
 			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
@@ -40,8 +37,8 @@ namespace Ipheidi
 					{
 						if (rc != null)
 						{
-							UserInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = UserInfo.domain, Value = rc };
-							_app.GetBrowserPage();
+							AppInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = AppInfo.domain, Value = rc };
+							AppInfo.app.GetBrowserPage();
 						}
 					}
 					else
@@ -77,19 +74,19 @@ namespace Ipheidi
 					{
 						string rc = await response.Content.ReadAsStringAsync();
 						Debug.WriteLine("WEBSESSION: " + rc);
-						UserInfo.webSession = new Cookie() { Name = "WEBSESSION",Domain = UserInfo.domain,  Value = rc };
+						AppInfo.webSession = new Cookie() { Name = "WEBSESSION",Domain = AppInfo.domain,  Value = rc };
 					
 						if (rc != null)		
 						{
 							if (rememberSwitch.IsToggled)
 							{
-								UserInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
+								AppInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
 							}
 							else
 							{
-								UserInfo.credentialsManager.DeleteCredentials();
+								AppInfo.credentialsManager.DeleteCredentials();
 							}
-							_app.GetBrowserPage();
+							AppInfo.app.GetBrowserPage();
 						}
 						else
 						{
@@ -116,13 +113,13 @@ namespace Ipheidi
 
 				try
 				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, UserInfo.url);
+					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, AppInfo.url);
 					request.Content = encodedContent;
 
 					request.Headers.Add("User-Agent", "Boris");
-					request.Headers.Add("UserHostAddress", UserInfo.ipAddressManager.GetIPAddress());
+					request.Headers.Add("UserHostAddress", AppInfo.ipAddressManager.GetIPAddress());
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
-					Debug.WriteLine("IP: " + UserInfo.ipAddressManager.GetIPAddress());
+					Debug.WriteLine("IP: " + AppInfo.ipAddressManager.GetIPAddress());
 					return await httpClient.SendAsync(request);
 
 				}

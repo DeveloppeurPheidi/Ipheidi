@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 namespace Ipheidi
 {
-	public class UserInfo
+	public class AppInfo
 	{
 		static public CookieContainer cookieContainer = new CookieContainer();
 		static public ICookieManager cookieManager;
@@ -11,5 +12,6 @@ namespace Ipheidi
 		static public Cookie webSession = new Cookie();
 		static public IIPAddressManager ipAddressManager;
 		static public ICredentialsManager credentialsManager;
+		static public App app;
 	}
 }
