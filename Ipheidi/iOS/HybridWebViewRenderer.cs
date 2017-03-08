@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Foundation;
 using Ipheidi;
 using Ipheidi.iOS;
+using ObjCRuntime;
 using UIKit;
 using WebKit;
 using Xamarin.Forms;
@@ -13,7 +15,6 @@ namespace Ipheidi.iOS
 {
 	public class HybridWebViewRenderer : ViewRenderer<HybridWebView, UIWebView>
 	{
-		const string JavaScriptFunction = "function invokeCSharpAction(data){window.webkit.messageHandlers.invokeAction.postMessage(data);}";
 
 		protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
 		{
@@ -21,7 +22,12 @@ namespace Ipheidi.iOS
 
 			if (Control == null)
 			{
+				// Register our custom url protocol
+				NSUrlProtocol.RegisterClass(new Class(typeof(CustomUrlProtocol)));
 				var webView = new UIWebView();
+
+				var webViewDelegate = new CustomWebViewDelegate();
+				webView.Delegate = webViewDelegate;
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)

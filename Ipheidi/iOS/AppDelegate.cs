@@ -12,7 +12,6 @@ namespace Ipheidi.iOS
 	{
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-			
 			global::Xamarin.Forms.Forms.Init();
 			AppInfo.cookieManager = new IOSCookieManager();
 			AppInfo.ipAddressManager = new IOSIpAddressManager();

@@ -13,5 +13,7 @@ namespace Ipheidi
 		static public IIPAddressManager ipAddressManager;
 		static public ICredentialsManager credentialsManager;
 		static public App app;
+		static public int debugCount = 0;
+		static public bool InLogin = false;
 	}
 }

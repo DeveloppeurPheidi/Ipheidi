@@ -8,8 +8,13 @@
 		<Entry x:Name="passwordEntry" IsPassword="true" />
 		<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
 		<Label x:Name="messageLabel" />
-		<Label Text="Rester connecter"/>
+		<Label Text="Mémoriser le compte?"/>
 		<Switch x:Name="rememberSwitch"/>
+		<StackLayout x:Name="PickerLayout" IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
+			<Label x:Name="PickerLabel" Margin="0,100,0,0" Text="Se connecter avec un compte existant"/>
+			<Picker x:Name="UserPicker"/>
+			<Button x:Name="ConnexionPicker" Text="Connexion" Clicked="OnPickedUserButtonClicked" />
+		</StackLayout>
 	</StackLayout>
 	
 </ContentPage>

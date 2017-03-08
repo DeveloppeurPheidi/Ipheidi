@@ -12,9 +12,8 @@ namespace Ipheidi.Droid
 
 		public override WebResourceResponse ShouldInterceptRequest(WebView view, string url)
 		{
-			var response = base.ShouldInterceptRequest(view, url);
 			BrowserPage.CheckWebSession();
-			return response;
+			return null;
 		}
 	}
 }
