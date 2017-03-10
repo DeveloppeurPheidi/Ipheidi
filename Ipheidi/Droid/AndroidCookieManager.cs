@@ -18,12 +18,22 @@ namespace Ipheidi.Droid
 			CookieManager.Instance.SetCookie(AppInfo.url, cookieValue);
 		}
 
+		public void ClearCookies()
+		{
+			CookieManager.Instance.RemoveAllCookie();
+
+		}
+
 		public CookieContainer GetAllCookies()
 		{
 			CookieContainer cookies = new CookieContainer();
 			foreach (Cookie c in RefreshCookies())
 			{
-				cookies.Add(c);
+				if (!string.IsNullOrEmpty(c.Domain))
+				{ 
+					cookies.Add(c);
+				}
+
 			}
 			return cookies;
 		}

@@ -10,11 +10,10 @@ namespace Ipheidi
 	{
 		public BrowserPage()
 		{
+			this.Title = "Navigateur";
+			this.Icon = "home.png";
 			//Cache la nav bar
-			if (Device.OS == TargetPlatform.iOS)
-			{
-				NavigationPage.SetHasNavigationBar(this, false);
-			}
+			NavigationPage.SetHasNavigationBar(this, false);
 
 			InitializeComponent();
 			if (Device.OS == TargetPlatform.iOS)
@@ -28,11 +27,15 @@ namespace Ipheidi
 			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
 		}
 
-
+		public void Refresh()
+		{ 
+			BrowserWeb.Source = AppInfo.url;
+			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
+		}
 		static public void CheckWebSession()
 		{ 
 			bool webSessionExistAndNotNull = false;
-			Debug.WriteLine("=============================");
+			//Debug.WriteLine("=============================");
 			foreach (Cookie c in AppInfo.cookieManager.GetAllCookies().GetCookies(new Uri(AppInfo.url)))
 			{
 				//Debug.WriteLine(c.Domain + " " + c.Name + " = " + c.Value);
@@ -45,15 +48,12 @@ namespace Ipheidi
 			}
 			AppInfo.debugCount++;
 			Debug.WriteLine(AppInfo.debugCount + ". WEBSSESION: " + webSessionExistAndNotNull);
-			Debug.WriteLine("=============================");
+			//Debug.WriteLine("=============================");
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
 			if (!webSessionExistAndNotNull && !AppInfo.InLogin)
 			{
 				AppInfo.InLogin = true;
-				Device.BeginInvokeOnMainThread(() =>
-				{
-					AppInfo.app.GetLoginPage();
-				});
+				Device.BeginInvokeOnMainThread(AppInfo.app.GetLoginPage);
 			}
 		}
 			

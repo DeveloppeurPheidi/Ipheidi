@@ -8,10 +8,20 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
+	
 	public partial class LoginPage : ContentPage
 	{
+		public Dictionary<string, string> listeUrl = new Dictionary<string, string>
+			{
+				{"10.1.50.216", "http://10.1.50.216/default.aspx"},
+				{"v2_5.pheidi.net", "http://v2_5.pheidi.net/default.aspx"},
+				{ "www.pheidi.com", "https://www.pheidi.com/default.aspx"},
+				{"app.solutionskpi.com","http://app.solutionskpi.com/default.aspx"}
+			};
+
 		public LoginPage()
 		{
+
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
 
@@ -25,6 +35,16 @@ namespace Ipheidi
 				UserPicker.Items.Add(username);
 				UserPicker.SelectedIndex = 0;
 			}
+			foreach (var domain in listeUrl.Keys)
+			{
+				UrlPicker.Items.Add(domain);
+			}
+			UrlPicker.SelectedIndexChanged += (sender, e) =>
+			{
+				AppInfo.domain = UrlPicker.Items[UrlPicker.SelectedIndex];
+				AppInfo.url = listeUrl[AppInfo.domain];
+			};
+			UrlPicker.SelectedIndex = 0;
 		}
 
 		//Méthode qui fait la connexion automatique de l'usager si les credentials de celui-ci sont stockés.
@@ -32,7 +52,7 @@ namespace Ipheidi
 		{
 			string username = UserPicker.Items[UserPicker.SelectedIndex];
 			string password = AppInfo.credentialsManager.GetPassword();
-
+			messageLabel.Text = "";
 			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
 
@@ -44,12 +64,18 @@ namespace Ipheidi
 					{
 						if (rc != null)
 						{
+							Debug.WriteLine(rc);
 							AppInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = AppInfo.domain, Value = rc };
 							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
 							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
 							AppInfo.InLogin = false;
 							AppInfo.app.GetBrowserPage();
+						}
+						else
+						{
+							messageLabel.TextColor = Color.Red;
+							messageLabel.Text = "L'adresse courriel ou le mot de passe saisi est incorrects";
 						}
 					}
 					else
@@ -70,6 +96,7 @@ namespace Ipheidi
 		//Évènement appelé lorsque l'on clique sur le bouton de connexion.
 		async void OnLoginButtonClicked(object sender, EventArgs e)
 		{
+			
 			if (string.IsNullOrWhiteSpace(usernameEntry.Text) || string.IsNullOrWhiteSpace(passwordEntry.Text))
 			{
 				messageLabel.TextColor = Color.Red;
@@ -77,6 +104,7 @@ namespace Ipheidi
 			}
 			else
 			{
+				
 				HttpResponseMessage response = await Login(usernameEntry.Text, passwordEntry.Text);
 				if(response != null)
 				{
@@ -88,15 +116,11 @@ namespace Ipheidi
 					
 						if (rc != null)		
 						{
+							Debug.WriteLine(rc);
 							if (rememberSwitch.IsToggled)
 							{
 								AppInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
 							}
-							else
-							{
-								AppInfo.credentialsManager.DeleteCredentials();
-							}
-
 							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
 							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
@@ -121,6 +145,7 @@ namespace Ipheidi
 		//Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
 		async Task<HttpResponseMessage> Login(string username, string password)
 		{
+			LockInterface();
 			using (var httpClient = new HttpClient())
 			{
 				var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password+ "**,**" } };
@@ -135,15 +160,30 @@ namespace Ipheidi
 					request.Headers.Add("UserHostAddress", AppInfo.ipAddressManager.GetIPAddress());
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
 					Debug.WriteLine("IP: " + AppInfo.ipAddressManager.GetIPAddress());
-					return await httpClient.SendAsync(request);
+					httpClient.Timeout =new TimeSpan(0, 0, 5);
+					var response = await httpClient.SendAsync(request);
+					UnlockInterface();
+					return response;
 
 				}
-				catch (HttpRequestException ex)
+				catch (Exception ex)
 				{
 					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
 				}
+				UnlockInterface();
 				return null;
 			}
+		}
+
+		private void LockInterface()
+		{
+			Debug.WriteLine("Interface: LOCK");
+			MainLayout.IsEnabled = false;
+		}
+		private void UnlockInterface()
+		{ 
+			Debug.WriteLine("Interface: UNLOCK");
+			MainLayout.IsEnabled = true;
 		}
 	}
 }

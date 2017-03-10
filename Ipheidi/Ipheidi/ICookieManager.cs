@@ -8,5 +8,6 @@ namespace Ipheidi
 	{
 		CookieContainer GetAllCookies();
 		void AddCookie(Cookie cookie);
+		void ClearCookies();
 	}
 }

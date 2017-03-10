@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.LoginPage">
 
-	<StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
-		<Label Text="Adresse courriel" />
-		<Entry x:Name="usernameEntry" Placeholder="Courriel" />
-		<Label Text="Mot de passe" />
-		<Entry x:Name="passwordEntry" IsPassword="true" />
-		<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
-		<Label x:Name="messageLabel" />
-		<Label Text="Mémoriser le compte?"/>
-		<Switch x:Name="rememberSwitch"/>
-		<StackLayout x:Name="PickerLayout" IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
-			<Label x:Name="PickerLabel" Margin="0,100,0,0" Text="Se connecter avec un compte existant"/>
-			<Picker x:Name="UserPicker"/>
-			<Button x:Name="ConnexionPicker" Text="Connexion" Clicked="OnPickedUserButtonClicked" />
+	<ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+		<StackLayout x:Name="MainLayout" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
+			<Picker x:Name="UrlPicker"/>
+			<Label Text="Adresse courriel" />
+			<Entry x:Name="usernameEntry" Placeholder="Courriel" />
+			<Label Text="Mot de passe" />
+			<Entry x:Name="passwordEntry" IsPassword="true" />
+			<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
+			<Label x:Name="messageLabel" />
+			<RelativeLayout>
+				<Switch x:Name="rememberSwitch"/>	
+				<Label Text="Mémoriser le compte?" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
+            ElementName=rememberSwitch,Property=Y,Factor=1,Constant=100}"/>
+			</RelativeLayout>
+			<StackLayout x:Name="PickerLayout" Margin="0,100,0,0"  IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
+				<Label Text="Se connecter avec un compte existant"/>
+				<Picker x:Name="UserPicker"/>
+				<Button Text="Connexion" Clicked="OnPickedUserButtonClicked" />
+			</StackLayout>
 		</StackLayout>
-	</StackLayout>
+	</ScrollView>
 	
 </ContentPage>

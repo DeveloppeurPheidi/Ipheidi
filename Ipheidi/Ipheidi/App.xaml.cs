@@ -8,8 +8,8 @@ namespace Ipheidi
 		public App()
 		{
 			InitializeComponent();
-			AppInfo.url = "http://10.1.50.213/default.aspx";
-			AppInfo.domain = "10.1.50.213";
+			AppInfo.url = "http://v2_5.pheidi.net/default.aspx";
+			AppInfo.domain = "v2_5.pheidi.net";
 			AppInfo.app = this;
 			GetLoginPage();
 
@@ -17,7 +17,7 @@ namespace Ipheidi
 
 		public void GetBrowserPage()
 		{
-			MainPage = new NavigationPage(new BrowserPage());
+			MainPage = new NavigationPage(new CustomTabbedPage());
 		}
 		public void GetLoginPage()
 		{
