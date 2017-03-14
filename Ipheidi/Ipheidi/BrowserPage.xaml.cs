@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace Ipheidi
 {
@@ -27,11 +28,6 @@ namespace Ipheidi
 			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
 		}
 
-		public void Refresh()
-		{ 
-			BrowserWeb.Source = AppInfo.url;
-			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
-		}
 		static public void CheckWebSession()
 		{ 
 			bool webSessionExistAndNotNull = false;
@@ -50,9 +46,9 @@ namespace Ipheidi
 			Debug.WriteLine(AppInfo.debugCount + ". WEBSSESION: " + webSessionExistAndNotNull);
 			//Debug.WriteLine("=============================");
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
-			if (!webSessionExistAndNotNull && !AppInfo.InLogin)
+			if (!webSessionExistAndNotNull && !AppInfo.inLogin)
 			{
-				AppInfo.InLogin = true;
+				AppInfo.inLogin = true;
 				Device.BeginInvokeOnMainThread(AppInfo.app.GetLoginPage);
 			}
 		}

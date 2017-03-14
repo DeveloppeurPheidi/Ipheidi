@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.LoginPage">
+	
+	<ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" Margin="0,0,0,0">
+		<RelativeLayout VerticalOptions="Fill" HorizontalOptions="Fill">
+			<Image x:Name="demiCercle" Source="demi_cercle_vert.png" Aspect="Fill"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.275,Constant=0}"/>
+			
+			<Image x:Name="logo" Source="logo.png" 
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.375,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.25,Constant=0}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.25,Constant=0}"/>
+			<StackLayout x:Name="mainLayout"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}">
+				
+				<Picker x:Name="urlPicker"/>
+				<Picker x:Name="userPicker"/>
+				<StackLayout x:Name="entryLayout">
+					<RelativeLayout>
+						<Label Text="Courriel" VerticalOptions="Center"
+						RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0,Constant=0}"
+						RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"/>
+						<Entry x:Name="usernameEntry" Placeholder="Courriel"  
+						RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.5,Constant=0}"/>
+					</RelativeLayout>
+					<RelativeLayout>
+						<Label Text="Mot de passe" VerticalOptions="Center"
+						RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.0,Constant=0}"
+						RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"/>
+						<Entry x:Name="passwordEntry" Placeholder="Mot de Passe" IsPassword="true" 
+						RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.5,Constant=0}"/>
+					</RelativeLayout>
+					<RelativeLayout >
+						<Switch x:Name="rememberSwitch"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.80,Constant=0}"/>	
+						<Label Text="Mémoriser" VerticalOptions="Center"
+						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.50,Constant=0}"
+						RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"/>
+					</RelativeLayout>
+				</StackLayout>
+				<Button x:Name="btnOtherAccount" Text="Se connecter avec un autre compte" Clicked="OnOtherAccountButtonClicked" BackgroundColor="Transparent" BorderColor="Transparent"/>
+				<Label x:Name="messageLabel" TextColor="Red" />
 
-	<ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
-		<StackLayout x:Name="MainLayout" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
-			<Picker x:Name="UrlPicker"/>
-			<Label Text="Adresse courriel" />
-			<Entry x:Name="usernameEntry" Placeholder="Courriel" />
-			<Label Text="Mot de passe" />
-			<Entry x:Name="passwordEntry" IsPassword="true" />
-			<Button Text="Connexion" Clicked="OnLoginButtonClicked" />
-			<Label x:Name="messageLabel" />
-			<RelativeLayout>
-				<Switch x:Name="rememberSwitch"/>	
-				<Label Text="Mémoriser le compte?" RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
-            ElementName=rememberSwitch,Property=Y,Factor=1,Constant=100}"/>
-			</RelativeLayout>
-			<StackLayout x:Name="PickerLayout" Margin="0,100,0,0"  IsVisible="false" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" WidthRequest="300">
-				<Label Text="Se connecter avec un compte existant"/>
-				<Picker x:Name="UserPicker"/>
-				<Button Text="Connexion" Clicked="OnPickedUserButtonClicked" />
 			</StackLayout>
-		</StackLayout>
+			<Button x:Name="btnLogin" Text="Se connecter"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.8,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.25,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"/>
+		</RelativeLayout>
 	</ScrollView>
 	
 </ContentPage>

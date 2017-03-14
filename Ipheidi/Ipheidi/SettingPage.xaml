@@ -3,6 +3,7 @@
 	<ContentPage.Content>
 		<StackLayout >
 			<Label x:Name="TodoLabel" Text="TODO: Add setting options"/>
+			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using Xamarin.Forms;
-
 namespace Ipheidi
 {
 	public class CustomTabbedPage:TabbedPage
 	{
-		
 		public CustomTabbedPage()
 		{
 			//Cache la nav bar
@@ -29,10 +27,14 @@ namespace Ipheidi
 			Children.Add(logout);
 
 			ClearTitles();
+			if (Device.OS == TargetPlatform.Android)
+			{
+				CancelSwipe();
+			}
 		}
 		private void CancelSwipe()
 		{ 
-		
+			
 		}
 		private void Logout()
 		{
@@ -50,21 +52,7 @@ namespace Ipheidi
 		private void Refresh()
 		{
 			Debug.WriteLine("Refresh");
-			if (Device.OS == TargetPlatform.iOS)
-			{
-				AppInfo.app.GetBrowserPage();
-			}
-			else
-			{
-				foreach (var child in this.Children)
-				{
-					if (child is BrowserPage)
-					{
-						CurrentPage = child;
-						//(child as BrowserPage).Refresh();
-					}
-				}
-			}
+			Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
 		}
 	}
 }

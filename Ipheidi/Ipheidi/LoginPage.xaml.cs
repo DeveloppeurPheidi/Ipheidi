@@ -5,152 +5,112 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace Ipheidi
 {
 	
 	public partial class LoginPage : ContentPage
 	{
-		public Dictionary<string, string> listeUrl = new Dictionary<string, string>
+		bool _isSecondPage;
+		public LoginPage():this(false)
+		{
+		}
+
+		public LoginPage(bool secondePage)
+		{
+			_isSecondPage = secondePage;
+			//Cache la nav bar
+			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && !string.IsNullOrEmpty(AppInfo.credentialsManager.GetUsername()));
+			InitializeComponent();
+
+			if (Device.OS == TargetPlatform.Android)
 			{
-				{"10.1.50.216", "http://10.1.50.216/default.aspx"},
-				{"v2_5.pheidi.net", "http://v2_5.pheidi.net/default.aspx"},
-				{ "www.pheidi.com", "https://www.pheidi.com/default.aspx"},
-				{"app.solutionskpi.com","http://app.solutionskpi.com/default.aspx"}
+				btnOtherAccount.BackgroundColor = Color.Transparent;
+				btnOtherAccount.BorderColor = Color.Transparent;
+				btnOtherAccount.TextColor = Color.FromHex("#3366BB");
+
+			}
+
+			btnLogin.FontSize *= 1.5;
+			btnLogin.FontAttributes = FontAttributes.Bold;
+			
+			btnLogin.Clicked += async (sender, e) =>
+			{
+				messageLabel.Text = "";
+				LockInterface();
+				messageLabel.Text = await Login(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
+				UnlockInterface();
 			};
 
-		public LoginPage()
-		{
-
-			//Cache la nav bar
-			NavigationPage.SetHasNavigationBar(this, false);
+			entryLayout.IsVisible = secondePage;
+			btnOtherAccount.IsVisible = !secondePage;
+			userPicker.IsVisible = !secondePage;
 
 
-			InitializeComponent();
+			//User picker
 			string username = AppInfo.credentialsManager.GetUsername();
 			string password = AppInfo.credentialsManager.GetPassword();
-			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !secondePage)
 			{
-				PickerLayout.IsVisible = true;
-				UserPicker.Items.Add(username);
-				UserPicker.SelectedIndex = 0;
+				userPicker.IsVisible = true;
+				userPicker.Items.Add(username);
+				userPicker.SelectedIndexChanged += (sender, e) =>
+				{
+					usernameEntry.Text = AppInfo.credentialsManager.GetUsername();
+					passwordEntry.Text = AppInfo.credentialsManager.GetPassword();
+					AppInfo.username = AppInfo.credentialsManager.GetUsername();
+				};
+				userPicker.SelectedIndex = string.IsNullOrEmpty(AppInfo.username)? 0: userPicker.Items.IndexOf(AppInfo.username);
 			}
-			foreach (var domain in listeUrl.Keys)
+
+			//Url Picker
+			foreach (var domain in AppInfo.listeUrl.Keys)
 			{
-				UrlPicker.Items.Add(domain);
+				urlPicker.Items.Add(domain);
 			}
-			UrlPicker.SelectedIndexChanged += (sender, e) =>
+			urlPicker.Title = "Sélectionnez une adresse";
+			urlPicker.SelectedIndexChanged += (sender, e) =>
 			{
-				AppInfo.domain = UrlPicker.Items[UrlPicker.SelectedIndex];
-				AppInfo.url = listeUrl[AppInfo.domain];
+				AppInfo.domain = urlPicker.Items[urlPicker.SelectedIndex];
+				AppInfo.url = AppInfo.listeUrl[AppInfo.domain];
 			};
-			UrlPicker.SelectedIndex = 0;
-		}
-
-		//Méthode qui fait la connexion automatique de l'usager si les credentials de celui-ci sont stockés.
-		async void OnPickedUserButtonClicked(object sender, EventArgs e)
-		{
-			string username = UserPicker.Items[UserPicker.SelectedIndex];
-			string password = AppInfo.credentialsManager.GetPassword();
-			messageLabel.Text = "";
-			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+			if (!string.IsNullOrEmpty(AppInfo.domain))
 			{
-
-				HttpResponseMessage response = await Login(username, password);
-				if (response != null)
-				{
-					string rc = await response.Content.ReadAsStringAsync();
-					if (response.StatusCode == HttpStatusCode.OK)
-					{
-						if (rc != null)
-						{
-							Debug.WriteLine(rc);
-							AppInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = AppInfo.domain, Value = rc };
-							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
-							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
-							AppInfo.InLogin = false;
-							AppInfo.app.GetBrowserPage();
-						}
-						else
-						{
-							messageLabel.TextColor = Color.Red;
-							messageLabel.Text = "L'adresse courriel ou le mot de passe saisi est incorrects";
-						}
-					}
-					else
-					{
-						Debug.WriteLine("Status: " + response.StatusCode.ToString());
-						Debug.WriteLine("Content: " + rc);
-						messageLabel.TextColor = Color.Red;
-						messageLabel.Text = "Problème de connexion au serveur, veuillez réessayer plus tard";
-					}
-				}
-				else
-				{
-					messageLabel.TextColor = Color.Red;
-					messageLabel.Text = "Problème de connexion au serveur, veuillez réessayer plus tard";
-				}
+				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(AppInfo.domain);
 			}
 		}
-		//Évènement appelé lorsque l'on clique sur le bouton de connexion.
-		async void OnLoginButtonClicked(object sender, EventArgs e)
+
+		//Évènement appelé lorsque l'on clique sur le bouton de connexion avec un autre compte.
+		void OnOtherAccountButtonClicked(object sender, EventArgs e)
 		{
-			
-			if (string.IsNullOrWhiteSpace(usernameEntry.Text) || string.IsNullOrWhiteSpace(passwordEntry.Text))
-			{
-				messageLabel.TextColor = Color.Red;
-				messageLabel.Text = "Veuillez laisser aucun champ vide.";
-			}
-			else
-			{
-				
-				HttpResponseMessage response = await Login(usernameEntry.Text, passwordEntry.Text);
-				if(response != null)
-				{
-					if (response.StatusCode == HttpStatusCode.OK)
-					{
-						string rc = await response.Content.ReadAsStringAsync();
-						Debug.WriteLine("WEBSESSION: " + rc);
-						AppInfo.webSession = new Cookie() { Name = "WEBSESSION",Domain = AppInfo.domain,  Value = rc};
-					
-						if (rc != null)		
-						{
-							Debug.WriteLine(rc);
-							if (rememberSwitch.IsToggled)
-							{
-								AppInfo.credentialsManager.SaveCredentials(usernameEntry.Text, passwordEntry.Text);
-							}
-							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
-							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
-							AppInfo.InLogin = false;
-							AppInfo.app.GetBrowserPage();
-						}
-						else
-						{
-							messageLabel.TextColor = Color.Red;
-							messageLabel.Text = "L'adresse courriel ou le mot de passe saisi est incorrects";
-						}
-					}
-				}
-				else
-				{
-					messageLabel.TextColor = Color.Red;
-					messageLabel.Text = "Problème de connexion au serveur, veuillez réessayer plus tard";
-				}
-			}
+			AppInfo.username = "";
+			Navigation.PushAsync(new LoginPage(true));
+		}
+
+		private void LockInterface()
+		{
+			Debug.WriteLine("Interface: LOCK");
+			mainLayout.IsEnabled = false;
+		}
+		private void UnlockInterface()
+		{ 
+			Debug.WriteLine("Interface: UNLOCK");
+			mainLayout.IsEnabled = true;
 		}
 
 		//Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
-		async Task<HttpResponseMessage> Login(string username, string password)
+		public async Task<string> Login(string username, string password, bool rememberUser)
 		{
-			LockInterface();
+			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(AppInfo.url))
+			{
+				return "Veullez laisser aucun champ vide";
+			}
 			using (var httpClient = new HttpClient())
 			{
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password+ "**,**" } };
+				var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
 				var encodedContent = new FormUrlEncodedContent(parameters);
-
+				HttpResponseMessage response = null;
 				try
 				{
 					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, AppInfo.url);
@@ -160,30 +120,53 @@ namespace Ipheidi
 					request.Headers.Add("UserHostAddress", AppInfo.ipAddressManager.GetIPAddress());
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
 					Debug.WriteLine("IP: " + AppInfo.ipAddressManager.GetIPAddress());
-					httpClient.Timeout =new TimeSpan(0, 0, 5);
-					var response = await httpClient.SendAsync(request);
-					UnlockInterface();
-					return response;
+					httpClient.Timeout = new TimeSpan(0, 0, 5);
+					response = await httpClient.SendAsync(request);
 
 				}
 				catch (Exception ex)
 				{
 					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
+				};
+				if (response != null)
+				{
+					if (response.StatusCode == HttpStatusCode.OK)
+					{
+						string rc = await response.Content.ReadAsStringAsync();
+						Debug.WriteLine("WEBSESSION: " + rc);
+						AppInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = AppInfo.domain, Value = rc };
+						if (!string.IsNullOrWhiteSpace(rc))
+						{
+							Debug.WriteLine(rc);
+							if (rememberUser)
+							{
+								AppInfo.credentialsManager.SaveCredentials(username, password);
+							}
+							AppInfo.username = username;
+							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
+							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
+							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
+							AppInfo.inLogin = false;
+							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+						}
+						else
+						{
+							return "L'adresse courriel ou le mot de passe saisi est incorrects";
+						}
+					}
 				}
-				UnlockInterface();
-				return null;
+				return "Problème de connexion au serveur, veuillez réessayer plus tard";
 			}
 		}
 
-		private void LockInterface()
+		protected override void OnSizeAllocated(double width, double height)
 		{
-			Debug.WriteLine("Interface: LOCK");
-			MainLayout.IsEnabled = false;
-		}
-		private void UnlockInterface()
-		{ 
-			Debug.WriteLine("Interface: UNLOCK");
-			MainLayout.IsEnabled = true;
+			//Permet d'afficher correctement la bar de status sur iOS
+			if (Device.OS == TargetPlatform.iOS)
+			{
+				this.scrollView.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0,0,0,0) :  new Thickness(0, 20, 0, 0);
+			}
+			base.OnSizeAllocated(width, height);
 		}
 	}
 }

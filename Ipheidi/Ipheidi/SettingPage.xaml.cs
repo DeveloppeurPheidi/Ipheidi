@@ -17,5 +17,11 @@ namespace Ipheidi
 				TodoLabel.Margin = new Thickness(0, 20, 0, 0);
 			}
 		}
+
+		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
+		{
+			AppInfo.credentialsManager.DeleteCredentials();
+			AppInfo.username = "";
+		}
 	}
 }

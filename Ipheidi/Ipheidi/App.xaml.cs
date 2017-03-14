@@ -8,8 +8,6 @@ namespace Ipheidi
 		public App()
 		{
 			InitializeComponent();
-			AppInfo.url = "http://v2_5.pheidi.net/default.aspx";
-			AppInfo.domain = "v2_5.pheidi.net";
 			AppInfo.app = this;
 			GetLoginPage();
 
@@ -21,7 +19,9 @@ namespace Ipheidi
 		}
 		public void GetLoginPage()
 		{
-			MainPage = new NavigationPage(new LoginPage());
+			string username = AppInfo.credentialsManager.GetUsername();
+			MainPage = new NavigationPage(new LoginPage(string.IsNullOrEmpty(username)));
+
 		}
 
 		protected override void OnStart()
