@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Auth;
 using Xamarin.Forms;
@@ -9,36 +10,42 @@ namespace Ipheidi.Droid
 	{
 		public void DeleteCredentials()
 		{
-			var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
-			if (account != null)
+			var accounts = AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName);
+			foreach (var account in accounts)
 			{
-				AccountStore.Create(Forms.Context).Delete(account, App.AppName);
+				AccountStore.Create(Forms.Context).Delete(account, AppInfo.AppName);
 			}
 		}
 
-		public void SaveCredentials(string userName, string password)
+		public void SaveCredentials(string username, string password)
 		{
-			if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
+			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
 				Account account = new Account
 				{
-					Username = userName
+					Username = username + " (" + AppInfo.domain + ")"
 				};
 				account.Properties.Add("Password", password);
-				AccountStore.Create(Forms.Context).Save(account, App.AppName);
+				account.Properties.Add("Domain", AppInfo.domain);
+				account.Properties.Add("Username", username);
+				AccountStore.Create(Forms.Context).Save(account, AppInfo.AppName);
 			}
 		}
 
-		public string GetPassword()
+		public void DeleteUser(string username)
 		{
-			var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
-			return (account != null) ? account.Properties["Password"] : null;
+			AccountStore.Create(Forms.Context).Delete(AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName).Where(a => a.Username == username + "( " + AppInfo.domain + ")").FirstOrDefault(), AppInfo.AppName);
 		}
 
-		public string GetUsername()
+		public Dictionary<string, Dictionary<string, string>> GetAllCredentials()
 		{
-			var account = AccountStore.Create(Forms.Context).FindAccountsForService(App.AppName).FirstOrDefault();
-			return (account != null) ? account.Username : null;
+			Dictionary<string, Dictionary<string, string>> credentials = new Dictionary<string, Dictionary<string, string>>();
+
+			foreach (var account in AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName))
+			{
+				credentials.Add(account.Username, account.Properties);
+			}
+			return credentials;
 		}
 	}
 }

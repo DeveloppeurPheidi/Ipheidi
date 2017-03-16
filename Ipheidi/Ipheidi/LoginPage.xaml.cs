@@ -12,26 +12,27 @@ namespace Ipheidi
 	
 	public partial class LoginPage : ContentPage
 	{
-		bool _isSecondPage;
 		public LoginPage():this(false)
 		{
 		}
 
 		public LoginPage(bool secondePage)
 		{
-			_isSecondPage = secondePage;
 			//Cache la nav bar
-			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && !string.IsNullOrEmpty(AppInfo.credentialsManager.GetUsername()));
+			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && AppInfo.credentials.Count > 0);
 			InitializeComponent();
+
 
 			if (Device.OS == TargetPlatform.Android)
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
 				btnOtherAccount.BorderColor = Color.Transparent;
 				btnOtherAccount.TextColor = Color.FromHex("#3366BB");
+				lblRemember.FontSize *= 1.5;
+				lblCourriel.FontSize *= 1.5;
+				lblPassword.FontSize *= 1.5;
 
 			}
-
 			btnLogin.FontSize *= 1.5;
 			btnLogin.FontAttributes = FontAttributes.Bold;
 			
@@ -43,28 +44,11 @@ namespace Ipheidi
 				UnlockInterface();
 			};
 
-			entryLayout.IsVisible = secondePage;
-			btnOtherAccount.IsVisible = !secondePage;
-			userPicker.IsVisible = !secondePage;
+			EntriesVisible(secondePage);
 
-
-			//User picker
-			string username = AppInfo.credentialsManager.GetUsername();
-			string password = AppInfo.credentialsManager.GetPassword();
-			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !secondePage)
-			{
-				userPicker.IsVisible = true;
-				userPicker.Items.Add(username);
-				userPicker.SelectedIndexChanged += (sender, e) =>
-				{
-					usernameEntry.Text = AppInfo.credentialsManager.GetUsername();
-					passwordEntry.Text = AppInfo.credentialsManager.GetPassword();
-					AppInfo.username = AppInfo.credentialsManager.GetUsername();
-				};
-				userPicker.SelectedIndex = string.IsNullOrEmpty(AppInfo.username)? 0: userPicker.Items.IndexOf(AppInfo.username);
-			}
 
 			//Url Picker
+			urlPicker.IsEnabled = secondePage;
 			foreach (var domain in AppInfo.listeUrl.Keys)
 			{
 				urlPicker.Items.Add(domain);
@@ -79,6 +63,36 @@ namespace Ipheidi
 			{
 				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(AppInfo.domain);
 			}
+			//User picker
+			if (AppInfo.credentials.Count > 0 && !secondePage)
+			{
+
+				foreach (var account in AppInfo.credentials)
+				{
+					if (account.Value.ContainsKey("Username"))
+					{ 
+						userPicker.Items.Add(account.Key);
+					}
+				}
+				if (userPicker.Items.Count == 0)
+				{
+					AppInfo.credentialsManager.DeleteCredentials();
+					Device.BeginInvokeOnMainThread(AppInfo.app.GetLoginPage);
+				}
+				userPicker.SelectedIndexChanged += (sender, e) =>
+				{
+					string account = userPicker.Items[userPicker.SelectedIndex];
+					if (AppInfo.credentials.ContainsKey(account))
+					{ 
+						var properties = AppInfo.credentials[account];
+						AppInfo.username = properties["Username"];
+						usernameEntry.Text = properties["Username"];
+						passwordEntry.Text = properties["Password"];
+						urlPicker.SelectedIndex = urlPicker.Items.IndexOf(properties["Domain"]);
+					}
+				};
+				userPicker.SelectedIndex = string.IsNullOrEmpty(AppInfo.username) || string.IsNullOrEmpty(AppInfo.domain) ? 0 : userPicker.Items.IndexOf(AppInfo.username + " (" + AppInfo.domain + ")");
+			}
 		}
 
 		//Évènement appelé lorsque l'on clique sur le bouton de connexion avec un autre compte.
@@ -91,12 +105,12 @@ namespace Ipheidi
 		private void LockInterface()
 		{
 			Debug.WriteLine("Interface: LOCK");
-			mainLayout.IsEnabled = false;
+			btnLogin.IsEnabled = false;
 		}
 		private void UnlockInterface()
 		{ 
 			Debug.WriteLine("Interface: UNLOCK");
-			mainLayout.IsEnabled = true;
+			btnLogin.IsEnabled = true;
 		}
 
 		//Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
@@ -148,6 +162,7 @@ namespace Ipheidi
 							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
 							AppInfo.inLogin = false;
 							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+							return "";
 						}
 						else
 						{
@@ -164,9 +179,23 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
-				this.scrollView.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0,0,0,0) :  new Thickness(0, 20, 0, 0);
+				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0,0,0,0) :  new Thickness(0, 20, 0, 0);
 			}
 			base.OnSizeAllocated(width, height);
+		}
+
+		void EntriesVisible(bool visible)
+		{
+			lblCourriel.IsVisible = visible;
+			lblPassword.IsVisible = visible;
+			lblRemember.IsVisible = visible;
+			passwordEntry.IsVisible = visible;
+			usernameEntry.IsVisible = visible;
+			rememberSwitch.IsVisible = visible;
+
+			btnOtherAccount.IsVisible = !visible;
+			userPicker.IsVisible = !visible;
+
 		}
 	}
 }

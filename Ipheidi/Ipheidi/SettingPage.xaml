@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.SettingPage">
 	<ContentPage.Content>
 		<StackLayout >
-			<Label x:Name="TodoLabel" Text="TODO: Add setting options"/>
 			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked"/>
+			<Button Text="Supprimer tout les comptes" Clicked="DeleteAllUserButtonClicked"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

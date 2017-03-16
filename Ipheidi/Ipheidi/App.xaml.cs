@@ -4,7 +4,6 @@ namespace Ipheidi
 {
 	public partial class App : Application
 	{
-		static public string AppName = "IPheidi";
 		public App()
 		{
 			InitializeComponent();
@@ -19,8 +18,8 @@ namespace Ipheidi
 		}
 		public void GetLoginPage()
 		{
-			string username = AppInfo.credentialsManager.GetUsername();
-			MainPage = new NavigationPage(new LoginPage(string.IsNullOrEmpty(username)));
+			AppInfo.credentials = AppInfo.credentialsManager.GetAllCredentials();
+			MainPage = new NavigationPage(new LoginPage(AppInfo.credentials.Count==0));
 
 		}
 

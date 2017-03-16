@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Auth;
 
@@ -8,36 +9,42 @@ namespace Ipheidi.iOS
 	{
 		public void DeleteCredentials()
 		{
-			var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
-			if (account != null)
+			var accounts = AccountStore.Create().FindAccountsForService(AppInfo.AppName);
+			foreach (var account in accounts)
 			{
-				AccountStore.Create().Delete(account, App.AppName);
+				AccountStore.Create().Delete(account, AppInfo.AppName);
 			}
 		}
 
-		public void SaveCredentials(string userName, string password)
+		public void SaveCredentials(string username, string password)
 		{
-			if (!string.IsNullOrWhiteSpace(userName) && !string.IsNullOrWhiteSpace(password))
+			if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
 			{
 				Account account = new Account
 				{
-					Username = userName
+					Username = username + " (" + AppInfo.domain + ")"
 				};
 				account.Properties.Add("Password", password);
-				AccountStore.Create().Save(account, App.AppName);
+				account.Properties.Add("Domain", AppInfo.domain);
+				account.Properties.Add("Username", username);
+				AccountStore.Create().Save(account, AppInfo.AppName);
 			}
 		}
 
-		public string GetPassword()
+		public void DeleteUser(string username)
 		{
-			var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
-			return (account != null) ? account.Properties["Password"] : null;
+			AccountStore.Create().Delete(AccountStore.Create().FindAccountsForService(AppInfo.AppName).Where(a => a.Username == username + "( " + AppInfo.domain + ")").FirstOrDefault(), AppInfo.AppName);
 		}
 
-		public string GetUsername()
+		public Dictionary<string, Dictionary<string, string>> GetAllCredentials()
 		{
-			var account = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault();
-			return (account != null) ? account.Username : null;
+			Dictionary<string, Dictionary<string, string>> credentials = new Dictionary<string, Dictionary<string, string>>();
+
+			foreach (var account in AccountStore.Create().FindAccountsForService(AppInfo.AppName))
+			{
+				credentials.Add(account.Username, account.Properties);
+			}
+			return credentials;
 		}
 	}
 }

@@ -12,13 +12,15 @@ namespace Ipheidi
 			this.Title = "Configuration";
 			this.Icon = "cogwheel.png";
 			InitializeComponent();
-			if (Device.OS == TargetPlatform.iOS)
-			{
-				TodoLabel.Margin = new Thickness(0, 20, 0, 0);
-			}
 		}
 
 		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
+		{
+			AppInfo.credentialsManager.DeleteUser(AppInfo.username);
+			AppInfo.username = "";
+		}
+
+		void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
 			AppInfo.credentialsManager.DeleteCredentials();
 			AppInfo.username = "";
