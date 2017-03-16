@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
 namespace Ipheidi
@@ -9,23 +10,34 @@ namespace Ipheidi
 		{
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
+			NavigationPage.SetHasBackButton(this, false);
 			//Bouton de logout
 			ContentPage logout = new ContentPage();
 			logout.Icon = "logout.png";
 			logout.Title = "Déconnexion";
 			logout.Appearing += (sender, e) => Logout();
 
-			//
+			//Bouton de refresh
 			ContentPage refresh = new ContentPage();
 			refresh.Icon = "refresh.png";
-			refresh.Title = "Regénérer";
+			refresh.Title = "Regénérer le navigateur";
 			refresh.Appearing += (sender, e) => Refresh();
 
-			Children.Add(new BrowserPage());
-			Children.Add(new SettingPage());
-			Children.Add(refresh);
-			Children.Add(logout);
+			BrowserPage browser = new BrowserPage();
 
+			SettingPage setting = new SettingPage();
+			LocationPage location = new LocationPage();
+			BluetoothPage bluetooth = new BluetoothPage();
+
+			MenuPage menu = new MenuPage();
+			menu.pages.Add(logout);
+			menu.pages.Add(refresh);
+
+			Children.Add(browser);
+			Children.Add(setting);
+			Children.Add(location);
+			Children.Add(bluetooth);
+			Children.Add(menu);
 			ClearTitles();
 			if (Device.OS == TargetPlatform.Android)
 			{
@@ -45,7 +57,7 @@ namespace Ipheidi
 		{ 
 			foreach (var child in this.Children)
 			{
-				child.Title = "";
+				child.Title = null;
 			}
 		}
 
@@ -54,5 +66,7 @@ namespace Ipheidi
 			Debug.WriteLine("Refresh");
 			Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
 		}
+
+
 	}
 }

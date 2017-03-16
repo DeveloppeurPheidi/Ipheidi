@@ -19,7 +19,8 @@ namespace Ipheidi
 		public void GetLoginPage()
 		{
 			AppInfo.credentials = AppInfo.credentialsManager.GetAllCredentials();
-			MainPage = new NavigationPage(new LoginPage(AppInfo.credentials.Count==0));
+			var page = new NavigationPage(new LoginPage(AppInfo.credentials.Count == 0));
+			MainPage = page;
 
 		}
 

@@ -22,7 +22,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && AppInfo.credentials.Count > 0);
 			InitializeComponent();
 
-
+			Debug.WriteLine("" + lblRemember.FontSize + "\n\n"+ Font.Default.FontFamily);
 			if (Device.OS == TargetPlatform.Android)
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
@@ -179,7 +179,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
-				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0,0,0,0) :  new Thickness(0, 20, 0, 0);
+				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			base.OnSizeAllocated(width, height);
 		}

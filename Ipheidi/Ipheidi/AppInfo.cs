@@ -7,14 +7,16 @@ namespace Ipheidi
 	public class AppInfo
 	{
 		static public CookieContainer cookieContainer = new CookieContainer();
-		static public ICookieManager cookieManager;
+
 		static public string AppName = "IPheidi";
 		static public string url = "";
 		static public string domain = "";
 		static public Cookie webSession = new Cookie();
+		static public ICookieManager cookieManager;	
 		static public IIPAddressManager ipAddressManager;
 		static public ICredentialsManager credentialsManager;
 		static public IStatusBarManager statusBarManager;
+		static public ILocationManager locationManager;
 		static public App app;
 		static public int debugCount = 0;
 		static public bool inLogin = false;
