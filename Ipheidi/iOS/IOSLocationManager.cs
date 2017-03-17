@@ -7,9 +7,9 @@ namespace Ipheidi.iOS
 {
 	public class IOSLocationManager:ILocationManager
 	{
-		
+		bool firstCheck = true;
 		List<ILocationListener> observers;
-		public  CLLocationManager locationManager;
+		CLLocationManager locationManager;
 
 		public IOSLocationManager()
 		{
@@ -17,12 +17,6 @@ namespace Ipheidi.iOS
 			this.locationManager = new CLLocationManager();
 			this.locationManager.PausesLocationUpdatesAutomatically = false;
 
-			// iOS 8 has additional permissions requirements
-			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-			{
-				locationManager.RequestAlwaysAuthorization(); // works in background
-													 //locMgr.RequestWhenInUseAuthorization (); // only in foreground
-			}
 
 			if (UIDevice.CurrentDevice.CheckSystemVersion(9, 0))
 			{
@@ -37,7 +31,13 @@ namespace Ipheidi.iOS
 
 		public Location GetLocation()
 		{
-			throw new NotImplementedException();
+			return new Location(){
+				Altitude= locationManager.Location.Altitude ,
+				Lattitude= locationManager.Location.Coordinate.Latitude ,
+				Longitude= locationManager.Location.Coordinate.Longitude ,
+				Course= locationManager.Location.Course ,
+				Speed= locationManager.Location.Speed
+			};
 		}
 
 		public void OnLocationUpdate(Location location)
@@ -50,6 +50,13 @@ namespace Ipheidi.iOS
 
 		public void StartLocationUpdate(double precision)
 		{
+			// iOS 8 has additional permissions requirements
+			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) && firstCheck)
+			{
+				firstCheck = false;
+				locationManager.RequestAlwaysAuthorization(); // works in background
+															  //locMgr.RequestWhenInUseAuthorization (); // only in foreground
+			}
 			if (CLLocationManager.LocationServicesEnabled)
 			{
 				//set the desired accuracy, in meters
@@ -63,7 +70,8 @@ namespace Ipheidi.iOS
 						Altitude = clLoc.Altitude,
 						Longitude = clLoc.Coordinate.Longitude,
 						Lattitude = clLoc.Coordinate.Latitude,
-						Course = clLoc.Course
+						Course = clLoc.Course,
+						Time = DateTime.Now
 					};
 					OnLocationUpdate(loc);
 				};
@@ -75,6 +83,7 @@ namespace Ipheidi.iOS
 		public void StopLocationUpdate()
 		{
 			locationManager.StopUpdatingLocation();
+
 		}
 	}
 }

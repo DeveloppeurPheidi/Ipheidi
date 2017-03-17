@@ -19,7 +19,7 @@
                         <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.50588235294117645" green="0.75294117647058822" blue="0.25098039215686274" alpha="1"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4" translatesAutoresizingMaskIntoConstraints="NO" image="logo.png">
-                                <rect key="frame" x="132" y="208" width="136" height="136"/>
+                                <rect key="frame" x="232" y="212" width="136" height="136"/>
                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                             </imageView>
                         </subviews>
@@ -34,6 +34,10 @@
                             <constraint id="32" firstItem="4" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="188"/>
                             <constraint id="33" firstItem="4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="132"/>
                             <constraint id="34" firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4" secondAttribute="bottom" constant="256"/>
+                            <constraint id="38" firstItem="4" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="192"/>
+                            <constraint id="39" firstItem="Ze5-6b-2t3" firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="232"/>
+                            <constraint id="42" firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4" secondAttribute="bottom" constant="252"/>
+                            <constraint id="43" firstItem="4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="232"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -71,11 +75,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home.png" width="25" height="24"/>
-        <image name="logout.png" width="21" height="18"/>
-        <image name="refresh.png" width="25" height="26"/>
-        <image name="cogwheel.png" width="24" height="24"/>
+        <image name="home.png" width="30" height="30"/>
+        <image name="logout.png" width="30" height="30"/>
+        <image name="refresh.png" width="30" height="30"/>
+        <image name="cogwheel.png" width="30" height="30"/>
         <image name="logo.png" width="136" height="136"/>
         <image name="demi_cercle_vert.png" width="1000" height="500"/>
+        <image name="bluetooth.png" width="30" height="30"/>
+        <image name="menu_hamburger.png" width="30" height="30"/>
+        <image name="nearby_square.png" width="30" height="30"/>
     </resources>
 </document>

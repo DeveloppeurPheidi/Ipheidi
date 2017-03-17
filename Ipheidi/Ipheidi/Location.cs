@@ -32,5 +32,12 @@ namespace Ipheidi
 			get;
 			set;
 		}
+
+		public DateTime Time
+		{
+			get;
+			set;
+		}
+
 	}
 }

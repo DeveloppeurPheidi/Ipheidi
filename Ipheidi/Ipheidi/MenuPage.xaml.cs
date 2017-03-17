@@ -24,10 +24,28 @@ namespace Ipheidi
 			{
 				if(listViewMenu.SelectedItem != null)
 				{ 
-					Navigation.PushAsync((Page)listViewMenu.SelectedItem);
+					Page p = (Page)listViewMenu.SelectedItem;
+					if (p.Title == "Déconnexion")
+					{
+						Logout();
+					}
+					else if (p.Title == "Regénérer le navigateur")
+					{
+						Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+					}
+					else
+					{
+						Navigation.PushAsync(p);
+					}
 				}
 				listViewMenu.SelectedItem = null;
 			};
+		}
+
+		private void Logout()
+		{
+			AppInfo.cookieManager.ClearCookies();
+			BrowserPage.CheckWebSession();
 		}
 
 	}

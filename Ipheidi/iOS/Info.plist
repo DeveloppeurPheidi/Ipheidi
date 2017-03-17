@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Ipheidi</string>
+	<string>iPheidi</string>
 	<key>CFBundleName</key>
-	<string>Ipheidi</string>
+	<string>iPheidi</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.pheidi.ipheidi</string>
 	<key>CFBundleShortVersionString</key>
@@ -51,5 +51,7 @@
 	<array>
 		<string>location</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Voulez vous authorizer l&apos;application iPheidi d&apos;utiliser la fonctionnalité de localisation?</string>
 </dict>
 </plist>

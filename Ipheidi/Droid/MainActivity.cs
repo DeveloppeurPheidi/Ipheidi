@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Locations;
 
 namespace Ipheidi.Droid
 {
@@ -23,6 +24,7 @@ namespace Ipheidi.Droid
 			AppInfo.cookieManager = new AndroidCookieManager();
 			AppInfo.ipAddressManager = new AndroidIpAddressManager();
 			AppInfo.credentialsManager = new AndroidCredentialsManager();
+			AppInfo.locationManager = new AndroidLocationManager(GetSystemService(Context.LocationService) as LocationManager);
 			LoadApplication(new App());
 		}
 	}

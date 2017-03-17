@@ -31,7 +31,6 @@ namespace Ipheidi
 		static public void CheckWebSession()
 		{ 
 			bool webSessionExistAndNotNull = false;
-			//Debug.WriteLine("=============================");
 			foreach (Cookie c in AppInfo.cookieManager.GetAllCookies().GetCookies(new Uri(AppInfo.url)))
 			{
 				//Debug.WriteLine(c.Domain + " " + c.Name + " = " + c.Value);
@@ -44,7 +43,6 @@ namespace Ipheidi
 			}
 			AppInfo.debugCount++;
 			Debug.WriteLine(AppInfo.debugCount + ". WEBSSESION: " + webSessionExistAndNotNull);
-			//Debug.WriteLine("=============================");
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
 			if (!webSessionExistAndNotNull && !AppInfo.inLogin)
 			{

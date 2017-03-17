@@ -15,13 +15,14 @@ namespace Ipheidi
 			ContentPage logout = new ContentPage();
 			logout.Icon = "logout.png";
 			logout.Title = "Déconnexion";
-			logout.Appearing += (sender, e) => Logout();
 
 			//Bouton de refresh
 			ContentPage refresh = new ContentPage();
 			refresh.Icon = "refresh.png";
 			refresh.Title = "Regénérer le navigateur";
-			refresh.Appearing += (sender, e) => Refresh();
+
+			NavigationPage.SetHasNavigationBar(refresh, false);
+			NavigationPage.SetHasNavigationBar(logout, false);
 
 			BrowserPage browser = new BrowserPage();
 
@@ -39,34 +40,13 @@ namespace Ipheidi
 			Children.Add(bluetooth);
 			Children.Add(menu);
 			ClearTitles();
-			if (Device.OS == TargetPlatform.Android)
-			{
-				CancelSwipe();
-			}
-		}
-		private void CancelSwipe()
-		{ 
-			
-		}
-		private void Logout()
-		{
-			AppInfo.cookieManager.ClearCookies();
-			BrowserPage.CheckWebSession();
 		}
 		private void ClearTitles()
 		{ 
 			foreach (var child in this.Children)
 			{
-				child.Title = null;
+				child.Title = "";
 			}
 		}
-
-		private void Refresh()
-		{
-			Debug.WriteLine("Refresh");
-			Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
-		}
-
-
 	}
 }

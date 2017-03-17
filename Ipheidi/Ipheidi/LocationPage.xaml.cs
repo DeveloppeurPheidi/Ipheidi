@@ -7,11 +7,18 @@ namespace Ipheidi
 {
 	public partial class LocationPage : ContentPage, ILocationListener
 	{
+		List<Location> locationsList; 
 		public LocationPage()
 		{
+			locationsList = new List<Location>();
 			Title = "Localisation";
 			Icon = "nearby_square.png";
 			InitializeComponent();
+			lblSpeed.FontSize *= 3;
+			lblSpeed.FontAttributes = FontAttributes.Bold;
+			lblSpeed.TextColor = Color.White;
+			lblSpeed.BackgroundColor = Color.Black;
+
 			if (AppInfo.locationManager != null)
 			{
 				AppInfo.locationManager.AddLocationListener(this);
@@ -26,15 +33,20 @@ namespace Ipheidi
 			else
 			{ 
 				AppInfo.locationManager.StopLocationUpdate();
+				lblSpeed.Text = "";
+				lblAltitude.Text = "";
+				lblLatitude.Text = "";
+				lblLongitude.Text = "";
 			}
-		}
+		}    
 
 		public void OnLocationUpdate(Location location)
 		{
-			Debug.WriteLine("Thx for location update!");
-			lblLocation.Text = "x: " + location.Longitude + "\ny: " + location.Lattitude + "\nheight: " + location.Altitude + "\nspeed: " + location.Speed + "\norientation: " + location.Course;
+			lblSpeed.Text = (location.Speed>= 0 ?(int)(location.Speed * 3.6):0) + " km/h";
+			lblAltitude.Text = "Altitude: " + (int)(location.Altitude) + " m";
+			lblLatitude.Text =  "Latitude: "+location.Lattitude;
+			lblLongitude.Text = "Longitude: "+location.Longitude;
 		}
-
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			//Permet d'afficher correctement la bar de status sur iOS
