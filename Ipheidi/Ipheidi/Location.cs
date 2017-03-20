@@ -21,7 +21,7 @@ namespace Ipheidi
 			set;
 		}
 
-		public double Course
+		public double Orientation
 		{
 			get;
 			set;
@@ -37,6 +37,46 @@ namespace Ipheidi
 		{
 			get;
 			set;
+		}
+
+		public int BatteryRemainingCharge
+		{
+			get;
+			set;
+		}
+
+		public string PowerSource
+		{
+			get;
+			set;
+		}
+
+		public string PowerStatus
+		{
+			get;
+			set;
+		}
+
+		public double GetDistanceFromOtherLocation(Location location)
+		{
+			double lat1 = this.Lattitude;
+			double lng1 = this.Longitude;
+			double lat2 = location.Lattitude;
+			double lng2 = location.Longitude;
+			double earthRadius = 6371000; //meters
+			double dLat = DegreeToRadian(lat2 - lat1);
+			double dLng = DegreeToRadian(lng2 - lng1);
+			double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+					   Math.Cos(DegreeToRadian(lat1)) * Math.Cos(DegreeToRadian(lat2)) *
+					   Math.Sin(dLng / 2) * Math.Sin(dLng / 2);
+			double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+			float dist = (float)(earthRadius * c);
+
+			return dist;
+		}
+		private double DegreeToRadian(double degree)
+		{
+			return (degree * Math.PI) / 180;
 		}
 
 	}

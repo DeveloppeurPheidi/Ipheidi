@@ -60,7 +60,7 @@
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=200}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
-			<Button x:Name="btnLogin" Text="Se connecter"
+			<Button x:Name="btnLogin" Text="Se connecter" BorderRadius="15" BorderWidth="1"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.8,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.25,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"/>

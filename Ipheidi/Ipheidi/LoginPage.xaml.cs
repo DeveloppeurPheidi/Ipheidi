@@ -32,10 +32,10 @@ namespace Ipheidi
 				lblCourriel.FontSize *= 1.5;
 				lblPassword.FontSize *= 1.5;
 
+
 			}
 			btnLogin.FontSize *= 1.5;
 			btnLogin.FontAttributes = FontAttributes.Bold;
-			
 			btnLogin.Clicked += async (sender, e) =>
 			{
 				messageLabel.Text = "";

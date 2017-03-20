@@ -31,7 +31,7 @@ namespace Ipheidi.Droid
 			Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = Accuracy.Fine }, true);
 			if (Provider!= null)
 			{
-				locationManager.RequestLocationUpdates(Provider, 2000, Precision, this);
+				locationManager.RequestLocationUpdates(Provider, 0, Precision, this);
 			}
 			else
 			{
@@ -55,7 +55,8 @@ namespace Ipheidi.Droid
 					Longitude = loc.Longitude,
 					Lattitude = loc.Latitude,
 					Speed = loc.Speed,
-					Course = loc.Bearing
+					Orientation = loc.Bearing,
+					Time = DateTime.Now
 				};
 			}
 			return null;
@@ -78,7 +79,7 @@ namespace Ipheidi.Droid
 				Lattitude = location.Latitude,
 				Longitude = location.Longitude,
 				Speed = location.Speed,
-				Course = location.Bearing
+				Orientation = location.Bearing
 			});
 		}
 

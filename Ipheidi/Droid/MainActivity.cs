@@ -25,6 +25,7 @@ namespace Ipheidi.Droid
 			AppInfo.ipAddressManager = new AndroidIpAddressManager();
 			AppInfo.credentialsManager = new AndroidCredentialsManager();
 			AppInfo.locationManager = new AndroidLocationManager(GetSystemService(Context.LocationService) as LocationManager);
+			AppInfo.battery = new AndroidBattery();
 			LoadApplication(new App());
 		}
 	}

@@ -19,6 +19,7 @@ namespace Ipheidi.iOS
 			AppInfo.credentialsManager = new IOSCredentialsManager();
 			AppInfo.statusBarManager = new IOSStatusBarManager();
 			AppInfo.locationManager = new IOSLocationManager();
+			AppInfo.battery = new IOSBattery();
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);

@@ -35,7 +35,7 @@ namespace Ipheidi.iOS
 				Altitude= locationManager.Location.Altitude ,
 				Lattitude= locationManager.Location.Coordinate.Latitude ,
 				Longitude= locationManager.Location.Coordinate.Longitude ,
-				Course= locationManager.Location.Course ,
+				Orientation= locationManager.Location.Course ,
 				Speed= locationManager.Location.Speed
 			};
 		}
@@ -70,7 +70,7 @@ namespace Ipheidi.iOS
 						Altitude = clLoc.Altitude,
 						Longitude = clLoc.Coordinate.Longitude,
 						Lattitude = clLoc.Coordinate.Latitude,
-						Course = clLoc.Course,
+						Orientation = clLoc.Course,
 						Time = DateTime.Now
 					};
 					OnLocationUpdate(loc);
