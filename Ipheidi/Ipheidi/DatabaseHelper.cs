@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
 using Xamarin.Forms;
+using System.IO;
 
 namespace Ipheidi
 {
@@ -27,12 +28,19 @@ namespace Ipheidi
 		public DatabaseHelper(string dbPath)
 		{
 			database = new SQLiteAsyncConnection(dbPath);
-			database.CreateTableAsync<Location>().Wait();
+			try
+			{
+				database.CreateTableAsync<Location>().Wait();
+			}
+			catch(Exception e)
+			{
+				DependencyService.Get<IFileHelper>().DeleteLocalFile("PheidiSQLite.db3");
+			}
 		}
 
 		public Task<List<Location>> GetItemsAsync()
 		{
-			return database.Table<Location>().ToListAsync();
+			return database.Table<Location>().Where(l=>l.Domain == AppInfo.domain && l.User == AppInfo.username).ToListAsync();
 		}
 
 		public Task<int> SaveItemAsync(Location item)

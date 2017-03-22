@@ -8,6 +8,12 @@ namespace Ipheidi.iOS
 {
 	public class FileHelper :IFileHelper
 	{
+		public void DeleteLocalFile(string filename)
+		{
+			string path = GetLocalFilePath(filename);
+			File.Delete(path);
+		}
+
 		public string GetLocalFilePath(string filename)
 		{
 			string docFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);

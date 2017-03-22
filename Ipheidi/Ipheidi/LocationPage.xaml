@@ -47,6 +47,10 @@
 			<Label x:Name="lblLongitude"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.5,Constant=40}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"/>
+			
+			<Label x:Name="lblOrientation"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.5,Constant=60}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"/>
 
 			<Label x:Name="lblBatteryLevel"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.5,Constant=100}"

@@ -1,8 +1,19 @@
 ﻿using System;
+using Newtonsoft.Json;
+using SQLite;
+
 namespace Ipheidi
 {
 	public class Location
 	{
+		[JsonIgnore]
+		[PrimaryKey, AutoIncrement]
+		public int ID
+		{
+			get;
+			set;
+		}
+
 		public double Altitude
 		{
 			get;
@@ -57,6 +68,19 @@ namespace Ipheidi
 			set;
 		}
 
+		[JsonIgnore]
+		public string User
+		{
+			get;
+			set;
+		}
+
+		[JsonIgnore]
+		public string Domain
+		{
+			get;
+			set;
+		}
 		public double GetDistanceFromOtherLocation(Location location)
 		{
 			double lat1 = this.Lattitude;

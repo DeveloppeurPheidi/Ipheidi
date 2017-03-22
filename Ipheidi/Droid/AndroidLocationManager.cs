@@ -72,7 +72,6 @@ namespace Ipheidi.Droid
 
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
-			System.Diagnostics.Debug.WriteLine("Update");
 			OnLocationUpdate(new Location()
 			{
 				Altitude = location.Altitude,

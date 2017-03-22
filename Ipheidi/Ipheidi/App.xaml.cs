@@ -26,7 +26,7 @@ namespace Ipheidi
 
 		protected override void OnStart()
 		{
-			AppInfo.locations = new List<Location>();
+			
 		}
 
 		protected override void OnSleep()
