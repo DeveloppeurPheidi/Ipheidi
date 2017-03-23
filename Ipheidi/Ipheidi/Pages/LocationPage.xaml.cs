@@ -19,8 +19,59 @@ namespace Ipheidi
 		bool userClicked = false;
 		int locationCount;
 		int time = 0;
+		bool visible = false;
+		protected static LocationPage instance;
+		public static LocationPage GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new LocationPage();
+			}
+			else if (Device.OS == TargetPlatform.iOS) 
+			{
+				var copy = new LocationPage();
+				copy = copy.Copy(instance);
+				instance = copy;
+			}
+			return instance;
+		}
+		public static void DiposeInstance()
+		{
+			if (instance != null)
+			{
+				instance.StopLocalisation();
+				instance = null;
+			}
+		}
 
-		public LocationPage()
+
+		protected override void OnDisappearing()
+		{
+			visible = false;
+			base.OnDisappearing();
+		}
+
+		protected override void OnAppearing()
+		{
+			visible = true;
+			base.OnAppearing();
+		}
+		//Constructeur par copie car ios bug si l'on renvoit simplement l'instance static de la page
+		protected LocationPage Copy(LocationPage original)
+		{
+			LocationPage page = new LocationPage();
+			if (original.timerRun)
+			{
+				page.DisplayLocation(original.lastLocation);
+				original.StopLocalisation();
+				page.StartLocalisation();
+			}
+			page.time = original.time;
+			page.distance = original.distance;
+			return page;
+		}
+
+		private LocationPage()
 		{
 			Title = "Localisation";
 			Icon = "nearby_square.png";
@@ -34,27 +85,29 @@ namespace Ipheidi
 			{
 				AppInfo.locationManager.AddLocationListener(this);
 			}
+
 		}
 
 
 		void OnLocalisationStart(object sender, System.EventArgs e)
 		{
 			userClicked = true;
-			Startlocalisation();
+			StartLocalisation();
 		}
-		void Startlocalisation()
-		{ 
+		void StartLocalisation()
+		{
 			btnSendData.IsEnabled = false;
 			locationCount = -1;
 			distance = 0;
 			time = 0;
-			lblTime.Text = "Temps: " + time + "s";
+			lblTime.Text = "Temps: ";
 			timerRun = true;
 			btnStart.IsVisible = false;
 			lblDistance.Text = "";
 			btnStop.IsVisible = true;
 			AppInfo.locationManager.StartLocationUpdate(1);
 			lblSpeed.IsVisible = true;
+			lblSpeed.Text = "0 km/h";
 			startBatteryLevel = AppInfo.battery.RemainingChargePercent;
 			if (!timerExist)
 			{
@@ -64,6 +117,10 @@ namespace Ipheidi
 		}
 		void OnLocalisationStop(object sender, System.EventArgs e)
 		{
+			StopLocalisation();
+		}
+		public void StopLocalisation()
+		{ 
 			btnSendData.IsEnabled = true;
 			btnStart.IsVisible = true;
 			btnStop.IsVisible = false;
@@ -71,9 +128,7 @@ namespace Ipheidi
 			AppInfo.locationManager.StopLocationUpdate();
 			lblSpeed.Text = "0 km/h";
 			lastLocation = null;
-			distance = 0;
 		}
-
 		public void OnLocationUpdate(Location location)
 		{
 			if (lastLocation != null)
@@ -89,32 +144,15 @@ namespace Ipheidi
 					if (userClicked)
 					{
 						userClicked = false;
-						OnLocalisationStop(null, null);
-						Startlocalisation();
+						StopLocalisation();
+						StartLocalisation();
 					}
 					else
 					{
 						DatabaseHelper.Database.SaveItemAsync(location);
 						distance += lastLocation.GetDistanceFromOtherLocation(location);
 					}
-					if (!AppInfo.IsInBackground)
-					{
-						lblSpeed.Text = (location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h";
-						lblAltitude.Text = "Altitude: " + (int)(location.Altitude) + " m";
-						lblLatitude.Text = "Latitude: " + location.Lattitude;
-						lblLongitude.Text = "Longitude: " + location.Longitude;
-						lblDistance.Text = "Distance: " + (int)distance + "m";
-						lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
-					}
-					else
-					{
-						Debug.WriteLine((location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h");
-						Debug.WriteLine("Altitude: " + (int)(location.Altitude) + " m");
-						Debug.WriteLine("Latitude: " + location.Lattitude);
-						Debug.WriteLine("Longitude: " + location.Longitude);
-						Debug.WriteLine("Distance: " + (int)distance + "m");
-						Debug.WriteLine("Temps: " + time + "s");
-					}
+					DisplayLocation(location);
 				}
 				locationCount++;
 			}
@@ -123,7 +161,7 @@ namespace Ipheidi
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (Device.OS == TargetPlatform.iOS && visible)
 			{
 				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
@@ -137,13 +175,15 @@ namespace Ipheidi
 			if (timerRun)
 			{
 				time++;
-				if (!AppInfo.IsInBackground)
+				if (!AppInfo.IsInBackground && visible)
 				{
-					lblTime.Text = "Temps: " + time + "s";
+					int remainingBattery = AppInfo.battery.RemainingChargePercent;
+					lblTime.Text = "Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
 					lblPowerSource.Text = "Source d'énergie: " + AppInfo.battery.PowerSource.ToString();
 					lblBatteryStatus.Text = "Status de la batterie: " + AppInfo.battery.Status.ToString();
-					lblBatteryLevel.Text = "Batterie: " + AppInfo.battery.RemainingChargePercent + "%";
-					lblBatteryConsumption.Text = "Batterie utilisé: " + (startBatteryLevel - AppInfo.battery.RemainingChargePercent) + "%";
+					lblBatteryLevel.Text = "Batterie: " + (remainingBattery>= 0? remainingBattery + "%" : "-");
+					if (remainingBattery > startBatteryLevel) startBatteryLevel = remainingBattery;
+					lblBatteryConsumption.Text = "Batterie utilisé: " + (remainingBattery < 0 ? "-" : startBatteryLevel - remainingBattery + "%");
 				}
 				return true;
 			}
@@ -151,14 +191,36 @@ namespace Ipheidi
 			return false;
 		}
 
-
+		protected void DisplayLocation(Location location)
+		{ 
+			if (!AppInfo.IsInBackground && visible)
+			{
+				lblSpeed.Text = (location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h";
+				lblAltitude.Text = "Altitude: " + (int)(location.Altitude) + " m";
+				lblLatitude.Text = "Latitude: " + location.Lattitude;
+				lblLongitude.Text = "Longitude: " + location.Longitude;
+				lblDistance.Text = "Distance: " + (distance / 1000).ToString("N1") + "km";
+				lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
+				lblSignal.Text = "Signal: " + AppInfo.locationManager.GetSignalStrenght().ToString();
+			}
+			else
+			{
+				Debug.WriteLine((location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h");
+				Debug.WriteLine("Altitude: " + (int)(location.Altitude) + " m");
+				Debug.WriteLine("Latitude: " + location.Lattitude);
+				Debug.WriteLine("Longitude: " + location.Longitude);
+				Debug.WriteLine("Distance: " + (distance / 1000).ToString("N1") + "km");
+				Debug.WriteLine("Temps: " + time + "s");
+				Debug.WriteLine("Thread: " + TaskScheduler.Current.Id);
+			}
+		}
 		async void OnSendDataClicked(object sender, System.EventArgs e)
 		{
 			List<Location> locations = await DatabaseHelper.Database.GetItemsAsync();
 			List<Location> locationsToSerialize = new List<Location>();
 			foreach (var l in locations)
 			{
-				if (locationsToSerialize.Count<=100)
+				if (locationsToSerialize.Count <= 100)
 				{
 					locationsToSerialize.Add(l);
 				}
@@ -186,9 +248,9 @@ namespace Ipheidi
 		async Task<bool> SendLocationsData(string json)
 		{
 			var handler = new HttpClientHandler() { CookieContainer = AppInfo.cookieManager.GetAllCookies() };
-			using (var httpClient = new HttpClient(handler,true))
+			using (var httpClient = new HttpClient(handler, true))
 			{
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "sendLocationData" }, { "pheidiparams", "value**:**"+json+"**,**"} };
+				var parameters = new Dictionary<string, string> { { "pheidiaction", "sendLocationData" }, { "pheidiparams", "value**:**" + json + "**,**" } };
 				var encodedContent = new FormUrlEncodedContent(parameters);
 				HttpResponseMessage response = null;
 				try
@@ -218,7 +280,7 @@ namespace Ipheidi
 				}
 				Debug.WriteLine("Problème de connexion au serveur, veuillez réessayer plus tard");
 				return false;
-				
+
 			}
 
 		}

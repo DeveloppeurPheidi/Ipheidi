@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using SQLite;
 using Xamarin.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Ipheidi
 {
@@ -34,6 +35,7 @@ namespace Ipheidi
 			}
 			catch(Exception e)
 			{
+				Debug.WriteLine(e.Message);
 				DependencyService.Get<IFileHelper>().DeleteLocalFile("PheidiSQLite.db3");
 			}
 		}

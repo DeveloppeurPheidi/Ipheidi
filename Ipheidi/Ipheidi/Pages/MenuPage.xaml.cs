@@ -27,6 +27,7 @@ namespace Ipheidi
 					Page p = (Page)listViewMenu.SelectedItem;
 					if (p.Title == "Déconnexion")
 					{
+						LocationPage.DiposeInstance();
 						Logout();
 					}
 					else if (p.Title == "Regénérer le navigateur")

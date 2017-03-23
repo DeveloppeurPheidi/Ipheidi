@@ -12,6 +12,7 @@ namespace Ipheidi.Droid
 	{
 		String Provider;
 		float Precision;
+		SignalStrength signal;
 		LocationManager locationManager;
 		List<ILocationListener> observers;
 		public AndroidLocationManager(LocationManager locMgr)
@@ -72,6 +73,9 @@ namespace Ipheidi.Droid
 
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
+			float acc = location.Accuracy;
+			System.Diagnostics.Debug.WriteLine(acc);
+			signal = acc == 0 ? SignalStrength.None : acc < 20 ? SignalStrength.Strong : acc < 100 ? SignalStrength.Average : SignalStrength.Weak;
 			OnLocationUpdate(new Location()
 			{
 				Altitude = location.Altitude,
@@ -96,7 +100,12 @@ namespace Ipheidi.Droid
 
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
-			System.Diagnostics.Debug.WriteLine("Status Changed " + provider);
+			System.Diagnostics.Debug.WriteLine(locationManager.GetProvider(provider).Accuracy.ToString());
+		}
+
+		public SignalStrength GetSignalStrenght()
+		{
+			return signal;
 		}
 	}
 }

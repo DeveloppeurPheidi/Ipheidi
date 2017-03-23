@@ -22,6 +22,7 @@ namespace Ipheidi
 		static public IBattery battery;
 		static public bool IsInBackground = false;
 		static public App app;
+		static public LocationPage locationPage;
 		static public int debugCount = 0;
 		static public bool inLogin = false;
 		static public string username = "";

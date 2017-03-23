@@ -27,7 +27,7 @@ namespace Ipheidi
 			BrowserPage browser = new BrowserPage();
 
 			SettingPage setting = new SettingPage();
-			LocationPage location = new LocationPage();
+			LocationPage location = LocationPage.GetInstance();
 			BluetoothPage bluetooth = new BluetoothPage();
 
 			MenuPage menu = new MenuPage();

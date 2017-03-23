@@ -10,6 +10,7 @@ namespace Ipheidi.iOS
 		bool firstCheck = true;
 		List<ILocationListener> observers;
 		CLLocationManager locationManager;
+		SignalStrength signal;
 
 		public IOSLocationManager()
 		{
@@ -73,6 +74,8 @@ namespace Ipheidi.iOS
 						Orientation = clLoc.Course,
 						Time = DateTime.Now
 					};
+					double acc = clLoc.HorizontalAccuracy;
+					signal = acc == 0 ? SignalStrength.None : acc < 20 ? SignalStrength.Strong : acc < 100 ? SignalStrength.Average : SignalStrength.Weak;
 					OnLocationUpdate(loc);
 				};
 				locationManager.StartUpdatingLocation();
@@ -84,6 +87,11 @@ namespace Ipheidi.iOS
 		{
 			locationManager.StopUpdatingLocation();
 
+		}
+
+		public SignalStrength GetSignalStrenght()
+		{
+			return signal;
 		}
 	}
 }
