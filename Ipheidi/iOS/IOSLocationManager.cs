@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using CoreLocation;
 using UIKit;
 
@@ -10,7 +11,6 @@ namespace Ipheidi.iOS
 		bool firstCheck = true;
 		List<ILocationListener> observers;
 		CLLocationManager locationManager;
-		SignalStrength signal;
 
 		public IOSLocationManager()
 		{
@@ -55,8 +55,7 @@ namespace Ipheidi.iOS
 			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) && firstCheck)
 			{
 				firstCheck = false;
-				locationManager.RequestAlwaysAuthorization(); // works in background
-															  //locMgr.RequestWhenInUseAuthorization (); // only in foreground
+				locationManager.RequestAlwaysAuthorization(); 
 			}
 			if (CLLocationManager.LocationServicesEnabled)
 			{
@@ -72,10 +71,9 @@ namespace Ipheidi.iOS
 						Longitude = clLoc.Coordinate.Longitude,
 						Lattitude = clLoc.Coordinate.Latitude,
 						Orientation = clLoc.Course,
-						Time = DateTime.Now
+						Utc = DateTime.UtcNow,
+						Accuracy = clLoc.HorizontalAccuracy
 					};
-					double acc = clLoc.HorizontalAccuracy;
-					signal = acc == 0 ? SignalStrength.None : acc < 20 ? SignalStrength.Strong : acc < 100 ? SignalStrength.Average : SignalStrength.Weak;
 					OnLocationUpdate(loc);
 				};
 				locationManager.StartUpdatingLocation();
@@ -87,11 +85,6 @@ namespace Ipheidi.iOS
 		{
 			locationManager.StopUpdatingLocation();
 
-		}
-
-		public SignalStrength GetSignalStrenght()
-		{
-			return signal;
 		}
 	}
 }

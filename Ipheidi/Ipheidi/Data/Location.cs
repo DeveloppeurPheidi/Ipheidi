@@ -44,12 +44,17 @@ namespace Ipheidi
 			set;
 		}
 
-		public DateTime Time
+		public DateTime Utc
 		{
 			get;
 			set;
 		}
 
+		public double Accuracy
+		{
+			get;
+			set;
+		}
 		public int BatteryRemainingCharge
 		{
 			get;

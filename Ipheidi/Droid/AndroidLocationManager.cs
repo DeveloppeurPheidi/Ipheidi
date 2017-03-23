@@ -12,7 +12,6 @@ namespace Ipheidi.Droid
 	{
 		String Provider;
 		float Precision;
-		SignalStrength signal;
 		LocationManager locationManager;
 		List<ILocationListener> observers;
 		public AndroidLocationManager(LocationManager locMgr)
@@ -32,7 +31,7 @@ namespace Ipheidi.Droid
 			Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = Accuracy.Fine }, true);
 			if (Provider!= null)
 			{
-				locationManager.RequestLocationUpdates(Provider, 0, Precision, this);
+				locationManager.RequestLocationUpdates(Provider, 1, Precision, this);
 			}
 			else
 			{
@@ -57,7 +56,7 @@ namespace Ipheidi.Droid
 					Lattitude = loc.Latitude,
 					Speed = loc.Speed,
 					Orientation = loc.Bearing,
-					Time = DateTime.Now
+					Utc = DateTime.UtcNow
 				};
 			}
 			return null;
@@ -73,16 +72,15 @@ namespace Ipheidi.Droid
 
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
-			float acc = location.Accuracy;
-			System.Diagnostics.Debug.WriteLine(acc);
-			signal = acc == 0 ? SignalStrength.None : acc < 20 ? SignalStrength.Strong : acc < 100 ? SignalStrength.Average : SignalStrength.Weak;
 			OnLocationUpdate(new Location()
 			{
 				Altitude = location.Altitude,
 				Lattitude = location.Latitude,
 				Longitude = location.Longitude,
 				Speed = location.Speed,
-				Orientation = location.Bearing
+				Orientation = location.Bearing,
+				Accuracy = location.Accuracy,
+				Utc = DateTime.UtcNow,
 			});
 		}
 
@@ -101,11 +99,6 @@ namespace Ipheidi.Droid
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
 			System.Diagnostics.Debug.WriteLine(locationManager.GetProvider(provider).Accuracy.ToString());
-		}
-
-		public SignalStrength GetSignalStrenght()
-		{
-			return signal;
 		}
 	}
 }

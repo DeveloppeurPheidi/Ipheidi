@@ -17,7 +17,6 @@ namespace Ipheidi
 		bool timerExist = false;
 		bool timerRun = false;
 		bool userClicked = false;
-		int locationCount;
 		int time = 0;
 		bool visible = false;
 		protected static LocationPage instance;
@@ -97,7 +96,6 @@ namespace Ipheidi
 		void StartLocalisation()
 		{
 			btnSendData.IsEnabled = false;
-			locationCount = -1;
 			distance = 0;
 			time = 0;
 			lblTime.Text = "Temps: ";
@@ -105,7 +103,7 @@ namespace Ipheidi
 			btnStart.IsVisible = false;
 			lblDistance.Text = "";
 			btnStop.IsVisible = true;
-			AppInfo.locationManager.StartLocationUpdate(1);
+			AppInfo.locationManager.StartLocationUpdate(50);
 			lblSpeed.IsVisible = true;
 			lblSpeed.Text = "0 km/h";
 			startBatteryLevel = AppInfo.battery.RemainingChargePercent;
@@ -138,7 +136,7 @@ namespace Ipheidi
 				location.PowerStatus = AppInfo.battery.Status.ToString();
 				location.User = AppInfo.username;
 				location.Domain = AppInfo.domain;
-				if ((location.Lattitude != lastLocation.Lattitude || location.Longitude != lastLocation.Longitude) && locationCount >= 0)
+				if ((location.Lattitude != lastLocation.Lattitude || location.Longitude != lastLocation.Longitude))
 				{
 					//Force le reset des donnees de localisation pour eviter des situations ou l'on commence avec une fausse distance .
 					if (userClicked)
@@ -154,12 +152,12 @@ namespace Ipheidi
 					}
 					DisplayLocation(location);
 				}
-				locationCount++;
 			}
 			lastLocation = location;
 		}
 		protected override void OnSizeAllocated(double width, double height)
 		{
+			
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS && visible)
 			{
@@ -201,7 +199,7 @@ namespace Ipheidi
 				lblLongitude.Text = "Longitude: " + location.Longitude;
 				lblDistance.Text = "Distance: " + (distance / 1000).ToString("N1") + "km";
 				lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
-				lblSignal.Text = "Signal: " + AppInfo.locationManager.GetSignalStrenght().ToString();
+				lblAccuracy.Text = "Accuracy: " +location.Accuracy + "m";
 			}
 			else
 			{
@@ -220,7 +218,11 @@ namespace Ipheidi
 			List<Location> locationsToSerialize = new List<Location>();
 			foreach (var l in locations)
 			{
-				if (locationsToSerialize.Count <= 100)
+				if(l.Utc == DateTime.MinValue)
+				{
+					await DatabaseHelper.Database.DeleteItemAsync(l);
+				}
+				else if (locationsToSerialize.Count <= 100)
 				{
 					locationsToSerialize.Add(l);
 				}
