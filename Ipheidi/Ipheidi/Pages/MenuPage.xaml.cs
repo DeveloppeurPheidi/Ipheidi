@@ -32,7 +32,14 @@ namespace Ipheidi
 					}
 					else if (p.Title == "Regénérer le navigateur")
 					{
-						Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+						if (Device.OS == TargetPlatform.iOS)
+						{
+							BrowserPage.Refresh();
+						}
+						else
+						{
+							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+						}
 					}
 					else
 					{

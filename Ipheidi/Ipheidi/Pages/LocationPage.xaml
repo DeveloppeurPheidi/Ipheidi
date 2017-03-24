@@ -8,20 +8,25 @@
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.8,Constant=0}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.2,Constant=0}"/>
 
+			<Button x:Name="btnGetData" Text="Data" Clicked="OnGetDataClicked" BorderWidth="1"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.9,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.65,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.3,Constant=0}"/>
+			
 			<Button x:Name="btnStart" Text="Start" Clicked="OnLocalisationStart" BorderWidth="1"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.9,Constant=0}"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.4,Constant=0}"/>
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.3,Constant=0}"/>
 
 			<Button x:Name="btnStop" Text="Stop" Clicked="OnLocalisationStop" IsVisible="false" BorderWidth="1"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.9,Constant=0}"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.4,Constant=0}"/>
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.3,Constant=0}"/>
 
 			<Button x:Name="btnSendData" Text="Send Data" Clicked="OnSendDataClicked" BorderWidth="1"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.9,Constant=0}"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.5,Constant=0}"
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.4,Constant=0}"/>
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.35,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.3,Constant=0}"/>
 			
 			<Label x:Name="lblSpeed" XAlign="Center"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.2,Constant=0}"

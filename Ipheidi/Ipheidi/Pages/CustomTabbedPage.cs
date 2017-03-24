@@ -24,7 +24,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(refresh, false);
 			NavigationPage.SetHasNavigationBar(logout, false);
 
-			BrowserPage browser = new BrowserPage();
+			BrowserPage browser = BrowserPage.GetInstance();
 
 			SettingPage setting = new SettingPage();
 			LocationPage location = LocationPage.GetInstance();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using CoreLocation;
 using UIKit;
 
@@ -30,6 +31,20 @@ namespace Ipheidi.iOS
 			observers.Add(observer);
 		}
 
+		public void RemoveLocationListener(ILocationListener observer)
+		{
+			observers.Remove(observer);
+		}
+
+		public bool ContainsLocationListener(ILocationListener observer)
+		{
+			//On s'assure qu'il n'y a qu'une seule instance de la classe LocationPage existe
+			if (observer is LocationPage)
+			{
+				observers.Remove(observers.Where(o => o is LocationPage).FirstOrDefault());
+			}
+			return observers.Contains(observer);
+		}
 		public Location GetLocation()
 		{
 			return new Location(){

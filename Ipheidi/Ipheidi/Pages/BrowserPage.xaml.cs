@@ -9,7 +9,21 @@ namespace Ipheidi
 {
 	public partial class BrowserPage : ContentPage
 	{
-		public BrowserPage()
+		protected static BrowserPage instance;
+
+		public static BrowserPage GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new BrowserPage();
+			}
+			return instance;
+		}
+		public static void Refresh()
+		{
+			instance = new BrowserPage();
+		}
+		protected BrowserPage()
 		{
 			this.Title = "Navigateur";
 			this.Icon = "home.png";
@@ -41,8 +55,6 @@ namespace Ipheidi
 					webSessionExistAndNotNull = true;
 				}
 			}
-			AppInfo.debugCount++;
-			Debug.WriteLine(AppInfo.debugCount + ". WEBSSESION: " + webSessionExistAndNotNull);
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
 			if (!webSessionExistAndNotNull && !AppInfo.inLogin)
 			{

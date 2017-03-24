@@ -28,6 +28,7 @@ namespace Ipheidi
 			}
 			else if (Device.OS == TargetPlatform.iOS) 
 			{
+				AppInfo.locationManager.RemoveLocationListener(instance);
 				var copy = new LocationPage();
 				copy = copy.Copy(instance);
 				instance = copy;
@@ -80,7 +81,7 @@ namespace Ipheidi
 			lblSpeed.TextColor = Color.White;
 			lblSpeed.BackgroundColor = Color.Black;
 			lblSpeed.IsVisible = false;
-			if (AppInfo.locationManager != null)
+			if (AppInfo.locationManager != null && !AppInfo.locationManager.ContainsLocationListener(this))
 			{
 				AppInfo.locationManager.AddLocationListener(this);
 			}
@@ -199,18 +200,55 @@ namespace Ipheidi
 				lblLongitude.Text = "Longitude: " + location.Longitude;
 				lblDistance.Text = "Distance: " + (distance / 1000).ToString("N1") + "km";
 				lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
-				lblAccuracy.Text = "Accuracy: " +location.Accuracy + "m";
+				lblAccuracy.Text = "Accuracy: " +(int)location.Accuracy + "m";
 			}
 			else
 			{
+				Debug.WriteLine("--------------------");
 				Debug.WriteLine((location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h");
 				Debug.WriteLine("Altitude: " + (int)(location.Altitude) + " m");
 				Debug.WriteLine("Latitude: " + location.Lattitude);
 				Debug.WriteLine("Longitude: " + location.Longitude);
 				Debug.WriteLine("Distance: " + (distance / 1000).ToString("N1") + "km");
-				Debug.WriteLine("Temps: " + time + "s");
-				Debug.WriteLine("Thread: " + TaskScheduler.Current.Id);
+				Debug.WriteLine("Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss"));
 			}
+		}
+
+		async void OnGetDataClicked(object sende, System.EventArgs e)
+		{
+			List<Location> locations = await DatabaseHelper.Database.GetItemsAsync();
+			List<string> data = new List<string>();
+			foreach (var loc in locations)
+			{
+				data.Add(loc.Utc + ", " + loc.Lattitude + ", " + loc.Longitude);
+			}
+			ContentPage page = new ContentPage();
+			page.Title = "Liste de données";
+			ListView list = new ListView() { 
+				ItemsSource= data
+			};
+			Button btnClear = new Button();
+			btnClear.Text = "Clear Data";
+			btnClear.BorderWidth = 1;
+			btnClear.Clicked += async(sender, ev) => 
+			{
+				list.IsVisible = false;
+				foreach (var item in locations)
+				{
+					await DatabaseHelper.Database.DeleteItemAsync(item);
+				}
+			};
+			ScrollView scroll = new ScrollView()
+			{
+				Orientation = ScrollOrientation.Both,
+				Content = list
+			};
+			StackLayout layout = new StackLayout();
+			layout.Children.Add(btnClear);
+			layout.Children.Add(scroll);
+
+			page.Content = layout;
+			await Navigation.PushAsync(page);
 		}
 		async void OnSendDataClicked(object sender, System.EventArgs e)
 		{

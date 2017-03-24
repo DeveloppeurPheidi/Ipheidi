@@ -25,6 +25,15 @@ namespace Ipheidi.Droid
 			observers.Add(observer);
 		}
 
+		public void RemoveLocationListener(ILocationListener observer)
+		{
+			observers.Remove(observer);
+		}
+
+		public bool ContainsLocationListener(ILocationListener observer)
+		{
+			return observers.Contains(observer);
+		}
 		public void StartLocationUpdate(double precision)
 		{
 			Precision = (float)precision;
