@@ -20,7 +20,11 @@ namespace Ipheidi.Droid
 				var webView = new Android.Webkit.WebView(Forms.Context);					
 				webView.Settings.JavaScriptEnabled = true;
 				var webViewClient = new CustomWebViewClient();
+
+#pragma warning disable CS0618 // Type or member is obsolete
 				webViewClient.ShouldInterceptRequest(webView,AppInfo.url);
+#pragma warning restore CS0618 // Type or member is obsolete
+
 				webView.SetWebViewClient(webViewClient);
 				SetNativeControl(webView);
 			}

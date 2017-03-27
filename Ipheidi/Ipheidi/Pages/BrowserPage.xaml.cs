@@ -9,23 +9,8 @@ namespace Ipheidi
 {
 	public partial class BrowserPage : ContentPage
 	{
-		protected static BrowserPage instance;
-
-		public static BrowserPage GetInstance()
+		public BrowserPage()
 		{
-			if (instance == null)
-			{
-				instance = new BrowserPage();
-			}
-			return instance;
-		}
-		public static void Refresh()
-		{
-			instance = new BrowserPage();
-		}
-		protected BrowserPage()
-		{
-			this.Title = "Navigateur";
 			this.Icon = "home.png";
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);

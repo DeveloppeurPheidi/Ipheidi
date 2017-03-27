@@ -6,6 +6,7 @@ namespace Ipheidi
 {
 	public class CustomTabbedPage:TabbedPage
 	{
+		
 		public CustomTabbedPage()
 		{
 			//Cache la nav bar
@@ -24,8 +25,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(refresh, false);
 			NavigationPage.SetHasNavigationBar(logout, false);
 
-			BrowserPage browser = BrowserPage.GetInstance();
-
+			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();
 			LocationPage location = LocationPage.GetInstance();
 			BluetoothPage bluetooth = new BluetoothPage();

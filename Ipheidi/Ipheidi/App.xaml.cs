@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Ipheidi
 {
 	public partial class App : Application
 	{
+		CustomTabbedPage nav;
 		public App()
 		{
 			InitializeComponent();
@@ -14,7 +16,11 @@ namespace Ipheidi
 
 		public void GetBrowserPage()
 		{
-			MainPage = new NavigationPage(new CustomTabbedPage());
+			if (nav == null)
+			{
+				nav = new CustomTabbedPage();
+			}
+			MainPage = new NavigationPage(nav);
 		}
 		public void GetLoginPage()
 		{
@@ -22,6 +28,14 @@ namespace Ipheidi
 			var page = new NavigationPage(new LoginPage(AppInfo.credentials.Count == 0));
 			MainPage = page;
 
+		}
+		public void RefreshBrowser()
+		{
+			var browser = nav.Children.Where(p => p is BrowserPage).Single();
+			nav.Children.Remove(browser);
+			browser = new BrowserPage();
+			nav.Children.Insert(0, browser);
+			nav.CurrentPage = browser;
 		}
 
 		protected override void OnStart()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -32,14 +33,8 @@ namespace Ipheidi
 					}
 					else if (p.Title == "Regénérer le navigateur")
 					{
-						if (Device.OS == TargetPlatform.iOS)
-						{
-							BrowserPage.Refresh();
-						}
-						else
-						{
-							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
-						}
+						Device.BeginInvokeOnMainThread(AppInfo.app.RefreshBrowser);
+						//Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
 					}
 					else
 					{
