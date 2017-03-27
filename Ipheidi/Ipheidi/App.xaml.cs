@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -6,21 +7,26 @@ namespace Ipheidi
 {
 	public partial class App : Application
 	{
-		CustomTabbedPage nav;
+		public CustomTabbedPage NavBar;
 		public App()
 		{
 			InitializeComponent();
 			AppInfo.app = this;
+			if (Application.Current.Properties.ContainsKey("LastUser") && Application.Current.Properties.ContainsKey("LastDomain"))
+			{
+				AppInfo.domain = Application.Current.Properties["LastDomain"] as string;
+				AppInfo.username = Application.Current.Properties["LastUser"] as string;
+			}
 			GetLoginPage();
 		}
 
 		public void GetBrowserPage()
 		{
-			if (nav == null)
+			if (NavBar == null)
 			{
-				nav = new CustomTabbedPage();
+				NavBar = new CustomTabbedPage();
 			}
-			MainPage = new NavigationPage(nav);
+			MainPage = new NavigationPage(NavBar);
 		}
 		public void GetLoginPage()
 		{
@@ -31,11 +37,12 @@ namespace Ipheidi
 		}
 		public void RefreshBrowser()
 		{
-			var browser = nav.Children.Where(p => p is BrowserPage).Single();
-			nav.Children.Remove(browser);
+			var browser = NavBar.Children.Where(p => p is BrowserPage).Single();
+			int index = AppInfo.app.NavBar.Children.IndexOf(browser);
+			NavBar.Children.Remove(browser);
 			browser = new BrowserPage();
-			nav.Children.Insert(0, browser);
-			nav.CurrentPage = browser;
+			NavBar.Children.Insert(index, browser);
+			NavBar.CurrentPage = browser;
 		}
 
 		protected override void OnStart()

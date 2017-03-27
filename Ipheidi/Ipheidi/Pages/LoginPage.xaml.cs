@@ -12,12 +12,15 @@ namespace Ipheidi
 	
 	public partial class LoginPage : ContentPage
 	{
+		bool IsInSecondPage;
 		public LoginPage():this(false)
 		{
 		}
 
 		public LoginPage(bool secondePage)
 		{
+			IsInSecondPage = secondePage;
+
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && AppInfo.credentials.Count > 0);
 			InitializeComponent();
@@ -152,22 +155,26 @@ namespace Ipheidi
 						if (!string.IsNullOrWhiteSpace(rc))
 						{
 							Debug.WriteLine(rc);
-							if (rememberUser)
+							if (rememberUser || !IsInSecondPage)
 							{
-								AppInfo.credentialsManager.SaveCredentials(username, password);
+								if (rememberUser)
+								{
+									AppInfo.credentialsManager.SaveCredentials(username, password);
+								}
+								Application.Current.Properties["LastUser"] = AppInfo.username;
+								Application.Current.Properties["LastDomain"] = AppInfo.domain;
+								await Application.Current.SavePropertiesAsync();
 							}
 							AppInfo.username = username;
 							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
+
 							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
 							AppInfo.inLogin = false;
 							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
 							return "";
 						}
-						else
-						{
-							return "L'adresse courriel ou le mot de passe saisi est incorrects";
-						}
+						return "L'adresse courriel ou le mot de passe saisi est incorrects";
 					}
 				}
 				return "Problème de connexion au serveur, veuillez réessayer plus tard";

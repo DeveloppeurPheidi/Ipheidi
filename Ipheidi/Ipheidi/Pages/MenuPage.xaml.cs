@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Ipheidi
 {
@@ -13,7 +14,6 @@ namespace Ipheidi
 		public MenuPage()
 		{
 			pages = new ObservableCollection<Page>();
-			Title = "Menu";
 			Icon = "menu_hamburger.png";
 			InitializeComponent();
 			listViewMenu.ItemsSource = pages;
@@ -28,13 +28,16 @@ namespace Ipheidi
 					Page p = (Page)listViewMenu.SelectedItem;
 					if (p.Title == "Déconnexion")
 					{
-						LocationPage.DiposeInstance();
-						Logout();
+						((LocationPage) AppInfo.app.NavBar.Children.Where(o => o is LocationPage).Single()).StopLocalisation();
+						int index = AppInfo.app.NavBar.Children.IndexOf(AppInfo.app.NavBar.Children.Where(o => o is LocationPage).Single());
+						AppInfo.app.NavBar.Children.RemoveAt(index);
+						AppInfo.app.NavBar.Children.Insert(index, new LocationPage());
+						AppInfo.cookieManager.ClearCookies();
+						BrowserPage.CheckWebSession();
 					}
 					else if (p.Title == "Regénérer le navigateur")
 					{
 						Device.BeginInvokeOnMainThread(AppInfo.app.RefreshBrowser);
-						//Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
 					}
 					else
 					{
@@ -45,11 +48,7 @@ namespace Ipheidi
 			};
 		}
 
-		private void Logout()
-		{
-			AppInfo.cookieManager.ClearCookies();
-			BrowserPage.CheckWebSession();
-		}
+
 
 	}
 }

@@ -19,31 +19,6 @@ namespace Ipheidi
 		bool userClicked = false;
 		int time = 0;
 		bool visible = false;
-		protected static LocationPage instance;
-		public static LocationPage GetInstance()
-		{
-			if (instance == null)
-			{
-				instance = new LocationPage();
-			}
-			else if (Device.OS == TargetPlatform.iOS) 
-			{
-				AppInfo.locationManager.RemoveLocationListener(instance);
-				var copy = new LocationPage();
-				copy = copy.Copy(instance);
-				instance = copy;
-			}
-			return instance;
-		}
-		public static void DiposeInstance()
-		{
-			if (instance != null)
-			{
-				instance.StopLocalisation();
-				instance = null;
-			}
-		}
-
 
 		protected override void OnDisappearing()
 		{
@@ -56,24 +31,9 @@ namespace Ipheidi
 			visible = true;
 			base.OnAppearing();
 		}
-		//Constructeur par copie car ios bug si l'on renvoit simplement l'instance static de la page
-		protected LocationPage Copy(LocationPage original)
-		{
-			LocationPage page = new LocationPage();
-			if (original.timerRun)
-			{
-				page.DisplayLocation(original.lastLocation);
-				original.StopLocalisation();
-				page.StartLocalisation();
-			}
-			page.time = original.time;
-			page.distance = original.distance;
-			return page;
-		}
 
-		private LocationPage()
+		public  LocationPage()
 		{
-			Title = "Localisation";
 			Icon = "nearby_square.png";
 			InitializeComponent();
 			lblSpeed.FontSize *= 3;
@@ -87,8 +47,6 @@ namespace Ipheidi
 			}
 
 		}
-
-
 		void OnLocalisationStart(object sender, System.EventArgs e)
 		{
 			userClicked = true;
@@ -252,6 +210,9 @@ namespace Ipheidi
 		}
 		async void OnSendDataClicked(object sender, System.EventArgs e)
 		{
+			btnStart.IsEnabled = false;
+			btnSendData.IsEnabled = false;
+			btnGetData.IsEnabled = false;
 			List<Location> locations = await DatabaseHelper.Database.GetItemsAsync();
 			List<Location> locationsToSerialize = new List<Location>();
 			foreach (var l in locations)
@@ -283,6 +244,9 @@ namespace Ipheidi
 					await DatabaseHelper.Database.DeleteItemAsync(toDelete);
 				}
 			}
+			btnStart.IsEnabled = true;
+			btnSendData.IsEnabled = true;
+			btnGetData.IsEnabled = true;
 		}
 
 		async Task<bool> SendLocationsData(string json)
