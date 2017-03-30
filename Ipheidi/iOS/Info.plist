@@ -53,5 +53,11 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Voulez vous authorizer l&apos;application iPheidi d&apos;utiliser la fonctionnalité de localisation?</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

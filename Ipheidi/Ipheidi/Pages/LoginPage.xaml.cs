@@ -9,46 +9,54 @@ using Xamarin.Forms.PlatformConfiguration;
 
 namespace Ipheidi
 {
-	
+	/// <summary>
+	/// Page de connexion de l'application
+	/// </summary>
 	public partial class LoginPage : ContentPage
 	{
 		bool IsInSecondPage;
+
+#region Construtor
 		public LoginPage():this(false)
 		{
 		}
 
 		public LoginPage(bool secondePage)
 		{
-			IsInSecondPage = secondePage;
 
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && AppInfo.credentials.Count > 0);
+
 			InitializeComponent();
 
-			Debug.WriteLine("" + lblRemember.FontSize + "\n\n"+ Font.Default.FontFamily);
+			IsInSecondPage = secondePage;
+
+			//Setting pour Android.
 			if (Device.OS == TargetPlatform.Android)
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
 				btnOtherAccount.BorderColor = Color.Transparent;
-				btnOtherAccount.TextColor = Color.FromHex("#3366BB");
 				lblRemember.FontSize *= 1.5;
 				lblCourriel.FontSize *= 1.5;
 				lblPassword.FontSize *= 1.5;
 
 
 			}
+			btnOtherAccount.TextColor = Color.FromHex("#83B347");
+			//btnOtherAccount.TextColor = Color.FromHex("#92c851");
+
+			//Bouton de login
 			btnLogin.FontSize *= 1.5;
 			btnLogin.FontAttributes = FontAttributes.Bold;
 			btnLogin.Clicked += async (sender, e) =>
 			{
 				messageLabel.Text = "";
-				LockInterface();
-				messageLabel.Text = await Login(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
-				UnlockInterface();
+				EnableInterface(false);
+				messageLabel.Text = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
+				EnableInterface(true);
 			};
 
 			EntriesVisible(secondePage);
-
 
 			//Url Picker
 			urlPicker.IsEnabled = secondePage;
@@ -66,6 +74,7 @@ namespace Ipheidi
 			{
 				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(AppInfo.domain);
 			}
+
 			//User picker
 			if (AppInfo.credentials.Count > 0 && !secondePage)
 			{
@@ -104,25 +113,50 @@ namespace Ipheidi
 			AppInfo.username = "";
 			Navigation.PushAsync(new LoginPage(true));
 		}
+#endregion
 
-		private void LockInterface()
+		/// <summary>
+		///Rend les champs approprié de l'interface de connexion activé.
+		/// </summary>
+		/// <param name="enable">Défini si les champs doivent être activé.</param>
+		private void EnableInterface(bool enable)
 		{
-			Debug.WriteLine("Interface: LOCK");
-			btnLogin.IsEnabled = false;
-		}
-		private void UnlockInterface()
-		{ 
-			Debug.WriteLine("Interface: UNLOCK");
-			btnLogin.IsEnabled = true;
+			btnLogin.IsEnabled = enable;
+			lblCourriel.IsEnabled = enable;
+			lblPassword.IsEnabled = enable;
+			lblRemember.IsEnabled = enable;
 		}
 
-		//Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
-		public async Task<string> Login(string username, string password, bool rememberUser)
+		/// <summary>
+		///Rend les champs approprié de l'interface de connexion visible.
+		/// </summary>
+		/// <param name="visible">Défini la visibilité</param>
+		void EntriesVisible(bool visible)
+		{
+			lblCourriel.IsVisible = visible;
+			lblPassword.IsVisible = visible;
+			lblRemember.IsVisible = visible;
+			passwordEntry.IsVisible = visible;
+			usernameEntry.IsVisible = visible;
+			rememberSwitch.IsVisible = visible;
+
+			btnOtherAccount.IsVisible = !visible;
+			userPicker.IsVisible = !visible;
+		}
+
+		/// <summary>
+		///Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <param name="rememberUser"></param>
+		public async Task<string> UserLogin(string username, string password, bool rememberUser)
 		{
 			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(AppInfo.url))
 			{
 				return "Veullez laisser aucun champ vide";
 			}
+
 			using (var httpClient = new HttpClient())
 			{
 				var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
@@ -171,7 +205,7 @@ namespace Ipheidi
 							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
 							AppInfo.inLogin = false;
-							Device.BeginInvokeOnMainThread(AppInfo.app.GetBrowserPage);
+							Device.BeginInvokeOnMainThread(AppInfo.app.GetToApplication);
 							return "";
 						}
 						return "L'adresse courriel ou le mot de passe saisi est incorrects";
@@ -181,28 +215,20 @@ namespace Ipheidi
 			}
 		}
 
+		/// <summary>
+		/// On size allocation.
+		/// </summary>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
-				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin  = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
+
 			base.OnSizeAllocated(width, height);
-		}
-
-		void EntriesVisible(bool visible)
-		{
-			lblCourriel.IsVisible = visible;
-			lblPassword.IsVisible = visible;
-			lblRemember.IsVisible = visible;
-			passwordEntry.IsVisible = visible;
-			usernameEntry.IsVisible = visible;
-			rememberSwitch.IsVisible = visible;
-
-			btnOtherAccount.IsVisible = !visible;
-			userPicker.IsVisible = !visible;
-
 		}
 	}
 }

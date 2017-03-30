@@ -1,17 +1,21 @@
 ﻿using Android.Webkit;
 using Ipheidi;
 using Ipheidi.Droid;
+using Java.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(HybridWebView), typeof(HybridWebViewRenderer))]
+[assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
 
 namespace Ipheidi.Droid
 {
-	public class HybridWebViewRenderer : ViewRenderer<HybridWebView, Android.Webkit.WebView>
+	/// <summary>
+	/// Custom web view renderer.
+	/// Sert à render la webview tout en permettant d'intercepter les requêtes.
+	/// </summary>
+	public class CustomWebViewRenderer : ViewRenderer<CustomWebView, Android.Webkit.WebView>
 	{
-
-		protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<CustomWebView> e)
 		{
 			base.OnElementChanged(e);
 
@@ -24,16 +28,15 @@ namespace Ipheidi.Droid
 #pragma warning disable CS0618 // Type or member is obsolete
 				webViewClient.ShouldInterceptRequest(webView,AppInfo.url);
 #pragma warning restore CS0618 // Type or member is obsolete
-
 				webView.SetWebViewClient(webViewClient);
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)
 			{
-				var hybridWebView = e.OldElement as HybridWebView;
+				var hybridWebView = e.OldElement as CustomWebView;
 			}
 			if (e.NewElement != null)
-			{;
+			{
 				Control.LoadUrl(Element.Source);
 			}
 		}

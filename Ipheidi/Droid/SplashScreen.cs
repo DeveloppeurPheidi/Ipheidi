@@ -14,6 +14,9 @@ using Android.Widget;
 
 namespace Ipheidi.Droid
 {
+	/// <summary>
+	/// Launch screen de l'application.
+	/// </summary>
 	[Activity(Label = "Pheidi", Icon = "@drawable/ic_launcher",MainLauncher = true, NoHistory = true, Theme = "@style/MyTheme.Splash",
 	ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class SplashScreen : Activity

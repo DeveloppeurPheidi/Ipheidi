@@ -5,27 +5,43 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
+	/// <summary>
+	/// Page de configuration de l'application
+	/// </summary>
 	public partial class SettingPage : ContentPage
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Ipheidi.SettingPage"/> class.
+		/// </summary>
 		public SettingPage()
 		{
-			this.Title = "Configuration";
 			this.Icon = "cogwheel.png";
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Forgets the account.
+		/// </summary>
 		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
 		{
 			AppInfo.credentialsManager.DeleteUser(AppInfo.username);
 			AppInfo.username = "";
 		}
 
+		/// <summary>
+		/// Deletes all user.
+		/// </summary>
 		void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
 			AppInfo.credentialsManager.DeleteCredentials();
 			AppInfo.username = "";
 		}
 
+		/// <summary>
+		/// On size allocation.
+		/// </summary>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			//Permet d'afficher correctement la bar de status sur iOS

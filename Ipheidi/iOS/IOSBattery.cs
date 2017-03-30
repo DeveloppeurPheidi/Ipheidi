@@ -3,13 +3,22 @@ using UIKit;
 
 namespace Ipheidi.iOS
 {
+	
 	public class IOSBattery :IBattery
 	{
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.IOSBattery"/> class.
+		/// </summary>
 		public IOSBattery()
 		{
 			UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
 		}
 
+		/// <summary>
+		/// Gets the remaining charge percent.
+		/// </summary>
+		/// <value>The remaining charge percent.</value>
 		public int RemainingChargePercent
 		{
 			get
@@ -18,6 +27,10 @@ namespace Ipheidi.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets the status.
+		/// </summary>
+		/// <value>The status.</value>
 		public BatteryStatus Status
 		{
 			get
@@ -36,6 +49,10 @@ namespace Ipheidi.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets the power source.
+		/// </summary>
+		/// <value>The power source.</value>
 		public PowerSource PowerSource
 		{
 			get

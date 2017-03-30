@@ -6,11 +6,18 @@ using Android.Webkit;
 
 namespace Ipheidi.Droid
 {
+	/// <summary>
+	/// Gestionnaire de cookie
+	/// </summary>
 	public class AndroidCookieManager:ICookieManager
 	{
 		
 		private readonly object _lock = new object();
 
+		/// <summary>
+		/// Adds the cookie.
+		/// </summary>
+		/// <param name="cookie">Cookie.</param>
 		public void AddCookie(Cookie cookie)
 		{
 			string cookieValue = cookie.Name + "=" + cookie.Value + ";" + cookie.Domain;
@@ -18,12 +25,19 @@ namespace Ipheidi.Droid
 			CookieManager.Instance.SetCookie(AppInfo.url, cookieValue);
 		}
 
+		/// <summary>
+		/// Clears the cookies.
+		/// </summary>
 		public void ClearCookies()
 		{
 			CookieManager.Instance.RemoveAllCookie();
 
 		}
 
+		/// <summary>
+		/// Gets all cookies.
+		/// </summary>
+		/// <returns>The all cookies.</returns>
 		public CookieContainer GetAllCookies()
 		{
 			CookieContainer cookies = new CookieContainer();
@@ -38,6 +52,10 @@ namespace Ipheidi.Droid
 			return cookies;
 		}
 
+		/// <summary>
+		/// Refresh the cookies.
+		/// </summary>
+		/// <returns>The cookies.</returns>
 		private IEnumerable<Cookie> RefreshCookies()
 		{
 			lock (_lock)

@@ -3,12 +3,17 @@ using System.Net;
 
 namespace Ipheidi.Droid
 {
-	public class AndroidIpAddressManager:IIPAddressManager
+	public class AndroidNetworkManager:INetworkManager
 	{
-		public AndroidIpAddressManager()
+		
+		public AndroidNetworkManager()
 		{
 		}
 
+		/// <summary>
+		/// Gets the IP Address.
+		/// </summary>
+		/// <returns>The IP Address.</returns>
 		public string GetIPAddress()
 		{
 			IPAddress[] adresses = Dns.GetHostAddresses(Dns.GetHostName());

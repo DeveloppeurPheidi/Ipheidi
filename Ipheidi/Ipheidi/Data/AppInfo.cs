@@ -6,6 +6,9 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
+	/// <summary>
+	/// Classe contenant les informations de l'application.
+	/// </summary>
 	public class AppInfo
 	{
 		static public CookieContainer cookieContainer = new CookieContainer();
@@ -15,7 +18,7 @@ namespace Ipheidi
 		static public string domain = "";
 		static public Cookie webSession = new Cookie();
 		static public ICookieManager cookieManager;	
-		static public IIPAddressManager ipAddressManager;
+		static public INetworkManager ipAddressManager;
 		static public ICredentialsManager credentialsManager;
 		static public IStatusBarManager statusBarManager;
 		static public ILocationManager locationManager;

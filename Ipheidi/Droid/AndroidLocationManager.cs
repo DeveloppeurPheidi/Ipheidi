@@ -8,32 +8,58 @@ using Android.Runtime;
 
 namespace Ipheidi.Droid
 {
+	/// <summary>
+	/// Gestionnaire de localisation
+	/// </summary>
 	public class AndroidLocationManager:Java.Lang.Object,ILocationManager, Android.Locations.ILocationListener
 	{
-		String Provider;
+		string Provider;
 		float Precision;
 		LocationManager locationManager;
 		List<ILocationListener> observers;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Ipheidi.Droid.AndroidLocationManager"/> class.
+		/// </summary>
+		/// <param name="locMgr">Location mgr.</param>
 		public AndroidLocationManager(LocationManager locMgr)
 		{
 			observers = new List<ILocationListener>();
 			locationManager = locMgr;
 		}
 
+		/// <summary>
+		/// Adds the location listener.
+		/// </summary>
+		/// <param name="observer">Observer.</param>
 		public void AddLocationListener(ILocationListener observer)
 		{
 			observers.Add(observer);
 		}
 
+		/// <summary>
+		/// Removes the location listener.
+		/// </summary>
+		/// <param name="observer">Observer.</param>
 		public void RemoveLocationListener(ILocationListener observer)
 		{
 			observers.Remove(observer);
 		}
 
+		/// <summary>
+		/// Containses the location listener.
+		/// </summary>
+		/// <returns><c>true</c>, if contains location listener, <c>false</c> otherwise.</returns>
+		/// <param name="observer">Observer.</param>
 		public bool ContainsLocationListener(ILocationListener observer)
 		{
 			return observers.Contains(observer);
 		}
+
+		/// <summary>
+		/// Starts the location update.
+		/// </summary>
+		/// <param name="precision">Précision en mêtre.</param>
 		public void StartLocationUpdate(double precision)
 		{
 			Precision = (float)precision;
@@ -48,16 +74,30 @@ namespace Ipheidi.Droid
 			}
 		}
 
+		/// <summary>
+		/// Stops the location update.
+		/// </summary>
 		public void StopLocationUpdate()
 		{
 			locationManager.RemoveUpdates(this);
 		}
 
+		/// <summary>
+		/// Gets the location.
+		/// </summary>
+		/// <returns>The location.</returns>
 		public Location GetLocation()
 		{
-			if (Provider != null)
-			{ 
-				var loc = locationManager.GetLastKnownLocation(Provider);
+			var providers = locationManager.GetProviders(true);
+
+			/* Loop over the array backwards, and if you get an accurate location, then break                 out the loop*/
+			Android.Locations.Location loc = null;
+
+			for (int i = providers.Count - 1; i >= 0; i--)
+			{
+				loc = locationManager.GetLastKnownLocation(providers[i]);
+				if (loc != null) break;
+			}
 				return new Location()
 				{
 					Altitude = loc.Altitude,
@@ -67,10 +107,12 @@ namespace Ipheidi.Droid
 					Orientation = loc.Bearing,
 					Utc = DateTime.UtcNow
 				};
-			}
-			return null;
 		}
 
+		/// <summary>
+		/// On the location update.
+		/// </summary>
+		/// <param name="location">Location.</param>
 		public void OnLocationUpdate(Location location)
 		{
 			foreach (var o in observers)
@@ -79,6 +121,10 @@ namespace Ipheidi.Droid
 			}
 		}	
 
+		/// <summary>
+		/// On the location changed.
+		/// </summary>
+		/// <param name="location">Location.</param>
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
 			OnLocationUpdate(new Location()
@@ -93,18 +139,32 @@ namespace Ipheidi.Droid
 			});
 		}
 
+		/// <summary>
+		/// On the provider disabled.
+		/// </summary>
+		/// <param name="provider">Provider.</param>
 		public void OnProviderDisabled(string provider)
 		{
 			StopLocationUpdate();
 			StartLocationUpdate(Precision);
 		}
 
+		/// <summary>
+		/// On the provider enabled.
+		/// </summary>
+		/// <param name="provider">Provider.</param>
 		public void OnProviderEnabled(string provider)
 		{
 			StopLocationUpdate();
 			StartLocationUpdate(Precision);
 		}
 
+		/// <summary>
+		/// On the status changed.
+		/// </summary>
+		/// <param name="provider">Provider.</param>
+		/// <param name="status">Status.</param>
+		/// <param name="extras">Extras.</param>
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
 			System.Diagnostics.Debug.WriteLine(locationManager.GetProvider(provider).Accuracy.ToString());

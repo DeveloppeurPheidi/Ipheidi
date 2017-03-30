@@ -11,6 +11,9 @@ using Android.Locations;
 
 namespace Ipheidi.Droid
 {
+	/// <summary>
+	/// Main activity.
+	/// </summary>
 	[Activity(Label = "Ipheidi.Droid", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
@@ -22,7 +25,7 @@ namespace Ipheidi.Droid
 			base.OnCreate(bundle);
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 			AppInfo.cookieManager = new AndroidCookieManager();
-			AppInfo.ipAddressManager = new AndroidIpAddressManager();
+			AppInfo.ipAddressManager = new AndroidNetworkManager();
 			AppInfo.credentialsManager = new AndroidCredentialsManager();
 			AppInfo.locationManager = new AndroidLocationManager(GetSystemService(Context.LocationService) as LocationManager);
 			AppInfo.battery = new AndroidBattery();

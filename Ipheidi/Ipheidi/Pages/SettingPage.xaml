@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.SettingPage">
 	<ContentPage.Content>
-		<StackLayout x:Name="mainLayout">
-			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked"/>
-			<Button Text="Supprimer tout les comptes" Clicked="DeleteAllUserButtonClicked"/>
-		</StackLayout>
+		<RelativeLayout x:Name="mainLayout">
+			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked" 
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.1,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.8,Constant=0}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.2,Constant=0}"/>
+			
+			<Button Text="Supprimer tous les comptes" Clicked="DeleteAllUserButtonClicked"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.35,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.8,Constant=0}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.2,Constant=0}"/>
+		</RelativeLayout>
 	</ContentPage.Content>
 </ContentPage>

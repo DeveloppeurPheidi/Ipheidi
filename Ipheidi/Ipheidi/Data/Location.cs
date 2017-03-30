@@ -4,6 +4,9 @@ using SQLite;
 
 namespace Ipheidi
 {
+	/// <summary>
+	/// Modèle de donnée de localisation.
+	/// </summary>
 	public class Location
 	{
 		[JsonIgnore]
@@ -86,6 +89,12 @@ namespace Ipheidi
 			get;
 			set;
 		}
+
+		/// <summary>
+		/// Gets the distance from other location.
+		/// </summary>
+		/// <returns>The distance from other location.</returns>
+		/// <param name="location">Location.</param>
 		public double GetDistanceFromOtherLocation(Location location)
 		{
 			double lat1 = this.Lattitude;
@@ -103,10 +112,43 @@ namespace Ipheidi
 
 			return dist;
 		}
+
+		/// <summary>
+		/// Convert Degree to radian.
+		/// </summary>
+		/// <returns>The radian.</returns>
+		/// <param name="degree">Degree.</param>
 		private double DegreeToRadian(double degree)
 		{
 			return (degree * Math.PI) / 180;
 		}
 
+		/// <summary>
+		/// Gets the degree minute second. item1=lat, item2=long. .item1=degree, .item2=minute, .item3=second, .item4=orientation
+		/// </summary>
+		/// <returns>The degree minute second.</returns>
+		public Tuple<Tuple<int, int, double, string>, Tuple<int, int, double, string>> GetDegreeMinuteSecond()
+		{
+			var lat = DecimalToDegreeMinuteSecond(Lattitude >= 0 ? Lattitude : Lattitude * -1, Lattitude >= 0 ? "N" : "S");
+			var lon = DecimalToDegreeMinuteSecond(Longitude >= 0 ? Longitude : Longitude * -1, Longitude >= 0 ? "E" : "W");
+			var result = Tuple.Create(lat, lon);
+			return result;
+		}
+
+		/// <summary>
+		/// Decimals to degree minute second.
+		/// </summary>
+		/// <returns>The degree minute second.</returns>
+		/// <param name="absoluteCoord">Absolute coordinate.</param>
+		/// <param name="orientation">Orientation.</param>
+		private Tuple<int, int, double, string> DecimalToDegreeMinuteSecond(double absoluteCoord, string orientation)
+		{
+			double sec = Math.Round(absoluteCoord * 3600);
+			int deg = (int)sec / 3600;
+			sec = Math.Abs((int)sec % 3600);
+			int min = (int)sec / 60;
+			sec %= 60;
+			return Tuple.Create(deg, min, sec, orientation);
+		}
 	}
 }

@@ -4,8 +4,12 @@ using System.Net.Sockets;
 
 namespace Ipheidi.iOS
 {
-	public class IOSIpAddressManager:IIPAddressManager
+	public class IOSNetworkManager:INetworkManager
 	{
+		/// <summary>
+		/// Gets the IP Address.
+		/// </summary>
+		/// <returns>The IP Address.</returns>
 		public string GetIPAddress()
 		{
 			String ipAddress = "";

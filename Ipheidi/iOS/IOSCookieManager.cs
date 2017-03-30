@@ -5,16 +5,25 @@ using Foundation;
 
 namespace Ipheidi.iOS
 {
+	/// <summary>
+	/// Gestionnaire de cookie
+	/// </summary>
 	public class IOSCookieManager:ICookieManager
 	{
 		private readonly object _refreshLock = new object();
 
-
+		/// <summary>
+		/// Adds the cookie.
+		/// </summary>
+		/// <param name="cookie">Cookie.</param>
 		public void AddCookie(Cookie cookie)
 		{
 			NSHttpCookieStorage.SharedStorage.SetCookie(new NSHttpCookie(cookie));
 		}
 
+		/// <summary>
+		/// Clears the cookies.
+		/// </summary>
 		public void ClearCookies()
 		{
 			NSHttpCookieStorage CookieStorage = NSHttpCookieStorage.SharedStorage;
@@ -25,6 +34,10 @@ namespace Ipheidi.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets all cookies.
+		/// </summary>
+		/// <returns>The all cookies.</returns>
 		public CookieContainer GetAllCookies()
 		{
 			CookieContainer cookies = new CookieContainer();
@@ -34,6 +47,11 @@ namespace Ipheidi.iOS
 			}
 			return cookies;
 		}
+
+		/// <summary>
+		/// Refresh the cookies.
+		/// </summary>
+		/// <returns>The cookies.</returns>
 		private IEnumerable<Cookie> RefreshCookies()
 		{
 			lock (_refreshLock)

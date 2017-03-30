@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.LoginPage">
+	<ScrollView VerticalOptions="FillAndExpand">
 		<RelativeLayout x:Name="mainLayout" VerticalOptions="Fill" HorizontalOptions="Fill">
 			<Image x:Name="demiCercle" Source="demi_cercle_vert.png" Aspect="Fill"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
@@ -42,7 +43,7 @@
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=100}"/>
 			
-			<Switch x:Name="rememberSwitch"						
+			<Switch x:Name="rememberSwitch"			
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.80,Constant=0}"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=150}"/>	
 			
@@ -50,7 +51,7 @@
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=155}"/>
 			
-			<Button x:Name="btnOtherAccount" Text="Se connecter avec un autre compte" Clicked="OnOtherAccountButtonClicked" BackgroundColor="Transparent" BorderColor="Transparent"
+			<Button x:Name="btnOtherAccount" Text="Se connecter avec un autre compte" Clicked="OnOtherAccountButtonClicked" BackgroundColor="Transparent" BorderWidth="1" BorderColor="Silver"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=100}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
@@ -60,9 +61,10 @@
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=200}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
-			<Button x:Name="btnLogin" Text="Se connecter" BorderRadius="15" BorderWidth="1"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.8,Constant=0}"
+			<Button x:Name="btnLogin" Text="Se connecter" Margin="0,0,0,60"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.35,Constant=230}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.25,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"/>
 		</RelativeLayout>
+	</ScrollView>
 </ContentPage>
