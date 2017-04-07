@@ -1,4 +1,5 @@
-﻿using Android.Webkit;
+﻿using Android.OS;
+using Android.Webkit;
 using Ipheidi;
 using Ipheidi.Droid;
 using Java.Net;
@@ -6,7 +7,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
-
 namespace Ipheidi.Droid
 {
 	/// <summary>
@@ -21,25 +21,24 @@ namespace Ipheidi.Droid
 
 			if (Control == null)
 			{
-				var webView = new Android.Webkit.WebView(Forms.Context);					
+				var webView = new CustomNativeWebView(Forms.Context);
 				webView.Settings.JavaScriptEnabled = true;
 				var webViewClient = new CustomWebViewClient();
 
-#pragma warning disable CS0618 // Type or member is obsolete
-				webViewClient.ShouldInterceptRequest(webView,AppInfo.url);
-#pragma warning restore CS0618 // Type or member is obsolete
 				webView.SetWebViewClient(webViewClient);
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)
 			{
-				var hybridWebView = e.OldElement as CustomWebView;
+				var customWebView = e.OldElement as CustomWebView;
 			}
 			if (e.NewElement != null)
 			{
 				Control.LoadUrl(Element.Source);
 			}
+
 		}
+
 	}
 }
 

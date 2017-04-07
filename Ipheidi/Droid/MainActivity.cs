@@ -24,11 +24,10 @@ namespace Ipheidi.Droid
 
 			base.OnCreate(bundle);
 			global::Xamarin.Forms.Forms.Init(this, bundle);
-			AppInfo.cookieManager = new AndroidCookieManager();
-			AppInfo.ipAddressManager = new AndroidNetworkManager();
-			AppInfo.credentialsManager = new AndroidCredentialsManager();
-			AppInfo.locationManager = new AndroidLocationManager(GetSystemService(Context.LocationService) as LocationManager);
-			AppInfo.battery = new AndroidBattery();
+			Droid.LocationManager.locationManager = base.GetSystemService(Context.LocationService) as Android.Locations.LocationManager;
+			App.Heigth = Resources.DisplayMetrics.HeightPixels;
+			App.Width = Resources.DisplayMetrics.WidthPixels;
+
 			LoadApplication(new App());
 		}
 	}

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using Ipheidi.iOS;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(NetworkManager))]
 namespace Ipheidi.iOS
 {
-	public class IOSNetworkManager:INetworkManager
+	public class NetworkManager:INetworkService
 	{
 		/// <summary>
 		/// Gets the IP Address.

@@ -13,34 +13,52 @@ namespace Ipheidi
 	public partial class MenuPage : ContentPage
 	{
 		
-		public  ObservableCollection<Page> pages;
+		public  List<Page> pages;
+		bool visible = true;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.MenuPage"/> class.
 		/// </summary>
 		public MenuPage()
 		{
-			pages = new ObservableCollection<Page>();
+			NavigationPage.SetHasNavigationBar(this, false);
+			pages = new List<Page>();
 			Icon = "menu_hamburger.png";
 			InitializeComponent();
+
+			//Bouton de logout
+			ContentPage logout = new ContentPage();
+			logout.Icon = "logout.png";
+			logout.Title = "Déconnexion";
+
+			//Bouton de refresh
+			ContentPage refresh = new ContentPage();
+			refresh.Icon = "refresh.png";
+			refresh.Title = "Regénérer le navigateur";
+
+			pages.Add(logout);
+			pages.Add(refresh);
+			pages.Add(new ContactPage());
+
+			var MenuCell = new DataTemplate(typeof(MenuCellView));
+			MenuCell.SetBinding(MenuCellView.ImageSourceProperty, "Icon");
+			MenuCell.SetBinding(MenuCellView.TextProperty, "Title");
+			listViewMenu.ItemTemplate = MenuCell;
 			listViewMenu.ItemsSource = pages;
-			listViewMenu.ItemTemplate = new DataTemplate(typeof(ImageCell));
-			listViewMenu.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, "Icon");
-			listViewMenu.ItemTemplate.SetBinding(ImageCell.TextProperty, "Title");
-			listViewMenu.ItemTemplate.SetValue(ImageCell.TextColorProperty, Color.Black);
+			listViewMenu.SeparatorColor = Color.Transparent;
 			listViewMenu.ItemSelected += (sender, e) =>
 			{
-				if(listViewMenu.SelectedItem != null)
-				{ 
+				if (listViewMenu.SelectedItem != null)
+				{
 					Page p = (Page)listViewMenu.SelectedItem;
 					if (p.Title == "Déconnexion")
 					{
-						AppInfo.cookieManager.ClearCookies();
+						App.CookieManager.ClearCookies();
 						BrowserPage.CheckWebSession();
 					}
 					else if (p.Title == "Regénérer le navigateur")
 					{
-						Device.BeginInvokeOnMainThread(AppInfo.app.RefreshBrowser);
+						Device.BeginInvokeOnMainThread(App.Instance.RefreshBrowser);
 					}
 					else
 					{
@@ -59,12 +77,27 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (visible)
 			{
-				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				//Permet d'afficher correctement la bar de status sur iOS
+				if (Device.OS == TargetPlatform.iOS)
+				{
+					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				}
+				base.OnSizeAllocated(width, height);
 			}
-			base.OnSizeAllocated(width, height);
+
+		}
+
+		protected override void OnAppearing()
+		{
+			visible = true;
+			base.OnAppearing();
+		}
+		protected override void OnDisappearing()
+		{
+			visible = false;
+			base.OnDisappearing();
 		}
 	}
 }

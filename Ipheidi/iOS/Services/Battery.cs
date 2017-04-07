@@ -1,16 +1,19 @@
 ﻿using System;
+using Ipheidi.iOS;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(Battery))]
 namespace Ipheidi.iOS
 {
 	
-	public class IOSBattery :IBattery
+	public class Battery :IBattery
 	{
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.IOSBattery"/> class.
 		/// </summary>
-		public IOSBattery()
+		public Battery()
 		{
 			UIDevice.CurrentDevice.BatteryMonitoringEnabled = true;
 		}

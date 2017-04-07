@@ -17,21 +17,17 @@ namespace Ipheidi.iOS
 		{
 			
 			global::Xamarin.Forms.Forms.Init();
-			AppInfo.cookieManager = new IOSCookieManager();
-			AppInfo.ipAddressManager = new IOSNetworkManager();
-			AppInfo.credentialsManager = new IOSCredentialsManager();
-			AppInfo.statusBarManager = new IOSStatusBarManager();
-			AppInfo.locationManager = new IOSLocationManager();
-			AppInfo.battery = new IOSBattery();
-
+			App.Heigth = UIScreen.MainScreen.Bounds.Height;
+			App.Width = UIScreen.MainScreen.Bounds.Width;
 			LoadApplication(new App());
 
 			Boolean result = base.FinishedLaunching(app, options);
-			UIColor colorPrimary = UIColor.FromRGB(0x92,0xc8,0x51);
-			//UIColor colorDark = UIColor.FromRGB(0x57, 0x78, 0x30);
+			UIColor colorPrimary = UIColor.FromRGB((nfloat)App.ColorPrimary.R,(nfloat)App.ColorPrimary.G,(nfloat)App.ColorPrimary.B);
+			UISwitch.Appearance.OnTintColor = colorPrimary;
 			app.KeyWindow.TintColor = colorPrimary;
 			UINavigationBar.Appearance.BarTintColor = colorPrimary;
 			UINavigationBar.Appearance.TintColor = UIColor.White;
+			UIBarButtonItem.Appearance.TintColor = colorPrimary;
 
 			var statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
 			if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))

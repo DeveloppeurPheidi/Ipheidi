@@ -58,7 +58,7 @@ namespace Ipheidi
 		/// <returns>The items async.</returns>
 		public Task<List<Location>> GetItemsAsync()
 		{
-			return database.Table<Location>().Where(l=>l.Domain == AppInfo.domain && l.User == AppInfo.username).ToListAsync();
+			return database.Table<Location>().Where(l=>l.Domain == App.Domain && l.User == App.Username).ToListAsync();
 		}
 
 		/// <summary>

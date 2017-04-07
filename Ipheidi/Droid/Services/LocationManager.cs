@@ -5,27 +5,29 @@ using Android.Content;
 using Android.Locations;
 using Android.OS;
 using Android.Runtime;
+using Ipheidi.Droid;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(Ipheidi.Droid.LocationManager))]
 namespace Ipheidi.Droid
 {
 	/// <summary>
 	/// Gestionnaire de localisation
 	/// </summary>
-	public class AndroidLocationManager:Java.Lang.Object,ILocationManager, Android.Locations.ILocationListener
+	public class LocationManager:Java.Lang.Object,ILocationService, Android.Locations.ILocationListener
 	{
 		string Provider;
-		float Precision;
-		LocationManager locationManager;
+		double Precision;
+		public static Android.Locations.LocationManager locationManager;
 		List<ILocationListener> observers;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.Droid.AndroidLocationManager"/> class.
 		/// </summary>
 		/// <param name="locMgr">Location mgr.</param>
-		public AndroidLocationManager(LocationManager locMgr)
+		public LocationManager()
 		{
 			observers = new List<ILocationListener>();
-			locationManager = locMgr;
 		}
 
 		/// <summary>
@@ -62,15 +64,16 @@ namespace Ipheidi.Droid
 		/// <param name="precision">Précision en mêtre.</param>
 		public void StartLocationUpdate(double precision)
 		{
-			Precision = (float)precision;
-			Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = Accuracy.Fine }, true);
+			Precision = precision;
+			var accuracy = precision <= 10 ? Accuracy.Fine : Accuracy.Coarse;
+			Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = accuracy }, true);
 			if (Provider!= null)
 			{
-				locationManager.RequestLocationUpdates(Provider, 1, Precision, this);
+				locationManager.RequestLocationUpdates(Provider, 1, 25, this);
 			}
 			else
 			{
-				System.Diagnostics.Debug.WriteLine(Provider + " is not available. Does the device have location services enabled?");
+				System.Diagnostics.Debug.WriteLine("No provider available. Does the device have location services enabled?");
 			}
 		}
 
@@ -102,7 +105,7 @@ namespace Ipheidi.Droid
 				{
 					Altitude = loc.Altitude,
 					Longitude = loc.Longitude,
-					Lattitude = loc.Latitude,
+					Latitude = loc.Latitude,
 					Speed = loc.Speed,
 					Orientation = loc.Bearing,
 					Utc = DateTime.UtcNow
@@ -130,7 +133,7 @@ namespace Ipheidi.Droid
 			OnLocationUpdate(new Location()
 			{
 				Altitude = location.Altitude,
-				Lattitude = location.Latitude,
+				Latitude = location.Latitude,
 				Longitude = location.Longitude,
 				Speed = location.Speed,
 				Orientation = location.Bearing,

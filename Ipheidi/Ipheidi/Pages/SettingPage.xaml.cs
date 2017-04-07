@@ -10,6 +10,8 @@ namespace Ipheidi
 	/// </summary>
 	public partial class SettingPage : ContentPage
 	{
+		bool visible = true;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.SettingPage"/> class.
 		/// </summary>
@@ -24,8 +26,8 @@ namespace Ipheidi
 		/// </summary>
 		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
 		{
-			AppInfo.credentialsManager.DeleteUser(AppInfo.username);
-			AppInfo.username = "";
+			App.CredentialsManager.DeleteUser(App.Username);
+			App.Username = "";
 		}
 
 		/// <summary>
@@ -33,8 +35,8 @@ namespace Ipheidi
 		/// </summary>
 		void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
-			AppInfo.credentialsManager.DeleteCredentials();
-			AppInfo.username = "";
+			App.CredentialsManager.DeleteCredentials();
+			App.Username = "";
 		}
 
 		/// <summary>
@@ -44,13 +46,27 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (visible)
 			{
-				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				//Permet d'afficher correctement la bar de status sur iOS
+				if (Device.OS == TargetPlatform.iOS)
+				{
+					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				}
+				base.OnSizeAllocated(width, height);
 			}
 
-			base.OnSizeAllocated(width, height);
+		}
+
+		protected override void OnAppearing()
+		{
+			visible = true;
+			base.OnAppearing();
+		}
+		protected override void OnDisappearing()
+		{
+			visible = false;
+			base.OnDisappearing();
 		}
 	}
 }

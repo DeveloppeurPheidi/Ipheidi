@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -25,7 +25,7 @@ namespace Ipheidi
 		{
 
 			//Cache la nav bar
-			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && AppInfo.credentials.Count > 0);
+			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && App.Credentials.Count > 0);
 
 			InitializeComponent();
 
@@ -36,20 +36,18 @@ namespace Ipheidi
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
 				btnOtherAccount.BorderColor = Color.Transparent;
-				lblRemember.FontSize *= 1.5;
-				lblCourriel.FontSize *= 1.5;
-				lblPassword.FontSize *= 1.5;
 
 
 			}
 			btnOtherAccount.TextColor = Color.FromHex("#83B347");
-			//btnOtherAccount.TextColor = Color.FromHex("#92c851");
+			btnOtherAccount.TextColor = Color.FromHex("#92c851");
 
 			//Bouton de login
-			btnLogin.FontSize *= 1.5;
+			btnLogin.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));;
 			btnLogin.FontAttributes = FontAttributes.Bold;
 			btnLogin.Clicked += async (sender, e) =>
 			{
+				App.Url = App.UrlList[App.Domain];
 				messageLabel.Text = "";
 				EnableInterface(false);
 				messageLabel.Text = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
@@ -60,26 +58,27 @@ namespace Ipheidi
 
 			//Url Picker
 			urlPicker.IsEnabled = secondePage;
-			foreach (var domain in AppInfo.listeUrl.Keys)
+			foreach (var domain in App.UrlList.Keys)
 			{
 				urlPicker.Items.Add(domain);
 			}
+
 			urlPicker.Title = "Sélectionnez une adresse";
 			urlPicker.SelectedIndexChanged += (sender, e) =>
 			{
-				AppInfo.domain = urlPicker.Items[urlPicker.SelectedIndex];
-				AppInfo.url = AppInfo.listeUrl[AppInfo.domain];
+				App.Domain = urlPicker.Items[urlPicker.SelectedIndex];
+				App.Url = App.UrlList[App.Domain];
 			};
-			if (!string.IsNullOrEmpty(AppInfo.domain))
+			if (!string.IsNullOrEmpty(App.Domain))
 			{
-				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(AppInfo.domain);
+				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.Domain);
 			}
 
 			//User picker
-			if (AppInfo.credentials.Count > 0 && !secondePage)
+			if (App.Credentials.Count > 0 && !secondePage)
 			{
 
-				foreach (var account in AppInfo.credentials)
+				foreach (var account in App.Credentials)
 				{
 					if (account.Value.ContainsKey("Username"))
 					{ 
@@ -88,29 +87,33 @@ namespace Ipheidi
 				}
 				if (userPicker.Items.Count == 0)
 				{
-					AppInfo.credentialsManager.DeleteCredentials();
-					Device.BeginInvokeOnMainThread(AppInfo.app.GetLoginPage);
+					App.CredentialsManager.DeleteCredentials();
+					Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
 				}
 				userPicker.SelectedIndexChanged += (sender, e) =>
 				{
-					string account = userPicker.Items[userPicker.SelectedIndex];
-					if (AppInfo.credentials.ContainsKey(account))
-					{ 
-						var properties = AppInfo.credentials[account];
-						AppInfo.username = properties["Username"];
-						usernameEntry.Text = properties["Username"];
-						passwordEntry.Text = properties["Password"];
-						urlPicker.SelectedIndex = urlPicker.Items.IndexOf(properties["Domain"]);
+					if (userPicker.SelectedIndex >= 0)
+					{
+						string account = userPicker.Items[userPicker.SelectedIndex];
+						if (App.Credentials.ContainsKey(account))
+						{
+							var properties = App.Credentials[account];
+							App.Username = properties["Username"];
+							App.Domain = properties["Domain"];
+							usernameEntry.Text = properties["Username"];
+							passwordEntry.Text = properties["Password"];
+							urlPicker.SelectedIndex = urlPicker.Items.IndexOf(properties["Domain"]);
+						}
 					}
 				};
-				userPicker.SelectedIndex = string.IsNullOrEmpty(AppInfo.username) || string.IsNullOrEmpty(AppInfo.domain) ? 0 : userPicker.Items.IndexOf(AppInfo.username + " (" + AppInfo.domain + ")");
+				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
 			}
 		}
 
 		//Évènement appelé lorsque l'on clique sur le bouton de connexion avec un autre compte.
 		void OnOtherAccountButtonClicked(object sender, EventArgs e)
 		{
-			AppInfo.username = "";
+			App.Username = "";
 			Navigation.PushAsync(new LoginPage(true));
 		}
 #endregion
@@ -152,7 +155,7 @@ namespace Ipheidi
 		/// <param name="rememberUser"></param>
 		public async Task<string> UserLogin(string username, string password, bool rememberUser)
 		{
-			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(AppInfo.url))
+			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(App.Url))
 			{
 				return "Veullez laisser aucun champ vide";
 			}
@@ -164,14 +167,14 @@ namespace Ipheidi
 				HttpResponseMessage response = null;
 				try
 				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, AppInfo.url);
+					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, App.Url);
 					request.Content = encodedContent;
 
 					request.Headers.Add("User-Agent", "Ipheidi " + Device.OS);
-					request.Headers.Add("UserHostAddress", AppInfo.ipAddressManager.GetIPAddress());
+					request.Headers.Add("UserHostAddress", App.IpAddressManager.GetIPAddress());
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
-					Debug.WriteLine("IP: " + AppInfo.ipAddressManager.GetIPAddress());
-					httpClient.Timeout = new TimeSpan(0, 0, 5);
+					Debug.WriteLine("IP: " + App.IpAddressManager.GetIPAddress());
+					httpClient.Timeout = new TimeSpan(0, 0, 10);
 					response = await httpClient.SendAsync(request);
 
 				}
@@ -185,30 +188,30 @@ namespace Ipheidi
 					{
 						string rc = await response.Content.ReadAsStringAsync();
 						Debug.WriteLine("WEBSESSION: " + rc);
-						AppInfo.webSession = new Cookie() { Name = "WEBSESSION", Domain = AppInfo.domain, Value = rc };
-						if (!string.IsNullOrWhiteSpace(rc))
+						App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
+						if (!string.IsNullOrEmpty(rc) && IsNumeric(rc))
 						{
 							Debug.WriteLine(rc);
 							if (rememberUser || !IsInSecondPage)
 							{
 								if (rememberUser)
 								{
-									AppInfo.credentialsManager.SaveCredentials(username, password);
+									App.CredentialsManager.SaveCredentials(username, password);
 								}
-								Application.Current.Properties["LastUser"] = AppInfo.username;
-								Application.Current.Properties["LastDomain"] = AppInfo.domain;
+								Application.Current.Properties["LastUser"] = App.Username;
+								Application.Current.Properties["LastDomain"] = App.Domain;
 								await Application.Current.SavePropertiesAsync();
 							}
-							AppInfo.username = username;
-							AppInfo.cookieContainer.GetCookies(new Uri(AppInfo.url));
+							App.Username = username;
+							App.CookieContainer.GetCookies(new Uri(App.Url));
 
 							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-							AppInfo.cookieManager.AddCookie(AppInfo.webSession);
-							AppInfo.inLogin = false;
-							Device.BeginInvokeOnMainThread(AppInfo.app.GetToApplication);
+							App.CookieManager.AddCookie(App.WebSession);
+							App.IsInLogin = false;
+							Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
 							return "";
 						}
-						return "L'adresse courriel ou le mot de passe saisi est incorrects";
+						return "L'adresse courriel ou le mot de passe saisi sont incorrects";
 					}
 				}
 				return "Problème de connexion au serveur, veuillez réessayer plus tard";
@@ -225,10 +228,38 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
-				mainLayout.Margin  = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin  = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 
 			base.OnSizeAllocated(width, height);
+		}
+
+		protected override void OnAppearing()
+		{
+			if(!IsInSecondPage)
+			{
+				userPicker.SelectedIndex = -1;
+				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
+
+			}
+			base.OnAppearing();
+		}
+
+		/// <summary>
+		/// Check if numeric.
+		/// </summary>
+		/// <returns><c>true</c>, if is numeric, <c>false</c> otherwise.</returns>
+		/// <param name="value">The string to check.</param>
+		bool IsNumeric(string value)
+		{
+			foreach (char c in value)
+			{
+				if (c < '0' || c > '9')
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }

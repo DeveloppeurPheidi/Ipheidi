@@ -2,6 +2,10 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Ipheidi.Droid;
+using Xamarin.Forms;
+
+[assembly: Dependency(typeof(AndroidBattery))]
 namespace Ipheidi.Droid
 {
 	public class AndroidBattery : IBattery
@@ -25,7 +29,7 @@ namespace Ipheidi.Droid
 				{
 					using (var filter = new IntentFilter(Intent.ActionBatteryChanged))
 					{
-						using (var battery = Application.Context.RegisterReceiver(null, filter))
+						using (var battery = Android.App.Application.Context.RegisterReceiver(null, filter))
 						{
 							var level = battery.GetIntExtra(BatteryManager.ExtraLevel, -1);
 							var scale = battery.GetIntExtra(BatteryManager.ExtraScale, -1);
@@ -55,7 +59,7 @@ namespace Ipheidi.Droid
 				{
 					using (var filter = new IntentFilter(Intent.ActionBatteryChanged))
 					{
-						using (var battery = Application.Context.RegisterReceiver(null, filter))
+						using (var battery = Android.App.Application.Context.RegisterReceiver(null, filter))
 						{
 							int status = battery.GetIntExtra(BatteryManager.ExtraStatus, -1);
 							var isCharging = status == (int)BatteryStatus.Charging || status == (int)BatteryStatus.Full;
@@ -106,7 +110,7 @@ namespace Ipheidi.Droid
 				{
 					using (var filter = new IntentFilter(Intent.ActionBatteryChanged))
 					{
-						using (var battery = Application.Context.RegisterReceiver(null, filter))
+						using (var battery = Android.App.Application.Context.RegisterReceiver(null, filter))
 						{
 							int status = battery.GetIntExtra(BatteryManager.ExtraStatus, -1);
 							var isCharging = status == (int)BatteryStatus.Charging || status == (int)BatteryStatus.Full;

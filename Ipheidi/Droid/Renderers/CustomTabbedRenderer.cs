@@ -6,7 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 
-[assembly: ExportRenderer(typeof(TabbedPage), typeof(CustomTabbedRenderer))]
+[assembly: ExportRenderer(typeof(CustomTabbedPage), typeof(CustomTabbedRenderer))]
 namespace Ipheidi.Droid
 {
 	public class CustomTabbedRenderer: TabbedPageRenderer

@@ -29,7 +29,7 @@ namespace Ipheidi
 			set;
 		}
 
-		public double Lattitude
+		public double Latitude
 		{
 			get;
 			set;
@@ -97,9 +97,9 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		public double GetDistanceFromOtherLocation(Location location)
 		{
-			double lat1 = this.Lattitude;
+			double lat1 = this.Latitude;
 			double lng1 = this.Longitude;
-			double lat2 = location.Lattitude;
+			double lat2 = location.Latitude;
 			double lng2 = location.Longitude;
 			double earthRadius = 6371000; //meters
 			double dLat = DegreeToRadian(lat2 - lat1);
@@ -129,7 +129,7 @@ namespace Ipheidi
 		/// <returns>The degree minute second.</returns>
 		public Tuple<Tuple<int, int, double, string>, Tuple<int, int, double, string>> GetDegreeMinuteSecond()
 		{
-			var lat = DecimalToDegreeMinuteSecond(Lattitude >= 0 ? Lattitude : Lattitude * -1, Lattitude >= 0 ? "N" : "S");
+			var lat = DecimalToDegreeMinuteSecond(Latitude >= 0 ? Latitude : Latitude * -1, Latitude >= 0 ? "N" : "S");
 			var lon = DecimalToDegreeMinuteSecond(Longitude >= 0 ? Longitude : Longitude * -1, Longitude >= 0 ? "E" : "W");
 			var result = Tuple.Create(lat, lon);
 			return result;

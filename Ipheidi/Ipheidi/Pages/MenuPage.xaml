@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.MenuPage">
 	<ContentPage.Content>
 		<StackLayout x:Name="mainLayout">
-			<ListView x:Name="listViewMenu" Margin="0,20,0,0"></ListView>
+			<ListView x:Name="listViewMenu"></ListView>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

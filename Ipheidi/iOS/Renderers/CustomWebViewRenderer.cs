@@ -19,7 +19,6 @@ namespace Ipheidi.iOS
 	/// </summary>
 	public class CustomWebViewRenderer : ViewRenderer<CustomWebView, UIWebView>
 	{
-
 		protected override void OnElementChanged(ElementChangedEventArgs<CustomWebView> e)
 		{
 			base.OnElementChanged(e);

@@ -25,10 +25,10 @@ namespace Ipheidi.iOS
 			{
 				if (request.Body.ToString().Contains("Logoff"))
 				{
-					var loc = AppInfo.locationManager.GetLocation();
-					loc.BatteryRemainingCharge = AppInfo.battery.RemainingChargePercent;
-					loc.PowerSource = AppInfo.battery.PowerSource.ToString();
-					loc.PowerStatus = AppInfo.battery.Status.ToString();
+					var loc = App.LocationManager.GetLocation();
+					loc.BatteryRemainingCharge = App.Battery.RemainingChargePercent;
+					loc.PowerSource = App.Battery.PowerSource.ToString();
+					loc.PowerStatus = App.Battery.Status.ToString();
 					List<Location> list = new List<Location>();
 					list.Add(loc);
 					string json = JsonConvert.SerializeObject(list);

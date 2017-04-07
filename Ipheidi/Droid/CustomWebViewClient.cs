@@ -1,41 +1,64 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
+using Android.Content.Res;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Webkit;
+using Java.IO;
 using Java.Net;
 
 namespace Ipheidi.Droid
 {
-	public class CustomWebViewClient:WebViewClient
+	public class CustomWebViewClient : WebViewClient
 	{
-		public CustomWebViewClient():base()
+		public CustomWebViewClient() : base()
 		{
 		}
 
 		/// <summary>
-		/// Intercept the request.
+		/// Intercept request.
 		/// </summary>
-		/// <returns>The intercepted request.</returns>
+		/// <returns>The intercept request.</returns>
 		/// <param name="view">View.</param>
-		/// <param name="url">URL.</param>
-#pragma warning disable CS0672 // Member overrides obsolete member
-		public override WebResourceResponse ShouldInterceptRequest(WebView view, string url)
-#pragma warning restore CS0672 // Member overrides obsolete member
+		/// <param name="request">Request.</param>
+		public override WebResourceResponse ShouldInterceptRequest(WebView view, IWebResourceRequest request)
 		{
-			BrowserPage.CheckWebSession();
+			if (request.Method == "POST")
+			{
+				BrowserPage.CheckWebSession();
+			}
+
+			string url = request.Url.ToString();
 			string ext = MimeTypeMap.GetFileExtensionFromUrl(url);
 			string mime = MimeTypeMap.Singleton.GetMimeTypeFromExtension(ext);
+			if (url.Contains("?"))
+			{
+				//Xamarin.Forms.Device.BeginInvokeOnMainThread(App.Instance.Logout);
+			}
 			if (mime == null)
 			{
-#pragma warning disable CS0618 // Type or member is obsolete
-				return base.ShouldInterceptRequest(view, url);
-#pragma warning restore CS0618 // Type or member is obsolete
+				return base.ShouldInterceptRequest(view, request);
 			}
 			else
 			{
+
 				HttpURLConnection conn = (HttpURLConnection)new URL(url).OpenConnection();
-				conn.SetRequestProperty("User-Agent", "Ipheidi " + Xamarin.Forms.Device.OS);
-				return new WebResourceResponse(mime, "UTF-8", conn.InputStream);
+				foreach (var i in request.RequestHeaders)
+				{
+					conn.SetRequestProperty(i.Key, i.Value);
+				}
+				var webResourceResponse = new WebResourceResponse(mime, "UTF-8", conn.InputStream);
+
+				if (webResourceResponse.MimeType == "text/css")
+				{
+					//MemoryStream ms = (MemoryStream)webResourceResponse.Data;
+					//Debug.WriteLine(System.Text.Encoding.UTF8.GetString(ms.ToArray()));
+				}
+				return webResourceResponse;
 			}
 		}
+
 	}
 }

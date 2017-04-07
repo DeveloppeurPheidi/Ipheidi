@@ -12,7 +12,7 @@ namespace Ipheidi
 	/// </summary>
 	public partial class BrowserPage : ContentPage
 	{
-		
+		bool visible = true;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.BrowserPage"/> class.
 		/// </summary>
@@ -24,16 +24,16 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 
 			InitializeComponent();
-			BrowserWeb.Source = "http://" + AppInfo.domain + "/connect";
+			BrowserWeb.Source = "http://" + App.Domain+ "/connect";
 		}
 
 		/// <summary>
 		/// Checks the web session.
 		/// </summary>
 		static public void CheckWebSession()
-		{ 
+		{
 			bool webSessionExistAndNotNull = false;
-			foreach (Cookie c in AppInfo.cookieManager.GetAllCookies().GetCookies(new Uri(AppInfo.url)))
+			foreach (Cookie c in App.CookieManager.GetAllCookies().GetCookies(new Uri(App.Url)))
 			{
 				if (c.Name == "WEBSESSION" && c.Value != "")
 				{
@@ -41,12 +41,11 @@ namespace Ipheidi
 				}
 			}
 			//Retourne à la page de login apres si le cookie de session est null ou si le cookie n'existe pas.
-			if (!webSessionExistAndNotNull && !AppInfo.inLogin)
+			if (!webSessionExistAndNotNull && !App.IsInLogin)
 			{
-				Device.BeginInvokeOnMainThread(AppInfo.app.Logout);
+				Device.BeginInvokeOnMainThread(App.Instance.Logout);
 			}
 		}
-
 		/// <summary>
 		/// On size allocation.
 		/// </summary>
@@ -54,14 +53,26 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-
-			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (visible)
 			{
-				this.mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				//Permet d'afficher correctement la bar de status sur iOS
+				if (Device.OS == TargetPlatform.iOS)
+				{
+					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				}
 			}
 			base.OnSizeAllocated(width, height);
 		}
-			
+
+		protected override void OnAppearing()
+		{
+			visible = true;
+			base.OnAppearing();
+		}
+		protected override void OnDisappearing()
+		{
+			visible = false;
+			base.OnDisappearing();
+		}
 	}
 }

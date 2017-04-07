@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace Ipheidi
 {
-	public interface ICredentialsManager
+	public interface ICredentialsService
 	{
 		/// <summary>
 		/// Saves the credentials.

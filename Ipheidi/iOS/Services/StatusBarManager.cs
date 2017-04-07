@@ -1,9 +1,12 @@
 ﻿using System;
+using Ipheidi.iOS;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(StatusBarManager))]
 namespace Ipheidi.iOS
 {
-	public class IOSStatusBarManager:IStatusBarManager
+	public class StatusBarManager:IStatusBarService
 	{
 		/// <summary>
 		/// Gets the status bar hidden property.

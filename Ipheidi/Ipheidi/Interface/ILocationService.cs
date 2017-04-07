@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Ipheidi
 {
-	public interface ILocationManager
+	public interface ILocationService
 	{
 		/// <summary>
 		/// Starts the location update.

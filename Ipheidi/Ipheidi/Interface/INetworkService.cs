@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Ipheidi
 {
-	public interface INetworkManager
+	public interface INetworkService
 	{
 		/// <summary>
 		/// Gets the IP Address.

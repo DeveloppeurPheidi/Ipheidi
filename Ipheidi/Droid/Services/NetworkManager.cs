@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Net;
+using Ipheidi.Droid;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(NetworkManager))]
 namespace Ipheidi.Droid
 {
-	public class AndroidNetworkManager:INetworkManager
+	public class NetworkManager:INetworkService
 	{
 		
-		public AndroidNetworkManager()
+		public NetworkManager()
 		{
+			
 		}
 
 		/// <summary>

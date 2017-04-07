@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Ipheidi
 {
-	public interface ICookieManager
+	public interface ICookieService
 	{
 		/// <summary>
 		/// Gets all cookies.

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using CoreLocation;
+using Ipheidi.iOS;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(LocationManager))]
 namespace Ipheidi.iOS
 {
 	/// <summary>
 	/// Gestionnaire de localisation
 	/// </summary>
-	public class IOSLocationManager:ILocationManager
+	public class LocationManager : ILocationService
 	{
 		bool firstCheck = true;
 		List<ILocationListener> observers;
@@ -19,7 +22,7 @@ namespace Ipheidi.iOS
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.IOSLocationManager"/> class.
 		/// </summary>
-		public IOSLocationManager()
+		public LocationManager()
 		{
 			observers = new List<ILocationListener>();
 			this.locationManager = new CLLocationManager();
@@ -66,15 +69,19 @@ namespace Ipheidi.iOS
 		/// <returns>The location.</returns>
 		public Location GetLocation()
 		{
-			return new Location()
+			if (CheckPermission())
 			{
-				Altitude = locationManager.Location.Altitude,
-				Lattitude = locationManager.Location.Coordinate.Latitude,
-				Longitude = locationManager.Location.Coordinate.Longitude,
-				Orientation = locationManager.Location.Course,
-				Speed = locationManager.Location.Speed,
-				Utc = DateTime.UtcNow
-			};
+				return new Location()
+				{
+					Altitude = locationManager.Location.Altitude,
+					Latitude = locationManager.Location.Coordinate.Latitude,
+					Longitude = locationManager.Location.Coordinate.Longitude,
+					Orientation = locationManager.Location.Course,
+					Speed = locationManager.Location.Speed,
+					Utc = DateTime.UtcNow
+				};
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -95,17 +102,11 @@ namespace Ipheidi.iOS
 		/// <param name="precision">Précision en mêtre.</param>
 		public void StartLocationUpdate(double precision)
 		{
-			// iOS 8 has additional permissions requirements
-			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) && firstCheck)
-			{
-				firstCheck = false;
-				locationManager.RequestAlwaysAuthorization(); 
-			}
-			if (CLLocationManager.LocationServicesEnabled)
+			if (CheckPermission())
 			{
 				//set the desired accuracy, in meters
-				locationManager.DesiredAccuracy = CLLocation.AccuracyKilometer;
-				locationManager.DistanceFilter = precision;
+				locationManager.DesiredAccuracy = precision;
+				locationManager.DistanceFilter = 25;
 				locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
 				{
 					CLLocation clLoc = e.Locations[e.Locations.Length - 1];
@@ -114,7 +115,7 @@ namespace Ipheidi.iOS
 						Speed = clLoc.Speed,
 						Altitude = clLoc.Altitude,
 						Longitude = clLoc.Coordinate.Longitude,
-						Lattitude = clLoc.Coordinate.Latitude,
+						Latitude = clLoc.Coordinate.Latitude,
 						Orientation = clLoc.Course,
 						Utc = DateTime.UtcNow,
 						Accuracy = clLoc.HorizontalAccuracy
@@ -122,10 +123,25 @@ namespace Ipheidi.iOS
 					OnLocationUpdate(loc);
 				};
 				locationManager.StartUpdatingLocation();
+				/*locationManager.DidVisit += (object sender, CLVisitedEventArgs e) => 
+				{
+					Debug.WriteLine("Visit: " + e.Visit.Coordinate.Latitude + ", " + e.Visit.Coordinate.Longitude); 
+				};
+				locationManager.StartMonitoringVisits();*/
 			}
 
 		}
 
+		bool CheckPermission()
+		{
+			// iOS 8 has additional permissions requirements
+			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) && firstCheck)
+			{
+				firstCheck = false;
+				locationManager.RequestAlwaysAuthorization();
+			}
+			return CLLocationManager.LocationServicesEnabled;
+		}
 		/// <summary>
 		/// Stops the location update.
 		/// </summary>

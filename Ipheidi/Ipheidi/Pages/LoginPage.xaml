@@ -19,52 +19,56 @@
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
 			<Picker x:Name="userPicker"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=50}"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=urlPicker,Property=Y,Factor=1,Constant=50}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
-			<Label x:Name="lblCourriel" Text="Courriel" VerticalOptions="Center" 
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=55}"/>
-			
+		
 			<Entry x:Name="usernameEntry" Placeholder="Courriel"  
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=50}"/>
-			
-			<Label x:Name="lblPassword" Text="Mot de passe" VerticalOptions="Center" 
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=urlPicker,Property=Y,Factor=1,Constant=50}"/>
+
+			<Label x:Name="lblCourriel" Text="Courriel" VerticalOptions="Center" 
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=105}"/>
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=usernameEntry,Property=Y,Factor=1,Constant=0}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=usernameEntry,Property=Height,Factor=1,Constant=0}"/>
 			
 			<Entry x:Name="passwordEntry" Placeholder="Mot de Passe" IsPassword="true" 
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=100}"/>
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=usernameEntry,Property=Y,Factor=1,Constant=50}"/>
+
+			<Label x:Name="lblPassword" Text="Mot de passe" VerticalOptions="Center" 
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=passwordEntry,Property=Y,Factor=1,Constant=0}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=passwordEntry,Property=Height,Factor=1,Constant=0}"/>
 			
 			<Switch x:Name="rememberSwitch"			
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.80,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=150}"/>	
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=passwordEntry,Property=Y,Factor=1,Constant=50}"/>	
 			
 			<Label x:Name="lblRemember" Text="Mémoriser" VerticalOptions="Center" 
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=155}"/>
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rememberSwitch,Property=Y,Factor=1,Constant=0}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rememberSwitch,Property=Height ,Factor=1,Constant=0}"/>
 			
 			<Button x:Name="btnOtherAccount" Text="Se connecter avec un autre compte" Clicked="OnOtherAccountButtonClicked" BackgroundColor="Transparent" BorderWidth="1" BorderColor="Silver"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=100}"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=usernameEntry,Property=Y,Factor=1,Constant=50}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
-			<Label x:Name="messageLabel" TextColor="Red" 
+			<Label x:Name="messageLabel" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" VerticalOptions="FillAndExpand" LineBreakMode="WordWrap"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.35,Constant=200}"
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rememberSwitch,Property=Y,Factor=1,Constant=50}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
 			
 			<Button x:Name="btnLogin" Text="Se connecter" Margin="0,0,0,60"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.35,Constant=230}"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.25,Constant=0}"
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.5,Constant=0}"/>
+			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=messageLabel,Property=Y,Factor=1,Constant=60}"
+			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.15,Constant=0}"
+			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.7,Constant=0}"/>
 		</RelativeLayout>
 	</ScrollView>
 </ContentPage>

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Net;
 using Foundation;
+using Ipheidi.iOS;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(CookieManager))]
 namespace Ipheidi.iOS
 {
 	/// <summary>
 	/// Gestionnaire de cookie
 	/// </summary>
-	public class IOSCookieManager:ICookieManager
+	public class CookieManager:ICookieService
 	{
 		private readonly object _refreshLock = new object();
 

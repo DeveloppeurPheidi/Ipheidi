@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ipheidi.iOS;
 using Xamarin.Auth;
 using Xamarin.Forms;
 
-namespace Ipheidi.Droid
+[assembly: Dependency(typeof(CredentialsManager))]
+namespace Ipheidi.iOS
 {
-	public class AndroidCredentialsManager:ICredentialsManager
+	public class CredentialsManager:ICredentialsService
 	{
+
 		/// <summary>
 		/// Deletes the credentials.
 		/// </summary>
 		public void DeleteCredentials()
 		{
-			var accounts = AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName);
+			var accounts = AccountStore.Create().FindAccountsForService(App.AppName);
 			foreach (var account in accounts)
 			{
-				AccountStore.Create(Forms.Context).Delete(account, AppInfo.AppName);
+				AccountStore.Create().Delete(account, App.AppName);
 			}
 		}
 
@@ -31,12 +34,12 @@ namespace Ipheidi.Droid
 			{
 				Account account = new Account
 				{
-					Username = username + " (" + AppInfo.domain + ")"
+					Username = username + " (" + App.Domain + ")"
 				};
 				account.Properties.Add("Password", password);
-				account.Properties.Add("Domain", AppInfo.domain);
+				account.Properties.Add("Domain", App.Domain);
 				account.Properties.Add("Username", username);
-				AccountStore.Create(Forms.Context).Save(account, AppInfo.AppName);
+				AccountStore.Create().Save(account, App.AppName);
 			}
 		}
 
@@ -46,7 +49,7 @@ namespace Ipheidi.Droid
 		/// <param name="username">Username.</param>
 		public void DeleteUser(string username)
 		{
-			AccountStore.Create(Forms.Context).Delete(AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName).Where(a => a.Username == username + "( " + AppInfo.domain + ")").FirstOrDefault(), AppInfo.AppName);
+			AccountStore.Create().Delete(AccountStore.Create().FindAccountsForService(App.AppName).Where(a => a.Username == username + "( " + App.Domain + ")").FirstOrDefault(), App.AppName);
 		}
 
 		/// <summary>
@@ -57,7 +60,7 @@ namespace Ipheidi.Droid
 		{
 			Dictionary<string, Dictionary<string, string>> credentials = new Dictionary<string, Dictionary<string, string>>();
 
-			foreach (var account in AccountStore.Create(Forms.Context).FindAccountsForService(AppInfo.AppName))
+			foreach (var account in AccountStore.Create().FindAccountsForService(App.AppName))
 			{
 				credentials.Add(account.Username, account.Properties);
 			}

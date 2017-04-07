@@ -8,11 +8,12 @@ namespace Ipheidi
 	public partial class MapPage : ContentPage
 	{
 		string url;
+		bool visible = true;
 		public MapPage()
 		{
 			Title = "Map";
 			InitializeComponent();
-			var location = AppInfo.locationManager.GetLocation();
+			var location = App.LocationManager.GetLocation();
 
 			if (location != null)
 			{
@@ -47,8 +48,15 @@ namespace Ipheidi
 
 		protected override void OnAppearing()
 		{
+			visible = true;
 			base.OnAppearing();
 		}
+		protected override void OnDisappearing()
+		{
+			visible = false;
+			base.OnDisappearing();
+		}
+
 		/// <summary>
 		/// On size allocation.
 		/// </summary>
@@ -56,12 +64,15 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (visible)
 			{
-				mainLayout.Margin = AppInfo.statusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				//Permet d'afficher correctement la bar de status sur iOS
+				if (Device.OS == TargetPlatform.iOS)
+				{
+					mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				}
+				base.OnSizeAllocated(width, height);
 			}
-			base.OnSizeAllocated(width, height);
 		}
 
 	}

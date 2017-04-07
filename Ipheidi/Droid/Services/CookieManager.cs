@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Android.Webkit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(Ipheidi.Droid.CookieManager))]
 namespace Ipheidi.Droid
 {
 	/// <summary>
 	/// Gestionnaire de cookie
 	/// </summary>
-	public class AndroidCookieManager:ICookieManager
+	public class CookieManager:ICookieService
 	{
 		
 		private readonly object _lock = new object();
@@ -21,8 +23,8 @@ namespace Ipheidi.Droid
 		public void AddCookie(Cookie cookie)
 		{
 			string cookieValue = cookie.Name + "=" + cookie.Value + ";" + cookie.Domain;
-			CookieManager.Instance.SetAcceptCookie(true);
-			CookieManager.Instance.SetCookie(AppInfo.url, cookieValue);
+			Android.Webkit.CookieManager.Instance.SetAcceptCookie(true);
+			Android.Webkit.CookieManager.Instance.SetCookie(App.Url, cookieValue);
 		}
 
 		/// <summary>
@@ -30,7 +32,7 @@ namespace Ipheidi.Droid
 		/// </summary>
 		public void ClearCookies()
 		{
-			CookieManager.Instance.RemoveAllCookie();
+			Android.Webkit.CookieManager.Instance.RemoveAllCookie();
 
 		}
 
@@ -62,7 +64,7 @@ namespace Ipheidi.Droid
 			{
 				// .GetCookie returns ALL cookies related to the URL as a single, long          
 				// string which we have to split and parse         
-				var allCookiesForUrl = CookieManager.Instance.GetCookie(AppInfo.url);
+				var allCookiesForUrl = Android.Webkit.CookieManager.Instance.GetCookie(App.Url);
 
 				if (string.IsNullOrWhiteSpace(allCookiesForUrl))
 				{
@@ -90,7 +92,7 @@ namespace Ipheidi.Droid
 								Name = cookiePieces[0],
 								Value = cookiePieces[1],
 								Path = "/",
-								Domain = new Uri(AppInfo.url).DnsSafeHost,
+								Domain = new Uri(App.Url).DnsSafeHost,
 							};
 						}
 					}

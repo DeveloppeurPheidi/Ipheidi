@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Ipheidi
 {
-	public interface IStatusBarManager
+	public interface IStatusBarService
 	{
 		/// <summary>
 		/// Gets the status bar hidden property.
