@@ -41,12 +41,19 @@ namespace Ipheidi
 			InitializeComponent();
 			lblSpeed.FontSize *= 3;
 			lblSpeed.FontAttributes = FontAttributes.Bold;
-			lblSpeed.TextColor = Color.White;
-			lblSpeed.BackgroundColor = Color.Black;
 			if (App.LocationManager != null && !App.LocationManager.ContainsLocationListener(this))
 			{
 				App.LocationManager.AddLocationListener(this);
 			}
+
+			foreach (var child in mainLayout.Children)
+			{
+				if (child is Label)
+				{
+					(child as Label).TextColor = Color.White;
+				}
+			}
+			mainLayout.BackgroundColor = Color.Black;	
 
 			lblSpeed.Text = "0 km/h";
 			lblAltitude.Text = "Altitude: ";

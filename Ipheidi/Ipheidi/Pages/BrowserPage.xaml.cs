@@ -25,6 +25,27 @@ namespace Ipheidi
 
 			InitializeComponent();
 			BrowserWeb.Source = "http://" + App.Domain+ "/connect";
+/*			const string html = @"
+<html>
+<body>
+
+<p>Click the button to display an alert box:</p>
+
+<button id=""myButton"" onclick = ""myFunction()"">Try it</button>
+  
+<script>
+function myFunction()
+{
+var data = CSharp.Location();
+	CSharp.Debug(data);
+	document.getElementById('myButton').firstChild.data = data ;
+	
+}
+</script>
+
+</body>
+</html>";
+			BrowserWeb.Source = html;*/
 		}
 
 		/// <summary>
@@ -67,11 +88,13 @@ namespace Ipheidi
 		protected override void OnAppearing()
 		{
 			visible = true;
+			CheckWebSession();
 			base.OnAppearing();
 		}
 		protected override void OnDisappearing()
 		{
 			visible = false;
+			CheckWebSession();
 			base.OnDisappearing();
 		}
 	}

@@ -21,8 +21,9 @@ namespace Ipheidi.Droid
 
 			if (Control == null)
 			{
-				var webView = new CustomNativeWebView(Forms.Context);
+				var webView = new Android.Webkit.WebView(Forms.Context);
 				webView.Settings.JavaScriptEnabled = true;
+				webView.AddJavascriptInterface(new CustomJavascriptInterface(webView), "Android");
 				var webViewClient = new CustomWebViewClient();
 
 				webView.SetWebViewClient(webViewClient);
@@ -34,7 +35,15 @@ namespace Ipheidi.Droid
 			}
 			if (e.NewElement != null)
 			{
-				Control.LoadUrl(Element.Source);
+				//Sert pour faire des tests avec des pages html.
+				if (Element.Source.Contains("<html>"))
+				{
+					Control.LoadData(Element.Source, "text/html", null);
+				}
+				else
+				{
+					Control.LoadUrl(Element.Source);
+				}
 			}
 
 		}

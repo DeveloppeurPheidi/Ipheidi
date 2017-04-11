@@ -93,7 +93,7 @@ namespace Ipheidi.Droid
 		{
 			var providers = locationManager.GetProviders(true);
 
-			/* Loop over the array backwards, and if you get an accurate location, then break                 out the loop*/
+			/* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
 			Android.Locations.Location loc = null;
 
 			for (int i = providers.Count - 1; i >= 0; i--)

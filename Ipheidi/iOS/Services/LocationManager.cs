@@ -69,7 +69,7 @@ namespace Ipheidi.iOS
 		/// <returns>The location.</returns>
 		public Location GetLocation()
 		{
-			if (CheckPermission())
+			if (CheckPermission() && locationManager.Location != null)
 			{
 				return new Location()
 				{

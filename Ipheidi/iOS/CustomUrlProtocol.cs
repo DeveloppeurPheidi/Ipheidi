@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 using Foundation;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace Ipheidi.iOS
 {
@@ -25,14 +28,12 @@ namespace Ipheidi.iOS
 			{
 				if (request.Body.ToString().Contains("Logoff"))
 				{
-					var loc = App.LocationManager.GetLocation();
-					loc.BatteryRemainingCharge = App.Battery.RemainingChargePercent;
-					loc.PowerSource = App.Battery.PowerSource.ToString();
-					loc.PowerStatus = App.Battery.Status.ToString();
-					List<Location> list = new List<Location>();
-					list.Add(loc);
-					string json = JsonConvert.SerializeObject(list);
-					LocationPage.SendLocationsData(json).Wait();
+					Device.BeginInvokeOnMainThread(App.Instance.Logout);
+				}
+				else if (request.Url.ToString().Contains("localisation"))
+				{
+					
+					return !request.Body.ToString().Contains("Longitude") && !request.Body.ToString().Contains("Latitude") && request.Body.ToString().Contains("pheidiparams") ;
 				}
 			}
 			return false;
@@ -46,6 +47,50 @@ namespace Ipheidi.iOS
 		[Export("canonicalRequestForRequest:")]
 		public static new NSUrlRequest GetCanonicalRequest(NSUrlRequest forRequest)
 		{
+			if (forRequest.Url.ToString().Contains("localisation"))
+			{
+				string[] param = forRequest.Body.ToString().Split('&');
+				string data = "";
+				for (int i = 0; i < param.Length; i++)
+				{
+					if (param[i].Contains("pheidiparams"))
+					{
+						var location = App.LocationManager.GetLocation();
+						string values = "";
+						string str = "";
+						if (location != null)
+						{
+							values = "Longitude%2A%2A%3A%2A%2A" + location.Longitude + "%2A%2A%2C%2A%2ALatitude%2A%2A%3A%2A%2A" + location.Latitude;
+							string[] keyValue = param[i].Split('=');
+							str = keyValue[1] == "null" ? keyValue[0] + "=" + values : param[i] + values;
+						}
+						else
+						{
+							str = param[i];
+						}
+						param[i] = str;
+					}
+				}
+				foreach (var str in param)
+				{
+					data += data.Length > 0 ? "&" + str : str;
+				}
+				NSData nsdata = NSData.FromString(data);
+				NSMutableUrlRequest req = new NSMutableUrlRequest();
+				req.Headers = forRequest.Headers;
+				req.NetworkServiceType = forRequest.NetworkServiceType;
+				req.AllowsCellularAccess = forRequest.AllowsCellularAccess;
+				req.ShouldHandleCookies = forRequest.ShouldHandleCookies;
+				req.BodyStream = new NSInputStream(nsdata);
+				req.HttpMethod = forRequest.HttpMethod;
+				req.CachePolicy = forRequest.CachePolicy;
+				req.TimeoutInterval = forRequest.TimeoutInterval;
+				req.Url = forRequest.Url;
+				req.Body = nsdata;
+				Debug.WriteLine(req.Body.ToString());
+				Debug.WriteLine(forRequest.Body.ToString());
+				return req;
+			}
 			return forRequest;
 		}
 
@@ -60,6 +105,22 @@ namespace Ipheidi.iOS
 			: base (request, cachedResponse, client)
 		{
 			
+		}
+
+
+		public override void StartLoading()
+		{
+			Debug.WriteLine(Request.Body.ToString());
+			NSUrlResponse response = null;
+			NSError error = null;
+			NSData data = NSUrlConnection.SendSynchronousRequest(Request, out response, out error);
+			Client.ReceivedResponse(this, response, NSUrlCacheStoragePolicy.NotAllowed);
+			Client.DataLoaded(this, data);
+			Client.FinishedLoading(this);
+		}
+
+		public override void StopLoading()
+		{
 		}
 	}
 }

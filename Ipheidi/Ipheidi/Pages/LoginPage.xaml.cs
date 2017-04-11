@@ -175,6 +175,7 @@ namespace Ipheidi
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
 					Debug.WriteLine("IP: " + App.IpAddressManager.GetIPAddress());
 					httpClient.Timeout = new TimeSpan(0, 0, 10);
+					Debug.WriteLine(request.Content.ToString());
 					response = await httpClient.SendAsync(request);
 
 				}
