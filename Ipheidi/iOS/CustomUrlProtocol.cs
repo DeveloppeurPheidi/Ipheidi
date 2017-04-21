@@ -61,13 +61,13 @@ namespace Ipheidi.iOS
 						if (location != null)
 						{
 							values = "Longitude%2A%2A%3A%2A%2A" + location.Longitude + "%2A%2A%2C%2A%2ALatitude%2A%2A%3A%2A%2A" + location.Latitude;
-							string[] keyValue = param[i].Split('=');
-							str = keyValue[1] == "null" ? keyValue[0] + "=" + values : param[i] + values;
 						}
 						else
 						{
-							str = param[i];
+							values = "Longitude%2A%2A%3A%2A%2Anull%2A%2A%2C%2A%2ALatitude%2A%2A%3A%2A%2Anull";
 						}
+						string[] keyValue = param[i].Split('=');
+						str = keyValue[1] == "null" ? keyValue[0] + "=" + values : param[i] + values;
 						param[i] = str;
 					}
 				}

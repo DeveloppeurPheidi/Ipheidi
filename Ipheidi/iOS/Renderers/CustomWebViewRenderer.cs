@@ -28,6 +28,7 @@ namespace Ipheidi.iOS
 				// Register our custom url protocol
 				NSUrlProtocol.RegisterClass(new Class(typeof(CustomUrlProtocol)));
 				var webView = new UIWebView();
+				webView.ScrollView.Bounces = false;
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)

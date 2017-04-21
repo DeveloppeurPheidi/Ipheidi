@@ -44,8 +44,9 @@ namespace Ipheidi
 			try
 			{
 				database.CreateTableAsync<Location>().Wait();
+				database.CreateTableAsync<Geofence>().Wait();
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				Debug.WriteLine(e.Message);
 				DependencyService.Get<IFileHelper>().DeleteLocalFile("PheidiSQLite.db3");
@@ -53,12 +54,21 @@ namespace Ipheidi
 		}
 
 		/// <summary>
+		/// Gets the items async for a specific user.
+		/// </summary>
+		/// <returns>The items.</returns>
+		public Task<List<T>> GetUserSpecificItems<T>() where T : UserData, new()
+		{
+			return database.Table<T>().Where(l => l.Domain == App.Domain && l.User == App.Username).ToListAsync();
+		}
+
+		/// <summary>
 		/// Gets the items async.
 		/// </summary>
-		/// <returns>The items async.</returns>
-		public Task<List<Location>> GetItemsAsync()
+		/// <returns>The items.</returns>
+		public Task<List<T>> GetAllItems<T>() where T : new()
 		{
-			return database.Table<Location>().Where(l=>l.Domain == App.Domain && l.User == App.Username).ToListAsync();
+			return database.Table<T>().ToListAsync();
 		}
 
 		/// <summary>
@@ -66,7 +76,7 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public Task<int> SaveItemAsync(Location item)
+		public Task<int> SaveItemAsync<T>(T item)
 		{
 			return database.InsertAsync(item);
 		}
@@ -76,7 +86,7 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public Task<int> DeleteItemAsync(Location item)
+		public Task<int> DeleteItemAsync<T>(T item)
 		{
 			return database.DeleteAsync(item);
 		}
@@ -84,15 +94,17 @@ namespace Ipheidi
 		/// <summary>
 		/// Drops the table.
 		/// </summary>
-		public void DropTable()
+		public void DropTable<T>() where T : new()
 		{
-			database.DropTableAsync<Location>().Wait();
+			
+			database.DropTableAsync<T>().Wait();
+
 		}
 
 		/// <summary>
 		/// Creates the table.
 		/// </summary>
-		public void CreateTable()
+		public void CreateTable<T>() where T:new()
 		{
 			database.CreateTableAsync<Location>().Wait();
 		}

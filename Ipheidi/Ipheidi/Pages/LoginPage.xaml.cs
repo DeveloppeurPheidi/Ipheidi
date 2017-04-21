@@ -160,63 +160,40 @@ namespace Ipheidi
 				return "Veullez laisser aucun champ vide";
 			}
 
-			using (var httpClient = new HttpClient())
+			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
+			HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 10));
+			var encodedContent = new FormUrlEncodedContent(parameters);
+			if (response != null)
 			{
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
-				var encodedContent = new FormUrlEncodedContent(parameters);
-				HttpResponseMessage response = null;
-				try
+				if (response.StatusCode == HttpStatusCode.OK)
 				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, App.Url);
-					request.Content = encodedContent;
-
-					request.Headers.Add("User-Agent", "Ipheidi " + Device.OS);
-					request.Headers.Add("UserHostAddress", App.IpAddressManager.GetIPAddress());
-					Debug.WriteLine(await request.Content.ReadAsStringAsync());
-					Debug.WriteLine("IP: " + App.IpAddressManager.GetIPAddress());
-					httpClient.Timeout = new TimeSpan(0, 0, 10);
-					Debug.WriteLine(request.Content.ToString());
-					response = await httpClient.SendAsync(request);
-
-				}
-				catch (Exception ex)
-				{
-					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
-				};
-				if (response != null)
-				{
-					if (response.StatusCode == HttpStatusCode.OK)
+					string rc = await response.Content.ReadAsStringAsync();
+					Debug.WriteLine("WEBSESSION: " + rc);
+					App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
+					if (!string.IsNullOrEmpty(rc) && IsNumeric(rc))
 					{
-						string rc = await response.Content.ReadAsStringAsync();
-						Debug.WriteLine("WEBSESSION: " + rc);
-						App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
-						if (!string.IsNullOrEmpty(rc) && IsNumeric(rc))
+						Debug.WriteLine(rc);
+						if (rememberUser || !IsInSecondPage)
 						{
-							Debug.WriteLine(rc);
-							if (rememberUser || !IsInSecondPage)
+							if (rememberUser)
 							{
-								if (rememberUser)
-								{
-									App.CredentialsManager.SaveCredentials(username, password);
-								}
-								Application.Current.Properties["LastUser"] = App.Username;
-								Application.Current.Properties["LastDomain"] = App.Domain;
-								await Application.Current.SavePropertiesAsync();
+								App.CredentialsManager.SaveCredentials(username, password);
 							}
-							App.Username = username;
-							App.CookieContainer.GetCookies(new Uri(App.Url));
-
-							//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-							App.CookieManager.AddCookie(App.WebSession);
-							App.IsInLogin = false;
-							Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
-							return "";
+							await Application.Current.SavePropertiesAsync();
 						}
-						return "L'adresse courriel ou le mot de passe saisi sont incorrects";
+						App.Username = username;
+						App.CookieContainer.GetCookies(new Uri(App.Url));
+
+						//Ajoute le cookie de WEBSESSION et envoie vers la page web.
+						App.CookieManager.AddCookie(App.WebSession);
+						App.IsInLogin = false;
+						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
+						return "";
 					}
+					return "L'adresse courriel ou le mot de passe saisi sont incorrects";
 				}
-				return "Problème de connexion au serveur, veuillez réessayer plus tard";
 			}
+			return "Problème de connexion au serveur, veuillez réessayer plus tard";
 		}
 
 		/// <summary>
@@ -237,7 +214,7 @@ namespace Ipheidi
 
 		protected override void OnAppearing()
 		{
-			if(!IsInSecondPage)
+			if (!IsInSecondPage)
 			{
 				userPicker.SelectedIndex = -1;
 				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");

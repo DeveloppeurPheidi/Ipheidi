@@ -30,11 +30,6 @@ namespace Ipheidi.Droid
 		/// <param name="request">Request.</param>
 		public  override WebResourceResponse ShouldInterceptRequest(Android.Webkit.WebView view, IWebResourceRequest request)
 		{
-			if (request.Method == "POST")
-			{
-				BrowserPage.CheckWebSession();
-			}
-
 			string url = request.Url.ToString();
 			string ext = MimeTypeMap.GetFileExtensionFromUrl(url);
 			string mime = MimeTypeMap.Singleton.GetMimeTypeFromExtension(ext);
@@ -52,6 +47,8 @@ namespace Ipheidi.Droid
 				var webResourceResponse = new WebResourceResponse(mime, "UTF-8", conn.InputStream);
 				return webResourceResponse;
 			}
+
+			BrowserPage.CheckWebSession();
 			return base.ShouldInterceptRequest(view, request);
 		}
 	}

@@ -5,10 +5,12 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
+
+
 	/// <summary>
 	/// Page de configuration de l'application
 	/// </summary>
-	public partial class SettingPage : ContentPage
+	public partial class SettingPage : ContentPage, INetworkStateListener
 	{
 		bool visible = true;
 
@@ -19,6 +21,29 @@ namespace Ipheidi
 		{
 			this.Icon = "cogwheel.png";
 			InitializeComponent();
+
+			btnCreateGeofence.Clicked += (sender, e) =>
+			 {
+				 Navigation.PushAsync(new GeofenceCreatePage());
+			 };
+
+			btnDeleteGeofences.Clicked += (sender, e) =>
+			{
+				var toDelete = DatabaseHelper.Database.GetAllItems<Geofence>().Result;
+				foreach (var geo in toDelete)
+				{
+					DatabaseHelper.Database.DeleteItemAsync(geo);
+				}
+			};
+			wifiOnlySwitch.IsToggled = App.WifiOnlyEnabled;
+			wifiOnlySwitch.Toggled += (sender, e) =>
+			{
+				App.WifiOnlyEnabled = wifiOnlySwitch.IsToggled;
+			};
+			App.NetworkManager.AddNetworkStateListener(this);
+			lblHostServerState.Text = "Host Server State: " + App.SplitCamelCase(NetworkState.Reachable.ToString());
+			lblNetworkState.Text = "NetworkState: " + App.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
+
 		}
 
 		/// <summary>
@@ -67,6 +92,21 @@ namespace Ipheidi
 		{
 			visible = false;
 			base.OnDisappearing();
+		}
+
+		public void OnNetworkStateUpdate(NetworkState state)
+		{
+			var data = App.SplitCamelCase(state.ToString());
+			lblNetworkState.Text = "NetworkState: " + data;
+		}
+
+		public void OnHostServerStateUpdate(NetworkState state)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				var data = App.SplitCamelCase(state.ToString());
+				lblHostServerState.Text = "Host Server State: " + data;
+			});
 		}
 	}
 }

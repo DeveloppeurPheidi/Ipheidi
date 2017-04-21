@@ -12,12 +12,15 @@ namespace Ipheidi
 	/// <summary>
 	/// Location page.
 	/// </summary>
-	public partial class LocationPage : ContentPage, ILocationListener
+	public partial class LocationPage : ContentPage, ILocationListener, INetworkStateListener
 	{
+		Random rand = new Random();
 		int startBatteryLevel;
 		Location lastLocation;
+		List<Location> PendingLocations = new List<Location>();
 		double distance;
 		double precision;
+		bool IsInLocationTest;
 		bool timerExist = false;
 		bool timerRun = false;
 		int time = 0;
@@ -29,7 +32,8 @@ namespace Ipheidi
 			{"Nearest ten meters", 10},
 			{"Hundred meters", 100},
 			{"Kilometers",1000},
-			{"Three Kilometers",3000}
+			{"Three Kilometers",3000},
+			{"Location Test mode",-3}
 		};
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.LocationPage"/> class.
@@ -39,6 +43,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 			Icon = "nearby_square.png";
 			InitializeComponent();
+			BackgroundColor = Color.Black;
 			lblSpeed.FontSize *= 3;
 			lblSpeed.FontAttributes = FontAttributes.Bold;
 			if (App.LocationManager != null && !App.LocationManager.ContainsLocationListener(this))
@@ -53,7 +58,7 @@ namespace Ipheidi
 					(child as Label).TextColor = Color.White;
 				}
 			}
-			mainLayout.BackgroundColor = Color.Black;	
+			mainLayout.BackgroundColor = Color.Black;
 
 			lblSpeed.Text = "0 km/h";
 			lblAltitude.Text = "Altitude: ";
@@ -80,6 +85,47 @@ namespace Ipheidi
 			};
 			precisionPicker.SelectedIndex = 0;
 			RefreshMargin();
+
+			App.NetworkManager.AddNetworkStateListener(this);
+			//Envoie automatique des locations au 30 seconde si le reseau le permet.
+			Device.StartTimer(new TimeSpan(0, 0, 30), () =>
+			{
+				if (PendingLocations.Count > 0)
+				{
+					List<Location> data = new List<Location>();
+					data.AddRange(PendingLocations);
+					PendingLocations.Clear();
+					NetworkState state = App.NetworkManager.GetNetworkState();
+					if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
+					{
+						Task.Run(async () =>
+							{
+								Debug.WriteLine("Sending location data");
+
+								bool IsGood = await SendJsonData(JsonConvert.SerializeObject(data));
+								if (!IsGood)
+								{
+									Debug.WriteLine("Error while sending location data.");
+									foreach (var location in data)
+									{
+										await DatabaseHelper.Database.SaveItemAsync(location);
+									}
+								}
+							});
+					}
+					else
+					{
+						Task.Run(async () =>
+							{
+								foreach (var location in data)
+								{
+									await DatabaseHelper.Database.SaveItemAsync(location);
+								}
+							});
+					}
+				}
+				return true;
+			});
 		}
 
 		void OnLocalisationStart(object sender, System.EventArgs e)
@@ -94,7 +140,7 @@ namespace Ipheidi
 		/// <summary>
 		/// Starts the localisation.
 		/// </summary>
-		void StartLocalisation()
+		public void StartLocalisation()
 		{
 			precisionPicker.IsEnabled = false;
 			btnSendData.IsEnabled = false;
@@ -108,7 +154,11 @@ namespace Ipheidi
 			lblSpeed.IsVisible = true;
 			lblSpeed.Text = "0 km/h";
 			lastLocation = null;
-			App.LocationManager.StartLocationUpdate(precision);
+			IsInLocationTest = -3 == precision;
+			if (!IsInLocationTest)
+			{
+				App.LocationManager.StartLocationUpdate(precision);
+			}
 			startBatteryLevel = App.Battery.RemainingChargePercent;
 			if (!timerExist)
 			{
@@ -147,17 +197,11 @@ namespace Ipheidi
 				location.Domain = App.Domain;
 				if ((location.Latitude != lastLocation.Latitude || location.Longitude != lastLocation.Longitude))
 				{
-					//Force le reset des donnees de localisation pour eviter des situations ou l'on commence avec une fausse distance .
-					/*if (userClicked)
-					{
-						userClicked = false;
-						StopLocalisation();
-						StartLocalisation();
-					}*/
+
 					double dis = lastLocation.GetDistanceFromOtherLocation(location);
-					if(dis <= 100)
+					if ((dis <= 100 && dis > 0))
 					{
-						DatabaseHelper.Database.SaveItemAsync(location);
+						PendingLocations.Add(location);
 						distance += dis;
 					}
 					DisplayLocation(location);
@@ -175,6 +219,28 @@ namespace Ipheidi
 		{
 			if (timerRun)
 			{
+				//Si True, envoie des donnée de localisation au hazard à partir de la coordonnée actuelle.
+				if (IsInLocationTest)
+				{
+					if (lastLocation == null)
+					{
+						lastLocation = App.LocationManager.GetLocation();
+					}
+					if (lastLocation != null)
+					{
+						var loc = new Location();
+						loc.Latitude = lastLocation.Latitude;
+						loc.Longitude = lastLocation.Longitude;
+						double r = rand.Next(1, 5); // 1↓, 2←, 3↑, 4→ 
+						double dLat = r % 2 * (r - 2) * 0.0002;
+						loc.Latitude += dLat;
+						double dLon = (r - 1) % 2 * (r - 3) * 0.0002;
+						loc.Longitude += dLon;
+						loc.Speed = loc.GetDistanceFromOtherLocation(lastLocation);
+						loc.Orientation = (((2 - r) % 2) * 90 + 90 * (r % 2)) + (((r - 3) % 2) * 90 + 180 * ((r - 1) % 2));
+						App.LocationManager.SendLocation(loc);
+					}
+				}
 				time++;
 				if (!App.IsInBackground && visible)
 				{
@@ -210,13 +276,14 @@ namespace Ipheidi
 			}
 			else
 			{
+				/*
 				Debug.WriteLine("--------------------");
 				Debug.WriteLine((location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h");
 				Debug.WriteLine("Altitude: " + (int)(location.Altitude) + " m");
 				Debug.WriteLine("Latitude: " + location.Latitude);
 				Debug.WriteLine("Longitude: " + location.Longitude);
 				Debug.WriteLine("Distance: " + (distance / 1000).ToString("N1") + "km");
-				Debug.WriteLine("Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss"));
+				Debug.WriteLine("Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss"));*/
 			}
 		}
 
@@ -225,7 +292,7 @@ namespace Ipheidi
 		/// </summary>
 		async void OnGetDataClicked(object sende, System.EventArgs e)
 		{
-			List<Location> locations = await DatabaseHelper.Database.GetItemsAsync();
+			List<Location> locations = await DatabaseHelper.Database.GetUserSpecificItems<Location>();
 			var locationCell = new DataTemplate(typeof(LocationCellView));
 			locationCell.SetBinding(LocationCellView.SpeedProperty, "Speed");
 			locationCell.SetBinding(LocationCellView.LatitudeProperty, "Latitude");
@@ -259,78 +326,81 @@ namespace Ipheidi
 
 		}
 
+
 		/// <summary>
-		/// Récupère les données de localisation et fait la convertion
-		/// en json avant de faire appel à SendLocationData
+		/// On the send data button click.
 		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		async void OnSendDataClicked(object sender, System.EventArgs e)
 		{
 			btnStart.IsEnabled = false;
 			btnSendData.IsEnabled = false;
 			btnGetData.IsEnabled = false;
-			List<Location> locations = await DatabaseHelper.Database.GetItemsAsync();
+			List<Location> locations = await DatabaseHelper.Database.GetUserSpecificItems<Location>();
 			List<Location> locationsToSerialize = new List<Location>();
-			foreach (var l in locations)
-			{
-				if (l.Utc == DateTime.MinValue)
-				{
-					await DatabaseHelper.Database.DeleteItemAsync(l);
-				}
-				else if (locationsToSerialize.Count <= 100)
-				{
-					locationsToSerialize.Add(l);
-				}
-				else
-				{
-					if (await SendLocationsData(JsonConvert.SerializeObject(locationsToSerialize)))
-					{
-						foreach (var toDelete in locationsToSerialize)
-						{
-							await DatabaseHelper.Database.DeleteItemAsync(toDelete);
-						}
-					}
-					locationsToSerialize = new List<Location>();
-				}
-			}
-			if (await SendLocationsData(JsonConvert.SerializeObject(locationsToSerialize)))
-			{
-				foreach (var toDelete in locationsToSerialize)
-				{
-					await DatabaseHelper.Database.DeleteItemAsync(toDelete);
-				}
-			}
+			await SendLocationsData();
 			btnStart.IsEnabled = true;
 			btnSendData.IsEnabled = true;
 			btnGetData.IsEnabled = true;
 		}
 
 		/// <summary>
+		/// Récupère les données de localisation et fait la convertion
+		/// en json avant de faire appel à SendJsonData
+		/// </summary>
+		async public Task SendLocationsData()
+		{
+			List<Location> locations = await DatabaseHelper.Database.GetUserSpecificItems<Location>();
+			if (locations.Count > 0)
+			{
+				List<Location> locationsToSerialize = new List<Location>();
+				foreach (var l in locations)
+				{
+					if (l.Utc == DateTime.MinValue)
+					{
+						await DatabaseHelper.Database.DeleteItemAsync(l);
+					}
+					else if (locationsToSerialize.Count <= 100)
+					{
+						locationsToSerialize.Add(l);
+					}
+					else
+					{
+						if (await SendJsonData(JsonConvert.SerializeObject(locationsToSerialize)))
+						{
+							foreach (var toDelete in locationsToSerialize)
+							{
+								await DatabaseHelper.Database.DeleteItemAsync(toDelete);
+							}
+						}
+						locationsToSerialize = new List<Location>();
+					}
+				}
+				if (locationsToSerialize.Count > 0)
+				{
+					if (await SendJsonData(JsonConvert.SerializeObject(locationsToSerialize)))
+					{
+						foreach (var toDelete in locationsToSerialize)
+						{
+							await DatabaseHelper.Database.DeleteItemAsync(toDelete);
+						}
+					}
+				}
+			}
+		}
+
+		/// <summary>
 		/// Envoie une requête http au serveur contenant les données de localisation en format json.
 		/// </summary>
 		/// <param name="json">Json string</param>
-		public static async Task<bool> SendLocationsData(string json)
+		public static async Task<bool> SendJsonData(string json)
 		{
 			var handler = new HttpClientHandler() { CookieContainer = App.CookieManager.GetAllCookies() };
 			using (var httpClient = new HttpClient(handler, true))
 			{
 				var parameters = new Dictionary<string, string> { { "pheidiaction", "sendLocationData" }, { "pheidiparams", "value**:**" + json + "**,**" } };
-				var encodedContent = new FormUrlEncodedContent(parameters);
-				HttpResponseMessage response = null;
-				try
-				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, App.Url);
-					request.Content = encodedContent;
-					request.Headers.Add("User-Agent", "Ipheidi " + Device.OS);
-					request.Headers.Add("UserHostAddress", App.IpAddressManager.GetIPAddress());
-					Debug.WriteLine(await request.Content.ReadAsStringAsync());
-					Debug.WriteLine("IP: " + App.IpAddressManager.GetIPAddress());
-					response = await httpClient.SendAsync(request);
-
-				}
-				catch (Exception ex)
-				{
-					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
-				};
+				HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
 				if (response != null)
 				{
 					if (response.StatusCode == HttpStatusCode.OK)
@@ -338,23 +408,28 @@ namespace Ipheidi
 						string responseContent = await response.Content.ReadAsStringAsync();
 						Debug.WriteLine("Reponse:" + responseContent);
 						return "Good" == responseContent;
-
 					}
 				}
 				Debug.WriteLine("Problème de connexion au serveur, veuillez réessayer plus tard");
 				return false;
-
 			}
-
 		}
 
+
+		/// <summary>
+		/// Ons the get map clicked.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		void OnGetMapClicked(Object sender, EventArgs e)
 		{
 			var map = new MapPage();
 			Navigation.PushAsync(map);
 		}
+
+
 		void RefreshMargin()
-		{ 
+		{
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
@@ -363,13 +438,18 @@ namespace Ipheidi
 			}
 		}
 
-		#region Override
+		/// <summary>
+		/// On the disappearing.
+		/// </summary>
 		protected override void OnDisappearing()
 		{
 			visible = false;
 			base.OnDisappearing();
 		}
 
+		/// <summary>
+		/// On the appearing.
+		/// </summary>
 		protected override void OnAppearing()
 		{
 			visible = true;
@@ -390,8 +470,33 @@ namespace Ipheidi
 
 			}
 			base.OnSizeAllocated(width, height);
-			
+
 		}
-#endregion
+
+		/// <summary>
+		/// On the network state update.
+		/// </summary>
+		/// <param name="state">State.</param>
+		public void OnNetworkStateUpdate(NetworkState state)
+		{
+			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
+			{
+				Task.Run(async () =>
+				{
+					await SendLocationsData();
+				});
+			}
+		}
+
+		public void OnHostServerStateUpdate(NetworkState state)
+		{
+			NetworkState netState = App.NetworkManager.GetNetworkState();
+			if (state == NetworkState.Reachable && (netState == NetworkState.ReachableViaWiFiNetwork || (netState == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled)))
+			{
+				Task.Run(async () => { 
+					await SendLocationsData(); 
+				});
+			}
+		}
 	}
 }

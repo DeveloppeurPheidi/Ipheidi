@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using SQLite;
 
@@ -7,8 +8,10 @@ namespace Ipheidi
 	/// <summary>
 	/// Modèle de donnée de localisation.
 	/// </summary>
-	public class Location
+	public class Location : UserData
 	{
+		public Location() { }
+
 		[JsonIgnore]
 		[PrimaryKey, AutoIncrement]
 		public int ID
@@ -76,20 +79,6 @@ namespace Ipheidi
 			set;
 		}
 
-		[JsonIgnore]
-		public string User
-		{
-			get;
-			set;
-		}
-
-		[JsonIgnore]
-		public string Domain
-		{
-			get;
-			set;
-		}
-
 		/// <summary>
 		/// Gets the distance from other location.
 		/// </summary>
@@ -149,6 +138,18 @@ namespace Ipheidi
 			int min = (int)sec / 60;
 			sec %= 60;
 			return Tuple.Create(deg, min, sec, orientation);
+		}
+
+		public bool IsLocationWithinRadius(List<Location> locations, double radius)
+		{
+			foreach (var loc in locations)
+			{
+				if (GetDistanceFromOtherLocation(loc) > radius)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }

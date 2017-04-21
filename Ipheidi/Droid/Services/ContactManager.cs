@@ -113,7 +113,7 @@ namespace Ipheidi.Droid
 			foreach (var list in dataList.GroupBy(x => x.ContactID))
 			{
 				var contact = new Contact();
-				contact.ID = list.First().ContactID;
+				contact.ID = list.First().ContactID.ToString();
 				contact.Email = new List<string>();
 				contact.PhoneNumber = new List<string>();
 				foreach (var element in list)

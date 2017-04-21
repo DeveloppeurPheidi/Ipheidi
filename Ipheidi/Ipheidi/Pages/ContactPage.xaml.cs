@@ -32,7 +32,7 @@ namespace Ipheidi
 				{
 					if (!contacts.Any(x => x.ID == c.ID))
 					{
-						contacts.Add(c);
+							contacts.Add(c);
 					}
 				}
 			}

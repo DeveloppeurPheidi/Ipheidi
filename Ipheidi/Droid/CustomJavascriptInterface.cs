@@ -21,8 +21,11 @@ namespace Ipheidi.Droid
 		public string Location()
 		{
 			var location = App.LocationManager.GetLocation();
-			string values = "Longitude**:**" + location.Longitude + "**,**Latitude**:**" + location.Latitude;
-			return values;
+			if (location != null)
+			{
+				return "Longitude**:**" + location.Longitude + "**,**Latitude**:**" + location.Latitude;
+			}
+			return "Longitude**:**null**,**Latitude**:**null";
 		}
 
 		[Export]

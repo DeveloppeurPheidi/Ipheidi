@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Android;
+using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Locations;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.Design.Widget;
+using Android.Support.V4.App;
+using Android.Support.V4.Content;
 using Ipheidi.Droid;
 using Xamarin.Forms;
 
@@ -14,7 +20,7 @@ namespace Ipheidi.Droid
 	/// <summary>
 	/// Gestionnaire de localisation
 	/// </summary>
-	public class LocationManager:Java.Lang.Object,ILocationService, Android.Locations.ILocationListener
+	public class LocationManager : Java.Lang.Object, ILocationService, Android.Locations.ILocationListener
 	{
 		string Provider;
 		double Precision;
@@ -64,16 +70,19 @@ namespace Ipheidi.Droid
 		/// <param name="precision">Précision en mêtre.</param>
 		public void StartLocationUpdate(double precision)
 		{
-			Precision = precision;
-			var accuracy = precision <= 10 ? Accuracy.Fine : Accuracy.Coarse;
-			Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = accuracy }, true);
-			if (Provider!= null)
+			if (GetLocationPermission())
 			{
-				locationManager.RequestLocationUpdates(Provider, 1, 25, this);
-			}
-			else
-			{
-				System.Diagnostics.Debug.WriteLine("No provider available. Does the device have location services enabled?");
+				Precision = precision;
+				var accuracy = precision <= 10 ? Accuracy.Fine : Accuracy.Coarse;
+				Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = accuracy }, true);
+				if (Provider != null)
+				{
+					locationManager.RequestLocationUpdates(Provider, 1, 25, this);
+				}
+				else
+				{
+					System.Diagnostics.Debug.WriteLine("No provider available. Does the device have location services enabled?");
+				}
 			}
 		}
 
@@ -91,25 +100,33 @@ namespace Ipheidi.Droid
 		/// <returns>The location.</returns>
 		public Location GetLocation()
 		{
-			var providers = locationManager.GetProviders(true);
 
-			/* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
-			Android.Locations.Location loc = null;
-
-			for (int i = providers.Count - 1; i >= 0; i--)
+			if (GetLocationPermission())
 			{
-				loc = locationManager.GetLastKnownLocation(providers[i]);
-				if (loc != null) break;
-			}
-				return new Location()
+				var providers = locationManager.GetProviders(true);
+
+				/* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
+				Android.Locations.Location loc = null;
+
+				for (int i = providers.Count - 1; i >= 0; i--)
 				{
-					Altitude = loc.Altitude,
-					Longitude = loc.Longitude,
-					Latitude = loc.Latitude,
-					Speed = loc.Speed,
-					Orientation = loc.Bearing,
-					Utc = DateTime.UtcNow
-				};
+					loc = locationManager.GetLastKnownLocation(providers[i]);
+					if (loc != null) break;
+				}
+				if (loc != null)
+				{
+					return new Location()
+					{
+						Altitude = loc.Altitude,
+						Longitude = loc.Longitude,
+						Latitude = loc.Latitude,
+						Speed = loc.Speed,
+						Orientation = loc.Bearing,
+						Utc = DateTime.UtcNow
+					};
+				}
+			}
+			return null;
 		}
 
 		/// <summary>
@@ -122,7 +139,7 @@ namespace Ipheidi.Droid
 			{
 				o.OnLocationUpdate(location);
 			}
-		}	
+		}
 
 		/// <summary>
 		/// On the location changed.
@@ -170,7 +187,42 @@ namespace Ipheidi.Droid
 		/// <param name="extras">Extras.</param>
 		public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
 		{
-			System.Diagnostics.Debug.WriteLine(locationManager.GetProvider(provider).Accuracy.ToString());
+			//System.Diagnostics.Debug.WriteLine(locationManager.GetProvider(provider).Accuracy.ToString());
+		}
+
+		/// <summary>
+		/// Gets the location permission.
+		/// </summary>
+		/// <returns><c>true</c>, if location permission was granted, <c>false</c> otherwise.</returns>
+		bool GetLocationPermission()
+		{
+			string[] PermissionsLocation = {
+				Manifest.Permission.AccessFineLocation,
+				Manifest.Permission.AccessCoarseLocation
+			};
+			int RequestLocationId = 1;
+			string permission = Manifest.Permission.AccessFineLocation;
+			if (ContextCompat.CheckSelfPermission(Android.App.Application.Context, permission) == (int)Permission.Granted)
+			{
+				return true;
+			}
+			if (ActivityCompat.ShouldShowRequestPermissionRationale((Activity)Xamarin.Forms.Forms.Context, permission))
+			{
+				//Explain to the user why we need to read the contacts
+				Snackbar.Make(((Activity)Xamarin.Forms.Forms.Context).FindViewById(Android.Resource.Id.Content), "Location access is required for our Big Brother application! We just want to know where you are, always...", Snackbar.LengthIndefinite)
+						.SetAction("OK", v => ActivityCompat.RequestPermissions((Activity)Xamarin.Forms.Forms.Context, PermissionsLocation, RequestLocationId))
+						.Show();
+
+			}
+			//Finally request permissions with the list of permissions and Id
+			ActivityCompat.RequestPermissions((Activity)Xamarin.Forms.Forms.Context, PermissionsLocation, RequestLocationId);
+
+			return false;
+		}
+
+		public void SendLocation(Location location)
+		{
+			OnLocationUpdate(location);
 		}
 	}
 }

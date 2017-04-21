@@ -46,6 +46,40 @@ namespace Ipheidi
 
 		}
 
+		public MapPage(Location location)
+		{
+			Title = "Map";
+			InitializeComponent();
+			if (location != null)
+			{
+
+				var dms = location.GetDegreeMinuteSecond();
+				switch (Device.OS)
+				{
+					case TargetPlatform.iOS:
+						var mapCWV = new CustomWebView();
+						mapCWV.WidthRequest = 1000;
+						mapCWV.HeightRequest = 1000;
+						url = $"https://www.google.ca/maps/place/";
+						url += $"{dms.Item1.Item1}°{dms.Item1.Item2}'{dms.Item1.Item3}\"{dms.Item1.Item4}+";
+						url += $"{dms.Item2.Item1}°{dms.Item2.Item2}'{dms.Item2.Item3}\"{dms.Item2.Item4}";
+						mapCWV.Source = url;
+						mainLayout.Children.Add(mapCWV);
+						break;
+					case TargetPlatform.Android:
+						var mapWV = new WebView();
+						mapWV.WidthRequest = 1000;
+						mapWV.HeightRequest = 1000;
+						url = $"https://www.google.ca/maps/place/";
+						url += $"{dms.Item1.Item1}°{dms.Item1.Item2}'{dms.Item1.Item3}\"{dms.Item1.Item4}+";
+						url += $"{dms.Item2.Item1}°{dms.Item2.Item2}'{dms.Item2.Item3}\"{dms.Item2.Item4}";
+						mapWV.Source = url;
+						mainLayout.Children.Add(mapWV);
+						break;
+				}
+
+			}
+		}
 		protected override void OnAppearing()
 		{
 			visible = true;

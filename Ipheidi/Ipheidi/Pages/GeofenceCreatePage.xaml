@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.GeofenceCreatePage">
+	<ContentPage.Content>
+		<StackLayout x:Name="mainLayout"  Padding="30,40,30,0">
+			<Label x:Name="lblLatitude" Text="Latitude: 00.00000"/>
+			<Label x:Name="lblLongitude" Text="Longitude: 00.00000"/>
+			<Button x:Name="btnMap" Text="Carte" />
+			<Entry x:Name="nameEntry" Placeholder="Nom du lieu"/>
+			<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+				<Label  Text="Activer la notification" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+			<Switch x:Name="switchNotification"/>
+			</StackLayout>
+			<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+				<Button x:Name="btnSave" Text="Enregistrer"/>
+			<Button x:Name="btnCancel" Text="Annuler"/>
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

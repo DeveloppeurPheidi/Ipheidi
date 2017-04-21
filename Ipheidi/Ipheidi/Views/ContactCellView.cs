@@ -47,7 +47,7 @@ namespace Ipheidi
 			if (BindingContext != null)
 			{
 				title.Text = Text;
-				img.Source = ImageSource;
+				img.Source = ImageSource != null ? ImageSource : "contact.png";
 			}
 		}
 

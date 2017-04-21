@@ -40,6 +40,12 @@ namespace Ipheidi
 		void OnLocationUpdate(Location location);
 
 		/// <summary>
+		/// Sends a location.
+		/// </summary>
+		/// <param name="location">Location.</param>
+		void SendLocation(Location location);
+
+		/// <summary>
 		/// Gets the location.
 		/// </summary>
 		/// <returns>The location.</returns>

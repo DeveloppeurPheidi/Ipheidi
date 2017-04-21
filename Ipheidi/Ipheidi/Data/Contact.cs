@@ -6,7 +6,7 @@ namespace Ipheidi
 {
 	public class Contact
 	{
-		public long ID
+		public string ID
 		{
 			get;
 			set;
@@ -48,6 +48,12 @@ namespace Ipheidi
 		}
 
 		public List<string> PhoneNumber
+		{
+			get;
+			set;
+		}
+
+		public List<string> Address
 		{
 			get;
 			set;

@@ -13,9 +13,8 @@ namespace Ipheidi.iOS
 	/// <summary>
 	/// Gestionnaire de localisation
 	/// </summary>
-	public class LocationManager : ILocationService
+	public class LocationManager : CLLocationManagerDelegate, ILocationService
 	{
-		bool firstCheck = true;
 		List<ILocationListener> observers;
 		CLLocationManager locationManager;
 
@@ -28,7 +27,11 @@ namespace Ipheidi.iOS
 			this.locationManager = new CLLocationManager();
 			this.locationManager.PausesLocationUpdatesAutomatically = false;
 
-
+			locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
+			{
+					CLLocation clLoc = e.Locations[e.Locations.Length - 1];
+					DidUpdateLocation(clLoc);
+			};
 			if (UIDevice.CurrentDevice.CheckSystemVersion(9, 0))
 			{
 				locationManager.AllowsBackgroundLocationUpdates = true;
@@ -69,17 +72,24 @@ namespace Ipheidi.iOS
 		/// <returns>The location.</returns>
 		public Location GetLocation()
 		{
-			if (CheckPermission() && locationManager.Location != null)
+			if (CheckPermission())
 			{
-				return new Location()
+				if (locationManager.Location != null)
 				{
-					Altitude = locationManager.Location.Altitude,
-					Latitude = locationManager.Location.Coordinate.Latitude,
-					Longitude = locationManager.Location.Coordinate.Longitude,
-					Orientation = locationManager.Location.Course,
-					Speed = locationManager.Location.Speed,
-					Utc = DateTime.UtcNow
-				};
+					return new Location()
+					{
+						Altitude = locationManager.Location.Altitude,
+						Latitude = locationManager.Location.Coordinate.Latitude,
+						Longitude = locationManager.Location.Coordinate.Longitude,
+						Orientation = locationManager.Location.Course,
+						Speed = locationManager.Location.Speed,
+						Utc = DateTime.UtcNow
+					};
+				}
+				else
+				{
+					locationManager.RequestLocation();
+				}
 			}
 			return null;
 		}
@@ -107,37 +117,30 @@ namespace Ipheidi.iOS
 				//set the desired accuracy, in meters
 				locationManager.DesiredAccuracy = precision;
 				locationManager.DistanceFilter = 25;
-				locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
-				{
-					CLLocation clLoc = e.Locations[e.Locations.Length - 1];
-					Location loc = new Location()
-					{
-						Speed = clLoc.Speed,
-						Altitude = clLoc.Altitude,
-						Longitude = clLoc.Coordinate.Longitude,
-						Latitude = clLoc.Coordinate.Latitude,
-						Orientation = clLoc.Course,
-						Utc = DateTime.UtcNow,
-						Accuracy = clLoc.HorizontalAccuracy
-					};
-					OnLocationUpdate(loc);
-				};
 				locationManager.StartUpdatingLocation();
-				/*locationManager.DidVisit += (object sender, CLVisitedEventArgs e) => 
-				{
-					Debug.WriteLine("Visit: " + e.Visit.Coordinate.Latitude + ", " + e.Visit.Coordinate.Longitude); 
-				};
-				locationManager.StartMonitoringVisits();*/
 			}
 
 		}
 
+		public void DidUpdateLocation(CLLocation clLoc)
+		{
+			Location loc = new Location()
+			{
+				Speed = clLoc.Speed,
+				Altitude = clLoc.Altitude,
+				Longitude = clLoc.Coordinate.Longitude,
+				Latitude = clLoc.Coordinate.Latitude,
+				Orientation = clLoc.Course,
+				Utc = DateTime.UtcNow,
+				Accuracy = clLoc.HorizontalAccuracy
+			};
+			OnLocationUpdate(loc);
+		}
 		bool CheckPermission()
 		{
 			// iOS 8 has additional permissions requirements
-			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) && firstCheck)
+			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) )//&& firstCheck)
 			{
-				firstCheck = false;
 				locationManager.RequestAlwaysAuthorization();
 			}
 			return CLLocationManager.LocationServicesEnabled;
@@ -150,5 +153,12 @@ namespace Ipheidi.iOS
 			locationManager.StopUpdatingLocation();
 
 		}
+
+		public void SendLocation(Location location)
+		{
+			OnLocationUpdate(location);
+		}
+
+
 	}
 }
