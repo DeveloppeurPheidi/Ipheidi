@@ -100,9 +100,12 @@ namespace Ipheidi.iOS
 		/// <param name="location">Location.</param>
 		public void OnLocationUpdate(Location location)
 		{
-			foreach (var o in observers)
+			if (location.Accuracy <= App.GeofenceRadius)
 			{
-				o.OnLocationUpdate(location);
+				foreach (var o in observers)
+				{
+					o.OnLocationUpdate(location);
+				}
 			}
 		}
 

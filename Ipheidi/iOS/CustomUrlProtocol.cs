@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using Foundation;
 using Newtonsoft.Json;
@@ -24,7 +25,7 @@ namespace Ipheidi.iOS
 		public static bool canInitWithRequest(NSUrlRequest request)
 		{
 			BrowserPage.CheckWebSession();
-			if (request.HttpMethod == "POST")
+			if (request.HttpMethod == "POST" && request.Body != null)
 			{
 				if (request.Body.ToString().Contains("Logoff"))
 				{
@@ -32,12 +33,44 @@ namespace Ipheidi.iOS
 				}
 				else if (request.Url.ToString().Contains("localisation"))
 				{
-					
-					return !request.Body.ToString().Contains("Longitude") && !request.Body.ToString().Contains("Latitude") && request.Body.ToString().Contains("pheidiparams") ;
+
+					return !request.Body.ToString().Contains("Longitude") && !request.Body.ToString().Contains("Latitude") && request.Body.ToString().Contains("pheidiparams");
+				}
+				else if (request.Url.ToString().Contains("geofenceAutoCreate"))
+				{
+
+					string[] param = request.Body.ToString().Split('&');
+					for (int i = 0; i < param.Length; i++)
+					{
+						if (param[i].Contains("pheidiparams"))
+						{
+							PheidiParams pheidiParam = new PheidiParams();
+							pheidiParam.Load(WebUtility.UrlDecode(param[i]));
+							Device.BeginInvokeOnMainThread(() =>
+							{
+								var location = App.LocationManager.GetLocation();
+								var geo = new Geofence()
+								{
+									Latitude = location.Latitude,
+									Longitude = location.Longitude,
+									NotificationEnabled = true,
+									User = App.Username,
+									Domain = App.Domain,
+									NotificationDelay = 0,
+									Name = pheidiParam["VALUE"],
+									Type = GeofenceType.Depense
+								};
+
+								geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+								App.GeofenceManager.CreateGeofenceAtCurrentLocation(geo, true);
+							});
+						}
+					}
 				}
 			}
 			return false;
 		}
+
 
 		/// <summary>
 		/// Gets the canonical request.
@@ -102,9 +135,9 @@ namespace Ipheidi.iOS
 		/// <param name="client">Client.</param>
 		[Export("initWithRequest:cachedResponse:client:")]
 		public CustomUrlProtocol(NSUrlRequest request, NSCachedUrlResponse cachedResponse, INSUrlProtocolClient client)
-			: base (request, cachedResponse, client)
+			: base(request, cachedResponse, client)
 		{
-			
+
 		}
 
 

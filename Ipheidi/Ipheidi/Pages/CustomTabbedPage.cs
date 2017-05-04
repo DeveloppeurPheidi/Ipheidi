@@ -20,7 +20,6 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 			NavigationPage.SetHasBackButton(this, false);
 
-
 			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();
 			LocationPage location = new LocationPage();

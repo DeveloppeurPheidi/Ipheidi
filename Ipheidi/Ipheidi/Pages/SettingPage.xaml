@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.SettingPage">
 	<ContentPage.Content>
-		
-		<RelativeLayout x:Name="mainLayout" HorizontalOptions="FillAndExpand" >
-			<StackLayout x:Name="stackLayout" Padding="20,40,20,0" HorizontalOptions="FillAndExpand" 
-				RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
-				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}">
-				<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked" />
-				<Button Text="Supprimer tous les comptes" Clicked="DeleteAllUserButtonClicked"/>
-				<Button x:Name="btnCreateGeofence" Text="Creez une Geofence"/>
-				<Button x:Name="btnDeleteGeofences" Text="Supprimer toutes les Geofences"/>
-				<StackLayout Orientation="Horizontal">
-					<Label Text="Transfert de données sous Wifi seulement" VerticalTextAlignment="Center"/>
-					<Switch x:Name="wifiOnlySwitch"/>
-				</StackLayout>
-				<Label x:Name="lblNetworkState" Text="Network State: "/>
-				<Label x:Name="lblHostServerState" Text="Host Server State: "/>
+		<StackLayout x:Name="mainLayout" Padding="20,40,20,0" HorizontalOptions="FillAndExpand">
+			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked" />
+			<Button Text="Supprimer tous les comptes" Clicked="DeleteAllUserButtonClicked" />
+			<Button x:Name="btnGeofences" Text="Geofences" />
+			<StackLayout Orientation="Horizontal">
+				<Label Text="Transfert de données sous Wifi seulement" VerticalTextAlignment="Center" />
+				<Switch x:Name="wifiOnlySwitch" />
 			</StackLayout>
-		</RelativeLayout>
-
+			<Label x:Name="lblNetworkState" Text="Network State: " />
+			<Label x:Name="lblHostServerState" Text="Host Server State: " />
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

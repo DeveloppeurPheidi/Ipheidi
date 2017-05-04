@@ -19,9 +19,9 @@ namespace Ipheidi
 			{
 				
 				var dms = location.GetDegreeMinuteSecond();
-				switch (Device.OS)
+				switch (Device.RuntimePlatform)
 				{
-					case TargetPlatform.iOS:
+					case Device.iOS:
 						var mapCWV = new CustomWebView();
 						mapCWV.WidthRequest = 1000;
 						mapCWV.HeightRequest = 1000;
@@ -31,7 +31,7 @@ namespace Ipheidi
 						mapCWV.Source = url;
 						mainLayout.Children.Add(mapCWV);
 						break;
-					case TargetPlatform.Android:
+					case Device.Android:
 						var mapWV = new WebView();
 						mapWV.WidthRequest = 1000;
 						mapWV.HeightRequest = 1000;
@@ -54,9 +54,9 @@ namespace Ipheidi
 			{
 
 				var dms = location.GetDegreeMinuteSecond();
-				switch (Device.OS)
+				switch (Device.RuntimePlatform)
 				{
-					case TargetPlatform.iOS:
+					case Device.iOS:
 						var mapCWV = new CustomWebView();
 						mapCWV.WidthRequest = 1000;
 						mapCWV.HeightRequest = 1000;
@@ -66,7 +66,7 @@ namespace Ipheidi
 						mapCWV.Source = url;
 						mainLayout.Children.Add(mapCWV);
 						break;
-					case TargetPlatform.Android:
+					case Device.Android:
 						var mapWV = new WebView();
 						mapWV.WidthRequest = 1000;
 						mapWV.HeightRequest = 1000;
@@ -101,9 +101,9 @@ namespace Ipheidi
 			if (visible)
 			{
 				//Permet d'afficher correctement la bar de status sur iOS
-				if (Device.OS == TargetPlatform.iOS)
+				if (Device.RuntimePlatform == Device.iOS)
 				{
-					mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+					mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 				}
 				base.OnSizeAllocated(width, height);
 			}

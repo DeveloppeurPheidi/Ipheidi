@@ -6,7 +6,8 @@ namespace Ipheidi
 	{
 		Default,
 		Geofence,
-		NewLocation
+		NewLocation,
+		Depense
 	}
 	/// <summary>
 	/// Notification service.

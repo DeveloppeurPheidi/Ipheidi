@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Content;
 using Android.Webkit;
@@ -8,14 +8,7 @@ namespace Ipheidi.Droid
 {
 	public class CustomJavascriptInterface : Java.Lang.Object
 	{
-		Context context;
-		WebView webview;
-		public CustomJavascriptInterface(WebView view)
-		{
-			webview = view;
-			this.context = Application.Context;
-		}
-
+		
 		[Export]
 		[JavascriptInterface]
 		public string Location()
@@ -26,6 +19,35 @@ namespace Ipheidi.Droid
 				return "Longitude**:**" + location.Longitude + "**,**Latitude**:**" + location.Latitude;
 			}
 			return "Longitude**:**null**,**Latitude**:**null";
+		}
+
+		[Export]
+		[JavascriptInterface]
+		public void ExecuteAction(string pheidiparams, string objectAction)
+		{
+			if (objectAction == "geofenceAutoCreate")
+			{
+				PheidiParams pp = new PheidiParams();
+				pp.Load(pheidiparams);
+				Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+				   {
+					   var location = App.LocationManager.GetLocation();
+					   var geo = new Geofence()
+					   {
+						   Latitude = location.Latitude,
+						   Longitude = location.Longitude,
+						   NotificationEnabled = true,
+						   User = App.Username,
+						   Domain = App.Domain,
+						   NotificationDelay = 0,
+						   Name = pp["VALUE"],
+						   Type = GeofenceType.Depense
+					   };
+
+					   geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+					App.GeofenceManager.CreateDepenseAtCurrentLocation(geo,true);
+				   });
+			}
 		}
 
 		[Export]

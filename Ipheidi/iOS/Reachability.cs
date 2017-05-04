@@ -60,7 +60,6 @@ namespace Ipheidi.iOS
 		{
 			if (defaultRouteReachability == null)
 			{
-				var ipAddress = new IPAddress(0);
 				defaultRouteReachability = new NetworkReachability(IPAddress.None);
 				defaultRouteReachability.SetNotification(OnChange);
 				defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
@@ -70,7 +69,6 @@ namespace Ipheidi.iOS
 			return a && b;
 		}
 
-		static NetworkReachability remoteHostReachability;
 
 	
 

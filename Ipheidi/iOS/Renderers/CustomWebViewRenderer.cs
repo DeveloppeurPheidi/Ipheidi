@@ -45,6 +45,7 @@ namespace Ipheidi.iOS
 				}
 				catch (Exception ex)
 				{
+					System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 					Debug.WriteLine(ex.Message);
 				}
 

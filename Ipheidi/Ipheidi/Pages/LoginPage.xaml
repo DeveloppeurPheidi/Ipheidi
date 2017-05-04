@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.LoginPage">
 	<ScrollView VerticalOptions="FillAndExpand">
 		<RelativeLayout x:Name="mainLayout" VerticalOptions="Fill" HorizontalOptions="Fill">
-			<Image x:Name="demiCercle" Source="demi_cercle_vert.png" Aspect="Fill"
+			<Image Source="demi_cercle_vert.png" Aspect="Fill"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.275,Constant=0}"/>
 			
-			<Image x:Name="logo" Source="logo.png" 
+			<Image  Source="logo.png" 
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.375,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.25,Constant=0}"
@@ -59,14 +59,9 @@
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=usernameEntry,Property=Y,Factor=1,Constant=50}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
-			
-			<Label x:Name="messageLabel" TextColor="Red" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" VerticalOptions="FillAndExpand" LineBreakMode="WordWrap"
-			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+
+			<Button x:Name="btnLogin" Text="Se connecter" Margin="0,0,0,0"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rememberSwitch,Property=Y,Factor=1,Constant=50}"
-			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.9,Constant=0}"/>
-			
-			<Button x:Name="btnLogin" Text="Se connecter" Margin="0,0,0,60"
-			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=messageLabel,Property=Y,Factor=1,Constant=60}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.15,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.7,Constant=0}"/>
 		</RelativeLayout>

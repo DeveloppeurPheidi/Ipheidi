@@ -8,7 +8,7 @@
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.0,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
-			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant= 50}"/>
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant= 60}"/>
 
 			<Label x:Name="lblDistance"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=lblSpeed,Property=Height,Factor=1,Constant=8}"
@@ -59,12 +59,12 @@
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.1,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.8,Constant=0}"/>
 				
-			<Button x:Name="btnStart" Text="Start" Clicked="OnLocalisationStart" 
+			<Button x:Name="btnStart" Text="Start" Clicked="OnLocalisationStartClick" 
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=precisionPicker,Property=Y,Factor=1,Constant=40}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.0333,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"/>
 
-			<Button x:Name="btnStop" Text="Stop" Clicked="OnLocalisationStop" IsVisible="false" 
+			<Button x:Name="btnStop" Text="Stop" Clicked="OnLocalisationStopClick" IsVisible="false" 
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnStart,Property=Y,Factor=1,Constant=0}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.0333,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"/>
@@ -79,7 +79,7 @@
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.0333,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"/>
 
-			<Button x:Name="btnGetMap" Text="Map" Clicked="OnGetMapClicked" 
+			<Button x:Name="btnGetMap" Text="Map"
 			RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnStart,Property=Y,Factor=1,Constant=60}"
 			RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.5166,Constant=0}"
 			RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.45,Constant=0}"/>

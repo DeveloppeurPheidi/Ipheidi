@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.MessagePage">
+	<ContentPage.Content>
+		<StackLayout HorizontalOptions="FillAndExpand" Padding="20,20,20,40" Spacing="20">
+			<Label x:Name="lblTitle" Text="Title" HorizontalOptions="Center" FontAttributes="Bold"/>
+			<ScrollView>
+			<Label x:Name="lblMessage" Text=""/>
+			</ScrollView>
+			<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Orientation="Horizontal" Spacing="40" Padding="20,0">
+				<Button x:Name="btnConfirmation" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="Yes"/>
+				<Button x:Name="btnCancel" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="No"/>
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

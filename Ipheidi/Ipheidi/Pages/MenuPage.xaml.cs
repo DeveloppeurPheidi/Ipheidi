@@ -14,7 +14,6 @@ namespace Ipheidi
 	{
 		
 		public  List<Page> pages;
-		bool visible = true;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.MenuPage"/> class.
@@ -79,26 +78,20 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (visible)
-			{
 				//Permet d'afficher correctement la bar de status sur iOS
-				if (Device.OS == TargetPlatform.iOS)
+				if (Device.RuntimePlatform == Device.iOS)
 				{
-					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 				}
 				base.OnSizeAllocated(width, height);
-			}
-
 		}
 
 		protected override void OnAppearing()
 		{
-			visible = true;
 			base.OnAppearing();
 		}
 		protected override void OnDisappearing()
 		{
-			visible = false;
 			base.OnDisappearing();
 		}
 	}

@@ -53,6 +53,11 @@ namespace Ipheidi
 		void CheckHostServerState();
 
 		/// <summary>
+		/// Checks the state of the network.
+		/// </summary>
+		void CheckNetworkState();
+
+		/// <summary>
 		/// Gets the state of the host server.
 		/// </summary>
 		/// <returns>The host server state.</returns>
@@ -68,5 +73,7 @@ namespace Ipheidi
 		/// Notifies the current state of the network.
 		/// </summary>
 		void NotifyCurrentNetworkState();
+
+
 	}
 }

@@ -48,6 +48,7 @@ namespace Ipheidi
 			}
 			catch (Exception e)
 			{
+				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 				Debug.WriteLine(e.Message);
 				DependencyService.Get<IFileHelper>().DeleteLocalFile("PheidiSQLite.db3");
 			}
@@ -57,7 +58,7 @@ namespace Ipheidi
 		/// Gets the items async for a specific user.
 		/// </summary>
 		/// <returns>The items.</returns>
-		public Task<List<T>> GetUserSpecificItems<T>() where T : UserData, new()
+		public Task<List<T>> GetUserSpecificItems<T>() where T : DatabaseData, new()
 		{
 			return database.Table<T>().Where(l => l.Domain == App.Domain && l.User == App.Username).ToListAsync();
 		}
@@ -72,13 +73,34 @@ namespace Ipheidi
 		}
 
 		/// <summary>
+		/// Gets the item.
+		/// </summary>
+		/// <returns>The item.</returns>
+		/// <param name="id">Identifier.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public Task<T> GetItem<T>(int id) where T : DatabaseData ,new()
+		{
+			return database.Table<T>().Where(i => i.ID == id).FirstAsync();
+		}
+
+
+		public async Task UpdateItem<T>(T item) where T : DatabaseData, new()
+		{
+			await database.InsertOrReplaceAsync(item);
+		}
+
+		/// <summary>
 		/// Saves the item async.
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public Task<int> SaveItemAsync<T>(T item)
+		public async Task SaveItemAsync<T>(T item)
 		{
-			return database.InsertAsync(item);
+			if (null != item)
+			{
+				Debug.WriteLine("DatabaseHelper: Saving new " + typeof(T));
+				await database.InsertAsync(item);
+			}
 		}
 
 		/// <summary>

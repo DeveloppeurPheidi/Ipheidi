@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -12,7 +12,6 @@ namespace Ipheidi
 	/// </summary>
 	public partial class SettingPage : ContentPage, INetworkStateListener
 	{
-		bool visible = true;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.SettingPage"/> class.
@@ -22,18 +21,10 @@ namespace Ipheidi
 			this.Icon = "cogwheel.png";
 			InitializeComponent();
 
-			btnCreateGeofence.Clicked += (sender, e) =>
-			 {
-				 Navigation.PushAsync(new GeofenceCreatePage());
-			 };
 
-			btnDeleteGeofences.Clicked += (sender, e) =>
+			btnGeofences.Clicked += (sender, e) =>
 			{
-				var toDelete = DatabaseHelper.Database.GetAllItems<Geofence>().Result;
-				foreach (var geo in toDelete)
-				{
-					DatabaseHelper.Database.DeleteItemAsync(geo);
-				}
+				Navigation.PushAsync(new GeofencePage());
 			};
 			wifiOnlySwitch.IsToggled = App.WifiOnlyEnabled;
 			wifiOnlySwitch.Toggled += (sender, e) =>
@@ -49,19 +40,27 @@ namespace Ipheidi
 		/// <summary>
 		/// Forgets the account.
 		/// </summary>
-		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
+		async void ForgetAccountButtonClicked(object sender, System.EventArgs e)
 		{
-			App.CredentialsManager.DeleteUser(App.Username);
-			App.Username = "";
+
+			if (await DisplayAlert("Oublié ce compte", "Voulez-vous vraiment oublier ce compte?", "Oui", "Non"))
+			{
+				App.CredentialsManager.DeleteUser(App.Username);
+				App.Username = "";
+			}
 		}
 
 		/// <summary>
 		/// Deletes all user.
 		/// </summary>
-		void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
+		async void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
-			App.CredentialsManager.DeleteCredentials();
-			App.Username = "";
+
+			if (await DisplayAlert("Supprimer tous les comptes", "Voulez-vous vraiment tous les comptes?", "Oui", "Non"))
+			{
+				App.CredentialsManager.DeleteCredentials();
+				App.Username = "";
+			}
 		}
 
 		/// <summary>
@@ -71,35 +70,44 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (visible)
+			//Permet d'afficher correctement la bar de status sur iOS
+			if (Device.RuntimePlatform == Device.iOS)
 			{
-				//Permet d'afficher correctement la bar de status sur iOS
-				if (Device.OS == TargetPlatform.iOS)
-				{
-					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
-				}
-				base.OnSizeAllocated(width, height);
+				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
-
+			base.OnSizeAllocated(width, height);
 		}
 
+		/// <summary>
+		/// On appearing.
+		/// </summary>
 		protected override void OnAppearing()
 		{
-			visible = true;
 			base.OnAppearing();
 		}
+
+		/// <summary>
+		/// On disappearing.
+		/// </summary>
 		protected override void OnDisappearing()
 		{
-			visible = false;
 			base.OnDisappearing();
 		}
 
+		/// <summary>
+		/// On the network state update.
+		/// </summary>
+		/// <param name="state">State.</param>
 		public void OnNetworkStateUpdate(NetworkState state)
 		{
 			var data = App.SplitCamelCase(state.ToString());
 			lblNetworkState.Text = "NetworkState: " + data;
 		}
 
+		/// <summary>
+		/// On the host server state update.
+		/// </summary>
+		/// <param name="state">State.</param>
 		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			Device.BeginInvokeOnMainThread(() =>

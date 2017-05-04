@@ -12,8 +12,14 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(NetworkManager))]
 namespace Ipheidi.iOS
 {
+	/// <summary>
+	/// Network manager.
+	/// </summary>
 	public class NetworkManager : NetworkService, INetworkService
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.NetworkManager"/> class.
+		/// </summary>
 		public NetworkManager()
 		{
 			listeners = new List<INetworkStateListener>();
@@ -37,8 +43,9 @@ namespace Ipheidi.iOS
 					return response.StatusCode == HttpStatusCode.OK;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
+				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 				return false;
 			}
 		}
@@ -107,6 +114,17 @@ namespace Ipheidi.iOS
 					 OnNetworkStateUpdate(CurrentNetworkState);
 				 }
 			 };
+		}
+
+		/// <summary>
+		/// Checks the state of the network.
+		/// </summary>
+		public void CheckNetworkState()
+		{
+			if (UpdateNetworkState())
+			{
+				NotifyCurrentNetworkState();
+			}
 		}
 	}
 }

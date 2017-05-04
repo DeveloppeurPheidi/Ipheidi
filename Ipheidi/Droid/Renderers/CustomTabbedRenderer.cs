@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Android.Support.Design.Widget;
 using Ipheidi;
 using Ipheidi.Droid;
 using Xamarin.Forms;
@@ -20,7 +21,10 @@ namespace Ipheidi.Droid
 			var info = typeof(TabbedPageRenderer).GetTypeInfo();
 			var fieldInfo = info.GetField("_useAnimations", BindingFlags.Instance | BindingFlags.NonPublic);
 			fieldInfo.SetValue(this, false);
+
+			System.Diagnostics.Debug.WriteLine(e.ToString());
 			base.OnElementChanged(e);
 		}
+
 	}
 }

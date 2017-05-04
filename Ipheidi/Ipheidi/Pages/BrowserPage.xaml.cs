@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -12,7 +12,6 @@ namespace Ipheidi
 	/// </summary>
 	public partial class BrowserPage : ContentPage
 	{
-		bool visible = true;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.BrowserPage"/> class.
 		/// </summary>
@@ -25,27 +24,6 @@ namespace Ipheidi
 
 			InitializeComponent();
 			BrowserWeb.Source = "http://" + App.Domain+ "/connect";
-/*			const string html = @"
-<html>
-<body>
-
-<p>Click the button to display an alert box:</p>
-
-<button id=""myButton"" onclick = ""myFunction()"">Try it</button>
-  
-<script>
-function myFunction()
-{
-var data = CSharp.Location();
-	CSharp.Debug(data);
-	document.getElementById('myButton').firstChild.data = data ;
-	
-}
-</script>
-
-</body>
-</html>";
-			BrowserWeb.Source = html;*/
 		}
 
 		/// <summary>
@@ -74,26 +52,21 @@ var data = CSharp.Location();
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (visible)
-			{
 				//Permet d'afficher correctement la bar de status sur iOS
-				if (Device.OS == TargetPlatform.iOS)
+				if (Device.RuntimePlatform == Device.iOS)
 				{
-					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+					this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 				}
-			}
 			base.OnSizeAllocated(width, height);
 		}
 
 		protected override void OnAppearing()
 		{
-			visible = true;
 			CheckWebSession();
 			base.OnAppearing();
 		}
 		protected override void OnDisappearing()
 		{
-			visible = false;
 			CheckWebSession();
 			base.OnDisappearing();
 		}

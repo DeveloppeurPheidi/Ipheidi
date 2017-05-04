@@ -23,16 +23,16 @@ namespace Ipheidi
 
 		public LoginPage(bool secondePage)
 		{
-
+			Debug.WriteLine("LoginPage: ctor");
 			//Cache la nav bar
-			NavigationPage.SetHasNavigationBar(this, secondePage && Device.OS == TargetPlatform.iOS && App.Credentials.Count > 0);
+			NavigationPage.SetHasNavigationBar(this, secondePage && Device.RuntimePlatform == Device.iOS && App.Credentials.Count > 0);
 
 			InitializeComponent();
 
 			IsInSecondPage = secondePage;
 
 			//Setting pour Android.
-			if (Device.OS == TargetPlatform.Android)
+			if (Device.RuntimePlatform == Device.Android)
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
 				btnOtherAccount.BorderColor = Color.Transparent;
@@ -48,9 +48,13 @@ namespace Ipheidi
 			btnLogin.Clicked += async (sender, e) =>
 			{
 				App.Url = App.UrlList[App.Domain];
-				messageLabel.Text = "";
 				EnableInterface(false);
-				messageLabel.Text = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
+				string s = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
+				if (!string.IsNullOrEmpty(s))
+				{
+					
+					await DisplayAlert("Problème de connexion", s, "OK");
+				}
 				EnableInterface(true);
 			};
 
@@ -162,7 +166,6 @@ namespace Ipheidi
 
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
 			HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 10));
-			var encodedContent = new FormUrlEncodedContent(parameters);
 			if (response != null)
 			{
 				if (response.StatusCode == HttpStatusCode.OK)
@@ -179,7 +182,6 @@ namespace Ipheidi
 							{
 								App.CredentialsManager.SaveCredentials(username, password);
 							}
-							await Application.Current.SavePropertiesAsync();
 						}
 						App.Username = username;
 						App.CookieContainer.GetCookies(new Uri(App.Url));
@@ -204,9 +206,9 @@ namespace Ipheidi
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (Device.RuntimePlatform == Device.iOS)
 			{
-				mainLayout.Margin  = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin  = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 
 			base.OnSizeAllocated(width, height);

@@ -28,7 +28,7 @@ namespace Ipheidi.iOS
 			app.KeyWindow.TintColor = colorPrimary;
 			UINavigationBar.Appearance.BarTintColor = colorPrimary;
 			UINavigationBar.Appearance.TintColor = UIColor.White;
-			UIBarButtonItem.Appearance.TintColor = colorPrimary;
+			UIBarButtonItem.Appearance.TintColor = UIColor.FromRGBA(0, 0, 0, 0.3f);
 
 			var statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
 			if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))

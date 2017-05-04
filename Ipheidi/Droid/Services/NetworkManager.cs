@@ -1,17 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Android.App;
+using Android.Content;
 using Android.Net;
+using Android.Util;
 using Ipheidi.Droid;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(NetworkManager))]
 namespace Ipheidi.Droid
 {
+
+	/// <summary>
+	/// Network receiver.
+	/// </summary>
+	[BroadcastReceiver(Enabled = true)]
+	[IntentFilter(new[] { Android.Net.ConnectivityManager.ConnectivityAction })]
+	public class NetworkReceiver : BroadcastReceiver
+	{
+		public override void OnReceive(Context context, Intent intent)
+		{
+			if (App.NetworkManager != null)
+			{
+				//App.NetworkManager.CheckNetworkState();
+			}
+		}
+	}
+
 	/// <summary>
 	/// Network manager.
 	/// </summary>
-	public class NetworkManager :  NetworkService, INetworkService
+	public class NetworkManager : NetworkService, INetworkService
 	{
 		ConnectivityManager connectivityManager;
 
@@ -22,6 +42,7 @@ namespace Ipheidi.Droid
 		{
 			listeners = new List<INetworkStateListener>();
 			connectivityManager = (ConnectivityManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.ConnectivityService);
+			ListenToNetworkState();
 		}
 
 
@@ -40,6 +61,17 @@ namespace Ipheidi.Droid
 			else
 			{
 				return null;
+			}
+		}
+
+		/// <summary>
+		/// Checks the state of the network.
+		/// </summary>
+		public void CheckNetworkState()
+		{
+			if (UpdateNetworkState())
+			{
+				NotifyCurrentNetworkState();
 			}
 		}
 
@@ -76,6 +108,7 @@ namespace Ipheidi.Droid
 		{
 			connectivityManager.DefaultNetworkActive += (sender, e) =>
 			{
+				Log.Debug("Network State Update", "The state of the network has changed");
 				if (UpdateNetworkState())
 				{
 					OnNetworkStateUpdate(CurrentNetworkState);
@@ -100,8 +133,9 @@ namespace Ipheidi.Droid
 					return response.StatusCode == HttpStatusCode.OK;
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
+				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 				return false;
 			}
 		}

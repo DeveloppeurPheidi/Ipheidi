@@ -22,13 +22,14 @@ namespace Ipheidi.Droid
 		public CustomWebViewClient() : base()
 		{
 		}
+
 		/// <summary>
 		/// Intercept request.
 		/// </summary>
 		/// <returns>The intercept request.</returns>
 		/// <param name="view">View.</param>
 		/// <param name="request">Request.</param>
-		public  override WebResourceResponse ShouldInterceptRequest(Android.Webkit.WebView view, IWebResourceRequest request)
+		public override WebResourceResponse ShouldInterceptRequest(Android.Webkit.WebView view, IWebResourceRequest request)
 		{
 			string url = request.Url.ToString();
 			string ext = MimeTypeMap.GetFileExtensionFromUrl(url);
@@ -36,6 +37,10 @@ namespace Ipheidi.Droid
 			if (url.ToLower().Contains("logoff"))
 			{
 				Xamarin.Forms.Device.BeginInvokeOnMainThread(App.Instance.Logout);
+			}
+			else if (request.Url.ToString().Contains("geofenceAutoCreate"))
+			{
+				
 			}
 			else if (mime != null)
 			{
@@ -51,5 +56,6 @@ namespace Ipheidi.Droid
 			BrowserPage.CheckWebSession();
 			return base.ShouldInterceptRequest(view, request);
 		}
+
 	}
 }

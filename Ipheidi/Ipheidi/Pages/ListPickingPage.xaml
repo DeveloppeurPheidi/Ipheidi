@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.ListPickingPage">
+	<ContentPage.Content>
+		<StackLayout x:Name="mainLayout" Padding="20,40">
+			<Label x:Name="lblHeader" Text="Header" HorizontalOptions="Fill"/>
+			<ListView x:Name="listView" />
+			<StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Fill" >
+				<Button x:Name="btnOk" Text="OK"     WidthRequest="50"/>
+				<Button x:Name="btnCancel" Text="Cancel"  HorizontalOptions="FillAndExpand"/>
+				<Button x:Name="btnAdd" BackgroundColor="Green" Text="+" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" FontSize="30" FontAttributes="Bold"/>
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

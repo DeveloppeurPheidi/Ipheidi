@@ -8,76 +8,27 @@ namespace Ipheidi
 	/// <summary>
 	/// Modèle de donnée de localisation.
 	/// </summary>
-	public class Location : UserData
+	public class Location : DatabaseData
 	{
-		public Location() { }
+		public double Altitude { get; set; }
 
-		[JsonIgnore]
-		[PrimaryKey, AutoIncrement]
-		public int ID
-		{
-			get;
-			set;
-		}
+		public double Longitude { get; set; }
 
-		public double Altitude
-		{
-			get;
-			set;
-		}
+		public double Latitude { get; set; }
 
-		public double Longitude
-		{
-			get;
-			set;
-		}
+		public double Orientation { get; set; }
 
-		public double Latitude
-		{
-			get;
-			set;
-		}
+		public double Speed { get; set; }
 
-		public double Orientation
-		{
-			get;
-			set;
-		}
+		public DateTime Utc { get; set; }
 
-		public double Speed
-		{
-			get;
-			set;
-		}
+		public double Accuracy { get; set; }
 
-		public DateTime Utc
-		{
-			get;
-			set;
-		}
+		public int BatteryRemainingCharge { get; set; }
 
-		public double Accuracy
-		{
-			get;
-			set;
-		}
-		public int BatteryRemainingCharge
-		{
-			get;
-			set;
-		}
+		public string PowerSource { get; set; }
 
-		public string PowerSource
-		{
-			get;
-			set;
-		}
-
-		public string PowerStatus
-		{
-			get;
-			set;
-		}
+		public string PowerStatus { get; set; }
 
 		/// <summary>
 		/// Gets the distance from other location.

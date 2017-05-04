@@ -9,18 +9,25 @@ using Android.Widget;
 using Android.OS;
 using Android.Locations;
 using Xamarin.Forms;
+using Android.Util;
 
 namespace Ipheidi.Droid
 {
 	/// <summary>
 	/// Main activity.
 	/// </summary>
-	[Activity(Label = "Ipheidi.Droid",AlwaysRetainTaskState = true, LaunchMode = LaunchMode.SingleTop, Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity(Label = "Ipheidi.Droid", AlwaysRetainTaskState = true, LaunchMode = LaunchMode.SingleTop, Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
+		private Action<int, Result, Intent> _resultCallback;
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			System.Diagnostics.Debug.WriteLine("MainActivity: OnCreate");
+			AndroidEnvironment.UnhandledExceptionRaiser += (sender, e) =>
+			{
+				Log.Error("ಠ_ಠ", App.ಠ_ಠ);
+			};
 			TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
 
@@ -65,6 +72,22 @@ namespace Ipheidi.Droid
 		{
 			base.OnRestart();
 			System.Diagnostics.Debug.WriteLine("MainActivity: OnRestart");
+		}
+
+
+		public void StartActivity(Intent intent, int requestCode, Action<int, Result, Intent> resultCallback)
+		{
+			_resultCallback = resultCallback;
+			StartActivityForResult(intent, requestCode);
+		}
+		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			base.OnActivityResult(requestCode, resultCode, data);
+			if (_resultCallback != null)
+			{
+				_resultCallback(requestCode, resultCode, data);
+				_resultCallback = null;
+			}
 		}
 	}
 }

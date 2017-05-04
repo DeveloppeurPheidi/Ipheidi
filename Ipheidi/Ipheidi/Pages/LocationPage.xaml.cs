@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -73,6 +73,8 @@ namespace Ipheidi
 			lblBatteryLevel.Text = "Batterie: ";
 			lblBatteryConsumption.Text = "Batterie utilisé: ";
 
+			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender,e);
+
 			//Precision Picker
 			foreach (var val in precisionsList)
 			{
@@ -100,12 +102,12 @@ namespace Ipheidi
 					{
 						Task.Run(async () =>
 							{
-								Debug.WriteLine("Sending location data");
+								Debug.WriteLine("LocationPage: Sending location data");
 
 								bool IsGood = await SendJsonData(JsonConvert.SerializeObject(data));
 								if (!IsGood)
 								{
-									Debug.WriteLine("Error while sending location data.");
+									Debug.WriteLine("LocationPage: Error while sending location data.");
 									foreach (var location in data)
 									{
 										await DatabaseHelper.Database.SaveItemAsync(location);
@@ -117,8 +119,10 @@ namespace Ipheidi
 					{
 						Task.Run(async () =>
 							{
+								Debug.WriteLine("LocationPage: Saving location data.");
 								foreach (var location in data)
 								{
+									
 									await DatabaseHelper.Database.SaveItemAsync(location);
 								}
 							});
@@ -128,11 +132,22 @@ namespace Ipheidi
 			});
 		}
 
-		void OnLocalisationStart(object sender, System.EventArgs e)
+		/// <summary>
+		/// On the localisation start button click.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		void OnLocalisationStartClick(object sender, System.EventArgs e)
 		{
 			StartLocalisation();
 		}
-		void OnLocalisationStop(object sender, System.EventArgs e)
+
+		/// <summary>
+		/// On the localisation stop button click.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
+		void OnLocalisationStopClick(object sender, System.EventArgs e)
 		{
 			StopLocalisation();
 		}
@@ -142,6 +157,16 @@ namespace Ipheidi
 		/// </summary>
 		public void StartLocalisation()
 		{
+			//Envoie de données dans le cas où la base de donnée ne serait pas vide.
+			NetworkState state = App.NetworkManager.GetNetworkState();
+			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
+			{
+				Task.Run(async() =>
+				{
+					await SendLocationsData();
+				});
+			}
+
 			precisionPicker.IsEnabled = false;
 			btnSendData.IsEnabled = false;
 			distance = 0;
@@ -337,8 +362,6 @@ namespace Ipheidi
 			btnStart.IsEnabled = false;
 			btnSendData.IsEnabled = false;
 			btnGetData.IsEnabled = false;
-			List<Location> locations = await DatabaseHelper.Database.GetUserSpecificItems<Location>();
-			List<Location> locationsToSerialize = new List<Location>();
 			await SendLocationsData();
 			btnStart.IsEnabled = true;
 			btnSendData.IsEnabled = true;
@@ -427,13 +450,15 @@ namespace Ipheidi
 			Navigation.PushAsync(map);
 		}
 
-
+		/// <summary>
+		/// Refreshs the margin.
+		/// </summary>
 		void RefreshMargin()
 		{
 			//Permet d'afficher correctement la bar de status sur iOS
-			if (Device.OS == TargetPlatform.iOS)
+			if (Device.RuntimePlatform == Device.iOS)
 			{
-				bool toMargin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) || Device.OS != TargetPlatform.iOS ? false : true;
+				bool toMargin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this)? false : true;
 				mainLayout.Margin = toMargin ? new Thickness(0, 20, 0, 0) : new Thickness(0, 0, 0, 0);
 			}
 		}
@@ -463,12 +488,7 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (visible)
-			{
-				RefreshMargin();
-				btnGetData.Margin = width > height ? new Thickness(0, 0, 0, 400) : new Thickness(0, 0, 0, 0);
-
-			}
+			RefreshMargin();
 			base.OnSizeAllocated(width, height);
 
 		}
@@ -488,6 +508,10 @@ namespace Ipheidi
 			}
 		}
 
+		/// <summary>
+		/// On the host server state update.
+		/// </summary>
+		/// <param name="state">State.</param>
 		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			NetworkState netState = App.NetworkManager.GetNetworkState();

@@ -7,19 +7,28 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Ipheidi
 {
+
 	/// <summary>
 	/// Entré principale de l'application.
 	/// </summary>
 	public partial class App : Application, INetworkStateListener
 	{
+		//Must be added to every Exception catch output.
+		static public string ಠ_ಠ = "(╯°□°）╯︵ ┻━┻";
+
+		static public int GeofenceRadius = 100;
 		static public double Heigth;
 		static public double Width;
 		static public CookieContainer CookieContainer = new CookieContainer();
 		static public string AppName = "IPheidi";
 		static public string Url = "";
+
+
 		static public string Domain
 		{
 			get
@@ -33,8 +42,10 @@ namespace Ipheidi
 			set
 			{
 				Application.Current.Properties["LastDomain"] = value;
+				Task.Run(async() => { await Application.Current.SavePropertiesAsync();});
 			}
 		}
+
 		static public bool WifiOnlyEnabled
 		{
 			get
@@ -43,7 +54,7 @@ namespace Ipheidi
 				if (Current.Properties.ContainsKey("WifiOnlyEnabled"))
 				{
 					string s = Current.Properties["WifiOnlyEnabled"] as string;
-					bool parsing = bool.TryParse(s, out isEnabled);
+					bool.TryParse(s, out isEnabled);
 				}
 				return isEnabled;
 			}
@@ -61,6 +72,7 @@ namespace Ipheidi
 				Task.Run(async () => { await Application.Current.SavePropertiesAsync();});
 			}
 		}
+
 		static public string Username
 		{
 			get
@@ -74,6 +86,7 @@ namespace Ipheidi
 			set
 			{
 				Application.Current.Properties["LastUser"] = value;
+				Task.Run(async() => { await Application.Current.SavePropertiesAsync();});
 			}
 		}
 		static public Cookie WebSession = new Cookie();
@@ -96,7 +109,7 @@ namespace Ipheidi
 		static public Dictionary<string, Dictionary<string, string>> Credentials;
 		static public Dictionary<string, string> UrlList = new Dictionary<string, string>
 			{
-				{"10.1.50.201", "http://10.1.50.201/default.aspx"},
+				{"10.1.50.209", "http://10.1.50.209/default.aspx"},
 				{"v2_5.pheidi.net", "http://v2_5.pheidi.net/default.aspx"},
 				{ "www.pheidi.com", "https://www.pheidi.com/default.aspx"},
 				{"app.solutionskpi.com","https://app.solutionskpi.com/default.aspx"}
@@ -146,6 +159,7 @@ namespace Ipheidi
 			}
 			catch (Exception e)
 			{
+				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 				Debug.WriteLine(e.Message);
 			}
 		}
@@ -203,10 +217,13 @@ namespace Ipheidi
 		/// </summary>
 		public void GetLoginPage()
 		{
+			
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
-			var page = new NavigationPage(new LoginPage(App.Credentials.Count == 0));
-			MainPage = page;
-
+			Debug.WriteLine("App: Create Login Page");
+			var p = new LoginPage(App.Credentials.Count == 0);
+			var page = new NavigationPage(p);
+			Debug.WriteLine("App: Set Login Page");
+			MainPage = page;	
 		}
 
 		/// <summary>
@@ -218,6 +235,7 @@ namespace Ipheidi
 			var locationPage = (LocationPage)NavBar.Children.Where(o => o is LocationPage).Single();
 			locationPage.StopLocalisation();
 			App.LocationManager.RemoveLocationListener(locationPage);
+
 			GetLoginPage();
 		}
 
@@ -234,12 +252,6 @@ namespace Ipheidi
 			NavBar.CurrentPage = browser;
 		}
 
-
-
-		public async Task SynchContact()
-		{
-			var contacts = ContactManager.GetAllContacts().ToList();
-		}
 
 
 		/// <summary>
@@ -260,7 +272,7 @@ namespace Ipheidi
 					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, App.Url);
 					request.Content = encodedContent;
 
-					request.Headers.Add("User-Agent", "Ipheidi " + Device.OS);
+					request.Headers.Add("User-Agent", "Ipheidi " + Device.RuntimePlatform);
 					request.Headers.Add("UserHostAddress", App.NetworkManager.GetIPAddress());
 					Debug.WriteLine(await request.Content.ReadAsStringAsync());
 					httpClient.Timeout = timeout;
@@ -269,6 +281,7 @@ namespace Ipheidi
 				}
 				catch (Exception ex)
 				{
+					System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
 					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
 					NetworkManager.CheckHostServerState();
 				};

@@ -52,7 +52,7 @@
 		<string>location</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Voulez vous authorizer l&apos;application iPheidi d&apos;utiliser la fonctionnalité de localisation?</string>
+	<string>Pour la localiser votre position</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
@@ -61,5 +61,13 @@
 	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>Nous avons besoin de l&apos;accès à votre carnet de contact pour faire la synchronisation de vos données.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Pour prendre des photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pour accèder à vos photos</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>Pour accèder à vos medias</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Pour capturer du son</string>
 </dict>
 </plist>

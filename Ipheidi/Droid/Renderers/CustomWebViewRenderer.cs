@@ -23,10 +23,12 @@ namespace Ipheidi.Droid
 			{
 				var webView = new Android.Webkit.WebView(Forms.Context);
 				webView.Settings.JavaScriptEnabled = true;
-				webView.AddJavascriptInterface(new CustomJavascriptInterface(webView), "Android");
+				webView.AddJavascriptInterface(new CustomJavascriptInterface(), "Android");
 				var webViewClient = new CustomWebViewClient();
+				var webChromeClient = new CustomWebChromeClient();
 
 				webView.SetWebViewClient(webViewClient);
+				webView.SetWebChromeClient(webChromeClient);
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)
@@ -49,5 +51,7 @@ namespace Ipheidi.Droid
 		}
 
 	}
+
+	
 }
 
