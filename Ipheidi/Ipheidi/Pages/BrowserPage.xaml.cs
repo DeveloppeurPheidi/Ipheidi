@@ -45,6 +45,7 @@ namespace Ipheidi
 				Device.BeginInvokeOnMainThread(App.Instance.Logout);
 			}
 		}
+
 		/// <summary>
 		/// On size allocation.
 		/// </summary>

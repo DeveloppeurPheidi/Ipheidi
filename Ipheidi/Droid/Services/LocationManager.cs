@@ -26,6 +26,7 @@ namespace Ipheidi.Droid
 		double Precision;
 		public static Android.Locations.LocationManager locationManager;
 		List<ILocationListener> observers;
+		private Location LastLocation;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.Droid.AndroidLocationManager"/> class.
@@ -113,7 +114,7 @@ namespace Ipheidi.Droid
 					loc = locationManager.GetLastKnownLocation(providers[i]);
 					if (loc != null) break;
 				}
-				if (loc != null)
+				if (loc != null && loc.Accuracy < LastLocation.Accuracy)
 				{
 					return new Location()
 					{
@@ -122,9 +123,15 @@ namespace Ipheidi.Droid
 						Latitude = loc.Latitude,
 						Speed = loc.Speed,
 						Orientation = loc.Bearing,
-						Utc = DateTime.UtcNow
+						Utc = DateTime.UtcNow,
+						Accuracy = loc.Accuracy
 					};
 				}
+				else if (LastLocation != null)
+				{
+					return LastLocation;
+				}
+
 			}
 			return null;
 		}
@@ -147,16 +154,20 @@ namespace Ipheidi.Droid
 		/// <param name="location">Location.</param>
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
-			OnLocationUpdate(new Location()
+			if (location.Accuracy < App.GeofenceRadius)
 			{
-				Altitude = location.Altitude,
-				Latitude = location.Latitude,
-				Longitude = location.Longitude,
-				Speed = location.Speed,
-				Orientation = location.Bearing,
-				Accuracy = location.Accuracy,
-				Utc = DateTime.UtcNow,
-			});
+				LastLocation = new Location()
+				{
+					Altitude = location.Altitude,
+					Latitude = location.Latitude,
+					Longitude = location.Longitude,
+					Speed = location.Speed,
+					Orientation = location.Bearing,
+					Accuracy = location.Accuracy,
+					Utc = DateTime.UtcNow,
+				};
+				OnLocationUpdate(LastLocation);
+			}
 		}
 
 		/// <summary>
@@ -209,7 +220,7 @@ namespace Ipheidi.Droid
 			if (ActivityCompat.ShouldShowRequestPermissionRationale((Activity)Xamarin.Forms.Forms.Context, permission))
 			{
 				//Explain to the user why we need to read the contacts
-				Snackbar.Make(((Activity)Xamarin.Forms.Forms.Context).FindViewById(Android.Resource.Id.Content), "Location access is required for our Big Brother application! We just want to know where you are, always...", Snackbar.LengthIndefinite)
+				Snackbar.Make(((Activity)Xamarin.Forms.Forms.Context).FindViewById(Android.Resource.Id.Content), "La localisation est requise pour cette application.", Snackbar.LengthIndefinite)
 						.SetAction("OK", v => ActivityCompat.RequestPermissions((Activity)Xamarin.Forms.Forms.Context, PermissionsLocation, RequestLocationId))
 						.Show();
 

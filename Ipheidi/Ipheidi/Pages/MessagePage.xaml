@@ -7,8 +7,8 @@
 			<Label x:Name="lblMessage" Text=""/>
 			</ScrollView>
 			<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Orientation="Horizontal" Spacing="40" Padding="20,0">
-				<Button x:Name="btnConfirmation" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="Yes"/>
-				<Button x:Name="btnCancel" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="No"/>
+				<Button x:Name="btnConfirmation" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="Oui"/>
+				<Button x:Name="btnCancel" HorizontalOptions="FillAndExpand" WidthRequest="50" Text="Non"/>
 			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>

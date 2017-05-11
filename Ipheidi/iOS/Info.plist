@@ -52,7 +52,7 @@
 		<string>location</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pour la localiser votre position</string>
+	<string>Pour localiser votre position</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
@@ -60,7 +60,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
-	<string>Nous avons besoin de l&apos;accès à votre carnet de contact pour faire la synchronisation de vos données.</string>
+	<string>Pour accèder à vos contacts</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Pour prendre des photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>

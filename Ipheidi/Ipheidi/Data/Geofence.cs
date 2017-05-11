@@ -52,7 +52,23 @@ namespace Ipheidi
 			}
 		}
 
+		[JsonIgnore,SQLite.Ignore]
+		public double DistanceFromCurrentPosition 
+		{
+			get
+			{
+				var location = App.LocationManager.GetLocation();
+				return location.GetDistanceFromOtherLocation(Latitude,Longitude);
+			}
+		}
 
+		public Geofence()
+		{
+			NoSeq = NoSeqGenerator.Generate(new Random(DateTime.Now.Millisecond));
+			CreationDate = DateTime.Now;
+			LastModification = CreationDate;
+			NotificationDelay = 30;
+		}
 
 
 
@@ -88,7 +104,7 @@ namespace Ipheidi
 				Device.StartTimer(new TimeSpan(0, 0, 1), () =>
 				{
 
-					System.Diagnostics.Debug.WriteLine(Name + " " + ID + ": " + "Sending " + (IsInside ? "entering" : "leaving") + " (" + Type.ToString() + ") notification in: " + (NotificationDelay - time) + "s");
+					//System.Diagnostics.Debug.WriteLine(Name + " " + ID + ": " + "Sending " + (IsInside ? "entering" : "leaving") + " (" + Type.ToString() + ") notification in: " + (NotificationDelay - time) + "s");
 					if (time >= NotificationDelay && wasInside == IsInside)
 					{
 						Device.BeginInvokeOnMainThread(() =>

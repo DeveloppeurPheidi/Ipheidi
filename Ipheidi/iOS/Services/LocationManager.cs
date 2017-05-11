@@ -17,6 +17,7 @@ namespace Ipheidi.iOS
 	{
 		List<ILocationListener> observers;
 		CLLocationManager locationManager;
+		Location LastLocation;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.IOSLocationManager"/> class.
@@ -29,8 +30,9 @@ namespace Ipheidi.iOS
 
 			locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
 			{
-					CLLocation clLoc = e.Locations[e.Locations.Length - 1];
-					DidUpdateLocation(clLoc);
+				CLLocation clLoc = e.Locations[e.Locations.Length - 1];
+
+				DidUpdateLocation(clLoc);
 			};
 			if (UIDevice.CurrentDevice.CheckSystemVersion(9, 0))
 			{
@@ -74,7 +76,12 @@ namespace Ipheidi.iOS
 		{
 			if (CheckPermission())
 			{
-				if (locationManager.Location != null)
+				if (LastLocation != null)
+				{
+					return LastLocation;
+
+				}
+				else if (locationManager.Location != null && locationManager.Location.HorizontalAccuracy <= App.GeofenceRadius)
 				{
 					return new Location()
 					{
@@ -83,6 +90,7 @@ namespace Ipheidi.iOS
 						Longitude = locationManager.Location.Coordinate.Longitude,
 						Orientation = locationManager.Location.Course,
 						Speed = locationManager.Location.Speed,
+						Accuracy = locationManager.Location.HorizontalAccuracy,
 						Utc = DateTime.UtcNow
 					};
 				}
@@ -102,6 +110,7 @@ namespace Ipheidi.iOS
 		{
 			if (location.Accuracy <= App.GeofenceRadius)
 			{
+				LastLocation = location;
 				foreach (var o in observers)
 				{
 					o.OnLocationUpdate(location);
@@ -142,7 +151,7 @@ namespace Ipheidi.iOS
 		bool CheckPermission()
 		{
 			// iOS 8 has additional permissions requirements
-			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0) )//&& firstCheck)
+			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))//&& firstCheck)
 			{
 				locationManager.RequestAlwaysAuthorization();
 			}

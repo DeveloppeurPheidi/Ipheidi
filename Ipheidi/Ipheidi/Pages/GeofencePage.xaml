@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.GeofencePage">
 	<ContentPage.Content>
 		<StackLayout x:Name="mainLayout">
-			<ListView x:Name="listViewGeofence"></ListView>
-			<Button x:Name="btnAdd" TextColor="White" BackgroundColor="Green" Text="+" FontAttributes="Bold" FontSize="30" HorizontalOptions = "FillAndExpand"/>
+			<ListView x:Name="listViewGeofence">
+			</ListView>
+			<StackLayout Orientation="Horizontal" >
+				<Picker x:Name="sortingPicker" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+				<Button x:Name="btnAdd" TextColor="White" BackgroundColor="Green" Text="+" FontAttributes="Bold" FontSize="30" VerticalOptions="FillAndExpand"/>
+			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

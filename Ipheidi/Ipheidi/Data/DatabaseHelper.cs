@@ -94,13 +94,15 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public async Task SaveItemAsync<T>(T item)
+		public async Task<bool> SaveItemAsync<T>(T item)
 		{
 			if (null != item)
 			{
 				Debug.WriteLine("DatabaseHelper: Saving new " + typeof(T));
 				await database.InsertAsync(item);
+				return true;
 			}
+			return false;
 		}
 
 		/// <summary>

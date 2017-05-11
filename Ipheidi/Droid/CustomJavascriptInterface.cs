@@ -8,7 +8,7 @@ namespace Ipheidi.Droid
 {
 	public class CustomJavascriptInterface : Java.Lang.Object
 	{
-		
+
 		[Export]
 		[JavascriptInterface]
 		public string Location()
@@ -45,7 +45,7 @@ namespace Ipheidi.Droid
 					   };
 
 					   geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-					App.GeofenceManager.CreateDepenseAtCurrentLocation(geo,true);
+					   App.GeofenceManager.CreateGeofenceAtCurrentLocation(geo, true);
 				   });
 			}
 		}

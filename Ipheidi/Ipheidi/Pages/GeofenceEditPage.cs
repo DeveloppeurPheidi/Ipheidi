@@ -8,30 +8,55 @@ namespace Ipheidi
 	{
 		bool didChange;
 		Geofence data;
+
+		StackLayout layout;
+		StackLayout lblLayout;
+		StackLayout entryLayout;
+		StackLayout formLayout;
+		Label namelbl;
+		Entry nameEntry;
+		Label latitudelbl;
+		Entry latitudeEntry;
+		Label longitudelbl;
+		Entry secEntry;
+		Entry minEntry;
+		Label delaylbl2;
+		Label delaylbl;
+		StackLayout delayLayout;
+		Picker typePicker;
+		Label typelbl;
+		Entry longitudeEntry;
+		StackLayout typeLayout;
+		Button map;
+
+
 		public GeofenceEditPage(Geofence geofence)
 		{
 			data = geofence;
 			Title = geofence.Name;
-			var layout = new StackLayout();
+			layout = new StackLayout();
 			layout.Padding = new Thickness(20, 20);
-			var nameLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			var namelbl = new Label() { Text = "Nom: ", VerticalTextAlignment = TextAlignment.Center };
-			var nameEntry = new Entry() { Text = geofence.Name, Placeholder = "Nom", HorizontalOptions = LayoutOptions.FillAndExpand };
-			nameEntry.Unfocused += (sender, e) =>
-									{
-										if (geofence.Name != nameEntry.Text)
-										{
-											geofence.Name = nameEntry.Text;
-											Title = geofence.Name;
-											didChange = true;
-										}
-									};
-			nameLayout.Children.Add(namelbl);
-			nameLayout.Children.Add(nameEntry);
-
-			var latitudeLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			var latitudelbl = new Label() { Text = "Latitude: ", VerticalTextAlignment = TextAlignment.Center };
-			var latitudeEntry = new Entry() { Text = geofence.Latitude + "", Placeholder = "Latitude", HorizontalOptions = LayoutOptions.FillAndExpand };
+			entryLayout = new StackLayout() { Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand};
+			lblLayout = new StackLayout() { Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand};
+			namelbl = new Label() { Text = "Nom: ", VerticalTextAlignment = TextAlignment.Center };
+			nameEntry = new Entry() { Placeholder = "Nom", HorizontalOptions = LayoutOptions.FillAndExpand};
+			nameEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
+			{
+				if (nameEntry.Text.Length > 50)
+				{
+					nameEntry.Text = nameEntry.Text.Substring(0, 50);
+				}
+				else if (geofence.Name != nameEntry.Text && nameEntry.Text.Length < 50)
+				{
+					geofence.Name = nameEntry.Text;
+					Title = geofence.Name;
+					didChange = true;
+				}
+			};
+			lblLayout.Children.Add(namelbl);
+			entryLayout.Children.Add(nameEntry);
+			latitudelbl = new Label() { Text = "Latitude: ", VerticalTextAlignment = TextAlignment.Center };
+			latitudeEntry= new Entry() { Text = geofence.Latitude + "", Placeholder = "Latitude", HorizontalOptions = LayoutOptions.FillAndExpand };
 			latitudeEntry.Unfocused += (sender, e) =>
 									{
 										double value = 0;
@@ -44,12 +69,12 @@ namespace Ipheidi
 											}
 										}
 									};
-			latitudeLayout.Children.Add(latitudelbl);
-			latitudeLayout.Children.Add(latitudeEntry);
+			lblLayout.Children.Add(latitudelbl);
+			entryLayout.Children.Add(latitudeEntry);
 
-			var longitudeLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			var longitudelbl = new Label() { Text = "Longitude: ", VerticalTextAlignment = TextAlignment.Center };
-			var longitudeEntry = new Entry() { Text = geofence.Longitude + "", Placeholder = "Longitude", HorizontalOptions = LayoutOptions.FillAndExpand };
+
+			longitudelbl = new Label() { Text = "Longitude: ", VerticalTextAlignment = TextAlignment.Center };
+			longitudeEntry = new Entry() { Text = geofence.Longitude + "", Placeholder = "Longitude", HorizontalOptions = LayoutOptions.FillAndExpand };
 			longitudeEntry.Unfocused += (sender, e) =>
 									{
 										double value = 0;
@@ -62,13 +87,15 @@ namespace Ipheidi
 											}
 										}
 									};
-			longitudeLayout.Children.Add(longitudelbl);
-			longitudeLayout.Children.Add(longitudeEntry);
+			lblLayout.Children.Add(longitudelbl);
+			entryLayout.Children.Add(longitudeEntry);
+			formLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
+			formLayout.Children.Add(lblLayout);
+			formLayout.Children.Add(entryLayout);
 
-
-			var typeLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			var typelbl = new Label() { Text = "Type: ", VerticalTextAlignment = TextAlignment.Center };
-			var typePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
+			typeLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
+			typelbl = new Label() { Text = "Type: ", VerticalTextAlignment = TextAlignment.Center };
+			typePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
 			foreach (var t in Enum.GetNames(typeof(GeofenceType)))
 			{
 				typePicker.Items.Add(t);
@@ -92,13 +119,13 @@ namespace Ipheidi
 			typeLayout.Children.Add(typePicker);
 
 
-			var delayLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			var delaylbl = new Label() { Text = "Délai de notification", VerticalTextAlignment = TextAlignment.Center };
-			var delaylbl2 = new Label() { Text = " : ", VerticalTextAlignment = TextAlignment.Center };
+			delayLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
+			delaylbl = new Label() { Text = "Délai de notification", VerticalTextAlignment = TextAlignment.Center };
+			delaylbl2 = new Label() { Text = " : ", VerticalTextAlignment = TextAlignment.Center };
 			uint sec = geofence.NotificationDelay % 60;
 			uint min = (geofence.NotificationDelay / 60) % 60;
-			var minEntry = new Entry() { Text = min + "", Placeholder = "Minutes", HorizontalOptions = LayoutOptions.FillAndExpand };
-			var secEntry = new Entry() { Text = sec + "", Placeholder = "Secondes", HorizontalOptions = LayoutOptions.FillAndExpand };
+			minEntry = new Entry() { Text = min + "", Placeholder = "Minutes", HorizontalOptions = LayoutOptions.FillAndExpand };
+			secEntry = new Entry() { Text = sec + "", Placeholder = "Secondes", HorizontalOptions = LayoutOptions.FillAndExpand };
 			EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
 			{
 				uint m = 0;
@@ -126,15 +153,13 @@ namespace Ipheidi
 			delayLayout.Children.Add(delaylbl2);
 			delayLayout.Children.Add(secEntry);
 
-			var map = new Button() { WidthRequest = App.Width / 2, Text = "Carte" };
+			map = new Button() { WidthRequest = App.Width / 2, Text = "Carte" };
 			map.Clicked += (sender, e) =>
 						{
 							var loc = new Location() { Latitude = geofence.Latitude, Longitude = geofence.Longitude };
 							App.Instance.PushPage(new MapPage(loc));
 						};
-			layout.Children.Add(nameLayout);
-			layout.Children.Add(latitudeLayout);
-			layout.Children.Add(longitudeLayout);
+			layout.Children.Add(formLayout);
 			layout.Children.Add(map);
 			layout.Children.Add(typeLayout);
 			layout.Children.Add(delaylbl);
@@ -142,6 +167,11 @@ namespace Ipheidi
 			Content = layout;
 		}
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			nameEntry.Text = data.Name;
+		}
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
@@ -149,6 +179,14 @@ namespace Ipheidi
 			{
 				App.GeofenceManager.UpdateGeofence(data);
 			}
+		}
+
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+			namelbl.HeightRequest = nameEntry.Height;
+			latitudelbl.HeightRequest = latitudeEntry.Height;
+			longitudelbl.HeightRequest = longitudeEntry.Height;
 		}
 	}
 }

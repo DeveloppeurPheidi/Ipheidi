@@ -37,10 +37,15 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		public double GetDistanceFromOtherLocation(Location location)
 		{
+			return GetDistanceFromOtherLocation(location.Latitude,location.Longitude);
+		}
+
+		public double GetDistanceFromOtherLocation(double latitude, double longitude)
+		{
 			double lat1 = this.Latitude;
 			double lng1 = this.Longitude;
-			double lat2 = location.Latitude;
-			double lng2 = location.Longitude;
+			double lat2 = latitude;
+			double lng2 = longitude;
 			double earthRadius = 6371000; //meters
 			double dLat = DegreeToRadian(lat2 - lat1);
 			double dLng = DegreeToRadian(lng2 - lng1);

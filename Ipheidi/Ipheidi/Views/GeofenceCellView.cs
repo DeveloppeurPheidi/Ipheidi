@@ -10,6 +10,9 @@ namespace Ipheidi
 			BindableProperty.Create("Latitude", typeof(double), typeof(LocationCellView), default(double));
 		public static readonly BindableProperty LongitudeProperty =
 			BindableProperty.Create("Longitude", typeof(double), typeof(LocationCellView), default(double));
+		public static readonly BindableProperty DistanceFromCurrentLocationProperty =
+			BindableProperty.Create("Distance", typeof(double), typeof(LocationCellView), default(double));
+
 		public static readonly BindableProperty NameProperty =
 			BindableProperty.Create("Name", typeof(string), typeof(LocationCellView), default(string));
 		public static readonly BindableProperty IDProperty =
@@ -18,15 +21,20 @@ namespace Ipheidi
 					BindableProperty.Create("NotificationEnabled", typeof(bool), typeof(LocationCellView), default(bool));
 
 		static bool IsDarkBackground = false;
-		public Double Longitude
+		public double Longitude
 		{
-			get { return (Double)GetValue(LongitudeProperty); }
+			get { return (double)GetValue(LongitudeProperty); }
 			set { SetValue(LongitudeProperty, value); }
 		}
 
-		public Double Latitude
+		public double DistanceFromCurrentLocation
 		{
-			get { return (Double)GetValue(LatitudeProperty); }
+			get { return (double)GetValue(DistanceFromCurrentLocationProperty); }
+		}
+
+		public double Latitude
+		{
+			get { return (double)GetValue(LatitudeProperty); }
 			set { SetValue(LatitudeProperty, value); }
 		}
 
@@ -50,6 +58,7 @@ namespace Ipheidi
 
 		StackLayout cellWrapper;
 		Label lblName;
+		Label lblDistance;
 		Switch notificationsSwitch = new Switch();
 		Button btnDelete;
 
@@ -57,7 +66,9 @@ namespace Ipheidi
 		{
 			cellWrapper = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal };
 			btnDelete = new Button() { TextColor = Color.Red, Text = "X", FontAttributes = FontAttributes.Bold, WidthRequest = 50 };
-			lblName = new Label() { Text = Name, VerticalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.FillAndExpand };
+			lblName = new Label() { Text = Name, VerticalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.FillAndExpand, LineBreakMode = LineBreakMode.TailTruncation };
+			lblDistance = new Label { VerticalTextAlignment = TextAlignment.Center, LineBreakMode = LineBreakMode.NoWrap, HorizontalOptions = LayoutOptions.Fill };
+			UpdateDistanceFromCurrentLocation();
 			notificationsSwitch = new Switch() { IsToggled = NotificationEnabled, VerticalOptions = LayoutOptions.Center };
 			notificationsSwitch.Toggled += (sender, e) =>
 			{
@@ -76,14 +87,16 @@ namespace Ipheidi
 				//View = new StackLayout() { BackgroundColor = Color.Transparent };
 				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceById(ID));
 			};
-			cellWrapper.BackgroundColor = IsDarkBackground ? Color.FromHex("#EEEEEE") : Color.White;
+			cellWrapper.BackgroundColor = Color.White;//IsDarkBackground ? Color.FromHex("#EEEEEE") : Color.White;
 			cellWrapper.Spacing = 10;
 			cellWrapper.Padding = new Thickness(20, 0, 10, 0);
 			cellWrapper.Children.Add(lblName);
+			cellWrapper.Children.Add(lblDistance);
 			cellWrapper.Children.Add(notificationsSwitch);
 			cellWrapper.Children.Add(btnDelete);
 			IsDarkBackground = !IsDarkBackground;
 			View = cellWrapper;
+
 		}
 		protected override void OnBindingContextChanged()
 		{
@@ -92,10 +105,14 @@ namespace Ipheidi
 			{
 				lblName.Text = Name;
 				notificationsSwitch.IsToggled = NotificationEnabled;
-
+				UpdateDistanceFromCurrentLocation();
 			}
 		}
 
+		void UpdateDistanceFromCurrentLocation()
+		{
+			lblDistance.Text = DistanceFromCurrentLocation < 100 ? DistanceFromCurrentLocation.ToString("N0") + " m" : (DistanceFromCurrentLocation > 10000 ? (DistanceFromCurrentLocation / 1000).ToString("N0") : (DistanceFromCurrentLocation / 1000).ToString("N1")) + " km";
+		}
 		protected override void OnTapped()
 		{
 			base.OnTapped();

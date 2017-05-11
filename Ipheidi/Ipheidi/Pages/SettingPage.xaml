@@ -4,7 +4,7 @@
 		<StackLayout x:Name="mainLayout" Padding="20,40,20,0" HorizontalOptions="FillAndExpand">
 			<Button Text="Oublier ce compte" Clicked="ForgetAccountButtonClicked" />
 			<Button Text="Supprimer tous les comptes" Clicked="DeleteAllUserButtonClicked" />
-			<Button x:Name="btnGeofences" Text="Geofences" />
+			<Button x:Name="btnGeofences" Text="Lieux enregistrés" />
 			<StackLayout Orientation="Horizontal">
 				<Label Text="Transfert de données sous Wifi seulement" VerticalTextAlignment="Center" />
 				<Switch x:Name="wifiOnlySwitch" />

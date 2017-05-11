@@ -30,6 +30,7 @@ namespace Ipheidi
 		public GeofenceCreatePage(Geofence geofence)
 		{
 			geo = geofence;
+			Title = "Nouveau Lieu";
 			Initialize();
 			nameEntry.Text = geo.Name;
 			secEntry.Text = geo.NotificationDelay + "";
@@ -173,9 +174,13 @@ namespace Ipheidi
 				};
 				minEntry.Unfocused += ev;
 				secEntry.Unfocused += ev;
+				secEntry.Text = "30";
 			}
 		}
-
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+		}
 
 		/// <summary>
 		/// On size allocation.

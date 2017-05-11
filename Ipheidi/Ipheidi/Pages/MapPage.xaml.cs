@@ -8,17 +8,17 @@ namespace Ipheidi
 	public partial class MapPage : ContentPage
 	{
 		string url;
-		bool visible = true;
+		Location Location;
 		public MapPage()
 		{
 			Title = "Map";
 			InitializeComponent();
-			var location = App.LocationManager.GetLocation();
+			Location = App.LocationManager.GetLocation();
 
-			if (location != null)
+			if (Location != null)
 			{
-				
-				var dms = location.GetDegreeMinuteSecond();
+
+				var dms = Location.GetDegreeMinuteSecond();
 				switch (Device.RuntimePlatform)
 				{
 					case Device.iOS:
@@ -43,17 +43,16 @@ namespace Ipheidi
 						break;
 				}
 			}
-
 		}
 
 		public MapPage(Location location)
 		{
 			Title = "Map";
 			InitializeComponent();
-			if (location != null)
+			Location = location;
+			if (Location != null)
 			{
-
-				var dms = location.GetDegreeMinuteSecond();
+				var dms = Location.GetDegreeMinuteSecond();
 				switch (Device.RuntimePlatform)
 				{
 					case Device.iOS:
@@ -77,18 +76,20 @@ namespace Ipheidi
 						mainLayout.Children.Add(mapWV);
 						break;
 				}
-
 			}
 		}
+
+		/// <summary>
+		/// On the page appearing.
+		/// </summary>
 		protected override void OnAppearing()
 		{
-			visible = true;
+			Debug.WriteLine("=============Location=============");
+			Debug.WriteLine("Accuracy: " + Location.Accuracy);
+			Debug.WriteLine("Longitude: " + Location.Longitude);
+			Debug.WriteLine("Latitude: " + Location.Latitude);
+
 			base.OnAppearing();
-		}
-		protected override void OnDisappearing()
-		{
-			visible = false;
-			base.OnDisappearing();
 		}
 
 		/// <summary>
@@ -98,15 +99,12 @@ namespace Ipheidi
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (visible)
+			//Permet d'afficher correctement la bar de status sur iOS
+			if (Device.RuntimePlatform == Device.iOS)
 			{
-				//Permet d'afficher correctement la bar de status sur iOS
-				if (Device.RuntimePlatform == Device.iOS)
-				{
-					mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
-				}
-				base.OnSizeAllocated(width, height);
+				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
+			base.OnSizeAllocated(width, height);
 		}
 
 	}

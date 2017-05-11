@@ -73,7 +73,7 @@ namespace Ipheidi
 			lblBatteryLevel.Text = "Batterie: ";
 			lblBatteryConsumption.Text = "Batterie utilisé: ";
 
-			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender,e);
+			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender, e);
 
 			//Precision Picker
 			foreach (var val in precisionsList)
@@ -122,7 +122,7 @@ namespace Ipheidi
 								Debug.WriteLine("LocationPage: Saving location data.");
 								foreach (var location in data)
 								{
-									
+
 									await DatabaseHelper.Database.SaveItemAsync(location);
 								}
 							});
@@ -161,7 +161,7 @@ namespace Ipheidi
 			NetworkState state = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 			{
-				Task.Run(async() =>
+				Task.Run(async () =>
 				{
 					await SendLocationsData();
 				});
@@ -179,7 +179,7 @@ namespace Ipheidi
 			lblSpeed.IsVisible = true;
 			lblSpeed.Text = "0 km/h";
 			lastLocation = null;
-			IsInLocationTest = -3 == precision;
+			IsInLocationTest = -3 == (int)precision;
 			if (!IsInLocationTest)
 			{
 				App.LocationManager.StartLocationUpdate(precision);
@@ -220,7 +220,7 @@ namespace Ipheidi
 				location.PowerStatus = App.Battery.Status.ToString();
 				location.User = App.Username;
 				location.Domain = App.Domain;
-				if ((location.Latitude != lastLocation.Latitude || location.Longitude != lastLocation.Longitude))
+				if ((Math.Abs(location.Latitude - lastLocation.Latitude) > 0.0000001 || Math.Abs(location.Longitude - lastLocation.Longitude) > 0.0000001))
 				{
 
 					double dis = lastLocation.GetDistanceFromOtherLocation(location);
@@ -256,7 +256,7 @@ namespace Ipheidi
 						var loc = new Location();
 						loc.Latitude = lastLocation.Latitude;
 						loc.Longitude = lastLocation.Longitude;
-						double r = rand.Next(1, 5); // 1↓, 2←, 3↑, 4→ 
+						double r = rand.Next(1, 5); //Direction: 1↓, 2←, 3↑, 4→ 
 						double dLat = r % 2 * (r - 2) * 0.0002;
 						loc.Latitude += dLat;
 						double dLon = (r - 1) % 2 * (r - 3) * 0.0002;
@@ -299,17 +299,6 @@ namespace Ipheidi
 				lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
 				lblAccuracy.Text = "Accuracy: " + (int)location.Accuracy + "m";
 			}
-			else
-			{
-				/*
-				Debug.WriteLine("--------------------");
-				Debug.WriteLine((location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h");
-				Debug.WriteLine("Altitude: " + (int)(location.Altitude) + " m");
-				Debug.WriteLine("Latitude: " + location.Latitude);
-				Debug.WriteLine("Longitude: " + location.Longitude);
-				Debug.WriteLine("Distance: " + (distance / 1000).ToString("N1") + "km");
-				Debug.WriteLine("Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss"));*/
-			}
 		}
 
 		/// <summary>
@@ -334,12 +323,12 @@ namespace Ipheidi
 			};
 			Button btnClear = new Button();
 			btnClear.Text = "Clear Data";
-			btnClear.Clicked += async (sender, ev) =>
+			btnClear.Clicked += (sender, ev) =>
 			{
 				list.IsVisible = false;
 				foreach (var item in locations)
 				{
-					await DatabaseHelper.Database.DeleteItemAsync(item);
+					Task.Run(async () => await DatabaseHelper.Database.DeleteItemAsync(item));
 				}
 			};
 			StackLayout layout = new StackLayout();
@@ -348,7 +337,6 @@ namespace Ipheidi
 
 			page.Content = layout;
 			await Navigation.PushAsync(page);
-
 		}
 
 
@@ -458,7 +446,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				bool toMargin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this)? false : true;
+				bool toMargin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? false : true;
 				mainLayout.Margin = toMargin ? new Thickness(0, 20, 0, 0) : new Thickness(0, 0, 0, 0);
 			}
 		}
@@ -517,8 +505,9 @@ namespace Ipheidi
 			NetworkState netState = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.Reachable && (netState == NetworkState.ReachableViaWiFiNetwork || (netState == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled)))
 			{
-				Task.Run(async () => { 
-					await SendLocationsData(); 
+				Task.Run(async () =>
+				{
+					await SendLocationsData();
 				});
 			}
 		}
