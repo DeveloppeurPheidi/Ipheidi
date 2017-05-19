@@ -163,6 +163,18 @@ namespace Ipheidi
 			return newParams;
 		}
 
+		public static string InsertValueInString(string pheidiparams, string key, string value)
+		{
+			var newParams = pheidiparams;
+			if (!newParams.EndsWith(ParamSplitter, StringComparison.OrdinalIgnoreCase))
+			{
+				newParams += ParamSplitter;
+			}
+			newParams += key + ValueSplitter + value + ParamSplitter;
+
+			return newParams;
+		}
+
 		public void Copy(PheidiParams pheidiParams)
 		{
 			Clear();

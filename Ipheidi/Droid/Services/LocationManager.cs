@@ -114,18 +114,21 @@ namespace Ipheidi.Droid
 					loc = locationManager.GetLastKnownLocation(providers[i]);
 					if (loc != null) break;
 				}
-				if (loc != null && loc.Accuracy < LastLocation.Accuracy)
+				if (loc != null)
 				{
-					return new Location()
+					if (loc.Accuracy <= App.GeofenceRadius)
 					{
-						Altitude = loc.Altitude,
-						Longitude = loc.Longitude,
-						Latitude = loc.Latitude,
-						Speed = loc.Speed,
-						Orientation = loc.Bearing,
-						Utc = DateTime.UtcNow,
-						Accuracy = loc.Accuracy
-					};
+						return new Location()
+						{
+							Altitude = loc.Altitude,
+							Longitude = loc.Longitude,
+							Latitude = loc.Latitude,
+							Speed = loc.Speed,
+							Orientation = loc.Bearing,
+							Utc = DateTime.UtcNow,
+							Accuracy = loc.Accuracy
+						};
+					}
 				}
 				else if (LastLocation != null)
 				{

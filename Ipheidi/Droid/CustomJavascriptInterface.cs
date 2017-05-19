@@ -1,6 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Views;
+using Android.Views.InputMethods;
 using Android.Webkit;
 using Java.Interop;
 
@@ -23,31 +26,34 @@ namespace Ipheidi.Droid
 
 		[Export]
 		[JavascriptInterface]
-		public void ExecuteAction(string pheidiparams, string objectAction)
+		public string ExecuteAction(string pheidiparams, string objectAction)
 		{
 			if (objectAction == "geofenceAutoCreate")
 			{
+				string data = "";
 				PheidiParams pp = new PheidiParams();
 				pp.Load(pheidiparams);
-				Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-				   {
-					   var location = App.LocationManager.GetLocation();
-					   var geo = new Geofence()
-					   {
-						   Latitude = location.Latitude,
-						   Longitude = location.Longitude,
-						   NotificationEnabled = true,
-						   User = App.Username,
-						   Domain = App.Domain,
-						   NotificationDelay = 0,
-						   Name = pp["VALUE"],
-						   Type = GeofenceType.Depense
-					   };
-
-					   geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-					   App.GeofenceManager.CreateGeofenceAtCurrentLocation(geo, true);
-				   });
+				var location = App.LocationManager.GetLocation();
+				var geo = new Geofence()
+				{
+					Latitude = location.Latitude,
+					Longitude = location.Longitude,
+					NotificationEnabled = true,
+					User = App.Username,
+					Domain = App.Domain,
+					NotificationDelay = 0,
+					Name = pp["VALUE"],
+					EnterAction = new Action() { Type = ActionType.Depense }
+				};
+				System.Diagnostics.Debug.WriteLine("On main thread: " + ThreadHelper.IsOnMainThread);
+				geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+				string noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo, false);
+				data = PheidiParams.InsertValueInString(pheidiparams, "IPheidi_Params", noseq);
+				System.Diagnostics.Debug.WriteLine(data);
+				return data;
 			}
+
+			return pheidiparams;
 		}
 
 		[Export]

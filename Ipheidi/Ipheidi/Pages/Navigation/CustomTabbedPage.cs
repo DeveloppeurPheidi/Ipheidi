@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+
 namespace Ipheidi
 {
 	/// <summary>
 	/// Bar de navigation de l'application.
 	/// </summary>
-	public class CustomTabbedPage:TabbedPage
+	public class CustomTabbedPage:Xamarin.Forms.TabbedPage
 	{
 		int indexLastPage = 0;
 		int indexCurrentPage = 0;
@@ -19,6 +21,8 @@ namespace Ipheidi
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);
 			NavigationPage.SetHasBackButton(this, false);
+
+            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
 
 			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();

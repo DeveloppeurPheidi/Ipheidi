@@ -23,6 +23,7 @@ namespace Ipheidi
 			listView.SeparatorColor = Color.FromRgba(0,0,0,0.5);
 			btnOk.IsEnabled = false;
 			btnAdd.IsVisible = false;
+			NavigationPage.SetHasBackButton(this, false);
 		}
 
 		public void SetData<T>(ObservableCollection<T> data, DataTemplate dataTemplate)
@@ -80,6 +81,11 @@ namespace Ipheidi
 				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			base.OnSizeAllocated(width, height);
+		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			return true;
 		}
 	}
 }

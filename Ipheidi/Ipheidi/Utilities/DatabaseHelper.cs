@@ -43,6 +43,8 @@ namespace Ipheidi
 			database = new SQLiteAsyncConnection(dbPath);
 			try
 			{
+				database.CreateTableAsync<ActionType>().Wait();
+				database.CreateTableAsync<Action>().Wait();
 				database.CreateTableAsync<Location>().Wait();
 				database.CreateTableAsync<Geofence>().Wait();
 			}
@@ -76,16 +78,17 @@ namespace Ipheidi
 		/// Gets the item.
 		/// </summary>
 		/// <returns>The item.</returns>
-		/// <param name="id">Identifier.</param>
+		/// <param name="NoSeq">Identifier.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public Task<T> GetItem<T>(int id) where T : DatabaseData ,new()
+		public Task<T> GetItem<T>(string NoSeq) where T : DatabaseData ,new()
 		{
-			return database.Table<T>().Where(i => i.ID == id).FirstAsync();
+			return database.Table<T>().Where(i => i.NoSeq == NoSeq).FirstAsync();
 		}
 
 
 		public async Task UpdateItem<T>(T item) where T : DatabaseData, new()
 		{
+			Debug.WriteLine("DatabaseHelper: Updating " + typeof(T) + " " + item.NoSeq);
 			await database.InsertOrReplaceAsync(item);
 		}
 
@@ -94,11 +97,11 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public async Task<bool> SaveItemAsync<T>(T item)
+		public async Task<bool> SaveItemAsync<T>(T item) where T: DatabaseData
 		{
-			if (null != item)
+			if (item != null)
 			{
-				Debug.WriteLine("DatabaseHelper: Saving new " + typeof(T));
+				Debug.WriteLine("DatabaseHelper: Saving new " + typeof(T) + " " + item.NoSeq);
 				await database.InsertAsync(item);
 				return true;
 			}
@@ -110,8 +113,9 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns>The item async.</returns>
 		/// <param name="item">Item.</param>
-		public Task<int> DeleteItemAsync<T>(T item)
+		public Task<int> DeleteItemAsync<T>(T item) where T:DatabaseData
 		{
+			Debug.WriteLine("DatabaseHelper: Deleting " + typeof(T) + " " + item.NoSeq);
 			return database.DeleteAsync(item);
 		}
 
@@ -128,9 +132,9 @@ namespace Ipheidi
 		/// <summary>
 		/// Creates the table.
 		/// </summary>
-		public void CreateTable<T>() where T:new()
+		public void CreateTable<T>() where T: new()
 		{
-			database.CreateTableAsync<Location>().Wait();
+			database.CreateTableAsync<T>().Wait();
 		}
 	}
 }

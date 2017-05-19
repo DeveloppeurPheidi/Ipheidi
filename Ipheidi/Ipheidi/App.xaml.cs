@@ -42,7 +42,7 @@ namespace Ipheidi
 			set
 			{
 				Application.Current.Properties["LastDomain"] = value;
-				Task.Run(async() => { await Application.Current.SavePropertiesAsync();});
+				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace Ipheidi
 				{
 					Current.Properties.Add("WifiOnlyEnabled", value.ToString());
 				}
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync();});
+				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace Ipheidi
 			set
 			{
 				Application.Current.Properties["LastUser"] = value;
-				Task.Run(async() => { await Application.Current.SavePropertiesAsync();});
+				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
 		static public Cookie WebSession = new Cookie();
@@ -156,6 +156,8 @@ namespace Ipheidi
 				StatusBarManager = DependencyService.Get<IStatusBarService>();
 				LocationManager = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
+				ThreadHelper.Initialize(Environment.CurrentManagedThreadId);
+				Task.Run(async() => await ActionType.SeedData());
 			}
 			catch (Exception e)
 			{
@@ -206,10 +208,13 @@ namespace Ipheidi
 		/// </summary>
 		public void GetToApplication()
 		{
-			GeofenceManager = new GeofenceManager();
+			if (GeofenceManager == null)
+			{
+				GeofenceManager = new GeofenceManager();
+			}
 			NavBar = new CustomTabbedPage();
-			var page = new NavigationPage(NavBar);
-			MainPage = page;
+			MainPage.Navigation.PushAsync(NavBar);
+
 		}
 
 		/// <summary>
@@ -217,13 +222,13 @@ namespace Ipheidi
 		/// </summary>
 		public void GetLoginPage()
 		{
-			
+
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
 			Debug.WriteLine("App: Create Login Page");
 			var p = new LoginPage(App.Credentials.Count == 0);
 			var page = new NavigationPage(p);
 			Debug.WriteLine("App: Set Login Page");
-			MainPage = page;	
+			MainPage = page;
 		}
 
 		/// <summary>
@@ -234,9 +239,10 @@ namespace Ipheidi
 			App.IsInLogin = true;
 			var locationPage = (LocationPage)NavBar.Children.Where(o => o is LocationPage).Single();
 			locationPage.StopLocalisation();
+			App.LocationManager.RemoveLocationListener(App.GeofenceManager);
+			App.GeofenceManager = null;
 			App.LocationManager.RemoveLocationListener(locationPage);
-
-			GetLoginPage();
+			MainPage.Navigation.PopAsync();
 		}
 
 		/// <summary>

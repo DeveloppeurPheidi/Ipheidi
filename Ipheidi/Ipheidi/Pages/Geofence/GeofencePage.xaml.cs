@@ -37,7 +37,7 @@ namespace Ipheidi
 			RefreshTitle();
 			mainLayout.BackgroundColor = listViewGeofence.BackgroundColor;
 			var geofenceCell = new DataTemplate(typeof(GeofenceCellView));
-			geofenceCell.SetBinding(GeofenceCellView.IDProperty, "ID");
+			geofenceCell.SetBinding(GeofenceCellView.IDProperty, "NoSeq");
 			geofenceCell.SetBinding(GeofenceCellView.LatitudeProperty, "Latitude");
 			geofenceCell.SetBinding(GeofenceCellView.LongitudeProperty, "Longitude");
 			geofenceCell.SetBinding(GeofenceCellView.DistanceFromCurrentLocationProperty, "DistanceFromCurrentPosition");

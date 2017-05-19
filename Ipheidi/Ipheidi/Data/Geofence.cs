@@ -4,12 +4,10 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
-
-	public enum GeofenceType
+	enum GeofenceEvent
 	{
-		Localisation,
-		Depense,
-		Maison,
+		Entering,
+		Leaving
 	}
 	public class Geofence : DatabaseData
 	{
@@ -24,41 +22,82 @@ namespace Ipheidi
 
 		public double Radius { get; set; }
 
+		public string EnterActionNoSeq { get; private set; }
+		public string ExitActionNoSeq { get; private set; }
+
+		Action enterAction;
+		Action exitAction;
+
+		[SQLite.Ignore]
+		public Action EnterAction
+		{
+			get
+			{
+				if (enterAction == null)
+				{
+					if (EnterActionNoSeq != null)
+					{
+						enterAction = DatabaseHelper.Database.GetItem<Action>(EnterActionNoSeq).Result;
+					}
+					else
+					{
+						enterAction = new Action() { Type = ActionType.Localisation, SousType = ActionType.Autre };
+					}
+				}
+				return enterAction;
+			}
+			set
+			{
+				enterAction = value;
+				EnterActionNoSeq = enterAction.NoSeq;
+			}
+		}
+
+		[SQLite.Ignore]
+		public Action ExitAction
+		{
+			get
+			{
+				if (exitAction == null)
+				{
+					if (ExitActionNoSeq != null)
+					{
+						exitAction = DatabaseHelper.Database.GetItem<Action>(ExitActionNoSeq).Result;
+					}
+					else
+					{
+						exitAction = new Action() { Type = ActionType.Localisation, SousType = ActionType.Autre };
+					}
+				}
+				return exitAction;
+			}
+			set
+			{
+				exitAction = value;
+				ExitActionNoSeq = exitAction.NoSeq;
+			}
+		}
+
 		[JsonIgnore]
 		public bool NotificationEnabled { get; set; }
 
-		[JsonIgnore]
-		public GeofenceType Type { get; set; }
-
-		public string NoSeq { get; set; }
+		[SQLite.PrimaryKey]
+		public new string NoSeq { get; set; }
 
 		[JsonIgnore]
 		public uint NotificationDelay { get; set; }
 
-		[SQLite.Ignore]
-		public string TypeName
-		{
-			get
-			{
-				return Type.ToString();
-			}
-			set
-			{
-				GeofenceType type;
-				if (Enum.TryParse(value, out type))
-				{
-					Type = type;
-				}
-			}
-		}
-
-		[JsonIgnore,SQLite.Ignore]
-		public double DistanceFromCurrentPosition 
+		[JsonIgnore, SQLite.Ignore]
+		public double DistanceFromCurrentPosition
 		{
 			get
 			{
 				var location = App.LocationManager.GetLocation();
-				return location.GetDistanceFromOtherLocation(Latitude,Longitude);
+				if (location == null)
+				{
+					return -1;
+				}
+				return location.GetDistanceFromOtherLocation(Latitude, Longitude);
 			}
 		}
 
@@ -69,7 +108,6 @@ namespace Ipheidi
 			LastModification = CreationDate;
 			NotificationDelay = 30;
 		}
-
 
 
 		/// <summary>
@@ -168,16 +206,7 @@ namespace Ipheidi
 		/// </summary>
 		public void OnEnteringGeofence()
 		{
-			switch (Type)
-			{
-				case GeofenceType.Localisation:
-					App.NotificationManager.SendNotification("Entering: " + Name, "Geolocation", "nearby_square", NotificationType.Geofence);
-					break;
-				case GeofenceType.Depense:
-					App.NotificationManager.SendNotification("Voulez créer une dépense pour: " + Name, "Géolocation", "nearby_square", NotificationType.Depense);
-					break;
-			}
-
+			ExecuteAction(EnterAction, GeofenceEvent.Entering);
 		}
 
 		/// <summary>
@@ -185,14 +214,24 @@ namespace Ipheidi
 		/// </summary>
 		public void OnLeavingGeofence()
 		{
-			switch (Type)
+			ExecuteAction(ExitAction, GeofenceEvent.Leaving);
+		}
+
+		void ExecuteAction(Action action, GeofenceEvent ev)
+		{
+			string message = "";
+			switch (action.Type)
 			{
-				case GeofenceType.Localisation:
-					App.NotificationManager.SendNotification("Leaving: " + Name, "Geolocation", "nearby_square", NotificationType.Geofence);
+				case ActionType.Localisation:
+					message = "Vous venez " + (ev == GeofenceEvent.Entering ? "d'arriver à" : "de quitter") + " cette endroit";
+					message += (action.SousType != ActionType.Autre ? " (" + action.SousType + ")." : ".");
+					App.NotificationManager.SendNotification(message, Name, "nearby_square", NotificationType.Geofence);
+					break;
+				case ActionType.Depense:
+					App.NotificationManager.SendNotification("Voulez créer une dépense (" + action.SousType + ")?", Name, "nearby_square", NotificationType.Depense);
 					break;
 			}
 		}
-
 
 		/// <summary>
 		/// Convert Degree to radian.

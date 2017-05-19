@@ -18,13 +18,12 @@ namespace Ipheidi.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<TabbedPage> e)
 		{
 			//Désactive les animations tel que le swipe sur Android.
-			var info = typeof(TabbedPageRenderer).GetTypeInfo();
+			/*var info = typeof(TabbedPageRenderer).GetTypeInfo();
 			var fieldInfo = info.GetField("_useAnimations", BindingFlags.Instance | BindingFlags.NonPublic);
 			fieldInfo.SetValue(this, false);
 
-			System.Diagnostics.Debug.WriteLine(e.ToString());
+			System.Diagnostics.Debug.WriteLine(e.ToString());*/
 			base.OnElementChanged(e);
 		}
-
 	}
 }

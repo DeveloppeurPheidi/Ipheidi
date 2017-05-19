@@ -10,7 +10,7 @@ namespace Ipheidi
 	/// </summary>
 	public partial class GeofenceCreatePage : ContentPage
 	{
-		private Geofence geo;
+		private Geofence Geofence;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceCreatePage"/> class.
@@ -18,8 +18,8 @@ namespace Ipheidi
 		/// <param name="loc">Location.</param>
 		public GeofenceCreatePage(Location loc)
 		{
-			geo = new Geofence() { Latitude = loc.Latitude, Longitude = loc.Longitude };
-			geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+			Geofence = new Geofence() { Latitude = loc.Latitude, Longitude = loc.Longitude };
+			Geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
 			Initialize();
 		}
 
@@ -29,11 +29,11 @@ namespace Ipheidi
 		/// <param name="geofence">Geofence.</param>
 		public GeofenceCreatePage(Geofence geofence)
 		{
-			geo = geofence;
+			Geofence = geofence;
 			Title = "Nouveau Lieu";
 			Initialize();
-			nameEntry.Text = geo.Name;
-			secEntry.Text = geo.NotificationDelay + "";
+			nameEntry.Text = Geofence.Name;
+			secEntry.Text = Geofence.NotificationDelay + "";
 		}
 
 		/// <summary>
@@ -49,22 +49,22 @@ namespace Ipheidi
 		/// </summary>
 		private void Initialize()
 		{
-			if (geo == null)
+			if (Geofence == null)
 			{
 				var data = App.GeofenceManager.GetPendingGeofenceRequest();
-				geo = data ?? new Geofence() { Latitude = 0, Longitude = 0 };
+				Geofence = data ?? new Geofence() { Latitude = 0, Longitude = 0 };
 			}
 
 			InitializeComponent();
 
-			if (geo != null)
+			if (Geofence != null)
 			{
-				entryLatitude.Text = geo.Latitude.ToString();
-				entryLongitude.Text = geo.Longitude.ToString();
+				entryLatitude.Text = Geofence.Latitude.ToString();
+				entryLongitude.Text = Geofence.Longitude.ToString();
 
 				btnMap.Clicked += (sender, e) =>
 				{
-					var loc = new Location() { Latitude = geo.Latitude, Longitude = geo.Longitude };
+					var loc = new Location() { Latitude = Geofence.Latitude, Longitude = Geofence.Longitude };
 					var map = new MapPage(loc);
 					Navigation.PushAsync(map);
 				};
@@ -74,12 +74,12 @@ namespace Ipheidi
 				{
 					if (!string.IsNullOrEmpty(nameEntry.Text))
 					{
-						geo.Name = nameEntry.Text;
-						geo.NotificationEnabled = switchNotification.IsToggled;
-						geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-						geo.User = App.Username;
-						geo.Domain = App.Domain;
-						App.GeofenceManager.AddGeofence(geo);
+						Geofence.Name = nameEntry.Text;
+						Geofence.NotificationEnabled = switchNotification.IsToggled;
+						Geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+						Geofence.User = App.Username;
+						Geofence.Domain = App.Domain;
+						App.GeofenceManager.AddGeofence(Geofence);
 						Navigation.PopAsync();
 					}
 				};
@@ -111,7 +111,7 @@ namespace Ipheidi
 					double lat = 0;
 					if (double.TryParse(entryLatitude.Text, out lat))
 					{
-						geo.Latitude = lat;
+						Geofence.Latitude = lat;
 						lblLatError.Text = "";
 					}
 					else
@@ -125,7 +125,7 @@ namespace Ipheidi
 					double lon = 0;
 					if (double.TryParse(entryLongitude.Text, out lon))
 					{
-						geo.Longitude = lon;
+						Geofence.Longitude = lon;
 					}
 					else
 					{
@@ -133,23 +133,77 @@ namespace Ipheidi
 					}
 				};
 
-				foreach (var t in Enum.GetNames(typeof(GeofenceType)))
+				//Type Picker
+				foreach (var t in ActionType.GetActionTypes())
 				{
-					typePicker.Items.Add(t);
+					EnterTypePicker.Items.Add(t.Name);
 				}
-				typePicker.SelectedIndex = typePicker.Items.IndexOf(geo.Type.ToString());
-				typePicker.SelectedIndexChanged += (sender, e) =>
+
+				EnterTypePicker.SelectedIndexChanged += (sender, e) =>
 				{
-					string s = typePicker.Items[typePicker.SelectedIndex];
-					GeofenceType value = GeofenceType.Localisation;
-					if (Enum.TryParse(s, out value))
+					string value = EnterTypePicker.Items[EnterTypePicker.SelectedIndex];
+					if (Geofence.EnterAction.Type != value)
 					{
-						if (geo.Type != value)
-						{
-							geo.Type = value;
-						}
+						Geofence.EnterAction.Type = value;
+						EnterSoustypePicker.Items.Clear();
+					}
+					foreach (var t in ActionType.GetActionSubTypes(value))
+					{
+						EnterSoustypePicker.Items.Add(t.Name);
+					}
+					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
+					if (EnterSoustypePicker.IsEnabled)
+					{
+						EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.Contains(Geofence.EnterAction.SousType) ? EnterSoustypePicker.Items.IndexOf(Geofence.EnterAction.SousType) : 0;
 					}
 				};
+
+
+				EnterSoustypePicker.SelectedIndexChanged += (sender, e) =>
+				{
+					string value = EnterSoustypePicker.SelectedIndex >= 0 ? EnterSoustypePicker.Items[EnterSoustypePicker.SelectedIndex] : "";
+					if (Geofence.EnterAction.SousType != value)
+					{
+						Geofence.EnterAction.SousType = value;
+					}
+				};
+
+				foreach (var t in ActionType.GetActionTypes())
+				{
+					ExitTypePicker.Items.Add(t.Name);
+				}
+				ExitTypePicker.SelectedIndexChanged += (sender, e) =>
+				{
+					string value = ExitTypePicker.Items[ExitTypePicker.SelectedIndex];
+					if (Geofence.ExitAction.Type != value)
+					{
+						Geofence.ExitAction.Type = value;
+						ExitSoustypePicker.Items.Clear();
+					}
+					foreach (var t in ActionType.GetActionSubTypes(value))
+					{
+						ExitSoustypePicker.Items.Add(t.Name);
+					}
+					ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
+					if (ExitSoustypePicker.IsEnabled)
+					{
+						ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.Contains(Geofence.EnterAction.SousType) ? ExitSoustypePicker.Items.IndexOf(Geofence.EnterAction.SousType) : 0;
+					}
+				};
+
+
+				ExitSoustypePicker.SelectedIndexChanged += (sender, e) =>
+				{
+					string value = ExitSoustypePicker.SelectedIndex >= 0 ? ExitSoustypePicker.Items[ExitSoustypePicker.SelectedIndex] : "";
+					if (Geofence.ExitAction.SousType != value)
+					{
+						Geofence.ExitAction.SousType = value;
+					}
+				};
+
+				EnterTypePicker.SelectedItem = ActionType.Null;
+
+				ExitTypePicker.SelectedItem = ActionType.Null;
 
 				EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
 				{
@@ -167,9 +221,9 @@ namespace Ipheidi
 
 					secEntry.Text = s + "";
 					minEntry.Text = m + "";
-					if (geo.NotificationDelay != m * 60 + s)
+					if (Geofence.NotificationDelay != m * 60 + s)
 					{
-						geo.NotificationDelay = m * 60 + s;
+						Geofence.NotificationDelay = m * 60 + s;
 					}
 				};
 				minEntry.Unfocused += ev;
@@ -179,6 +233,7 @@ namespace Ipheidi
 		}
 		protected override void OnAppearing()
 		{
+			AdjustWidth(this.Width);
 			base.OnAppearing();
 		}
 
@@ -194,14 +249,21 @@ namespace Ipheidi
 			{
 				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
+			AdjustWidth(width);
+			base.OnSizeAllocated(width, height);
+		}
+
+		void AdjustWidth(double width)
+		{
 			double size = width * 0.5 - lblDelay2.Width - mainLayout.Padding.Left;
 			minEntry.WidthRequest = size;
 			secEntry.WidthRequest = size;
 
 			btnSave.WidthRequest = size;
 			btnCancel.WidthRequest = size;
-			base.OnSizeAllocated(width, height);
-		}
 
+			typeEnterLayout.WidthRequest = typeLayout.Width / 2;
+			typeExitLayout.WidthRequest = typeLayout.Width / 2;
+		}
 	}
 }

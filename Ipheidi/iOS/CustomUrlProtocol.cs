@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
+
 using System.Diagnostics;
-using System.IO;
 using System.Net;
-using System.Text;
 using Foundation;
-using Newtonsoft.Json;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Ipheidi.iOS
 {
@@ -16,6 +13,8 @@ namespace Ipheidi.iOS
 	/// </summary>
 	public class CustomUrlProtocol : NSUrlProtocol
 	{
+		static bool CurrentlySendingGeofenceAutoCreate = false;
+
 		/// <summary>
 		/// Cans the init with request.
 		/// </summary>
@@ -38,34 +37,7 @@ namespace Ipheidi.iOS
 				}
 				else if (request.Url.ToString().Contains("geofenceAutoCreate"))
 				{
-
-					string[] param = request.Body.ToString().Split('&');
-					for (int i = 0; i < param.Length; i++)
-					{
-						if (param[i].Contains("pheidiparams"))
-						{
-							PheidiParams pheidiParam = new PheidiParams();
-							pheidiParam.Load(WebUtility.UrlDecode(param[i]));
-							Device.BeginInvokeOnMainThread(() =>
-							{
-								var location = App.LocationManager.GetLocation();
-								var geo = new Geofence()
-								{
-									Latitude = location.Latitude,
-									Longitude = location.Longitude,
-									NotificationEnabled = true,
-									User = App.Username,
-									Domain = App.Domain,
-									NotificationDelay = 0,
-									Name = pheidiParam["VALUE"],
-									Type = GeofenceType.Depense
-								};
-
-								geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-								App.GeofenceManager.CreateGeofenceAtCurrentLocation(geo, true);
-							});
-						}
-					}
+					return !CurrentlySendingGeofenceAutoCreate;
 				}
 			}
 			return false;
@@ -76,14 +48,14 @@ namespace Ipheidi.iOS
 		/// Gets the canonical request.
 		/// </summary>
 		/// <returns>The canonical request.</returns>
-		/// <param name="forRequest">For request.</param>
+		/// <param name="request">Request.</param>
 		[Export("canonicalRequestForRequest:")]
-		public static new NSUrlRequest GetCanonicalRequest(NSUrlRequest forRequest)
+		public static new NSUrlRequest GetCanonicalRequest(NSUrlRequest request)
 		{
-			if (forRequest.Url.ToString().Contains("localisation"))
+			string data = "";
+			string[] param = request.Body.ToString().Split('&');
+			if (request.Url.ToString().Contains("localisation"))
 			{
-				string[] param = forRequest.Body.ToString().Split('&');
-				string data = "";
 				for (int i = 0; i < param.Length; i++)
 				{
 					if (param[i].Contains("pheidiparams"))
@@ -108,23 +80,61 @@ namespace Ipheidi.iOS
 				{
 					data += data.Length > 0 ? "&" + str : str;
 				}
-				NSData nsdata = NSData.FromString(data);
-				NSMutableUrlRequest req = new NSMutableUrlRequest();
-				req.Headers = forRequest.Headers;
-				req.NetworkServiceType = forRequest.NetworkServiceType;
-				req.AllowsCellularAccess = forRequest.AllowsCellularAccess;
-				req.ShouldHandleCookies = forRequest.ShouldHandleCookies;
-				req.BodyStream = new NSInputStream(nsdata);
-				req.HttpMethod = forRequest.HttpMethod;
-				req.CachePolicy = forRequest.CachePolicy;
-				req.TimeoutInterval = forRequest.TimeoutInterval;
-				req.Url = forRequest.Url;
-				req.Body = nsdata;
-				Debug.WriteLine(req.Body.ToString());
-				Debug.WriteLine(forRequest.Body.ToString());
-				return req;
+				return GenerateRequest(request, data);
 			}
-			return forRequest;
+			else if (request.Url.ToString().Contains("geofenceAutoCreate"))
+			{
+				param = request.Body.ToString().Split('&');
+				PheidiParams pp = new PheidiParams();
+				int index = 0;
+				for (int i = 0; i < param.Length; i++)
+				{
+					if (param[i].Contains("pheidiparams"))
+					{
+						pp.Load(WebUtility.UrlDecode(param[i]));
+						index = i;
+					}
+				}
+				if (!CurrentlySendingGeofenceAutoCreate)
+				{
+					CurrentlySendingGeofenceAutoCreate = true;
+					Task.Run(() =>
+					{
+						data = "";
+						string pheidiParams = "";
+						var location = App.LocationManager.GetLocation();
+						var geo = new Geofence()
+						{
+							Latitude = location.Latitude,
+							Longitude = location.Longitude,
+							NotificationEnabled = true,
+							User = App.Username,
+							Domain = App.Domain,
+							NotificationDelay = 0,
+							Name = pp["VALUE"],
+							EnterAction = new Action() { Type = ActionType.Depense }
+						};
+						Debug.WriteLine("On main thread: " + ThreadHelper.IsOnMainThread);
+						geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+
+						string noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo, false);
+						pheidiParams = PheidiParams.InsertValueInString(param[index], "IPheidi_Params", noseq);
+
+						for (int i = 0; i < param.Length; i++)
+						{
+							string str = i != index ? param[i] : pheidiParams;
+							data += data.Length > 0 ? "&" + str : str;
+						}
+						Debug.WriteLine(data);
+						SendRequest(GenerateRequest(request, data));
+						Task.Delay(100);
+						CurrentlySendingGeofenceAutoCreate = false;
+					});
+					return null;
+				}
+
+			}
+			return request;
 		}
 
 		/// <summary>
@@ -154,6 +164,32 @@ namespace Ipheidi.iOS
 
 		public override void StopLoading()
 		{
+		}
+
+
+		static bool SendRequest(NSUrlRequest request)
+		{
+			NSUrlResponse response = null;
+			NSError error = null;
+			NSData data = NSUrlConnection.SendSynchronousRequest(request, out response, out error);
+ 			return true;
+		}
+
+		static NSUrlRequest GenerateRequest(NSUrlRequest request, string data)
+		{
+			NSData nsdata = NSData.FromString(data);
+			NSMutableUrlRequest req = new NSMutableUrlRequest();
+			req.Headers = request.Headers;
+			req.NetworkServiceType = request.NetworkServiceType;
+			req.AllowsCellularAccess = request.AllowsCellularAccess;
+			req.ShouldHandleCookies = request.ShouldHandleCookies;
+			req.BodyStream = new NSInputStream(nsdata);
+			req.HttpMethod = request.HttpMethod;
+			req.CachePolicy = request.CachePolicy;
+			req.TimeoutInterval = request.TimeoutInterval;
+			req.Url = request.Url;
+			req.Body = nsdata;
+			return req;
 		}
 	}
 }

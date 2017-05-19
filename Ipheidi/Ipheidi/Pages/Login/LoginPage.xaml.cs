@@ -15,51 +15,57 @@ namespace Ipheidi
 	public partial class LoginPage : ContentPage
 	{
 		bool IsInSecondPage;
-
-#region Construtor
-		public LoginPage():this(false)
+		int lastUserIndex = 0;
+		#region Construtor
+		public LoginPage() : this(false)
 		{
 		}
 
 		public LoginPage(bool secondePage)
 		{
 			Debug.WriteLine("LoginPage: ctor");
+			var watch = Stopwatch.StartNew();
 			//Cache la nav bar
-			NavigationPage.SetHasNavigationBar(this, secondePage && Device.RuntimePlatform == Device.iOS && App.Credentials.Count > 0);
-
+			NavigationPage.SetHasNavigationBar(this, false);
 			InitializeComponent();
-
+			Debug.WriteLine("Initialize: " + watch.Elapsed.Milliseconds);
 			IsInSecondPage = secondePage;
 
+			Debug.WriteLine("Setting Android: " + watch.Elapsed.Milliseconds);
 			//Setting pour Android.
 			if (Device.RuntimePlatform == Device.Android)
 			{
 				btnOtherAccount.BackgroundColor = Color.Transparent;
 				btnOtherAccount.BorderColor = Color.Transparent;
-
-
 			}
-			btnOtherAccount.TextColor = Color.FromHex("#83B347");
-			btnOtherAccount.TextColor = Color.FromHex("#92c851");
-
+			btnOtherAccount.TextColor = App.ColorPrimary;
+			btnBackToFirstPage.TextColor = App.ColorPrimary;
+			btnBackToFirstPage.Clicked += (sender, e) => OnBackButtonPressed();
+			btnBackToFirstPage.IsVisible = false;
+			Debug.WriteLine("Btn login: " + watch.Elapsed.Milliseconds);
 			//Bouton de login
-			btnLogin.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));;
+			btnLogin.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button)); ;
 			btnLogin.FontAttributes = FontAttributes.Bold;
-			btnLogin.Clicked += async (sender, e) =>
+			btnLogin.Clicked += (sender, e) =>
 			{
 				App.Url = App.UrlList[App.Domain];
-				EnableInterface(false);
-				string s = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
-				if (!string.IsNullOrEmpty(s))
+				Task.Run(async () =>
 				{
-					
-					await DisplayAlert("Problème de connexion", s, "OK");
-				}
-				EnableInterface(true);
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
+					string s = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
+					if (!string.IsNullOrEmpty(s))
+					{
+
+						await DisplayAlert("Problème de connexion", s, "OK");
+					}
+				});
 			};
 
+			Debug.WriteLine("Entry visible: " + watch.Elapsed.Milliseconds);
 			EntriesVisible(secondePage);
 
+			Debug.WriteLine("Url Picker: " + watch.Elapsed.Milliseconds);
 			//Url Picker
 			urlPicker.IsEnabled = secondePage;
 			foreach (var domain in App.UrlList.Keys)
@@ -78,6 +84,7 @@ namespace Ipheidi
 				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.Domain);
 			}
 
+			Debug.WriteLine("User Picker: " + watch.Elapsed.Milliseconds);
 			//User picker
 			if (App.Credentials.Count > 0 && !secondePage)
 			{
@@ -85,7 +92,7 @@ namespace Ipheidi
 				foreach (var account in App.Credentials)
 				{
 					if (account.Value.ContainsKey("Username"))
-					{ 
+					{
 						userPicker.Items.Add(account.Key);
 					}
 				}
@@ -98,6 +105,7 @@ namespace Ipheidi
 				{
 					if (userPicker.SelectedIndex >= 0)
 					{
+						lastUserIndex = userPicker.SelectedIndex;
 						string account = userPicker.Items[userPicker.SelectedIndex];
 						if (App.Credentials.ContainsKey(account))
 						{
@@ -112,26 +120,42 @@ namespace Ipheidi
 				};
 				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
 			}
+
+			AppLoadingView.SetVisibility(false);
+			Debug.WriteLine("TOTAL: " + watch.Elapsed.Milliseconds);
 		}
+		#endregion
 
 		//Évènement appelé lorsque l'on clique sur le bouton de connexion avec un autre compte.
 		void OnOtherAccountButtonClicked(object sender, EventArgs e)
 		{
+			EntriesVisible(true);
+			IsInSecondPage = true;
 			App.Username = "";
-			Navigation.PushAsync(new LoginPage(true));
-		}
-#endregion
+			usernameEntry.Text = "";
+			passwordEntry.Text = "";
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				btnBackToFirstPage.IsVisible = true;
+			}
 
-		/// <summary>
-		///Rend les champs approprié de l'interface de connexion activé.
-		/// </summary>
-		/// <param name="enable">Défini si les champs doivent être activé.</param>
-		private void EnableInterface(bool enable)
+		}
+
+		protected override bool OnBackButtonPressed()
 		{
-			btnLogin.IsEnabled = enable;
-			lblCourriel.IsEnabled = enable;
-			lblPassword.IsEnabled = enable;
-			lblRemember.IsEnabled = enable;
+			if (IsInSecondPage)
+			{
+				EntriesVisible(false);
+				userPicker.SelectedIndex = -1;
+				userPicker.SelectedIndex = lastUserIndex;
+				IsInSecondPage = false;
+				if (Device.RuntimePlatform == Device.iOS)
+				{
+					btnBackToFirstPage.IsVisible = false;
+				}
+				return true;
+			}
+			return base.OnBackButtonPressed();
 		}
 
 		/// <summary>
@@ -140,15 +164,15 @@ namespace Ipheidi
 		/// <param name="visible">Défini la visibilité</param>
 		void EntriesVisible(bool visible)
 		{
+			btnOtherAccount.IsVisible = !visible;
+			userPicker.IsVisible = !visible;
 			lblCourriel.IsVisible = visible;
 			lblPassword.IsVisible = visible;
 			lblRemember.IsVisible = visible;
 			passwordEntry.IsVisible = visible;
 			usernameEntry.IsVisible = visible;
 			rememberSwitch.IsVisible = visible;
-
-			btnOtherAccount.IsVisible = !visible;
-			userPicker.IsVisible = !visible;
+			urlPicker.IsEnabled = visible;
 		}
 
 		/// <summary>
@@ -208,7 +232,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				mainLayout.Margin  = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 
 			base.OnSizeAllocated(width, height);

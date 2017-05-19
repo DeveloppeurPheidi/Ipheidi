@@ -22,7 +22,7 @@ namespace Ipheidi
 		Color initialColor;
 		public BasicTextCellView()
 		{
-			lblText = new Label() { VerticalTextAlignment = TextAlignment.Center, VerticalOptions = LayoutOptions.FillAndExpand, LineBreakMode = LineBreakMode.TailTruncation};
+			lblText = new Label() { VerticalTextAlignment = TextAlignment.Center, VerticalOptions = LayoutOptions.FillAndExpand, LineBreakMode = LineBreakMode.TailTruncation,TextColor = Color.Black};
 			layout = new StackLayout() { Padding = new Thickness(10, 0), VerticalOptions = LayoutOptions.FillAndExpand };
 			initialColor = Color.FromRgba(1.0,1.0,1.0,0.5);
 			//initialColor = Color.Transparent;

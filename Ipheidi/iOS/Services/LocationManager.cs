@@ -81,18 +81,21 @@ namespace Ipheidi.iOS
 					return LastLocation;
 
 				}
-				else if (locationManager.Location != null && locationManager.Location.HorizontalAccuracy <= App.GeofenceRadius)
+				else if (locationManager.Location != null )
 				{
-					return new Location()
+					if (locationManager.Location.HorizontalAccuracy <= App.GeofenceRadius)
 					{
-						Altitude = locationManager.Location.Altitude,
-						Latitude = locationManager.Location.Coordinate.Latitude,
-						Longitude = locationManager.Location.Coordinate.Longitude,
-						Orientation = locationManager.Location.Course,
-						Speed = locationManager.Location.Speed,
-						Accuracy = locationManager.Location.HorizontalAccuracy,
-						Utc = DateTime.UtcNow
-					};
+						return new Location()
+						{
+							Altitude = locationManager.Location.Altitude,
+							Latitude = locationManager.Location.Coordinate.Latitude,
+							Longitude = locationManager.Location.Coordinate.Longitude,
+							Orientation = locationManager.Location.Course,
+							Speed = locationManager.Location.Speed,
+							Accuracy = locationManager.Location.HorizontalAccuracy,
+							Utc = DateTime.UtcNow
+						};
+					}
 				}
 				else
 				{

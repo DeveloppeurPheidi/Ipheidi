@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using SQLite;
 
@@ -12,16 +13,14 @@ namespace Ipheidi
 		[JsonIgnore]
 		public string User { get; set; }
 
-		[JsonIgnore]
-		[PrimaryKey, AutoIncrement]
-		public int ID { get; set; }
+		[PrimaryKey,JsonIgnore]
+		public string NoSeq { get; set; }
 
 		[JsonIgnore]
 		public DateTime CreationDate { get; set; }
 
 		[JsonIgnore]
 		public DateTime LastModification { get; set; }
-
 
 		public int DeleteFlag { get; set; }
 	}

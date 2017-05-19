@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -16,7 +16,7 @@ namespace Ipheidi
 		public static readonly BindableProperty NameProperty =
 			BindableProperty.Create("Name", typeof(string), typeof(LocationCellView), default(string));
 		public static readonly BindableProperty IDProperty =
-					BindableProperty.Create("ID", typeof(int), typeof(LocationCellView), default(int));
+			BindableProperty.Create("ID", typeof(string), typeof(LocationCellView), default(string));
 		public static readonly BindableProperty NotificationProperty =
 					BindableProperty.Create("NotificationEnabled", typeof(bool), typeof(LocationCellView), default(bool));
 
@@ -44,9 +44,9 @@ namespace Ipheidi
 			set { SetValue(NameProperty, value); }
 		}
 
-		public int ID
+		public string ID
 		{
-			get { return (int)GetValue(IDProperty); }
+			get { return (string)GetValue(IDProperty); }
 			set { SetValue(IDProperty, value); }
 		}
 
@@ -75,7 +75,7 @@ namespace Ipheidi
 				if (notificationsSwitch.IsToggled != NotificationEnabled)
 				{
 					System.Diagnostics.Debug.WriteLine("Toggled " + Name + " " + ID);
-					var geo = App.GeofenceManager.GetGeofenceById(ID);
+					var geo = App.GeofenceManager.GetGeofenceByID(ID);
 					geo.NotificationEnabled = notificationsSwitch.IsToggled;
 					App.GeofenceManager.LocalGeofenceUpdate(geo);
 				}
@@ -85,7 +85,7 @@ namespace Ipheidi
 			{
 				System.Diagnostics.Debug.WriteLine("Deleted " + Name + " " + ID);
 				//View = new StackLayout() { BackgroundColor = Color.Transparent };
-				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceById(ID));
+				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceByID(ID));
 			};
 			cellWrapper.BackgroundColor = Color.White;//IsDarkBackground ? Color.FromHex("#EEEEEE") : Color.White;
 			cellWrapper.Spacing = 10;
@@ -116,7 +116,7 @@ namespace Ipheidi
 		protected override void OnTapped()
 		{
 			base.OnTapped();
-			var geo = App.GeofenceManager.GetGeofenceById(ID);
+			var geo = App.GeofenceManager.GetGeofenceByID(ID);
 			var p = new GeofenceEditPage(geo);
 			App.Instance.PushPage(p);
 		}
