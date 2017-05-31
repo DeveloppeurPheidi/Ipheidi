@@ -8,10 +8,10 @@ using Ipheidi.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(Entry), typeof(PheidiEntryRenderer))]
 namespace Ipheidi.Droid
 {
-	class CustomEntryRenderer : EntryRenderer        
+	class PheidiEntryRenderer : EntryRenderer        
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
 		{

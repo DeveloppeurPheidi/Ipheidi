@@ -65,7 +65,7 @@ namespace Ipheidi
 				};
 				geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
 
-				App.GeofenceManager.CreateGeofenceAtCurrentLocation(geofence, false);
+				App.GeofenceManager.CreateGeofenceAtCurrentLocation(geofence);
 			};
 
 			foreach (var filter in filters)

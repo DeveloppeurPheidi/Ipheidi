@@ -26,6 +26,7 @@ namespace Ipheidi
 			{
 				Navigation.PushAsync(new GeofencePage());
 			};
+		
 			wifiOnlySwitch.IsToggled = App.WifiOnlyEnabled;
 			wifiOnlySwitch.Toggled += (sender, e) =>
 			{

@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using Ipheidi;
 using Ipheidi.iOS;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CustomTabbedPage), typeof(CustomTabbedPageRenderer))]
+[assembly: ExportRenderer(typeof(PheidiTabbedPage), typeof(PheidiTabbedPageRenderer))]
 namespace Ipheidi.iOS
 {
-	public class CustomTabbedPageRenderer : TabbedRenderer
+	public class PheidiTabbedPageRenderer : TabbedRenderer
 	{
 		readonly nfloat imageYOffset = 6.0f;
 

@@ -15,14 +15,15 @@ namespace Ipheidi
 	public partial class LoginPage : ContentPage
 	{
 		bool IsInSecondPage;
+		bool firstPageExist;
 		int lastUserIndex = 0;
-		#region Construtor
 		public LoginPage() : this(false)
 		{
 		}
 
 		public LoginPage(bool secondePage)
 		{
+			firstPageExist = !secondePage;
 			Debug.WriteLine("LoginPage: ctor");
 			var watch = Stopwatch.StartNew();
 			//Cache la nav bar
@@ -124,7 +125,6 @@ namespace Ipheidi
 			AppLoadingView.SetVisibility(false);
 			Debug.WriteLine("TOTAL: " + watch.Elapsed.Milliseconds);
 		}
-		#endregion
 
 		//Évènement appelé lorsque l'on clique sur le bouton de connexion avec un autre compte.
 		void OnOtherAccountButtonClicked(object sender, EventArgs e)
@@ -143,7 +143,7 @@ namespace Ipheidi
 
 		protected override bool OnBackButtonPressed()
 		{
-			if (IsInSecondPage)
+			if (IsInSecondPage && firstPageExist)
 			{
 				EntriesVisible(false);
 				userPicker.SelectedIndex = -1;

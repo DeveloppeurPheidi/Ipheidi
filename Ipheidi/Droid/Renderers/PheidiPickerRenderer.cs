@@ -4,10 +4,10 @@ using Ipheidi.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
+[assembly: ExportRenderer(typeof(Picker), typeof(PheidiPickerRenderer))]
 namespace Ipheidi.Droid
 {
-	class CustomPickerRenderer : PickerRenderer
+	class PheidiPickerRenderer : PickerRenderer
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
 		{

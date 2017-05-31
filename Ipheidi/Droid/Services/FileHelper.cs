@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Android.Graphics;
 using Ipheidi.Droid;
 using Xamarin.Forms;
 
@@ -26,7 +27,27 @@ namespace Ipheidi.Droid
 		public string GetLocalFilePath(string filename)
 		{
 			string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			return Path.Combine(path, filename);
+			return System.IO.Path.Combine(path, filename);
+		}
+
+		public Stream GetStreamFromImageFile(string path)
+		{
+			try
+			{
+				return new FileStream(path, FileMode.Open);
+			}
+			catch
+			{
+				return null;
+			}
+		}
+		public void SaveImage(string path, byte[] imageData )
+		{
+			Bitmap bitmap = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
+			using (var os = new FileStream(path, FileMode.Create))
+			{
+				bitmap.Compress(Bitmap.CompressFormat.Jpeg, 95, os);
+			}
 		}
 	}
 }

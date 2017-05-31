@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Newtonsoft.Json;
 using UIKit;
 using UserNotifications;
 
@@ -58,24 +59,9 @@ namespace Ipheidi.iOS
 
 		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
 		{
-			UIAlertController alertController = UIAlertController.Create(notification.AlertTitle, notification.AlertBody, UIAlertControllerStyle.Alert);
+			var action = JsonConvert.DeserializeObject<Action>(notification.UserInfo[new NSString("Action")] as NSString);
 
-			if (notification.UserInfo[new NSString("NotificationType")] as NSString == new NSString(NotificationType.NewLocation.ToString()))
-			{
-				string title = "Nouvelle Localisation";
-				string message = "Nous avons détecté une nouvelle localisation, souhaitez vous l'enregistrer?";
-				// show an alert
-				alertController = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
-				alertController.AddAction(UIAlertAction.Create("OUI", UIAlertActionStyle.Default, (obj) => App.Instance.PushPage(new GeofenceCreatePage())));
-				alertController.AddAction(UIAlertAction.Create("NON", UIAlertActionStyle.Default, null));
-			}
-			else
-			{
-				alertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-			}
-
-			var window = UIApplication.SharedApplication.KeyWindow;
-			window.RootViewController.PresentViewController(alertController, true, null);
+			Action.ExecuteAction(action);
 
 			// reset our badge
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;

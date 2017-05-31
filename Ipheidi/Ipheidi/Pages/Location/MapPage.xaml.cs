@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
@@ -22,7 +22,7 @@ namespace Ipheidi
 				switch (Device.RuntimePlatform)
 				{
 					case Device.iOS:
-						var mapCWV = new CustomWebView();
+						var mapCWV = new PheidiWebView();
 						mapCWV.WidthRequest = 1000;
 						mapCWV.HeightRequest = 1000;
 						url = $"https://www.google.ca/maps/place/";
@@ -56,7 +56,7 @@ namespace Ipheidi
 				switch (Device.RuntimePlatform)
 				{
 					case Device.iOS:
-						var mapCWV = new CustomWebView();
+						var mapCWV = new PheidiWebView();
 						mapCWV.WidthRequest = 1000;
 						mapCWV.HeightRequest = 1000;
 						url = $"https://www.google.ca/maps/place/";

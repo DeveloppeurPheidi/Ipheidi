@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -24,7 +25,6 @@ namespace Ipheidi
 		Label delaylbl;
 		StackLayout delayLayout;
 		Picker EnterTypePicker;
-		Label typelbl;
 		Entry longitudeEntry;
 		StackLayout typeLayout;
 		Button map;
@@ -101,37 +101,50 @@ namespace Ipheidi
 
 			EnterTypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
 			var EnterSoustypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
-			foreach (var t in ActionType.GetActionTypes())
+			foreach (var t in Action.GetActionTypes())
 			{
-				EnterTypePicker.Items.Add(t.Name);
+				EnterTypePicker.Items.Add(t);
 			}
 
 			EnterTypePicker.SelectedIndexChanged += (sender, e) =>
-			{
-				string value = EnterTypePicker.Items[EnterTypePicker.SelectedIndex];
-				if (geofence.EnterAction.Type != value)
 				{
-					geofence.EnterAction.Type = value;
-					didChange = true;
-					EnterSoustypePicker.Items.Clear();
-				}
-				foreach (var t in ActionType.GetActionSubTypes(value))
-				{
-					EnterSoustypePicker.Items.Add(t.Name);
-				}
-				EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
-				EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.Contains(geofence.EnterAction.SousType) ? EnterSoustypePicker.Items.IndexOf(geofence.EnterAction.SousType) : 0;
+					string value = EnterTypePicker.Items[EnterTypePicker.SelectedIndex];
 
-			};
+					EnterSoustypePicker.Items.Clear();
+					foreach (var t in Action.GetActionList().Where((Action a) => a.Category == value))
+					{
+						EnterSoustypePicker.Items.Add(t.Description);
+					}
+					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
+					if (EnterSoustypePicker.IsEnabled)
+					{
+						if (geofence.EnterActionNoSeq != "")
+						{
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
+						}
+						else
+						{
+							EnterSoustypePicker.SelectedIndex = 0;
+						}
+					}
+				};
 
 
 			EnterSoustypePicker.SelectedIndexChanged += (sender, e) =>
 			{
 				string value = EnterSoustypePicker.SelectedIndex >= 0 ? EnterSoustypePicker.Items[EnterSoustypePicker.SelectedIndex] : "";
-				if (geofence.EnterAction.SousType != value)
+				if (value != "")
 				{
-					geofence.EnterAction.SousType = value;
-					didChange = true;
+					var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+					if (geofence.EnterActionNoSeq != action.NoSeq)
+					{
+						geofence.EnterActionNoSeq = action.NoSeq;
+						didChange = true;
+					}
+				}
+				else
+				{
+					geofence.EnterActionNoSeq = "";
 				}
 			};
 
@@ -140,47 +153,69 @@ namespace Ipheidi
 
 			var ExitTypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
 			var ExitSoustypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
-			foreach (var t in ActionType.GetActionTypes())
+			foreach (var t in Action.GetActionTypes())
 			{
-				ExitTypePicker.Items.Add(t.Name);
+				ExitTypePicker.Items.Add(t);
 			}
 			ExitTypePicker.SelectedIndexChanged += (sender, e) =>
 			{
 				string value = ExitTypePicker.Items[ExitTypePicker.SelectedIndex];
-				if (geofence.ExitAction.Type != value)
+				ExitSoustypePicker.Items.Clear();
+
+				foreach (var t in Action.GetActionList().Where(a => a.Category == value))
 				{
-					geofence.ExitAction.Type = value;
-					didChange = true;
-					ExitSoustypePicker.Items.Clear();
-				}
-				foreach (var t in ActionType.GetActionSubTypes(value))
-				{
-					ExitSoustypePicker.Items.Add(t.Name);
+					ExitSoustypePicker.Items.Add(t.Description);
 				}
 				ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
-				int index = ExitSoustypePicker.Items.Contains(geofence.ExitAction.SousType) ? ExitSoustypePicker.Items.IndexOf(geofence.ExitAction.SousType) : 0;
-				Debug.WriteLine("Exit Soustype picker index: " + index);
-				ExitSoustypePicker.SelectedIndex = index;
-
+				if (ExitSoustypePicker.IsEnabled)
+				{
+					if (geofence.ExitActionNoSeq != "")
+					{
+						ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == geofence.ExitActionNoSeq).Description);
+					}
+					else
+					{
+						ExitSoustypePicker.SelectedIndex = 0;
+					}
+				}
 			};
 
 
 			ExitSoustypePicker.SelectedIndexChanged += (sender, e) =>
 			{
-
 				string value = ExitSoustypePicker.SelectedIndex >= 0 ? ExitSoustypePicker.Items[ExitSoustypePicker.SelectedIndex] : "";
-				if (geofence.ExitAction.SousType != value)
+				if (value != "")
 				{
-					geofence.ExitAction.SousType = value;
-					didChange = true;
+					var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+					if (geofence.ExitActionNoSeq != action.NoSeq)
+					{
+						geofence.ExitActionNoSeq = action.NoSeq;
+					}
+				}
+				else
+				{
+					geofence.ExitActionNoSeq = "";
 				}
 			};
 
-			EnterTypePicker.SelectedItem = geofence.EnterAction.Type;
-			EnterSoustypePicker.SelectedItem = geofence.EnterAction.SousType;
+			string category = Action.Null;
 
-			ExitTypePicker.SelectedItem = geofence.ExitAction.Type;
-			ExitSoustypePicker.SelectedItem = geofence.ExitAction.SousType;
+			if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
+			{
+				var enterAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+				category = enterAction.Category;
+			}
+			EnterTypePicker.SelectedItem = category;
+
+
+			category = Action.Null;
+
+			if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
+			{
+				var exitAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+				category = exitAction.Category;
+			}
+			ExitTypePicker.SelectedItem = category;
 
 			typeEnterLayout.Children.Add(EnterTypePicker);
 			typeEnterLayout.Children.Add(EnterSoustypePicker);

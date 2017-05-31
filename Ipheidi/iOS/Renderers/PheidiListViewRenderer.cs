@@ -4,10 +4,10 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Xamarin.Forms.ListView), typeof(CustomListViewRenderer))]
+[assembly: ExportRenderer(typeof(Xamarin.Forms.ListView), typeof(PheidiListViewRenderer))]
 namespace Ipheidi.iOS
 {
-	public class CustomListViewRenderer : ListViewRenderer
+	public class PheidiListViewRenderer : ListViewRenderer
 	{
 
 
@@ -16,14 +16,6 @@ namespace Ipheidi.iOS
 			base.OnElementChanged(e);
 
 			Control.Bounces = false;
-
-			if (e.OldElement != null) {
-                // Unsubscribe
-            }
-
-            if (e.NewElement != null) {
-				//Do stuff
-            }
 		}
 	}
 }

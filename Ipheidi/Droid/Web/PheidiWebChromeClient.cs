@@ -11,10 +11,11 @@ using Android.Webkit;
 using Android.Widget;
 using Java.IO;
 using Java.Util;
+using Xamarin.Forms;
 
 namespace Ipheidi.Droid
 {
-	public class CustomWebChromeClient : WebChromeClient
+	public class PheidiWebChromeClient : WebChromeClient
 	{
 		IValueCallback mUploadMessage;
 		private static int FILECHOOSER_RESULTCODE = 1;
@@ -23,7 +24,7 @@ namespace Ipheidi.Droid
 		private static File _file;
 		Context context;
 
-		public CustomWebChromeClient() : base()
+		public PheidiWebChromeClient() : base()
 		{
 			context = Xamarin.Forms.Forms.Context;
 		}
@@ -31,7 +32,7 @@ namespace Ipheidi.Droid
 		private void CreateDirectoryForPictures()
 		{
 			var file = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures);
-			_dir = new File(file, "webViewPictures");
+			_dir = new File(file, "PheidiPictures");
 			if (!_dir.Exists())
 			{
 				_dir.Mkdirs();
@@ -47,13 +48,14 @@ namespace Ipheidi.Droid
 				mUploadMessage.OnReceiveValue(WebChromeClient.FileChooserParams.ParseResult((int)resultCode, data));
 				mUploadMessage = null;
 			}
-			else if (requestCode == CAMERA_RESULTCODE)
+			else if (requestCode == CAMERA_RESULTCODE && resultCode == Result.Ok)
 			{
 				if (null == mUploadMessage)
 					return;
 
 				var result = new List<Android.Net.Uri>();
 				var contentUri = Android.Net.Uri.FromFile(_file);
+				Device.BeginInvokeOnMainThread(() => App.Instance.PushPage(new ImageEditPage(_file.AbsolutePath)));
 				result.Add(contentUri);
 				mUploadMessage.OnReceiveValue(result.ToArray());
 				mUploadMessage = null;
@@ -86,7 +88,7 @@ namespace Ipheidi.Droid
 									case "Camera":
 										intent = new Intent(MediaStore.ActionImageCapture);
 										CreateDirectoryForPictures();
-										_file = new File(_dir, String.Format("Pic_{0}.jpg", Guid.NewGuid()));
+										_file = new File(_dir, String.Format("Pic_{0}.jpg", NoSeqGenerator.Generate()));
 										intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
 
 										resultCode = CAMERA_RESULTCODE;

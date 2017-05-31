@@ -8,10 +8,7 @@ namespace Ipheidi
 {
 	public class ActionType : DatabaseData
 	{
-		public ActionType()
-		{
-			NoSeq = NoSeqGenerator.Generate(new Random(DateTime.Now.Millisecond));
-		}
+		/*
 		public string Name { get; set; }
 		public string Parent { get; set; }
 
@@ -25,7 +22,6 @@ namespace Ipheidi
 
 		static List<ActionType> ActionTypesList;
 
-		static bool DataLoaded = false;
 		static bool IsLoading = false;
 
 		public static List<ActionType> GetActionSubTypes(string type)
@@ -96,6 +92,6 @@ namespace Ipheidi
 				}
 				IsLoading = false;
 			}
-		}
+		}*/
 	}
 }

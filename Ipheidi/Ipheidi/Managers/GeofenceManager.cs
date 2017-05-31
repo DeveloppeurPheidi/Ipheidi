@@ -54,7 +54,7 @@ namespace Ipheidi
 		/// <returns><c>true</c>, if the timer has to be kept alive, <c>false</c> otherwise.</returns>
 		private bool TimerTick()
 		{
-			if (UnknownLocationList.Count > 0 && (DateTime.UtcNow - TimerStartTime) >= TimeDelay)
+			/*if (UnknownLocationList.Count > 0 && (DateTime.UtcNow - TimerStartTime) >= TimeDelay)
 			{
 				double lat = 0;
 				double lon = 0;
@@ -81,7 +81,8 @@ namespace Ipheidi
 
 				UnknownLocationList.Clear();
 			}
-			return true;
+			return true;*/
+			return false;
 		}
 
 
@@ -194,8 +195,7 @@ namespace Ipheidi
 		/// Creates the geofence at current location.
 		/// </summary>
 		/// <param name="geofence">Geofence.</param>
-		/// <param name="TypeSpecific">If set to <c>true</c> type specific to geofence.EnterAction.Type type.</param>
-		public void CreateGeofenceAtCurrentLocation(Geofence geofence, bool TypeSpecific)
+		public void CreateGeofenceAtCurrentLocation(Geofence geofence)
 		{
 			if (geofence != null)
 			{
@@ -207,10 +207,7 @@ namespace Ipheidi
 					string list = "";
 					foreach (var g in overlappingList)
 					{
-						if (g.EnterAction.Type == geofence.EnterAction.Type || !TypeSpecific)
-						{
-							list += g.Name + (TypeSpecific ? "" : " (" + g.EnterAction.Type.ToString() + ")") + "\n";
-						}
+						list += g.Name + "\n";
 					}
 					var p = new MessagePage();
 					p.Title = "Localisation";
@@ -241,7 +238,7 @@ namespace Ipheidi
 		/// </summary>
 		/// <param name="geofence">Geofence.</param>
 		/// <param name="TypeSpecific">If set to <c>true</c> type specific.</param>
-		public string CreateOrSelectGeofenceAtCurrentLocation(Geofence geofence, bool TypeSpecific)
+		public string CreateOrSelectGeofenceAtCurrentLocation(Geofence geofence)
 		{
 			string noseq = "";
 			bool selecting = true;
@@ -253,10 +250,7 @@ namespace Ipheidi
 				ObservableCollection<Geofence> list = new ObservableCollection<Geofence>();
 				foreach (var g in overlappingList)
 				{
-					if (g.EnterAction.Type == geofence.EnterAction.Type || !TypeSpecific)
-					{
-						list.Add(g);
-					}
+					list.Add(g);
 				}
 				var p = new ListPickingPage();
 				p.Title = "Localisation";
@@ -289,7 +283,7 @@ namespace Ipheidi
 					overlappingList = GetOverlappingGeofences(geofence);
 					foreach (var g in overlappingList)
 					{
-						if (!list.Any((arg) => arg.NoSeq == g.NoSeq) && (g.EnterAction.Type == geofence.EnterAction.Type || !TypeSpecific))
+						if (!list.Any((arg) => arg.NoSeq == g.NoSeq))
 						{
 							list.Add(g);
 						}
@@ -397,7 +391,7 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		public void OnLocationUpdate(Location location)
 		{
-			bool IsUnknowLocation = true;
+			//bool IsUnknowLocation = true;
 
 			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ClosePositionDistance - App.GeofenceRadius * 2.5)
 			{
@@ -407,11 +401,11 @@ namespace Ipheidi
 			{
 				if (geo.CheckIfLocationInsideFence(location))
 				{
-					IsUnknowLocation = false;
+					//IsUnknowLocation = false;
 				}
 			}
 
-			if (IsUnknowLocation)
+			/*if (IsUnknowLocation)
 			{
 				if (location.IsLocationWithinRadius(UnknownLocationList, App.GeofenceRadius))
 				{
@@ -422,7 +416,7 @@ namespace Ipheidi
 				{
 					UnknownLocationList.Clear();
 				}
-			}
+			}*/
 		}
 
 
@@ -530,8 +524,6 @@ namespace Ipheidi
 										{
 											var data = await DatabaseHelper.Database.GetItem<Geofence>(geofence.NoSeq);
 											await DatabaseHelper.Database.DeleteItemAsync<Geofence>(data);
-											await DatabaseHelper.Database.DeleteItemAsync(data.EnterAction);
-											await DatabaseHelper.Database.DeleteItemAsync(data.ExitAction);
 											toRemove.Add(geofence);
 										}
 										//Update la copie local pour correspondre à celle du serveur.
@@ -544,11 +536,9 @@ namespace Ipheidi
 											data.Name = geofence.Name;
 											data.Radius = geofence.Radius;
 											data.LastModification = DateTime.Now;
-											data.EnterAction = geofence.EnterAction;
-											data.ExitAction = geofence.ExitAction;
+											data.EnterActionNoSeq = geofence.EnterActionNoSeq;
+											data.ExitActionNoSeq = geofence.ExitActionNoSeq;
 											await DatabaseHelper.Database.UpdateItem(data);
-											await DatabaseHelper.Database.UpdateItem(data.EnterAction);
-											await DatabaseHelper.Database.UpdateItem(data.ExitAction);
 										}
 									}
 
@@ -558,8 +548,6 @@ namespace Ipheidi
 										//Ajoute une nouvelle geofence si la copie locale n'existe pas.
 										if (geofence.DeleteFlag == 0)
 										{
-											DatabaseHelper.Database.SaveItemAsync(geofence.EnterAction).Wait();
-											DatabaseHelper.Database.SaveItemAsync(geofence.ExitAction).Wait();
 											await DatabaseHelper.Database.SaveItemAsync(geofence);
 										}
 									}
@@ -582,6 +570,7 @@ namespace Ipheidi
 			}
 			return false;
 		}
+
 	}
 }
 

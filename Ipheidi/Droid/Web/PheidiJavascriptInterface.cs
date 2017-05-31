@@ -9,7 +9,7 @@ using Java.Interop;
 
 namespace Ipheidi.Droid
 {
-	public class CustomJavascriptInterface : Java.Lang.Object
+	public class PheidiJavascriptInterface : Java.Lang.Object
 	{
 
 		[Export]
@@ -43,11 +43,10 @@ namespace Ipheidi.Droid
 					Domain = App.Domain,
 					NotificationDelay = 0,
 					Name = pp["VALUE"],
-					EnterAction = new Action() { Type = ActionType.Depense }
 				};
 				System.Diagnostics.Debug.WriteLine("On main thread: " + ThreadHelper.IsOnMainThread);
 				geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-				string noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo, false);
+				string noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo);
 				data = PheidiParams.InsertValueInString(pheidiparams, "IPheidi_Params", noseq);
 				System.Diagnostics.Debug.WriteLine(data);
 				return data;

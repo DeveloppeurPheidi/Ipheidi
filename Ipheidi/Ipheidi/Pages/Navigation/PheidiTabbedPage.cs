@@ -9,14 +9,14 @@ namespace Ipheidi
 	/// <summary>
 	/// Bar de navigation de l'application.
 	/// </summary>
-	public class CustomTabbedPage:Xamarin.Forms.TabbedPage
+	public class PheidiTabbedPage:Xamarin.Forms.TabbedPage
 	{
 		int indexLastPage = 0;
 		int indexCurrentPage = 0;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.CustomTabbedPage"/> class.
 		/// </summary>
-		public CustomTabbedPage()
+		public PheidiTabbedPage()
 		{
 			//Cache la nav bar
 			NavigationPage.SetHasNavigationBar(this, false);

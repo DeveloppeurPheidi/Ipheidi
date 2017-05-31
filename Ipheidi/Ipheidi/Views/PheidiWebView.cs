@@ -7,15 +7,16 @@ namespace Ipheidi
 	/// <summary>
 	/// Hybrid web view.
 	/// </summary>
-	public class CustomWebView : WebView
+	public class PheidiWebView : WebView
 	{
+
 		/// <summary>
 		/// The source property.
 		/// </summary>
 		public new static readonly BindableProperty SourceProperty = BindableProperty.Create(
-			propertyName: "Source",
+			propertyName: "BrowserSource",
 			returnType: typeof(string),
-			declaringType: typeof(CustomWebView),
+			declaringType: typeof(PheidiWebView),
 			defaultValue: default(string));
 
 		/// <summary>
@@ -27,5 +28,7 @@ namespace Ipheidi
 			get { return (string)GetValue(SourceProperty); }
 			set { SetValue(SourceProperty, value); }
 		}
+
+
 	}
 }

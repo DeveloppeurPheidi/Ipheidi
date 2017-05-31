@@ -17,9 +17,9 @@ using Xamarin.Forms;
 
 namespace Ipheidi.Droid
 {
-	public class CustomWebViewClient : WebViewClient
+	public class PheidiWebViewClient : WebViewClient
 	{
-		public CustomWebViewClient() : base()
+		public PheidiWebViewClient() : base()
 		{
 		}
 
@@ -56,6 +56,7 @@ namespace Ipheidi.Droid
 			BrowserPage.CheckWebSession();
 			return base.ShouldInterceptRequest(view, request);
 		}
+
 
 	}
 }

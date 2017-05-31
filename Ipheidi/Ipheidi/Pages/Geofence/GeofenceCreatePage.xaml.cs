@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -133,28 +134,34 @@ namespace Ipheidi
 					}
 				};
 
+
+
 				//Type Picker
-				foreach (var t in ActionType.GetActionTypes())
+				foreach (var t in Action.GetActionTypes())
 				{
-					EnterTypePicker.Items.Add(t.Name);
+					EnterTypePicker.Items.Add(t);
 				}
 
 				EnterTypePicker.SelectedIndexChanged += (sender, e) =>
 				{
 					string value = EnterTypePicker.Items[EnterTypePicker.SelectedIndex];
-					if (Geofence.EnterAction.Type != value)
+
+					EnterSoustypePicker.Items.Clear();
+					foreach (var t in Action.GetActionList().Where((Action a) => a.Category == value))
 					{
-						Geofence.EnterAction.Type = value;
-						EnterSoustypePicker.Items.Clear();
-					}
-					foreach (var t in ActionType.GetActionSubTypes(value))
-					{
-						EnterSoustypePicker.Items.Add(t.Name);
+						EnterSoustypePicker.Items.Add(t.Description);
 					}
 					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
 					if (EnterSoustypePicker.IsEnabled)
 					{
-						EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.Contains(Geofence.EnterAction.SousType) ? EnterSoustypePicker.Items.IndexOf(Geofence.EnterAction.SousType) : 0;
+						if (Geofence.EnterActionNoSeq != "")
+						{
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == Geofence.EnterActionNoSeq).Description);
+						}
+						else
+						{
+							EnterSoustypePicker.SelectedIndex = 0;
+						}
 					}
 				};
 
@@ -162,32 +169,44 @@ namespace Ipheidi
 				EnterSoustypePicker.SelectedIndexChanged += (sender, e) =>
 				{
 					string value = EnterSoustypePicker.SelectedIndex >= 0 ? EnterSoustypePicker.Items[EnterSoustypePicker.SelectedIndex] : "";
-					if (Geofence.EnterAction.SousType != value)
+					if (value != "")
 					{
-						Geofence.EnterAction.SousType = value;
+						var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+						if (Geofence.EnterActionNoSeq != action.NoSeq)
+						{
+							Geofence.EnterActionNoSeq = action.NoSeq;
+						}
+					}
+					else
+					{
+						Geofence.EnterActionNoSeq = "";
 					}
 				};
 
-				foreach (var t in ActionType.GetActionTypes())
+				foreach (var t in Action.GetActionTypes())
 				{
-					ExitTypePicker.Items.Add(t.Name);
+					ExitTypePicker.Items.Add(t);
 				}
 				ExitTypePicker.SelectedIndexChanged += (sender, e) =>
 				{
 					string value = ExitTypePicker.Items[ExitTypePicker.SelectedIndex];
-					if (Geofence.ExitAction.Type != value)
+					ExitSoustypePicker.Items.Clear();
+
+					foreach (var t in Action.GetActionList().Where(a => a.Category == value))
 					{
-						Geofence.ExitAction.Type = value;
-						ExitSoustypePicker.Items.Clear();
-					}
-					foreach (var t in ActionType.GetActionSubTypes(value))
-					{
-						ExitSoustypePicker.Items.Add(t.Name);
+						ExitSoustypePicker.Items.Add(t.Description);
 					}
 					ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
 					if (ExitSoustypePicker.IsEnabled)
 					{
-						ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.Contains(Geofence.EnterAction.SousType) ? ExitSoustypePicker.Items.IndexOf(Geofence.EnterAction.SousType) : 0;
+						if (Geofence.ExitActionNoSeq != "")
+						{
+							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == Geofence.ExitActionNoSeq).Description);
+						}
+						else
+						{
+							ExitSoustypePicker.SelectedIndex = 0;
+						}
 					}
 				};
 
@@ -195,15 +214,38 @@ namespace Ipheidi
 				ExitSoustypePicker.SelectedIndexChanged += (sender, e) =>
 				{
 					string value = ExitSoustypePicker.SelectedIndex >= 0 ? ExitSoustypePicker.Items[ExitSoustypePicker.SelectedIndex] : "";
-					if (Geofence.ExitAction.SousType != value)
+					if (value != "")
 					{
-						Geofence.ExitAction.SousType = value;
+						var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+						if (Geofence.ExitActionNoSeq != action.NoSeq)
+						{
+							Geofence.ExitActionNoSeq = action.NoSeq;
+						}
+					}
+					else
+					{
+						Geofence.ExitActionNoSeq = "";
 					}
 				};
 
-				EnterTypePicker.SelectedItem = ActionType.Null;
 
-				ExitTypePicker.SelectedItem = ActionType.Null;
+				string category = Action.Null;
+
+				if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))
+				{
+					var enterAction = Action.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					category = enterAction.Category;
+				}
+				EnterTypePicker.SelectedItem = category;
+
+				category = Action.Null;
+
+				if (!string.IsNullOrEmpty(Geofence.ExitActionNoSeq))
+				{
+					var exitAction = Action.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					category = exitAction.Category;
+				}
+				ExitTypePicker.SelectedItem = category;
 
 				EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
 				{

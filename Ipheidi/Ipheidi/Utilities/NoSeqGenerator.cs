@@ -8,8 +8,9 @@ namespace Ipheidi
 		/// </summary>
 		/// <param name="random"></param>
 		/// <returns></returns>
-		public static string Generate(Random random)
+		public static string Generate()
 		{
+			Random random = new Random(DateTime.Now.Millisecond);
 			var buffer = Guid.NewGuid().ToByteArray();
 
 			var result = BitConverter.ToInt64(buffer, 0).ToString();

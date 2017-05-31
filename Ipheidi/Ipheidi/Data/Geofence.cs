@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xamarin.Forms;
-
+//[{"action":"pheidiAlert","message":"Salut!","title":"[[Name]]"},{"action":"pheidiAlert","message":"Vous [[GeofenceEvent]] [[Name]]","title":"[[Name]],"entering":"êtes arrivé chez","leaving":"avez quitté"}]
 namespace Ipheidi
 {
 	enum GeofenceEvent
@@ -22,67 +26,12 @@ namespace Ipheidi
 
 		public double Radius { get; set; }
 
-		public string EnterActionNoSeq { get; private set; }
-		public string ExitActionNoSeq { get; private set; }
-
-		Action enterAction;
-		Action exitAction;
-
-		[SQLite.Ignore]
-		public Action EnterAction
-		{
-			get
-			{
-				if (enterAction == null)
-				{
-					if (EnterActionNoSeq != null)
-					{
-						enterAction = DatabaseHelper.Database.GetItem<Action>(EnterActionNoSeq).Result;
-					}
-					else
-					{
-						enterAction = new Action() { Type = ActionType.Localisation, SousType = ActionType.Autre };
-					}
-				}
-				return enterAction;
-			}
-			set
-			{
-				enterAction = value;
-				EnterActionNoSeq = enterAction.NoSeq;
-			}
-		}
-
-		[SQLite.Ignore]
-		public Action ExitAction
-		{
-			get
-			{
-				if (exitAction == null)
-				{
-					if (ExitActionNoSeq != null)
-					{
-						exitAction = DatabaseHelper.Database.GetItem<Action>(ExitActionNoSeq).Result;
-					}
-					else
-					{
-						exitAction = new Action() { Type = ActionType.Localisation, SousType = ActionType.Autre };
-					}
-				}
-				return exitAction;
-			}
-			set
-			{
-				exitAction = value;
-				ExitActionNoSeq = exitAction.NoSeq;
-			}
-		}
+		public string EnterActionNoSeq { get; set; }
+		public string ExitActionNoSeq { get; set; }
 
 		[JsonIgnore]
 		public bool NotificationEnabled { get; set; }
 
-		[SQLite.PrimaryKey]
-		public new string NoSeq { get; set; }
 
 		[JsonIgnore]
 		public uint NotificationDelay { get; set; }
@@ -103,7 +52,6 @@ namespace Ipheidi
 
 		public Geofence()
 		{
-			NoSeq = NoSeqGenerator.Generate(new Random(DateTime.Now.Millisecond));
 			CreationDate = DateTime.Now;
 			LastModification = CreationDate;
 			NotificationDelay = 30;
@@ -149,8 +97,14 @@ namespace Ipheidi
 						{
 							if (NotificationEnabled)
 							{
-								if (IsInside) OnEnteringGeofence();
-								else OnLeavingGeofence();
+								if (IsInside)
+								{
+									ExecuteAction(EnterActionNoSeq, GeofenceEvent.Entering);
+								}
+								else
+								{
+									ExecuteAction(ExitActionNoSeq, GeofenceEvent.Leaving);
+								}
 							}
 						});
 						timerRunning = false;
@@ -201,36 +155,71 @@ namespace Ipheidi
 			Radius = meters / (111319.9 * Math.Cos(DegreeToRadian(Latitude)));
 		}
 
-		/// <summary>
-		/// On entering geofence.
-		/// </summary>
-		public void OnEnteringGeofence()
+		void ExecuteAction(string actionNoSeq, GeofenceEvent ev)
 		{
-			ExecuteAction(EnterAction, GeofenceEvent.Entering);
-		}
-
-		/// <summary>
-		/// Onleaving geofence.
-		/// </summary>
-		public void OnLeavingGeofence()
-		{
-			ExecuteAction(ExitAction, GeofenceEvent.Leaving);
-		}
-
-		void ExecuteAction(Action action, GeofenceEvent ev)
-		{
-			string message = "";
-			switch (action.Type)
+			Task.Run(async () =>
 			{
-				case ActionType.Localisation:
-					message = "Vous venez " + (ev == GeofenceEvent.Entering ? "d'arriver à" : "de quitter") + " cette endroit";
-					message += (action.SousType != ActionType.Autre ? " (" + action.SousType + ")." : ".");
-					App.NotificationManager.SendNotification(message, Name, "nearby_square", NotificationType.Geofence);
-					break;
-				case ActionType.Depense:
-					App.NotificationManager.SendNotification("Voulez créer une dépense (" + action.SousType + ")?", Name, "nearby_square", NotificationType.Depense);
-					break;
-			}
+				Debug.WriteLine("Geofence: Get Action");
+				var action = await Action.GetAction(EnterActionNoSeq);
+				Debug.WriteLine("Geofence: Get Values for " + action.Name);
+				var Values = new Dictionary<string, string>[0];
+				try
+				{
+					Debug.WriteLine(action.Value);
+					Values = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(action.Value);
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine(ex);
+				}
+				Debug.WriteLine("Geofence: Run through each Values...");
+				for (int i = 0; i < Values.Length; i++)
+				{
+					Debug.WriteLine("Geofence: Values [" + (i+1) +"/"+ Values.Length + "]");
+					foreach (var data in Values[i].ToList())
+					{
+						string key = data.Key;
+						Debug.WriteLine("Geofence: Data[" + key + "] = " + data.Value);
+						while (Values[i][key].Contains("[[") && Values[i][key].Contains("]]"))
+						{
+							int startIndex = Values[i][key].IndexOf("[[", StringComparison.Ordinal);
+							int endIndex = Values[i][key].IndexOf("]]", StringComparison.Ordinal) + 2;
+
+							int length = endIndex - startIndex;
+							var varName = Values[i][key].Substring(startIndex, length);
+
+							switch (varName.ToUpper())
+							{
+								case "[[NAME]]":
+									Values[i][key] = Values[i][key].Replace(varName, Name);
+									break;
+								case "[[LONGITUDE]]":
+									Values[i][key] = Values[i][key].Replace(varName, Longitude.ToString());
+									break;
+								case "[[LATITUDE]]":
+									Values[i][key] = Values[i][key].Replace(varName, Latitude.ToString());
+									break;
+								case "[[GEOFENCEEVENT]]":
+									string eventDescription = Values[i].ContainsKey(ev.ToString().ToLower()) ? Values[i][ev.ToString().ToLower()] : ev.ToString();
+									Values[i][key] = Values[i][key].Replace(varName, eventDescription);
+									break;
+							}
+							Debug.WriteLine("Geofence: Data[" + key + "] value changed to: " + Values[i][key]);
+						}
+					}
+				}
+				try
+				{
+					Debug.WriteLine("Geofence: Serialize Values");
+					action.Value = JsonConvert.SerializeObject(Values);
+					Debug.WriteLine("Geofence: Execute action " + action.Name);
+					Action.ExecuteAction(action);
+				}
+				catch(Exception ex)
+				{
+					Debug.WriteLine(ex.Message);	
+				}
+			});
 		}
 
 		/// <summary>

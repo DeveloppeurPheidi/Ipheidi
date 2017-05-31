@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Ipheidi.BrowserPage">
+<ContentPage
+	xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi"
+	xmlns     ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x    ="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class    ="Ipheidi.BrowserPage">
+
 	<ContentPage.Content>
-		<StackLayout x:Name="mainLayout">
-            <local:CustomWebView x:Name="BrowserWeb" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
+
+		<StackLayout
+			x:Name="mainLayout">
+
+			<local:PheidiWebView
+				x:Name           ="BrowserWeb"
+				VerticalOptions  ="Fill"
+				HorizontalOptions="Fill" />
+
+
+		</StackLayout>
+
 	</ContentPage.Content>
+
 </ContentPage>

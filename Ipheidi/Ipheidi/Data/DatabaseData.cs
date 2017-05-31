@@ -7,13 +7,18 @@ namespace Ipheidi
 {
 	public abstract class DatabaseData
 	{
+		public DatabaseData()
+		{
+			NoSeq = NoSeqGenerator.Generate();
+		}
+
 		[JsonIgnore]
 		public string Domain { get; set; }
 
 		[JsonIgnore]
 		public string User { get; set; }
 
-		[PrimaryKey,JsonIgnore]
+		[PrimaryKey]
 		public string NoSeq { get; set; }
 
 		[JsonIgnore]

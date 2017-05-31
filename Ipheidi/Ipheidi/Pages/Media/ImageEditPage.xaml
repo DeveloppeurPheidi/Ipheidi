@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Ipheidi.ImageEditPage">
+
+	<ContentPage.Content>
+
+		<StackLayout
+			x:Name ="mainLayout"
+			Padding="20,40">
+
+			<StackLayout
+				Orientation="Horizontal">
+
+				<Button
+					Text  ="↺"
+					x:Name="btnRotateLeft" />
+
+				<Button
+					Text  ="↻"
+					x:Name="btnRotateRight" />
+
+				<Button
+					Text  ="Reload"
+					x:Name="btnReload" />
+
+				<Button
+					Text  ="Crop"
+					x:Name="btnCrop" />
+
+			</StackLayout>
+
+			<Image
+				BackgroundColor="Silver"
+				x:Name         ="imageView"
+				Aspect         ="AspectFit" />
+
+			<Slider
+				x:Name ="sizeSlider"
+				Minimum="0"
+				Maximum="200"
+				Value  ="100" />
+
+			<StackLayout
+				Orientation      ="Horizontal"
+				HorizontalOptions="CenterAndExpand"
+				Spacing          ="10">
+
+				<Button
+					x:Name           ="btnSave"
+					Text             ="Enregistrer"
+					HorizontalOptions="FillAndExpand" />
+
+				<Button
+					x:Name           ="btnCancel"
+					Text             ="Annuler"
+					HorizontalOptions="FillAndExpand" />
+
+			</StackLayout>
+
+		</StackLayout>
+
+	</ContentPage.Content>
+
+</ContentPage>

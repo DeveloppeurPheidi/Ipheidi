@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+
 namespace Ipheidi
 {
 	public interface IFileHelper
@@ -15,5 +17,8 @@ namespace Ipheidi
 		/// </summary>
 		/// <param name="filename">Filename.</param>
 		void DeleteLocalFile(string filename);
+
+		Stream GetStreamFromImageFile(string path);
+		void SaveImage(string path, byte[] byteArray);
 	}
 }

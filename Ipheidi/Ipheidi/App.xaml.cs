@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +20,7 @@ namespace Ipheidi
 	public partial class App : Application, INetworkStateListener
 	{
 		//Must be added to every Exception catch output.
-		static public string ಠ_ಠ = "(╯°□°）╯︵ ┻━┻";
+		public const string ಠ_ಠ = "(╯°□°）╯︵ ┻━┻";
 
 		static public int GeofenceRadius = 100;
 		static public double Heigth;
@@ -98,6 +99,7 @@ namespace Ipheidi
 		static public IStatusBarService StatusBarManager;
 		static public ILocationService LocationManager;
 		static public INotificationService NotificationManager;
+		static public IFileHelper FileHelper;
 		static public GeofenceManager GeofenceManager;
 		public int InstanceNumber;
 		static public int InstanceCount = 0;
@@ -115,7 +117,7 @@ namespace Ipheidi
 				{"app.solutionskpi.com","https://app.solutionskpi.com/default.aspx"}
 			};
 
-		public CustomTabbedPage NavBar;
+		public PheidiTabbedPage NavBar;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.App"/> class.
@@ -156,8 +158,8 @@ namespace Ipheidi
 				StatusBarManager = DependencyService.Get<IStatusBarService>();
 				LocationManager = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
+				FileHelper = DependencyService.Get<IFileHelper>();
 				ThreadHelper.Initialize(Environment.CurrentManagedThreadId);
-				Task.Run(async() => await ActionType.SeedData());
 			}
 			catch (Exception e)
 			{
@@ -212,7 +214,8 @@ namespace Ipheidi
 			{
 				GeofenceManager = new GeofenceManager();
 			}
-			NavBar = new CustomTabbedPage();
+			Action.GetActionList();
+			NavBar = new PheidiTabbedPage();
 			MainPage.Navigation.PushAsync(NavBar);
 
 		}
