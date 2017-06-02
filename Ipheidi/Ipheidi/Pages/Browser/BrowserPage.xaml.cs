@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 
@@ -23,7 +24,25 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 
 			InitializeComponent();
-			BrowserWeb.Source = "http://" + App.Domain+ "/connect";
+
+			btnInsertJS.Clicked += (sender, e) =>
+			{
+				string script = @"(function() {
+								    Enviro[""pheidiparams""]= ""**,**"";
+								    Enviro[""pheidiaction""]=""complexAction"";
+								    Enviro[""textTarget""]= ""#autoupd"";
+								    Enviro[""target""]= ""#autoupd"";
+								    Enviro[""vffid""] = ""51929637909621692991"";
+								    Enviro[""item_vffid""]= ""51929637909621692991"";
+								    Enviro[""parent_vffid""]= ""48813666641407169141"";
+								    Enviro[""objAction""]= ""localisation"";
+								    PostData();
+								})();";
+				InsertJavscript(script);
+			};
+
+			BrowserWeb.Source = "http://" + App.Domain + "/connect";
+
 			/*
 			var htmlSource = new HtmlWebViewSource();
 			htmlSource.Html = @"<html>
@@ -63,6 +82,11 @@ background:#ccc;
 			*/
 		}
 
+		public void InsertJavscript(string script)
+		{
+			BrowserWeb.Eval(script);
+		}
+
 		/// <summary>
 		/// Checks the web session.
 		/// </summary>
@@ -99,6 +123,7 @@ background:#ccc;
 			BrowserWeb.HeightRequest = height;
 			base.OnSizeAllocated(width, height);
 		}
+
 
 		protected override void OnAppearing()
 		{

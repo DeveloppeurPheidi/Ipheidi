@@ -157,7 +157,18 @@ namespace Ipheidi
 
 		void ExecuteAction(string actionNoSeq, GeofenceEvent ev)
 		{
-			Task.Run(async () =>
+
+			Task.Run(() =>
+			{
+				var pheidiParams = new Dictionary<string, string>();
+				pheidiParams.Add("Name", Name);
+				pheidiParams.Add("GeofenceEvent", ev.ToString());
+				pheidiParams.Add("Latitude", Latitude.ToString());
+				pheidiParams.Add("Longitude", Longitude.ToString());
+				Action.ExecuteAction(pheidiParams, actionNoSeq);
+			});
+
+			/*Task.Run(async () =>
 			{
 				Debug.WriteLine("Geofence: Get Action");
 				var action = await Action.GetAction(EnterActionNoSeq);
@@ -219,7 +230,7 @@ namespace Ipheidi
 				{
 					Debug.WriteLine(ex.Message);	
 				}
-			});
+			});*/
 		}
 
 		/// <summary>

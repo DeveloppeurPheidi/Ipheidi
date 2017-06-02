@@ -263,6 +263,7 @@ namespace Ipheidi
 						loc.Longitude += dLon;
 						loc.Speed = loc.GetDistanceFromOtherLocation(lastLocation);
 						loc.Orientation = (((2 - r) % 2) * 90 + 90 * (r % 2)) + (((r - 3) % 2) * 90 + 180 * ((r - 1) % 2));
+						loc.Utc = DateTime.UtcNow;
 						App.LocationManager.SendLocation(loc);
 					}
 				}

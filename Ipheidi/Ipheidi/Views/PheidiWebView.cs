@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Ipheidi
 {
@@ -13,8 +14,8 @@ namespace Ipheidi
 		/// <summary>
 		/// The source property.
 		/// </summary>
-		public new static readonly BindableProperty SourceProperty = BindableProperty.Create(
-			propertyName: "BrowserSource",
+		public static readonly BindableProperty JavascriptProperty = BindableProperty.Create(
+			propertyName: "Javascript",
 			returnType: typeof(string),
 			declaringType: typeof(PheidiWebView),
 			defaultValue: default(string));
@@ -23,12 +24,15 @@ namespace Ipheidi
 		/// Gets or sets the source.
 		/// </summary>
 		/// <value>The source.</value>
-		public new string Source
+		public string Javascript
 		{
-			get { return (string)GetValue(SourceProperty); }
-			set { SetValue(SourceProperty, value); }
+			get { return (string)GetValue(JavascriptProperty); }
+			set { SetValue(JavascriptProperty, value); }
 		}
 
-
+		public new void Eval(string script)
+		{
+			Javascript = script;
+		}
 	}
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -26,7 +28,7 @@ namespace Ipheidi
 			{
 				Navigation.PushAsync(new GeofencePage());
 			};
-		
+
 			wifiOnlySwitch.IsToggled = App.WifiOnlyEnabled;
 			wifiOnlySwitch.Toggled += (sender, e) =>
 			{
@@ -36,6 +38,16 @@ namespace Ipheidi
 			lblHostServerState.Text = "Host Server State: " + App.SplitCamelCase(NetworkState.Reachable.ToString());
 			lblNetworkState.Text = "NetworkState: " + App.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
 
+			languePicker.Items.Add("fr");
+			languePicker.Items.Add("en");
+			languePicker.SelectedItem = App.Language;
+			languePicker.SelectedIndexChanged += (sender, e) =>
+			{
+				App.Language = languePicker.SelectedItem.ToString();
+				App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
+				var languageCookie = new Cookie() { Name = "language", Domain = App.Domain, Value = App.Language };
+				App.CookieManager.AddCookie(languageCookie);
+			};
 		}
 
 		/// <summary>

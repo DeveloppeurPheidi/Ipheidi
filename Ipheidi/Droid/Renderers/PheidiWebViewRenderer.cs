@@ -17,6 +17,17 @@ namespace Ipheidi.Droid
 	/// </summary>
 	public class PheidiWebViewRenderer : ViewRenderer<PheidiWebView, Android.Webkit.WebView>
 	{
+
+		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
+
+			if (e.PropertyName == "Javascript" && !string.IsNullOrEmpty(Element.Javascript))
+			{
+				Control.EvaluateJavascript(Element.Javascript, null);
+				Element.Javascript = string.Empty;
+			}
+		}
 		protected override void OnElementChanged(ElementChangedEventArgs<PheidiWebView> e)
 		{
 			base.OnElementChanged(e);
@@ -32,7 +43,7 @@ namespace Ipheidi.Droid
 				webView.Settings.JavaScriptEnabled = true;
 				webView.Settings.DomStorageEnabled = true;
 				webView.AddJavascriptInterface(new PheidiJavascriptInterface(), "Android");
-                SetNativeControl(webView);
+				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)
 			{
@@ -51,13 +62,15 @@ namespace Ipheidi.Droid
 			if (Element.Source != null)
 			{
 				//Sert pour faire des tests avec des pages html.
-				if (Element.Source.Contains("<html>"))
+				if (Element.Source is HtmlWebViewSource)
 				{
-					Control.LoadData(Element.Source, "text/html", null);
+					var source = (HtmlWebViewSource)Element.Source;
+					Control.LoadData(source.Html, "text/html", null);
 				}
 				else
 				{
-					Control.LoadUrl(Element.Source);
+					var source = (UrlWebViewSource)Element.Source;
+					Control.LoadUrl(source.Url);
 				}
 			}
 		}

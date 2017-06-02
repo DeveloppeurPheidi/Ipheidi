@@ -61,7 +61,7 @@ namespace Ipheidi.iOS
 		{
 			var action = JsonConvert.DeserializeObject<Action>(notification.UserInfo[new NSString("Action")] as NSString);
 
-			Action.ExecuteAction(action);
+			Action.RunActionAnswer(action);
 
 			// reset our badge
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;

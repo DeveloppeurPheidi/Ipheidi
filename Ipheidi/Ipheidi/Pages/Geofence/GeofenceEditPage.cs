@@ -118,7 +118,7 @@ namespace Ipheidi
 					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
 					if (EnterSoustypePicker.IsEnabled)
 					{
-						if (geofence.EnterActionNoSeq != "")
+					if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 						{
 							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
 						}
@@ -169,7 +169,7 @@ namespace Ipheidi
 				ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
 				if (ExitSoustypePicker.IsEnabled)
 				{
-					if (geofence.ExitActionNoSeq != "")
+					if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
 					{
 						ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == geofence.ExitActionNoSeq).Description);
 					}

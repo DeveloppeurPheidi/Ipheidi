@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -90,6 +91,25 @@ namespace Ipheidi
 				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
+
+		static public string Language
+		{
+			get
+			{
+				if (Application.Current.Properties.ContainsKey("Language"))
+				{
+					return Application.Current.Properties["Language"] as string;
+				}
+				return "";
+			}
+			set
+			{
+				Application.Current.Properties["Language"] = value;
+				Task.Run(async() => { await Application.Current.SavePropertiesAsync(); });
+			}
+		}
+
+
 		static public Cookie WebSession = new Cookie();
 		static public IBattery Battery;
 		static public INetworkService NetworkManager;
@@ -99,6 +119,7 @@ namespace Ipheidi
 		static public IStatusBarService StatusBarManager;
 		static public ILocationService LocationManager;
 		static public INotificationService NotificationManager;
+		static public ILocalization LocalizationManager;
 		static public IFileHelper FileHelper;
 		static public GeofenceManager GeofenceManager;
 		public int InstanceNumber;
@@ -140,7 +161,16 @@ namespace Ipheidi
 			InstanceCount++;
 			InitializeServices();
 			InitializeComponent();
-			InitiazeStyles();
+			InitializeStyles();
+			SetProperties();
+		}
+
+		/// <summary>
+		/// Sets the properties.
+		/// </summary>
+		private void SetProperties()
+		{
+			LocalizationManager.SetLocale(new CultureInfo(Language));
 		}
 
 		/// <summary>
@@ -159,6 +189,7 @@ namespace Ipheidi
 				LocationManager = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
 				FileHelper = DependencyService.Get<IFileHelper>();
+				LocalizationManager = DependencyService.Get<ILocalization>();
 				ThreadHelper.Initialize(Environment.CurrentManagedThreadId);
 			}
 			catch (Exception e)
@@ -171,7 +202,7 @@ namespace Ipheidi
 		/// <summary>
 		/// Initiates the styles.
 		/// </summary>
-		private void InitiazeStyles()
+		private void InitializeStyles()
 		{
 			var buttonStyle = new Style(typeof(Button))
 			{

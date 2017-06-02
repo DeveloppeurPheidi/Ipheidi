@@ -19,6 +19,9 @@ namespace Ipheidi
 		public string Category { get; set; }
 		public int DeleteFlag { get; set; }
 
+		public string ActionAnswer { get; set; }
+
+
 		public const string Null = "Aucune";
 		static List<Action> actionList;
 		static List<string> actionTypes;
@@ -86,53 +89,127 @@ namespace Ipheidi
 					}
 				}
 				Debug.WriteLine("Return Action");
+				//action = SetParametersLanguage(action);
 				return action;
 			});
 		}
 
-		public static void ExecuteAction(Action action)
+
+
+		public static void RunActionAnswer(Action action)
 		{
-			Debug.WriteLine("Action: Execute Action " + action.Name);
-			var Values = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(action.Value);
-			if (Values.Length == 0)
+			try
 			{
-				return;
-			}
 
-			var request = Values[0];
-
-			if (request.ContainsKey("action"))
-			{
-				if (request["action"] == "pheidiAlert")
+				if (action.ActionAnswer.Contains("pheidiAlert"))
 				{
-					string title = request.ContainsKey("title") ? request["title"] : "";
-					string message = request.ContainsKey("message") ? request["message"] : "";
+					string a = "\"pheidiAlert\"";
+					string title = "Pheidi";
+
+					int index = action.ActionAnswer.IndexOf(a,StringComparison.Ordinal);
+					string b = action.ActionAnswer.Substring(index + a.Length);
+					string c = "";
+					bool insideString = false;
+					for (int i = 0; i < b.Length; i++)
+					{
+						if (b[i] == '"')
+						{
+							if (insideString)
+							{
+								break;
+							}
+							insideString = !insideString;
+						}
+						else if (insideString)
+						{
+							c += b[i];
+						}
+					}
+					string message = c;
 					if (App.IsInBackground)
 					{
 						App.NotificationManager.SendNotification(message, title, "nearby_square", action);
 					}
 					else
 					{
-						App.NotificationManager.DisplayAlert(message,title,"OK",() => CheckIfOtherAction(action, Values));
+						App.NotificationManager.DisplayAlert(message, title, "OK", () => { });
+
 					}
 				}
 			}
-		}
-
-		static void CheckIfOtherAction(Action action, Dictionary<string, string>[] Values)
-		{
-			if (Values.Length < 2)
+			catch (Exception e)
 			{
-				return;
+				Debug.WriteLine(e.Message);
 			}
-			int size = Values.Length - 1;
-			var NewValues = new Dictionary<string, string>[size];
-			Array.Copy(Values, 1, NewValues, 0, size);
-
-			action.Value = JsonConvert.SerializeObject(NewValues);
-
-			ExecuteAction(action);
 		}
+		public static void ExecuteAction(Dictionary<string, string> pheidiParams, string NoSeq)
+		{
+			Task.Run(async () =>
+			{
+				var action = await Action.GetAction(NoSeq);
+				pheidiParams.Add("action", action.Name);
+				pheidiParams.Add("language", App.Language);
+				string param = "";
+				foreach (var data in pheidiParams)
+				{
+					param += data.Key + "**:**" + data.Value + "**,**";
+				}
+				var parameters = new Dictionary<string, string> { { "pheidiaction", action.Name }, { "pheidiparams", param } };
+				HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 240));
+
+				if (response != null)
+				{
+					if (response.StatusCode == HttpStatusCode.OK)
+					{
+						string responseContent = response.Content.ReadAsStringAsync().Result;
+						Debug.WriteLine("Reponse:" + responseContent);
+						action.ActionAnswer = responseContent;
+					}
+				}
+				RunActionAnswer(action);
+			});
+		}
+
+
+
+		static public Action SetParametersLanguage(Action action)
+		{
+			string lng = App.LocalizationManager.GetCurrentCultureInfo().TwoLetterISOLanguageName.ToLower();
+			var Values = new Dictionary<string, string>[0];
+			try
+			{
+				Values = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(action.Value);
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine(e.Message);
+			}
+			for (int i = 0; i < Values.Length; i++)
+			{
+				foreach (var data in Values[i].ToList())
+				{
+					string key = data.Key;
+					if (Values[i][key].StartsWith("{", StringComparison.OrdinalIgnoreCase) && Values[i][key].EndsWith("}", StringComparison.OrdinalIgnoreCase))
+					{
+						try
+						{
+							var multiLangueValue = JsonConvert.DeserializeObject<Dictionary<string, string>>(Values[i][key]);
+							if (multiLangueValue.ContainsKey(lng))
+							{
+								Values[i][key] = multiLangueValue[lng];
+							}
+						}
+						catch
+						{
+
+						}
+					}
+				}
+			}
+			action.Value = JsonConvert.SerializeObject(Values);
+			return action;
+		}
+
 		static async Task<List<Action>> GetActions()
 		{
 			return await Task.Run(async () =>

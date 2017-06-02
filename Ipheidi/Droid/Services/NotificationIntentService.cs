@@ -4,6 +4,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Ipheidi.Droid
@@ -18,12 +19,10 @@ namespace Ipheidi.Droid
 		{
 			if (intent.Extras != null)
 			{
-				if (NotificationType.NewLocation.ToString() == intent.Extras.GetString("NotificationType"))
+				if (intent.Extras.ContainsKey("Action"))
 				{
-					Device.BeginInvokeOnMainThread(() =>
-					{
-						App.Instance.PushPage(new GeofenceCreatePage());
-					});
+					var action = JsonConvert.DeserializeObject<Ipheidi.Action>(intent.Extras.GetString("Action"));
+					Action.RunActionAnswer(action);
 				}
 			}
 		}

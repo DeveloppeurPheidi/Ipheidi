@@ -20,7 +20,16 @@ namespace Ipheidi.iOS
 
 	public class PheidiWebViewRenderer : ViewRenderer<PheidiWebView, UIWebView>
 	{
+		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
 
+			if (e.PropertyName == "Javascript" && !string.IsNullOrEmpty(Element.Javascript))
+			{
+				Control.EvaluateJavascript(Element.Javascript);
+				Element.Javascript = string.Empty;
+			}
+		}
 		protected override void OnElementChanged(ElementChangedEventArgs<PheidiWebView> e)
 		{
 			base.OnElementChanged(e);
@@ -29,6 +38,7 @@ namespace Ipheidi.iOS
 				// Register our custom url protocol
 				NSUrlProtocol.RegisterClass(new Class(typeof(PheidiUrlProtocol)));
 				var webView = new UIWebView();
+
 				webView.Delegate = new PheidiUIWebViewDelegate();
 				webView.ScrollView.Bounces = false;
 				webView.ScrollView.ScrollAnimationEnded += (sender, ev) =>
@@ -45,7 +55,7 @@ namespace Ipheidi.iOS
 			{
 				try
 				{
-					var uri = new Uri(Element.Source);
+					var uri = new Uri((Element.Source as UrlWebViewSource).Url);
 					var url = NSUrl.FromString(uri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped));
 					Control.LoadRequest(new NSUrlRequest(url));
 				}
@@ -153,6 +163,10 @@ namespace Ipheidi.iOS
 		public override bool ShouldStartLoad(UIWebView webView, NSUrlRequest request, UIWebViewNavigationType navigationType)
 		{
 			return true;
+		}
+
+		public override void LoadingFinished(UIWebView webView)
+		{
 		}
 	}
 }

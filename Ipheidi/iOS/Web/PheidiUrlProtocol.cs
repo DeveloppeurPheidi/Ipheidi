@@ -48,7 +48,7 @@ namespace Ipheidi.iOS
 			{
 				return true;
 			}
-			Debug.WriteLine(request.Url);
+			//Debug.WriteLine(request.Url);
 			return false;
 		}
 
