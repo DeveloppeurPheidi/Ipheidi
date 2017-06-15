@@ -21,6 +21,8 @@ namespace Ipheidi.Droid
 	{
 		private Action<int, Result, Intent> _resultCallback;
 
+		public Action<int,Result,Intent> ResultCallback { get; private set; }
+
 		protected override void OnCreate(Bundle bundle)
 		{
 			System.Diagnostics.Debug.WriteLine("MainActivity: OnCreate");
@@ -86,7 +88,6 @@ namespace Ipheidi.Droid
 			if (_resultCallback != null)
 			{
 				_resultCallback(requestCode, resultCode, data);
-				_resultCallback = null;
 			}
 		}
 	}

@@ -21,7 +21,7 @@ namespace Ipheidi.Droid
 		public NotificationService()
 		{
 		}
-
+		int count = 0;
 		enum MessageResult
 		{
 			NONE = 0,
@@ -39,7 +39,7 @@ namespace Ipheidi.Droid
 			Activity mcontext = (Activity)Xamarin.Forms.Forms.Context;
 			var tcs = new TaskCompletionSource<MessageResult>();
 
-			var builder = new AlertDialog.Builder(mcontext);
+			var builder = new AlertDialog.Builder(mcontext,Resource.Style.AppCompatDialogStyle);
 			builder.SetTitle(title);
 			builder.SetMessage(message);
 			//builder.SetInverseBackgroundForced(SetInverseBackgroundForced);
@@ -58,7 +58,7 @@ namespace Ipheidi.Droid
 			Activity mcontext = (Activity)Xamarin.Forms.Forms.Context;
 			var tcs = new TaskCompletionSource<MessageResult>();
 
-			var builder = new AlertDialog.Builder(mcontext);
+			var builder = new AlertDialog.Builder(mcontext,Resource.Style.AppCompatDialogStyle);
 			builder.SetTitle(title);
 			builder.SetMessage(message);
 
@@ -96,7 +96,8 @@ namespace Ipheidi.Droid
 
 			// Finally, publish the notification:
 			NotificationManager notificationManager = (NotificationManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.NotificationService);
-			notificationManager.Notify(0, builder.Build());
+			count++;
+			notificationManager.Notify(count, builder.Build());
 		}
 	}
 }

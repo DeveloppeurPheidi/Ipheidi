@@ -132,7 +132,7 @@ namespace Ipheidi
 		static public Dictionary<string, Dictionary<string, string>> Credentials;
 		static public Dictionary<string, string> UrlList = new Dictionary<string, string>
 			{
-				{"10.1.50.209", "http://10.1.50.209/default.aspx"},
+				{"10.1.50.220", "http://10.1.50.220/default.aspx"},
 				{"v2_5.pheidi.net", "http://v2_5.pheidi.net/default.aspx"},
 				{ "www.pheidi.com", "https://www.pheidi.com/default.aspx"},
 				{"app.solutionskpi.com","https://app.solutionskpi.com/default.aspx"}
@@ -258,6 +258,9 @@ namespace Ipheidi
 		{
 
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
+			foreach (var cred in App.Credentials)
+			{
+			}
 			Debug.WriteLine("App: Create Login Page");
 			var p = new LoginPage(App.Credentials.Count == 0);
 			var page = new NavigationPage(p);
@@ -300,8 +303,10 @@ namespace Ipheidi
 		/// <returns>The http request response async.</returns>
 		/// <param name="parameters">Parameters.</param>
 		/// <param name="timeout">Timeout.</param>
-		public async Task<HttpResponseMessage> SendHttpRequestAsync(Dictionary<string, string> parameters, TimeSpan timeout)
+		public async Task<HttpResponseMessage> SendHttpRequestAsync(Dictionary<string, string> parameters, TimeSpan timeout, string url = null )
 		{
+			var _url = string.IsNullOrEmpty(url) ? App.Url : url;
+
 			var handler = new HttpClientHandler() { CookieContainer = CookieManager.GetAllCookies() };
 			using (var httpClient = new HttpClient(handler, true))
 			{
@@ -309,7 +314,7 @@ namespace Ipheidi
 				HttpResponseMessage response = null;
 				try
 				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, App.Url);
+					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _url);
 					request.Content = encodedContent;
 
 					request.Headers.Add("User-Agent", "Ipheidi " + Device.RuntimePlatform);
@@ -336,7 +341,10 @@ namespace Ipheidi
 
 		public void PushPage(Page page)
 		{
-			MainPage.Navigation.PushAsync(page);
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				MainPage.Navigation.PushAsync(page);
+			});
 		}
 
 		protected override void OnStart()

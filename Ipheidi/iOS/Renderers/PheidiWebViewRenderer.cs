@@ -41,10 +41,7 @@ namespace Ipheidi.iOS
 
 				webView.Delegate = new PheidiUIWebViewDelegate();
 				webView.ScrollView.Bounces = false;
-				webView.ScrollView.ScrollAnimationEnded += (sender, ev) =>
-				{
-					Debug.WriteLine("Scroll Ended");
-				};
+
 				SetNativeControl(webView);
 			}
 			if (e.OldElement != null)

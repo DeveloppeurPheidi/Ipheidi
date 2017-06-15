@@ -34,5 +34,10 @@
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
 		<item name="colorAccent">@color/PheidiGreen</item>
+		<item name="android:windowTitleStyle">@style/MyTitleTextStyle</item>
+	</style>
+	<style name="MyTitleTextStyle">
+    	<item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+		<item name="android:gravity">center_horizontal</item>
 	</style>
 </resources>

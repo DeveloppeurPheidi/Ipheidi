@@ -92,9 +92,12 @@ namespace Ipheidi
 
 				foreach (var account in App.Credentials)
 				{
-					if (account.Value.ContainsKey("Username"))
+					if (account.Value.ContainsKey("Username") && account.Value.ContainsKey("Domain"))
 					{
-						userPicker.Items.Add(account.Key);
+						if (App.UrlList.ContainsKey(account.Value["Domain"]))
+						{
+							userPicker.Items.Add(account.Key);
+						}
 					}
 				}
 				if (userPicker.Items.Count == 0)
@@ -197,6 +200,8 @@ namespace Ipheidi
 					string rc = await response.Content.ReadAsStringAsync();
 					Debug.WriteLine("WEBSESSION: " + rc);
 					App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
+					var userAgent = App.AppName + " " + Xamarin.Forms.Device.RuntimePlatform;
+					var uaCookie = new Cookie() { Name = "IPHEIDI_USERAGENT", Domain = App.Domain, Value = userAgent };
 					if (!string.IsNullOrEmpty(rc) && IsNumeric(rc))
 					{
 						Debug.WriteLine(rc);
@@ -212,6 +217,7 @@ namespace Ipheidi
 
 						//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 						App.CookieManager.AddCookie(App.WebSession);
+						App.CookieManager.AddCookie(uaCookie);
 						App.IsInLogin = false;
 						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
 						return "";

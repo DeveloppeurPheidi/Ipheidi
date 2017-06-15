@@ -10,10 +10,7 @@
 		<StackLayout
 			x:Name="mainLayout">
 
-			<Button
-				x:Name           ="btnInsertJS"
-				Text             ="Insert JS"
-				HorizontalOptions="FillAndExpand" />
+		
 
 			<local:PheidiWebView
 				x:Name           ="BrowserWeb"

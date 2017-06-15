@@ -20,6 +20,7 @@ namespace Ipheidi.Droid
 		IValueCallback mUploadMessage;
 		private static int FILECHOOSER_RESULTCODE = 1;
 		private static int CAMERA_RESULTCODE = 2;
+		private static int IMAGE_EDITOR_RESULTCODE = 3;
 		private static File _dir;
 		private static File _file;
 		Context context;
@@ -52,10 +53,32 @@ namespace Ipheidi.Droid
 			{
 				if (null == mUploadMessage)
 					return;
+				Intent editIntent = new Intent(Intent.ActionEdit);
+				editIntent.SetDataAndType(Android.Net.Uri.FromFile(_file), "image/*");
+				editIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
+				var appActivity = context as MainActivity;
+				appActivity.StartActivity(Intent.CreateChooser(editIntent, "Choisissez un editeur d'image"), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
 
+				/*var result = new List<Android.Net.Uri>();
+				var contentUri = Android.Net.Uri.FromFile(_file);
+				var p = new ImageEditPage(_file.AbsolutePath);
+				p.AddOnSaveBtnClickEvent((sender, e) =>
+				{
+					result.Add(contentUri);
+					mUploadMessage.OnReceiveValue(result.ToArray());
+					mUploadMessage = null;
+				});
+				p.AddOnCancelBtnClickEvent((sender, e) =>
+				{
+					mUploadMessage.OnReceiveValue(result.ToArray());
+					mUploadMessage = null;
+				});
+				Device.BeginInvokeOnMainThread(() => App.Instance.PushPage(p));*/
+			}
+			else if (requestCode == IMAGE_EDITOR_RESULTCODE)
+			{
 				var result = new List<Android.Net.Uri>();
 				var contentUri = Android.Net.Uri.FromFile(_file);
-				Device.BeginInvokeOnMainThread(() => App.Instance.PushPage(new ImageEditPage(_file.AbsolutePath)));
 				result.Add(contentUri);
 				mUploadMessage.OnReceiveValue(result.ToArray());
 				mUploadMessage = null;

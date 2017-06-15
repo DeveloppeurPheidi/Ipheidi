@@ -120,7 +120,8 @@ namespace Ipheidi
 					{
 					if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 						{
-							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
+							var list = Action.GetActionList();
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(list.First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
 						}
 						else
 						{
@@ -202,8 +203,16 @@ namespace Ipheidi
 
 			if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 			{
-				var enterAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
-				category = enterAction.Category;
+				if (Action.GetActionList().Any(a => geofence.EnterActionNoSeq == a.NoSeq))
+				{
+					var enterAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+					category = enterAction.Category;
+				}
+				else
+				{
+					geofence.EnterActionNoSeq = string.Empty;
+					category = Action.Null;
+				}
 			}
 			EnterTypePicker.SelectedItem = category;
 
@@ -212,8 +221,16 @@ namespace Ipheidi
 
 			if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
 			{
-				var exitAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
-				category = exitAction.Category;
+				if (Action.GetActionList().Any(a => geofence.ExitActionNoSeq == a.NoSeq))
+				{
+					var exitAction = Action.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+					category = exitAction.Category;
+				}
+				else
+				{
+					geofence.ExitActionNoSeq = string.Empty;
+					category = Action.Null;
+				}
 			}
 			ExitTypePicker.SelectedItem = category;
 

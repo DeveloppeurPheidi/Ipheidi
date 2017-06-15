@@ -17,6 +17,10 @@ namespace Ipheidi.Droid
 
 		protected override void OnHandleIntent(Intent intent)
 		{
+			var context = Xamarin.Forms.Forms.Context;
+			var activityIntent = new Intent(context, typeof(MainActivity));
+			activityIntent.SetFlags(ActivityFlags.NewTask);
+			this.StartActivity(activityIntent);
 			if (intent.Extras != null)
 			{
 				if (intent.Extras.ContainsKey("Action"))

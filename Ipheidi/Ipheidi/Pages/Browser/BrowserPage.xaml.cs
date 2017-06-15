@@ -13,6 +13,8 @@ namespace Ipheidi
 	/// </summary>
 	public partial class BrowserPage : ContentPage
 	{
+		static BrowserPage instance;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.BrowserPage"/> class.
 		/// </summary>
@@ -24,22 +26,6 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 
 			InitializeComponent();
-
-			btnInsertJS.Clicked += (sender, e) =>
-			{
-				string script = @"(function() {
-								    Enviro[""pheidiparams""]= ""**,**"";
-								    Enviro[""pheidiaction""]=""complexAction"";
-								    Enviro[""textTarget""]= ""#autoupd"";
-								    Enviro[""target""]= ""#autoupd"";
-								    Enviro[""vffid""] = ""51929637909621692991"";
-								    Enviro[""item_vffid""]= ""51929637909621692991"";
-								    Enviro[""parent_vffid""]= ""48813666641407169141"";
-								    Enviro[""objAction""]= ""localisation"";
-								    PostData();
-								})();";
-				InsertJavscript(script);
-			};
 
 			BrowserWeb.Source = "http://" + App.Domain + "/connect";
 
@@ -80,11 +66,56 @@ background:#ccc;
 
 			BrowserWeb.Source = htmlSource.Html;
 			*/
+
+			instance = this;
 		}
 
-		public void InsertJavscript(string script)
+		static public void InsertJavscript(string script)
 		{
-			BrowserWeb.Eval(script);
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				script = @"(function() {" + script;
+				script += "})();";
+
+				string AutoClick = @"function AutoClick(listItemToClick,index, failCount)
+{
+    setTimeout(function () { 
+        var matchingElements = [];
+        var element = document.getElementById(listItemToClick[index]);
+        if(element !== null)
+        {
+            matchingElements.push(element);
+        }
+        else
+        {
+            var id = listItemToClick[index];
+			matchingElements = document.querySelectorAll('[vffid=\''+id+'\']');
+        }
+        if(matchingElements.length >0)
+        {
+            matchingElements[0].click();
+            if(index+1 < listItemToClick.length)
+            {
+                AutoClick(listItemToClick, index+1, 0);
+            }
+            else
+            {
+            }
+        }
+        else if(failCount<60)
+        {
+            AutoClick(listItemToClick, index,failCount+1);
+        }
+        else
+        {
+            alert('Failed to find element: ' + listItemToClick[index]);
+        }
+    },500);
+};";
+
+				script += AutoClick;
+				instance.BrowserWeb.Eval(script);
+			});
 		}
 
 		/// <summary>

@@ -165,6 +165,7 @@ namespace Ipheidi
 				pheidiParams.Add("GeofenceEvent", ev.ToString());
 				pheidiParams.Add("Latitude", Latitude.ToString());
 				pheidiParams.Add("Longitude", Longitude.ToString());
+				pheidiParams.Add("GeofenceNoseq", NoSeq);
 				Action.ExecuteAction(pheidiParams, actionNoSeq);
 			});
 
