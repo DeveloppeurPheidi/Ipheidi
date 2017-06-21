@@ -30,7 +30,6 @@ namespace Ipheidi
 		static public string AppName = "IPheidi";
 		static public string Url = "";
 
-
 		static public string Domain
 		{
 			get
@@ -62,7 +61,7 @@ namespace Ipheidi
 			}
 			set
 			{
-				NetworkManager.NotifyCurrentNetworkState();
+				
 				if (Current.Properties.ContainsKey("WifiOnlyEnabled"))
 				{
 					Current.Properties["WifiOnlyEnabled"] = value.ToString();
@@ -72,6 +71,7 @@ namespace Ipheidi
 					Current.Properties.Add("WifiOnlyEnabled", value.ToString());
 				}
 				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				NetworkManager.NotifyCurrentNetworkState();
 			}
 		}
 
@@ -110,6 +110,7 @@ namespace Ipheidi
 		}
 
 
+		static public IImageHelper ImageHelper;
 		static public Cookie WebSession = new Cookie();
 		static public IBattery Battery;
 		static public INetworkService NetworkManager;
@@ -189,6 +190,7 @@ namespace Ipheidi
 				LocationManager = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
 				FileHelper = DependencyService.Get<IFileHelper>();
+				ImageHelper = DependencyService.Get<IImageHelper>();
 				LocalizationManager = DependencyService.Get<ILocalization>();
 				ThreadHelper.Initialize(Environment.CurrentManagedThreadId);
 			}
@@ -245,7 +247,12 @@ namespace Ipheidi
 			{
 				GeofenceManager = new GeofenceManager();
 			}
-			Action.GetActionList();
+			if (ImageHelper != null)
+			{
+				ImageHelper.CheckForImageToUpload();
+				NetworkManager.AddNetworkStateListener(ImageHelper);
+			}
+			ActionManager.GetActionList();
 			NavBar = new PheidiTabbedPage();
 			MainPage.Navigation.PushAsync(NavBar);
 
@@ -276,9 +283,10 @@ namespace Ipheidi
 			App.IsInLogin = true;
 			var locationPage = (LocationPage)NavBar.Children.Where(o => o is LocationPage).Single();
 			locationPage.StopLocalisation();
-			App.LocationManager.RemoveLocationListener(App.GeofenceManager);
+			App.LocationManager.RemoveLocationListener(GeofenceManager);
 			App.GeofenceManager = null;
 			App.LocationManager.RemoveLocationListener(locationPage);
+			App.NetworkManager.RemoveNetworkStateListener(ImageHelper);
 			MainPage.Navigation.PopAsync();
 		}
 
@@ -294,50 +302,6 @@ namespace Ipheidi
 			NavBar.Children.Insert(index, browser);
 			NavBar.CurrentPage = browser;
 		}
-
-
-
-		/// <summary>
-		/// Sends an http request async.
-		/// </summary>
-		/// <returns>The http request response async.</returns>
-		/// <param name="parameters">Parameters.</param>
-		/// <param name="timeout">Timeout.</param>
-		public async Task<HttpResponseMessage> SendHttpRequestAsync(Dictionary<string, string> parameters, TimeSpan timeout, string url = null )
-		{
-			var _url = string.IsNullOrEmpty(url) ? App.Url : url;
-
-			var handler = new HttpClientHandler() { CookieContainer = CookieManager.GetAllCookies() };
-			using (var httpClient = new HttpClient(handler, true))
-			{
-				var encodedContent = new FormUrlEncodedContent(parameters);
-				HttpResponseMessage response = null;
-				try
-				{
-					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _url);
-					request.Content = encodedContent;
-
-					request.Headers.Add("User-Agent", "Ipheidi " + Device.RuntimePlatform);
-					request.Headers.Add("UserHostAddress", App.NetworkManager.GetIPAddress());
-					Debug.WriteLine(await request.Content.ReadAsStringAsync());
-					httpClient.Timeout = timeout;
-					response = await httpClient.SendAsync(request);
-
-				}
-				catch (Exception ex)
-				{
-					System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
-					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
-					NetworkManager.CheckHostServerState();
-				};
-				if (response != null)
-				{
-					return response;
-				}
-			}
-			return null;
-		}
-
 
 		public void PushPage(Page page)
 		{
@@ -373,24 +337,14 @@ namespace Ipheidi
 			base.OnPropertyChanged(propertyName);
 		}
 
-		static public string SplitCamelCase(String s)
-		{
-			var r = new Regex(@"
-                (?<=[A-Z])(?=[A-Z][a-z]) |
-                 (?<=[^A-Z])(?=[A-Z]) |
-                 (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
-
-			return r.Replace(s, " ");
-		}
-
 		public void OnNetworkStateUpdate(NetworkState state)
 		{
-			Debug.WriteLine("App: Network State = " + SplitCamelCase(state.ToString()));
+			Debug.WriteLine("App: Network State = " + Utilities.SplitCamelCase(state.ToString()));
 		}
 
 		public void OnHostServerStateUpdate(NetworkState state)
 		{
-			Debug.WriteLine("App: Host Server State = " + SplitCamelCase(state.ToString()));
+			Debug.WriteLine("App: Host Server State = " + Utilities.SplitCamelCase(state.ToString()));
 		}
 
 	}

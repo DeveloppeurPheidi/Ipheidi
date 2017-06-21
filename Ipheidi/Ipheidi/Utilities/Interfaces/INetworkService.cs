@@ -48,6 +48,12 @@ namespace Ipheidi
 		void AddNetworkStateListener(INetworkStateListener listener);
 
 		/// <summary>
+		/// Removes the network state listener.
+		/// </summary>
+		/// <param name="listener">Listener.</param>
+		void RemoveNetworkStateListener(INetworkStateListener listener);
+
+		/// <summary>
 		/// Checks the state of the host server.
 		/// </summary>
 		void CheckHostServerState();

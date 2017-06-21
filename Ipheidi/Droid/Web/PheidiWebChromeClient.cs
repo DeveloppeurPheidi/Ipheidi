@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Database;
 using Android.Graphics;
 using Android.Icu.Text;
 using Android.OS;
@@ -11,6 +13,7 @@ using Android.Webkit;
 using Android.Widget;
 using Java.IO;
 using Java.Util;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Ipheidi.Droid
@@ -21,8 +24,10 @@ namespace Ipheidi.Droid
 		private static int FILECHOOSER_RESULTCODE = 1;
 		private static int CAMERA_RESULTCODE = 2;
 		private static int IMAGE_EDITOR_RESULTCODE = 3;
+		private static int IMAGE_CHOOSER_RESULTCODE = 4;
 		private static File _dir;
 		private static File _file;
+		static public PheidiParams FileChooserPheidiParams;
 		Context context;
 
 		public PheidiWebChromeClient() : base()
@@ -40,14 +45,73 @@ namespace Ipheidi.Droid
 			}
 		}
 
+		private string GetPathToImage(Android.Net.Uri uri)
+		{
+			var appActivity = context as MainActivity;
+			string doc_id = "";
+			using (var c1 = appActivity.ContentResolver.Query(uri, null, null, null, null))
+			{
+				c1.MoveToFirst();
+				String document_id = c1.GetString(0);
+				doc_id = document_id.Substring(document_id.LastIndexOf(":",StringComparison.OrdinalIgnoreCase) + 1);
+			}
+
+			string path = null;
+
+			// The projection contains the columns we want to return in our query.
+			string selection = Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
+			using (var cursor = appActivity.ManagedQuery(Android.Provider.MediaStore.Images.Media.ExternalContentUri, null, selection, new string[] { doc_id }, null))
+			{
+				if (cursor == null) return path;
+				var columnIndex = cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
+				cursor.MoveToFirst();
+				path = cursor.GetString(columnIndex);
+			}
+			return path;
+		}
+
 		private void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
 			if (requestCode == FILECHOOSER_RESULTCODE)
 			{
 				if (null == mUploadMessage)
 					return;
+
 				mUploadMessage.OnReceiveValue(WebChromeClient.FileChooserParams.ParseResult((int)resultCode, data));
 				mUploadMessage = null;
+			}
+			else if (requestCode == IMAGE_CHOOSER_RESULTCODE)
+			{
+				if (null == mUploadMessage)
+					return;
+
+				try
+				{
+					Intent editIntent = new Intent(Intent.ActionEdit);
+					var appActivity = context as MainActivity;
+					string filePath = "";
+					var uri = data.Data;
+					if (uri != null && "content".Equals(uri.Scheme))
+					{
+						filePath = GetPathToImage(uri);
+					}
+					else
+					{
+						filePath = uri.Path;
+					}
+
+					_file = new File(filePath);
+					editIntent.SetDataAndType(Android.Net.Uri.FromFile(_file), "image/*");
+					editIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
+
+
+					appActivity.StartActivity(Intent.CreateChooser(editIntent, "Choisissez un editeur d'image"), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
+				}
+				catch (Exception e)
+				{
+					System.Diagnostics.Debug.WriteLine(e.Message);
+					mUploadMessage.OnReceiveValue(null);
+				}
 			}
 			else if (requestCode == CAMERA_RESULTCODE && resultCode == Result.Ok)
 			{
@@ -56,32 +120,59 @@ namespace Ipheidi.Droid
 				Intent editIntent = new Intent(Intent.ActionEdit);
 				editIntent.SetDataAndType(Android.Net.Uri.FromFile(_file), "image/*");
 				editIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
+
 				var appActivity = context as MainActivity;
 				appActivity.StartActivity(Intent.CreateChooser(editIntent, "Choisissez un editeur d'image"), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
-
-				/*var result = new List<Android.Net.Uri>();
-				var contentUri = Android.Net.Uri.FromFile(_file);
-				var p = new ImageEditPage(_file.AbsolutePath);
-				p.AddOnSaveBtnClickEvent((sender, e) =>
-				{
-					result.Add(contentUri);
-					mUploadMessage.OnReceiveValue(result.ToArray());
-					mUploadMessage = null;
-				});
-				p.AddOnCancelBtnClickEvent((sender, e) =>
-				{
-					mUploadMessage.OnReceiveValue(result.ToArray());
-					mUploadMessage = null;
-				});
-				Device.BeginInvokeOnMainThread(() => App.Instance.PushPage(p));*/
 			}
 			else if (requestCode == IMAGE_EDITOR_RESULTCODE)
 			{
-				var result = new List<Android.Net.Uri>();
-				var contentUri = Android.Net.Uri.FromFile(_file);
-				result.Add(contentUri);
-				mUploadMessage.OnReceiveValue(result.ToArray());
-				mUploadMessage = null;
+				if ((!App.WifiOnlyEnabled || App.NetworkManager.GetNetworkState() == NetworkState.ReachableViaWiFiNetwork) && App.NetworkManager.GetHostServerState() == NetworkState.Reachable)
+				{
+					var result = new List<Android.Net.Uri>();
+					var contentUri = Android.Net.Uri.FromFile(_file);
+					result.Add(contentUri);
+					mUploadMessage.OnReceiveValue(result.ToArray());
+					mUploadMessage = null;
+				}
+				else
+				{
+					string title = "";
+					string message = "";
+					if (App.NetworkManager.GetHostServerState() == NetworkState.NotReachable)
+					{
+						title = "Le serveur hôte est présentement inacessible.";
+						message = "L'image sera envoyer lorsque la connexion sera récupérée.";
+					}
+					else if (App.WifiOnlyEnabled)
+					{
+						title = "L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.";
+						message = "Vous pouvez changer ce paramètre dans le menu de configuration en désactivant le \"Transfert de données sous Wifi seulement\" ";
+					}
+					App.NotificationManager.DisplayAlert(message, title, "OK", () => { });
+					Task.Run(async () =>
+					{
+						if (!_file.Exists())
+						{
+							System.Diagnostics.Debug.WriteLine("L'image " + _file.Name + " n'existe pas !!!");
+						}
+						var iu = new ImageUpload()
+						{
+							FilePath = _file.Path,
+							FileName = _file.Name,
+							Field = FileChooserPheidiParams["FIELD"],
+							QueryFieldValue = FileChooserPheidiParams["QUERYFIELDVALUE"],
+							Domain = App.Domain,
+							User = App.Username
+						};
+						await DatabaseHelper.Database.SaveItemAsync(iu);
+					});
+					mUploadMessage.OnReceiveValue(null);
+
+				}
+			}
+			else
+			{
+				mUploadMessage.OnReceiveValue(null);
 			}
 		}
 
@@ -91,7 +182,8 @@ namespace Ipheidi.Droid
 			List<string> items = new List<string>()
 			{
 				"Camera",
-				"Documents"
+				"Galerie Photo",
+				"Document"
 			};
 			string selectedItem = items[0];
 			int resultCode = 0;
@@ -111,27 +203,31 @@ namespace Ipheidi.Droid
 									case "Camera":
 										intent = new Intent(MediaStore.ActionImageCapture);
 										CreateDirectoryForPictures();
-										_file = new File(_dir, String.Format("Pic_{0}.jpg", NoSeqGenerator.Generate()));
+										_file = new File(_dir, String.Format("Pic_{0}.png", NoSeqGenerator.Generate()));
 										intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
 
 										resultCode = CAMERA_RESULTCODE;
 
 										break;
-									case "Documents":
+									case "Galerie Photo":
+										intent = new Intent(Intent.ActionGetContent);
+										intent.SetType("image/*");
+										resultCode = IMAGE_CHOOSER_RESULTCODE;
+										break;
+									case "Document":
 										intent = fileChooserParams.CreateIntent();
 										resultCode = FILECHOOSER_RESULTCODE;
 										break;
 								}
 								if (intent != null)
 								{
+									intent.PutExtra("PheidiParams", JsonConvert.SerializeObject(FileChooserPheidiParams));
 									mUploadMessage = filePathCallback;
 									appActivity.StartActivity(intent, resultCode, OnActivityResult);
 								}
 							}).Show();
 			return true;
 		}
-
-
-		// Do something useful withe the position of the selected radio button }
 	}
+
 }

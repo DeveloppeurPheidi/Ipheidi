@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -166,13 +166,13 @@ namespace Ipheidi
 				pheidiParams.Add("Latitude", Latitude.ToString());
 				pheidiParams.Add("Longitude", Longitude.ToString());
 				pheidiParams.Add("GeofenceNoseq", NoSeq);
-				Action.ExecuteAction(pheidiParams, actionNoSeq);
+				ActionManager.ExecuteAction(pheidiParams, actionNoSeq);
 			});
 
 			/*Task.Run(async () =>
 			{
 				Debug.WriteLine("Geofence: Get Action");
-				var action = await Action.GetAction(EnterActionNoSeq);
+				var action = await ActionManager.GetAction(EnterActionNoSeq);
 				Debug.WriteLine("Geofence: Get Values for " + action.Name);
 				var Values = new Dictionary<string, string>[0];
 				try
@@ -225,7 +225,7 @@ namespace Ipheidi
 					Debug.WriteLine("Geofence: Serialize Values");
 					action.Value = JsonConvert.SerializeObject(Values);
 					Debug.WriteLine("Geofence: Execute action " + action.Name);
-					Action.ExecuteAction(action);
+					ActionManager.ExecuteAction(action);
 				}
 				catch(Exception ex)
 				{

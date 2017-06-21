@@ -412,7 +412,7 @@ namespace Ipheidi
 			using (var httpClient = new HttpClient(handler, true))
 			{
 				var parameters = new Dictionary<string, string> { { "pheidiaction", "sendLocationData" }, { "pheidiparams", "value**:**" + json + "**,**" } };
-				HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
+				HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
 				if (response != null)
 				{
 					if (response.StatusCode == HttpStatusCode.OK)

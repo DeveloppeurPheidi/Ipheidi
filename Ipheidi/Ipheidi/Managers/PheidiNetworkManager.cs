@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Ipheidi
 {
@@ -12,6 +14,46 @@ namespace Ipheidi
 	{
 
 
+		///<summary>
+		/// Sends an http request async.
+		/// </summary>
+		/// <returns>The http request response async.</returns>
+		/// <param name="parameters">Parameters.</param>
+		/// <param name="timeout">Timeout.</param>
+		static public async Task<HttpResponseMessage> SendHttpRequestAsync(Dictionary<string, string> parameters, TimeSpan timeout, string url = null)
+		{
+			var _url = string.IsNullOrEmpty(url) ? App.Url : url;
+
+			var handler = new HttpClientHandler() { CookieContainer = App.CookieManager.GetAllCookies() };
+			using (var httpClient = new HttpClient(handler, true))
+			{
+				var encodedContent = new FormUrlEncodedContent(parameters);
+				HttpResponseMessage response = null;
+				try
+				{
+					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _url);
+					request.Content = encodedContent;
+
+					request.Headers.Add("User-Agent", "Ipheidi " + Device.RuntimePlatform);
+					request.Headers.Add("UserHostAddress", App.NetworkManager.GetIPAddress());
+					Debug.WriteLine(await request.Content.ReadAsStringAsync());
+					httpClient.Timeout = timeout;
+					response = await httpClient.SendAsync(request);
+
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine(ApplicationConst.ಠ_ಠ);
+					Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
+					App.NetworkManager.CheckHostServerState();
+				};
+				if (response != null)
+				{
+					return response;
+				}
+			}
+			return null;
+		}
 
 		static public void UploadFilesToServer(Uri uri, Dictionary<string, string> data, string fileName, string fileContentType, byte[] fileData)
 		{
@@ -41,7 +83,7 @@ namespace Ipheidi
 								using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
 								{
 									string responseString = streamReader.ReadToEnd();
-									Debug.WriteLine("Reponse: "+responseString);
+									Debug.WriteLine("Reponse: " + responseString);
 								}
 							}
 						}

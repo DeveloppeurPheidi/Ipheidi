@@ -65,6 +65,11 @@ namespace Ipheidi
 			listeners.Add(listener);
 		}
 
+		public void RemoveNetworkStateListener(INetworkStateListener listener)
+		{
+			listeners.Remove(listener);
+		}
+
 		/// <summary>
 		/// Checks the state of the host server.
 		/// </summary>
@@ -109,9 +114,16 @@ namespace Ipheidi
 		/// <param name="state">State.</param>
 		public void OnNetworkStateUpdate(NetworkState state)
 		{
-			foreach (var l in listeners)
+			try
 			{
-				l.OnNetworkStateUpdate(state);
+				foreach (var l in listeners)
+				{
+					l.OnNetworkStateUpdate(state);
+				}
+			}
+			catch(Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.Message);
 			}
 		}
 

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Wapps.TOCrop;
+using System.Linq;
 
 namespace Ipheidi.iOS
 {
@@ -81,7 +82,7 @@ namespace Ipheidi.iOS
 									p += d.Key + "**:**" + d.Value + "**,**";
 								}
 								var parameters = new Dictionary<string, string> { { "pheidiaction", "GetFieldValueFromOtherField" }, { "pheidiparams", p } };
-								HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
+								HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
 								if (response != null)
 								{
 									if (response.StatusCode == HttpStatusCode.OK)
@@ -90,7 +91,7 @@ namespace Ipheidi.iOS
 										Debug.WriteLine("Reponse:" + responseContent);
 										try
 										{
-											answer = Action.GetFields(responseContent)[0][dic["FIELD"]] as string;
+											answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
 										}
 										catch (Exception e)
 										{
@@ -115,7 +116,7 @@ namespace Ipheidi.iOS
 							}
 							var parameters = new Dictionary<string, string> { { "pheidiaction", "UpdateFieldValue" }, { "pheidiparams", p } };
 
-							var response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
+							var response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
 							if (response != null)
 							{
 								if (response.StatusCode == HttpStatusCode.OK)
@@ -131,11 +132,11 @@ namespace Ipheidi.iOS
 							{
 								UIAlertController actionSheetAlert = UIAlertController.Create(null, null, UIAlertControllerStyle.ActionSheet);
 								// Add Actions
-								var a1 = UIAlertAction.Create("Prendre une Photo ou Video", UIAlertActionStyle.Default, (action) => ImageImport(UIImagePickerControllerSourceType.Camera, request));
+								var a1 = UIAlertAction.Create("Prendre une Photo ou Video", UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.Camera, request));
 								a1.SetValueForKey(new UIImage("camera.png"), new NSString("image"));
 								actionSheetAlert.AddAction(a1);
 
-								var a2 = UIAlertAction.Create("Galerie de Photo", UIAlertActionStyle.Default, (action) => ImageImport(UIImagePickerControllerSourceType.PhotoLibrary, request));
+								var a2 = UIAlertAction.Create("Galerie de Photo", UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.PhotoLibrary, request));
 								a2.SetValueForKey(new UIImage("sort.png"), new NSString("image"));
 								actionSheetAlert.AddAction(a2);
 
@@ -239,76 +240,104 @@ namespace Ipheidi.iOS
 						{
 							Task.Run(async () =>
 							{
-								try
+								string answer = "";
+								string p = "";
+								var dic = new Dictionary<string, string>();
+								dic.Add("OTHERFIELD", pp["FIELD"]);
+								dic.Add("NOSEQ", pp["NOSEQ"]);
+								dic.Add("FIELD", "geofence");
+
+								foreach (var d in dic)
 								{
-									string answer = "";
-									string p = "";
-									var dic = new Dictionary<string, string>();
-									dic.Add("OTHERFIELD", pp["FIELD"]);
-									dic.Add("NOSEQ", pp["NOSEQ"]);
-									dic.Add("FIELD", "geofence");
-
-									foreach (var d in dic)
+									p += d.Key + "**:**" + d.Value + "**,**";
+								}
+								var parameters = new Dictionary<string, string> { { "pheidiaction", "GetFieldValueFromOtherField" }, { "pheidiparams", p } };
+								HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
+								if (response != null)
+								{
+									if (response.StatusCode == HttpStatusCode.OK)
 									{
-										p += d.Key + "**:**" + d.Value + "**,**";
-									}
-									var parameters = new Dictionary<string, string> { { "pheidiaction", "GetFieldValueFromOtherField" }, { "pheidiparams", p } };
-									HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
-									if (response != null)
-									{
-										if (response.StatusCode == HttpStatusCode.OK)
+										string responseContent = response.Content.ReadAsStringAsync().Result;
+										Debug.WriteLine("Reponse:" + responseContent);
+										try
 										{
-											string responseContent = response.Content.ReadAsStringAsync().Result;
-											Debug.WriteLine("Reponse:" + responseContent);
-											try
-											{
-												answer = Action.GetFields(responseContent)[0][dic["FIELD"]] as string;
-											}
-											catch (Exception e)
-											{
-												Debug.WriteLine(e.Message);
-											}
-
-
-
+											answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
+										}
+										catch (Exception e)
+										{
+											Debug.WriteLine(e.Message);
 										}
 									}
-
-									if (string.IsNullOrEmpty(answer))
-									{
-										data = "";
-										string pheidiParams = "";
-										var location = App.LocationManager.GetLocation();
-										var geo = new Geofence()
-										{
-											Latitude = location.Latitude,
-											Longitude = location.Longitude,
-											NotificationEnabled = true,
-											User = App.Username,
-											Domain = App.Domain,
-											NotificationDelay = 0,
-											Name = pp["VALUE"],
-										};
-										geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-
-										string noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo);
-										pheidiParams = PheidiParams.InsertValueInString(param[index], "IPheidi_Params", noseq);
-
-										for (int i = 0; i < param.Length; i++)
-										{
-											string str = i != index ? param[i] : pheidiParams;
-											data += data.Length > 0 ? "&" + str : str;
-										}
-										Debug.WriteLine(data);
-										SendRequest(GenerateRequest(request, data));
-										Task.Delay(100);
-									}
 								}
-								catch (Exception e)
+								if (string.IsNullOrEmpty(answer))
 								{
-									Debug.WriteLine(e.Message);
+									string val = "";
+									if (pp.ContainsKey("VALUE"))
+									{
+										val = pp["VALUE"];
+									}
+									string message = "Voulez-vous associez \"" + val + "\" comme étant le lieux actuel?";
+									var a = new System.Action(() =>
+									{
+										try
+										{
+											var location = App.LocationManager.GetLocation();
+											string noseq = "";
+											string pheidiParams = "";
+											data = "";
+											bool createNewGeo = true;
+											if (location != null)
+											{
+												var potentialGeofences = App.GeofenceManager.GetOverlappingGeofences(location.Latitude, location.Longitude);
+												if (potentialGeofences.Any(g => g.Name.ToLower() == val.ToLower()))
+												{
+													var geo = potentialGeofences.First(g => g.Name.ToLower() == val.ToLower());
+													noseq = geo.NoSeq;
+													createNewGeo = false;
+												}
+											}
+											if (createNewGeo)
+											{
+
+												var geo = new Geofence()
+												{
+													Latitude = location.Latitude,
+													Longitude = location.Longitude,
+													NotificationEnabled = true,
+													User = App.Username,
+													Domain = App.Domain,
+													NotificationDelay = 0,
+													Name = val,
+												};
+												geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+												App.GeofenceManager.AddGeofence(geo);
+												noseq = geo.NoSeq;
+											}
+											pheidiParams = PheidiParams.InsertValueInString(param[index], "IPheidi_Params", noseq);
+
+											for (int i = 0; i < param.Length; i++)
+											{
+												string str = i != index ? param[i] : pheidiParams;
+												data += data.Length > 0 ? "&" + str : str;
+											}
+											Debug.WriteLine(data);
+											SendRequest(GenerateRequest(request, data));
+											Task.Delay(100);
+										}
+										catch (Exception e)
+										{
+											Debug.WriteLine(e.Message);
+										}
+										finally
+										{
+											CurrentlyProcessingRequestLocaly = false;
+										}
+
+									});
+
+									App.NotificationManager.DisplayAlert(message, "", "Oui", "Non", a, () => { CurrentlyProcessingRequestLocaly = false; });
 								}
-								finally
+								else
 								{
 									CurrentlyProcessingRequestLocaly = false;
 								}
@@ -319,6 +348,7 @@ namespace Ipheidi.iOS
 							Debug.WriteLine(e.Message);
 							CurrentlyProcessingRequestLocaly = false;
 						}
+
 						return null;
 					}
 				}
@@ -326,142 +356,6 @@ namespace Ipheidi.iOS
 			return request;
 		}
 
-		static void ImageImport(UIImagePickerControllerSourceType sourceType, NSUrlRequest request)
-		{
-			var imagePicker = new UIImagePickerController { SourceType = sourceType };
-
-			imagePicker.FinishedPickingMedia += (send, ev) =>
-			{
-
-				var image = (UIImage)ev.Info.ObjectForKey(new NSString("UIImagePickerControllerOriginalImage"));
-				var filename = String.Format("Pic_{0}.png", NoSeqGenerator.Generate());
-				var filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), filename);
-				using (NSData imageData = image.AsPNG())
-				{
-					Byte[] byteArray = new Byte[imageData.Length];
-					System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, byteArray, 0, Convert.ToInt32(imageData.Length));
-
-					App.FileHelper.SaveImage(filepath, byteArray);
-				}
-
-				UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewController(true, null);
-				var imageEditor = new PheidiTOCropViewController(image);
-				imageEditor.OnEditFinished(() =>
-				{
-					var param = request.Body.ToString().Split('&');
-					PheidiParams pp = new PheidiParams();
-					int index = 0;
-					for (int i = 0; i < param.Length; i++)
-					{
-						if (param[i].Contains("pheidiparams"))
-						{
-							pp.Load(WebUtility.UrlDecode(param[i]));
-							index = i;
-						}
-					}
-					image = imageEditor.FinalImage;
-					if (image != null)
-					{
-						using (NSData imageData = image.AsJPEG())
-						{
-							Byte[] byteArray = new Byte[imageData.Length];
-							System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, byteArray, 0, Convert.ToInt32(imageData.Length));
-
-							App.FileHelper.SaveImage(filepath, byteArray);
-						}
-
-						Task.Run(async () =>
-						{
-
-							string p = "";
-							var dic = new Dictionary<string, string>();
-							var uploadId = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString("F0");
-							var url = "http://" + App.Domain + "/upload.ashx";
-							var parameters = new Dictionary<string, string> { { "uploadID", uploadId } };
-
-							var timeout = new TimeSpan(0, 0, 240);
-							var handler = new HttpClientHandler() { CookieContainer = App.CookieManager.GetAllCookies() };
-							using (var httpClient = new HttpClient(handler, true))
-							{
-
-								MultipartFormDataContent content = new MultipartFormDataContent();
-
-								content.Add(new StringContent(uploadId), "uploadID");
-								content.Add(new StreamContent(image.AsPNG().AsStream()), "Filedata", filename);
-								content.Add(new StringContent(DateTime.Now.ToString()), "ModDate");
-								content.Add(new StringContent(DateTime.Now.ToString()), "CrDate");
-								content.Add(new StringContent("image"), "callType");
-								content.Add(new StringContent(pp["NOSEQ"]), "qfv");
-								content.Add(new StringContent("2"), "BD");
-
-								HttpResponseMessage response = null;
-								try
-								{
-									HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Post, url);
-									httpRequest.Content = content;
-									httpRequest.Headers.Add("User-Agent", "Ipheidi " + Device.RuntimePlatform);
-									httpRequest.Headers.Add("UserHostAddress", App.NetworkManager.GetIPAddress());
-									Debug.WriteLine(await httpRequest.Content.ReadAsStringAsync());
-									httpClient.Timeout = timeout;
-									response = await httpClient.SendAsync(httpRequest);
-
-								}
-								catch (Exception ex)
-								{
-									System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
-									Debug.WriteLine(ex.Message + "\n\n" + ex.ToString());
-									App.NetworkManager.CheckHostServerState();
-								};
-								if (response != null)
-								{
-									if (response.StatusCode == HttpStatusCode.OK)
-									{
-										string responseContent = response.Content.ReadAsStringAsync().Result;
-										Debug.WriteLine("Reponse:" + responseContent);
-
-										if (responseContent == "1")
-										{
-											dic = new Dictionary<string, string>();
-											dic.Add("FIELD", pp["FIELD"]);
-											dic.Add("NOSEQ", pp["NOSEQ"]);
-											dic.Add("VALUE", "'" + uploadId + "'");
-
-											foreach (var d in dic)
-											{
-												p += d.Key + "**:**" + d.Value + "**,**";
-											}
-											parameters = new Dictionary<string, string> { { "pheidiaction", "UpdateFieldValue" }, { "pheidiparams", p } };
-											response = null;
-											response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
-											if (response != null)
-											{
-												if (response.StatusCode == HttpStatusCode.OK)
-												{
-													responseContent = response.Content.ReadAsStringAsync().Result;
-													Debug.WriteLine("Reponse:" + responseContent);
-													if (!responseContent.StartsWith("erreur", StringComparison.OrdinalIgnoreCase))
-													{
-														App.NotificationManager.DisplayAlert("L'envoie de la photo fut complèté avec succès.", "Pheidi", "OK", () => { });
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						});
-					}
-				});
-				UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(imageEditor, true, () => { });
-			};
-
-			imagePicker.Canceled += (send, ev2) =>
-			{
-				UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewController(true, null);
-			};
-
-			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(imagePicker, true, null);
-		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.iOS.CustomUrlProtocol"/> class.
@@ -471,7 +365,7 @@ namespace Ipheidi.iOS
 		/// <param name="client">Client.</param>
 		[Export("initWithRequest:cachedResponse:client:")]
 		public PheidiUrlProtocol(NSUrlRequest request, NSCachedUrlResponse cachedResponse, INSUrlProtocolClient client)
-				: base(request, cachedResponse, client)
+					: base(request, cachedResponse, client)
 		{
 
 		}
@@ -519,5 +413,7 @@ namespace Ipheidi.iOS
 			req.Body = nsdata;
 			return req;
 		}
+
+
 	}
 }

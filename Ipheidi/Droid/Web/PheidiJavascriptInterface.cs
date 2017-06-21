@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,11 +32,13 @@ namespace Ipheidi.Droid
 		[JavascriptInterface]
 		public string ExecuteAction(string pheidiparams, string objectAction)
 		{
+			PheidiParams pp = new PheidiParams();
+			pp.Load(pheidiparams);
 			if (objectAction == "geofenceAutoCreate")
 			{
+
 				string data = "";
-				PheidiParams pp = new PheidiParams();
-				pp.Load(pheidiparams);
+				/*
 				string answer = "";
 				string p = "";
 				var dic = new Dictionary<string, string>();
@@ -48,7 +51,7 @@ namespace Ipheidi.Droid
 					p += d.Key + "**:**" + d.Value + "**,**";
 				}
 				var parameters = new Dictionary<string, string> { { "pheidiaction", "GetTableField" }, { "pheidiparams", p } };
-				HttpResponseMessage response = App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
+				HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
 				if (response != null)
 				{
 					if (response.StatusCode == HttpStatusCode.OK)
@@ -57,7 +60,7 @@ namespace Ipheidi.Droid
 						System.Diagnostics.Debug.WriteLine("Reponse:" + responseContent);
 						try
 						{
-							answer = Action.GetFields(responseContent)[0][dic["FieldName"]] as string;
+							answer = ActionManager.GetFields(responseContent)[0][dic["FieldName"]] as string;
 						}
 						catch (Exception e)
 						{
@@ -89,8 +92,114 @@ namespace Ipheidi.Droid
 				}
 				data = PheidiParams.InsertValueInString(pheidiparams, "IPheidi_Params", noseq);
 				System.Diagnostics.Debug.WriteLine(data);
-				return data;
+				return data;*/
 
+				try
+				{
+					string answer = "";
+					string p = "";
+					var dic = new Dictionary<string, string>();
+					dic.Add("OTHERFIELD", pp["FIELD"]);
+					dic.Add("NOSEQ", pp["NOSEQ"]);
+					dic.Add("FIELD", "geofence");
+
+					foreach (var d in dic)
+					{
+						p += d.Key + "**:**" + d.Value + "**,**";
+					}
+					var parameters = new Dictionary<string, string> { { "pheidiaction", "GetFieldValueFromOtherField" }, { "pheidiparams", p } };
+					HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
+					if (response != null)
+					{
+						if (response.StatusCode == HttpStatusCode.OK)
+						{
+							string responseContent = response.Content.ReadAsStringAsync().Result;
+							System.Diagnostics.Debug.WriteLine("Reponse:" + responseContent);
+							try
+							{
+								answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
+							}
+							catch (Exception e)
+							{
+								System.Diagnostics.Debug.WriteLine(e.Message);
+							}
+						}
+					}
+					if (string.IsNullOrEmpty(answer))
+					{
+						string val = "";
+						if (pp.ContainsKey("VALUE"))
+						{
+							val = pp["VALUE"];
+						}
+						bool EndOfProcess = false;
+						string message = "Voulez-vous associez \"" + val + "\" comme étant le lieux actuel?";
+						var a = new System.Action(() =>
+						{
+							try
+							{
+
+								var location = App.LocationManager.GetLocation();
+								string noseq = "";
+								data = "";
+								bool createNewGeo = true;
+								if (location != null)
+								{
+									var potentialGeofences = App.GeofenceManager.GetOverlappingGeofences(location.Latitude, location.Longitude);
+									if (potentialGeofences.Any(g => g.Name.ToLower() == val.ToLower()))
+									{
+										var geo = potentialGeofences.First(g => g.Name.ToLower() == val.ToLower());
+										noseq = geo.NoSeq;
+										createNewGeo = false;
+									}
+								}
+								if (createNewGeo)
+								{
+
+									var geo = new Geofence()
+									{
+										Latitude = location.Latitude,
+										Longitude = location.Longitude,
+										NotificationEnabled = true,
+										User = App.Username,
+										Domain = App.Domain,
+										NotificationDelay = 0,
+										Name = val,
+									};
+									geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+									App.GeofenceManager.AddGeofence(geo);
+									noseq = geo.NoSeq;
+								}
+								pheidiparams = PheidiParams.InsertValueInString(pheidiparams, "IPheidi_Params", noseq);
+							}
+							catch (Exception e)
+							{
+								System.Diagnostics.Debug.WriteLine(e.Message);
+							}
+							finally
+							{
+								EndOfProcess = true;
+							}
+						});
+
+						App.NotificationManager.DisplayAlert(message, "", "Oui", "Non", a, () => { EndOfProcess = true;});
+
+						while (!EndOfProcess)
+						{
+							Task.Delay(500);
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					System.Diagnostics.Debug.WriteLine(e.Message);
+
+				}
+
+			}
+			else if (pp.ContainsKey("FILECHOOSER"))
+			{
+				PheidiWebChromeClient.FileChooserPheidiParams = pp;
 			}
 			return pheidiparams;
 		}

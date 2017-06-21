@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
@@ -35,8 +35,8 @@ namespace Ipheidi
 				App.WifiOnlyEnabled = wifiOnlySwitch.IsToggled;
 			};
 			App.NetworkManager.AddNetworkStateListener(this);
-			lblHostServerState.Text = "Host Server State: " + App.SplitCamelCase(NetworkState.Reachable.ToString());
-			lblNetworkState.Text = "NetworkState: " + App.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
+			lblHostServerState.Text = "Host Server State: " + Utilities.SplitCamelCase(NetworkState.Reachable.ToString());
+			lblNetworkState.Text = "NetworkState: " + Utilities.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
 
 			languePicker.Items.Add("fr");
 			languePicker.Items.Add("en");
@@ -113,7 +113,7 @@ namespace Ipheidi
 		/// <param name="state">State.</param>
 		public void OnNetworkStateUpdate(NetworkState state)
 		{
-			var data = App.SplitCamelCase(state.ToString());
+			var data = Utilities.SplitCamelCase(state.ToString());
 			lblNetworkState.Text = "NetworkState: " + data;
 		}
 
@@ -125,7 +125,7 @@ namespace Ipheidi
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				var data = App.SplitCamelCase(state.ToString());
+				var data = Utilities.SplitCamelCase(state.ToString());
 				lblHostServerState.Text = "Host Server State: " + data;
 			});
 		}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +22,7 @@ namespace Ipheidi.iOS
 			App.Heigth = UIScreen.MainScreen.Bounds.Height;
 			App.Width = UIScreen.MainScreen.Bounds.Width;
 			LoadApplication(new App());
+
 
 			Boolean result = base.FinishedLaunching(app, options);
 			UIColor colorPrimary = UIColor.FromRGB((nfloat)App.ColorPrimary.R, (nfloat)App.ColorPrimary.G, (nfloat)App.ColorPrimary.B);
@@ -61,7 +62,7 @@ namespace Ipheidi.iOS
 		{
 			var action = JsonConvert.DeserializeObject<Action>(notification.UserInfo[new NSString("Action")] as NSString);
 
-			Action.RunActionAnswer(action);
+			ActionManager.RunActionAnswer(action);
 
 			// reset our badge
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;

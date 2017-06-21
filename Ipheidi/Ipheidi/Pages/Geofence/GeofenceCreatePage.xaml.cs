@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -137,7 +137,7 @@ namespace Ipheidi
 
 
 				//Type Picker
-				foreach (var t in Action.GetActionTypes())
+				foreach (var t in ActionManager.GetActionTypes())
 				{
 					EnterTypePicker.Items.Add(t);
 				}
@@ -147,7 +147,7 @@ namespace Ipheidi
 					string value = EnterTypePicker.Items[EnterTypePicker.SelectedIndex];
 
 					EnterSoustypePicker.Items.Clear();
-					foreach (var t in Action.GetActionList().Where((Action a) => a.Category == value))
+					foreach (var t in ActionManager.GetActionList().Where((Action a) => a.Category == value))
 					{
 						EnterSoustypePicker.Items.Add(t.Description);
 					}
@@ -156,7 +156,7 @@ namespace Ipheidi
 					{
 						if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))
 						{
-							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == Geofence.EnterActionNoSeq).Description);
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == Geofence.EnterActionNoSeq).Description);
 						}
 						else
 						{
@@ -171,7 +171,7 @@ namespace Ipheidi
 					string value = EnterSoustypePicker.SelectedIndex >= 0 ? EnterSoustypePicker.Items[EnterSoustypePicker.SelectedIndex] : "";
 					if (value != "")
 					{
-						var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
 						if (Geofence.EnterActionNoSeq != action.NoSeq)
 						{
 							Geofence.EnterActionNoSeq = action.NoSeq;
@@ -183,7 +183,7 @@ namespace Ipheidi
 					}
 				};
 
-				foreach (var t in Action.GetActionTypes())
+				foreach (var t in ActionManager.GetActionTypes())
 				{
 					ExitTypePicker.Items.Add(t);
 				}
@@ -192,7 +192,7 @@ namespace Ipheidi
 					string value = ExitTypePicker.Items[ExitTypePicker.SelectedIndex];
 					ExitSoustypePicker.Items.Clear();
 
-					foreach (var t in Action.GetActionList().Where(a => a.Category == value))
+					foreach (var t in ActionManager.GetActionList().Where(a => a.Category == value))
 					{
 						ExitSoustypePicker.Items.Add(t.Description);
 					}
@@ -201,7 +201,7 @@ namespace Ipheidi
 					{
 						if (!string.IsNullOrEmpty(Geofence.ExitActionNoSeq))
 						{
-							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(Action.GetActionList().First(a => a.NoSeq == Geofence.ExitActionNoSeq).Description);
+							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == Geofence.ExitActionNoSeq).Description);
 						}
 						else
 						{
@@ -216,7 +216,7 @@ namespace Ipheidi
 					string value = ExitSoustypePicker.SelectedIndex >= 0 ? ExitSoustypePicker.Items[ExitSoustypePicker.SelectedIndex] : "";
 					if (value != "")
 					{
-						var action = Action.GetActionList().FirstOrDefault((a) => a.Description == value);
+						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
 						if (Geofence.ExitActionNoSeq != action.NoSeq)
 						{
 							Geofence.ExitActionNoSeq = action.NoSeq;
@@ -229,20 +229,20 @@ namespace Ipheidi
 				};
 
 
-				string category = Action.Null;
+				string category = ActionManager.Null;
 
 				if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))
 				{
-					var enterAction = Action.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					var enterAction = ActionManager.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
 					category = enterAction.Category;
 				}
 				EnterTypePicker.SelectedItem = category;
 
-				category = Action.Null;
+				category = ActionManager.Null;
 
 				if (!string.IsNullOrEmpty(Geofence.ExitActionNoSeq))
 				{
-					var exitAction = Action.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					var exitAction = ActionManager.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
 					category = exitAction.Category;
 				}
 				ExitTypePicker.SelectedItem = category;

@@ -35,11 +35,11 @@ namespace Ipheidi
 			Add("ISACOM", "@");
 
 		}
-
 		public void Load(string param)
 		{
 			if (String.IsNullOrEmpty(param)) return;
-			if (param.EndsWith(ParamSplitter)) param.Remove(param.Length - 6);
+
+			if (param.EndsWith(ParamSplitter, StringComparison.Ordinal)) param = param.Remove(param.Length-ParamSplitter.Length);
 
 			if (!param.Contains(ParamSplitter) && !param.Contains(ValueSplitter)) return;
 

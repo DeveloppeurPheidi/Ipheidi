@@ -26,7 +26,7 @@ namespace Ipheidi.Droid
 				if (intent.Extras.ContainsKey("Action"))
 				{
 					var action = JsonConvert.DeserializeObject<Ipheidi.Action>(intent.Extras.GetString("Action"));
-					Action.RunActionAnswer(action);
+					ActionManager.RunActionAnswer(action);
 				}
 			}
 		}

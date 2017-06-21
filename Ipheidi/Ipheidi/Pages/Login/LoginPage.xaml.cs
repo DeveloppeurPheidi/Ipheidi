@@ -192,7 +192,7 @@ namespace Ipheidi
 			}
 
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
-			HttpResponseMessage response = await App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 10));
+			HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 10));
 			if (response != null)
 			{
 				if (response.StatusCode == HttpStatusCode.OK)

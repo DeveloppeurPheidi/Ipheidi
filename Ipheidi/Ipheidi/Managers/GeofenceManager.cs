@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ namespace Ipheidi
 	{
 		private ObservableCollection<Geofence> Geofences = new ObservableCollection<Geofence>();
 		private List<Geofence> ClosePositionGeofences = new List<Geofence>();
-		private const int ClosePositionDistance = 3000;
+
 		private Location LastClosePositionRefreshLocation;
 		private List<Geofence> RescheduledGeofenceUpdates = new List<Geofence>();
 		private List<Location> UnknownLocationList;
@@ -120,7 +120,7 @@ namespace Ipheidi
 				geofence.NoSeq = (await DatabaseHelper.Database.GetAllItems<Geofence>()).First((arg) => arg.NoSeq == geofence.NoSeq).NoSeq;
 				Geofences.Add(geofence);
 				RefreshClosePositionGeofencesList();
-				SendGeofenceToServer(ref geofence);
+				await SendGeofenceToServer(geofence);
 			});
 		}
 
@@ -135,7 +135,7 @@ namespace Ipheidi
 			{
 				await DatabaseHelper.Database.UpdateItem(geofence);
 				Geofences[Geofences.IndexOf(Geofences.First(g => g.NoSeq == geofence.NoSeq))] = geofence;
-				if (!SendGeofenceToServer(ref geofence))
+				if (!await SendGeofenceToServer(geofence))
 				{
 					if (RescheduledGeofenceUpdates.Any((arg) => arg.NoSeq == geofence.NoSeq))
 					{
@@ -318,10 +318,31 @@ namespace Ipheidi
 		/// <param name="geofence">Geofence.</param>
 		public List<Geofence> GetOverlappingGeofences(Geofence geofence)
 		{
+			return GetOverlappingGeofences(geofence.Latitude, geofence.Longitude);
+		}
+
+		/// <summary>
+		/// Gets the overlapping geofences.
+		/// </summary>
+		/// <returns>The overlapping geofences.</returns>
+		/// <param name="location">Location.</param>
+		public List<Geofence> GetOverlappingGeofences(Location location)
+		{
+			return GetOverlappingGeofences(location.Latitude, location.Longitude);
+		}
+
+		/// <summary>
+		/// Gets the overlapping geofences.
+		/// </summary>
+		/// <returns>The overlapping geofences.</returns>
+		/// <param name="latitude">Latitude.</param>
+		/// <param name="longitude">Longitude.</param>
+		public List<Geofence> GetOverlappingGeofences(double latitude, double longitude)
+		{
 			List<Geofence> list = new List<Geofence>();
 			foreach (var g in Geofences)
 			{
-				if (g.CheckIfLocationInsideFence(geofence.Latitude, geofence.Longitude))
+				if (g.CheckIfLocationInsideFence(latitude, longitude))
 				{
 					list.Add(g);
 				}
@@ -340,7 +361,7 @@ namespace Ipheidi
 			geofence.DeleteFlag = 1;
 			Task.Run(async () =>
 			{
-				if (SendGeofenceToServer(ref geofence))
+				if (await SendGeofenceToServer(geofence))
 				{
 					var toDelete = await DatabaseHelper.Database.GetItem<Geofence>(geofence.NoSeq);
 					await DatabaseHelper.Database.DeleteItemAsync<Geofence>(toDelete);
@@ -376,7 +397,7 @@ namespace Ipheidi
 			Debug.WriteLine("======New Close Position Geofence List======");
 			foreach (var geofence in data)
 			{
-				if (geofence.NotificationEnabled && geofence.DistanceFromCurrentPosition < ClosePositionDistance)
+				if (geofence.NotificationEnabled && geofence.DistanceFromCurrentPosition < ApplicationConst.ClosePositionDistance)
 				{
 					ClosePositionGeofences.Add(geofence);
 					Debug.WriteLine(geofence.Name);
@@ -393,7 +414,7 @@ namespace Ipheidi
 		{
 			//bool IsUnknowLocation = true;
 
-			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ClosePositionDistance - App.GeofenceRadius * 2.5)
+			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ApplicationConst.ClosePositionDistance - ApplicationConst.DefaultGeofenceRadius * 2.5)
 			{
 				RefreshClosePositionGeofencesList();
 			}
@@ -407,7 +428,7 @@ namespace Ipheidi
 
 			/*if (IsUnknowLocation)
 			{
-				if (location.IsLocationWithinRadius(UnknownLocationList, App.GeofenceRadius))
+				if (location.IsLocationWithinRadius(UnknownLocationList, ApplicationConst.DefaultGeofenceRadius))
 				{
 					if (UnknownLocationList.Count == 0) TimerStartTime = DateTime.UtcNow;
 					UnknownLocationList.Add(location);
@@ -425,11 +446,11 @@ namespace Ipheidi
 		/// </summary>
 		/// <returns><c>true</c>, if geofence was sent to the server , <c>false</c> otherwise.</returns>
 		/// <param name="geofence">Geofence.</param>
-		bool SendGeofenceToServer(ref Geofence geofence)
+		async Task<bool> SendGeofenceToServer(Geofence geofence)
 		{
 			var json = JsonConvert.SerializeObject(geofence);
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "sendGeofence" }, { "pheidiparams", "value**:**" + json + "**,**" } };
-			HttpResponseMessage response = App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
+			HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
 			if (response != null)
 			{
 				if (response.StatusCode == HttpStatusCode.OK)
@@ -486,7 +507,7 @@ namespace Ipheidi
 				Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
 			}
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "getGeofences" }, { "pheidiparams", "value**:**" + Application.Current.Properties["LastGeofenceSync"] + "**,**" } };
-			HttpResponseMessage response = App.Instance.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
+			HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
 			if (response != null)
 			{
 				if (response.StatusCode == HttpStatusCode.OK)
