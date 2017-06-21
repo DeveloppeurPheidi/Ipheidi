@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -11,7 +12,7 @@ namespace Ipheidi
 		Location Location;
 		public MapPage()
 		{
-			Title = "Map";
+			Title = AppResources.MapPageTitle;
 			InitializeComponent();
 			Location = App.LocationManager.GetLocation();
 
@@ -47,7 +48,7 @@ namespace Ipheidi
 
 		public MapPage(Location location)
 		{
-			Title = "Map";
+			Title = AppResources.MapPageTitle;
 			InitializeComponent();
 			Location = location;
 			if (Location != null)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -31,7 +32,7 @@ namespace Ipheidi
 		public GeofenceCreatePage(Geofence geofence)
 		{
 			Geofence = geofence;
-			Title = "Nouveau Lieu";
+			Title = AppResources.GeofenceCreatePageTitle;
 			Initialize();
 			nameEntry.Text = Geofence.Name;
 			secEntry.Text = Geofence.NotificationDelay + "";
@@ -57,6 +58,22 @@ namespace Ipheidi
 			}
 
 			InitializeComponent();
+
+			labelLongitude.Text = AppResources.LongitudeLabel;
+			entryLongitude.Placeholder = AppResources.LongitudePlaceHolder;
+			labelLatitude.Text = AppResources.LatitudeLabel;
+			entryLatitude.Placeholder = AppResources.LatitudePlaceHolder;
+			btnMap.Text = AppResources.CarteButton;
+			nameEntry.Placeholder = AppResources.NomLieuPlaceHolder;
+			notificationLabel.Text = AppResources.ActiverNotificationLabel;
+			enterActionLabel.Text = AppResources.ActionEntreeLabel;
+			exitActionLabel.Text = AppResources.ActionSortieLabel;
+			notificationDelaiLabel.Text = AppResources.DelaiNotificationLabel;
+			minEntry.Placeholder = AppResources.MinutesPlaceHolder;
+			secEntry.Placeholder = AppResources.SecondesPlaceHolder;
+			btnSave.Text = AppResources.EnregistrerBouton;
+			btnCancel.Text = AppResources.AnnulerBouton;
+
 
 			if (Geofence != null)
 			{

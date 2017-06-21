@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -15,9 +16,9 @@ namespace Ipheidi
 	{
 		List<string> filters = new List<string>()
 		{
-			"Nom",
-			"Proximité",
-			"Notifcation Activée"
+			AppResources.FilterNom,
+			AppResources.FilterProximite,
+			AppResources.FilterNotificationActive
 		};
 
 		static bool IsCurrentlySorting = false;
@@ -30,7 +31,8 @@ namespace Ipheidi
 		public GeofencePage()
 		{
 			InitializeComponent();
-			ToolbarItems.Add(new ToolbarItem("", "refresh.png", () => {
+			ToolbarItems.Add(new ToolbarItem("", "refresh.png", () =>
+			{
 				SortList();
 			}));
 			geofenceCollection = App.GeofenceManager.GetGeofences();
@@ -88,18 +90,20 @@ namespace Ipheidi
 				Task.Run(() =>
 				{
 					var list = new List<Geofence>();
-					switch (sortingPicker.SelectedItem.ToString())
+					string s = sortingPicker.SelectedItem.ToString();
+					if (s == AppResources.FilterNom)
 					{
-						case "Nom":
-							list = geofenceCollection.OrderBy((arg) => arg.Name).ToList();
-							break;
-						case "Proximité":
-							list = geofenceCollection.OrderBy((arg) => arg.DistanceFromCurrentPosition).ToList();
-							break;
-						case "Notifcation Activée":
-							list = geofenceCollection.OrderByDescending((arg) => arg.NotificationEnabled).ToList();
-							break;
+						list = geofenceCollection.OrderBy((arg) => arg.Name).ToList();
 					}
+					else if (s == AppResources.FilterProximite)
+					{
+						list = geofenceCollection.OrderBy((arg) => arg.DistanceFromCurrentPosition).ToList();
+					}
+					else if (s == AppResources.FilterNotificationActive)
+					{
+						list = geofenceCollection.OrderByDescending((arg) => arg.NotificationEnabled).ToList();
+					}
+
 					geofenceCollection.Clear();
 					for (int i = 0; i < list.Count; i++)
 					{
@@ -112,7 +116,7 @@ namespace Ipheidi
 		}
 		void RefreshTitle()
 		{
-			Title = "Lieux (" + geofenceCollection.Count + ")";
+			Title = string.Format(AppResources.GeofencePageTitle, geofenceCollection.Count);
 		}
 
 		/// <summary>

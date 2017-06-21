@@ -12,10 +12,12 @@
 			HorizontalOptions="FillAndExpand">
 
 			<Button
+				x:Name="forgetAccountBtn"
 				Text   ="Oublier ce compte"
 				Clicked="ForgetAccountButtonClicked" />
 
 			<Button
+				x:Name="deleteAllAccountBtn"
 				Text   ="Supprimer tous les comptes"
 				Clicked="DeleteAllUserButtonClicked" />
 
@@ -27,6 +29,7 @@
 				Orientation="Horizontal">
 
 				<Label
+					x:Name="lblWifiOnly"
 					Text                 ="Transfert de données sous Wifi seulement"
 					VerticalTextAlignment="Center" />
 

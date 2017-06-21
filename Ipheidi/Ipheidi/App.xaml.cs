@@ -263,7 +263,6 @@ namespace Ipheidi
 		/// </summary>
 		public void GetLoginPage()
 		{
-
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
 			foreach (var cred in App.Credentials)
 			{
@@ -337,14 +336,14 @@ namespace Ipheidi
 			base.OnPropertyChanged(propertyName);
 		}
 
-		public void OnNetworkStateUpdate(NetworkState state)
+		public void OnNetworkStateUpdate(string state)
 		{
-			Debug.WriteLine("App: Network State = " + Utilities.SplitCamelCase(state.ToString()));
+			Debug.WriteLine("App: Network State = " + state);
 		}
 
-		public void OnHostServerStateUpdate(NetworkState state)
+		public void OnHostServerStateUpdate(string state)
 		{
-			Debug.WriteLine("App: Host Server State = " + Utilities.SplitCamelCase(state.ToString()));
+			Debug.WriteLine("App: Host Server State = " + state);
 		}
 
 	}

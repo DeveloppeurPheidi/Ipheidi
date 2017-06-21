@@ -93,7 +93,7 @@ namespace Ipheidi.iOS
 		/// Gets the state of the network.
 		/// </summary>
 		/// <returns>The network state.</returns>
-		public NetworkState GetNetworkState()
+		public string GetNetworkState()
 		{
 			if (CurrentNetworkState == NetworkState.Default)
 			{

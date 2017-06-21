@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Xamarin.Forms;
 using System.Linq;
+using Ipheidi.Resources;
 
 namespace Ipheidi
 {
@@ -28,12 +29,12 @@ namespace Ipheidi
 			//Bouton de logout
 			ContentPage logout = new ContentPage();
 			logout.Icon = "logout.png";
-			logout.Title = "Déconnexion";
+			logout.Title = AppResources.DeconnexionBouton;
 
 			//Bouton de refresh
 			ContentPage refresh = new ContentPage();
 			refresh.Icon = "refresh.png";
-			refresh.Title = "Regénérer le navigateur";
+			refresh.Title = AppResources.RegenererBrowserBouton;
 
 			pages.Add(logout);
 			pages.Add(refresh);
@@ -50,12 +51,12 @@ namespace Ipheidi
 				if (listViewMenu.SelectedItem != null)
 				{
 					Page p = (Page)listViewMenu.SelectedItem;
-					if (p.Title == "Déconnexion")
+					if (p.Title == AppResources.DeconnexionBouton)
 					{
 						App.CookieManager.ClearCookies();
 						BrowserPage.CheckWebSession();
 					}
-					else if (p.Title == "Regénérer le navigateur")
+					else if (p.Title == AppResources.RegenererBrowserBouton)
 					{
 						Device.BeginInvokeOnMainThread(App.Instance.RefreshBrowser);
 					}

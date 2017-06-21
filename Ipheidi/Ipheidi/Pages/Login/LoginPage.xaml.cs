@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 
@@ -125,6 +126,15 @@ namespace Ipheidi
 				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
 			}
 
+			usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
+			lblCourriel.Text = AppResources.CourrielLabel;
+			passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
+			lblPassword.Text = AppResources.MotDePasseLabel;
+			lblRemember.Text = AppResources.MemoriserLabel;
+			btnOtherAccount.Text = AppResources.ConnexionBouton;
+			btnOtherAccount.Text = AppResources.AutreCompteBouton;
+			btnBackToFirstPage.Text = AppResources.RetourBouton;
+
 			AppLoadingView.SetVisibility(false);
 			Debug.WriteLine("TOTAL: " + watch.Elapsed.Milliseconds);
 		}
@@ -188,7 +198,7 @@ namespace Ipheidi
 		{
 			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(App.Url))
 			{
-				return "Veullez laisser aucun champ vide";
+				return AppResources.Erreur_LaissezAucunChampVide;
 			}
 
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
@@ -202,7 +212,7 @@ namespace Ipheidi
 					App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
 					var userAgent = App.AppName + " " + Xamarin.Forms.Device.RuntimePlatform;
 					var uaCookie = new Cookie() { Name = "IPHEIDI_USERAGENT", Domain = App.Domain, Value = userAgent };
-					if (!string.IsNullOrEmpty(rc) && IsNumeric(rc))
+					if (!string.IsNullOrEmpty(rc) && Utilities.IsNumeric(rc))
 					{
 						Debug.WriteLine(rc);
 						if (rememberUser || !IsInSecondPage)
@@ -222,10 +232,10 @@ namespace Ipheidi
 						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
 						return "";
 					}
-					return "L'adresse courriel ou le mot de passe saisi sont incorrects";
+					return AppResources.Erreur_MauvaisEmailOuMdp;
 				}
 			}
-			return "Problème de connexion au serveur, veuillez réessayer plus tard";
+			return AppResources.Erreur_ProblemeConnexionServeur;
 		}
 
 		/// <summary>
@@ -255,21 +265,5 @@ namespace Ipheidi
 			base.OnAppearing();
 		}
 
-		/// <summary>
-		/// Check if numeric.
-		/// </summary>
-		/// <returns><c>true</c>, if is numeric, <c>false</c> otherwise.</returns>
-		/// <param name="value">The string to check.</param>
-		bool IsNumeric(string value)
-		{
-			foreach (char c in value)
-			{
-				if (c < '0' || c > '9')
-				{
-					return false;
-				}
-			}
-			return true;
-		}
 	}
 }

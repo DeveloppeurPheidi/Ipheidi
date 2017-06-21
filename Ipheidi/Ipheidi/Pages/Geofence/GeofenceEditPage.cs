@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -40,8 +41,8 @@ namespace Ipheidi
 			layout.Padding = new Thickness(20, 20);
 			entryLayout = new StackLayout() { Orientation = StackOrientation.Vertical, HorizontalOptions = LayoutOptions.FillAndExpand };
 			lblLayout = new StackLayout() { Orientation = StackOrientation.Vertical, VerticalOptions = LayoutOptions.FillAndExpand };
-			namelbl = new Label() { Text = "Nom: ", VerticalTextAlignment = TextAlignment.Center };
-			nameEntry = new Entry() { Placeholder = "Nom", HorizontalOptions = LayoutOptions.FillAndExpand };
+			namelbl = new Label() { Text = AppResources.NomLabel, VerticalTextAlignment = TextAlignment.Center };
+			nameEntry = new Entry() { Placeholder = AppResources.NomPlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
 			nameEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
 			{
 				if (nameEntry.Text.Length > 50)
@@ -57,14 +58,14 @@ namespace Ipheidi
 			};
 			lblLayout.Children.Add(namelbl);
 			entryLayout.Children.Add(nameEntry);
-			latitudelbl = new Label() { Text = "Latitude: ", VerticalTextAlignment = TextAlignment.Center };
-			latitudeEntry = new Entry() { Text = geofence.Latitude + "", Placeholder = "Latitude", HorizontalOptions = LayoutOptions.FillAndExpand };
+			latitudelbl = new Label() { Text = AppResources.LatitudeLabel, VerticalTextAlignment = TextAlignment.Center };
+			latitudeEntry = new Entry() { Text = geofence.Latitude + "", Placeholder = AppResources.LatitudePlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
 			latitudeEntry.Unfocused += (sender, e) =>
 									{
 										double value = 0;
 										if (double.TryParse(latitudeEntry.Text, out value) || string.IsNullOrEmpty(latitudeEntry.Text))
 										{
-											if (geofence.Latitude != value)
+											if (geofence.Latitude > value || geofence.Latitude < value)
 											{
 												geofence.Latitude = value;
 												didChange = true;
@@ -75,14 +76,14 @@ namespace Ipheidi
 			entryLayout.Children.Add(latitudeEntry);
 
 
-			longitudelbl = new Label() { Text = "Longitude: ", VerticalTextAlignment = TextAlignment.Center };
-			longitudeEntry = new Entry() { Text = geofence.Longitude + "", Placeholder = "Longitude", HorizontalOptions = LayoutOptions.FillAndExpand };
+			longitudelbl = new Label() { Text = AppResources.LongitudeLabel, VerticalTextAlignment = TextAlignment.Center };
+			longitudeEntry = new Entry() { Text = geofence.Longitude + "", Placeholder = AppResources.LongitudePlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
 			longitudeEntry.Unfocused += (sender, e) =>
 									{
 										double value = 0;
 										if (double.TryParse(longitudeEntry.Text, out value) || string.IsNullOrEmpty(longitudeEntry.Text))
 										{
-											if (geofence.Longitude != value)
+											if (geofence.Longitude > value || geofence.Longitude < value)
 											{
 												geofence.Longitude = value;
 												didChange = true;
@@ -97,7 +98,7 @@ namespace Ipheidi
 
 			typeLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
 			typeEnterLayout = new StackLayout();
-			typeEnterLayout.Children.Add(new Label() { Text = "Action d'entrée", VerticalTextAlignment = TextAlignment.Center });
+			typeEnterLayout.Children.Add(new Label() { Text = AppResources.ActionEntreeLabel, VerticalTextAlignment = TextAlignment.Center });
 
 			EnterTypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
 			var EnterSoustypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -118,7 +119,7 @@ namespace Ipheidi
 					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
 					if (EnterSoustypePicker.IsEnabled)
 					{
-					if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
+						if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 						{
 							var list = ActionManager.GetActionList();
 							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(list.First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
@@ -150,7 +151,7 @@ namespace Ipheidi
 			};
 
 			typeExitLayout = new StackLayout();
-			typeExitLayout.Children.Add(new Label() { Text = "Action de sortie", VerticalTextAlignment = TextAlignment.Center });
+			typeExitLayout.Children.Add(new Label() { Text = AppResources.ActionSortieLabel, VerticalTextAlignment = TextAlignment.Center });
 
 			var ExitTypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
 			var ExitSoustypePicker = new Picker() { HorizontalOptions = LayoutOptions.FillAndExpand };
@@ -244,12 +245,12 @@ namespace Ipheidi
 			typeLayout.Children.Add(typeExitLayout);
 
 			delayLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-			delaylbl = new Label() { Text = "Délai de notification", VerticalTextAlignment = TextAlignment.Center };
+			delaylbl = new Label() { Text = AppResources.DelaiNotificationLabel, VerticalTextAlignment = TextAlignment.Center };
 			delaylbl2 = new Label() { Text = " : ", VerticalTextAlignment = TextAlignment.Center };
 			uint sec = geofence.NotificationDelay % 60;
 			uint min = (geofence.NotificationDelay / 60) % 60;
-			minEntry = new Entry() { Text = min + "", Placeholder = "Minutes", HorizontalOptions = LayoutOptions.FillAndExpand };
-			secEntry = new Entry() { Text = sec + "", Placeholder = "Secondes", HorizontalOptions = LayoutOptions.FillAndExpand };
+			minEntry = new Entry() { Text = min + "", Placeholder = AppResources.MinutesPlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
+			secEntry = new Entry() { Text = sec + "", Placeholder = AppResources.SecondesPlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
 			EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
 			{
 				uint m = 0;
@@ -277,7 +278,7 @@ namespace Ipheidi
 			delayLayout.Children.Add(delaylbl2);
 			delayLayout.Children.Add(secEntry);
 
-			map = new Button() { WidthRequest = App.Width / 2, Text = "Carte" };
+			map = new Button() { WidthRequest = App.Width / 2, Text = AppResources.CarteButton };
 			map.Clicked += (sender, e) =>
 							{
 								var loc = new Location() { Latitude = geofence.Latitude, Longitude = geofence.Longitude };

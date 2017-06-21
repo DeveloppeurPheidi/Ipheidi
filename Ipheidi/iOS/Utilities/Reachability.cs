@@ -72,7 +72,7 @@ namespace Ipheidi.iOS
 
 	
 
-		public static NetworkState InternetConnectionStatus()
+		public static string InternetConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
 			bool defaultNetworkAvailable = IsNetworkAvailable(out flags);
@@ -93,7 +93,7 @@ namespace Ipheidi.iOS
 			}
 		}
 
-		public static NetworkState LocalWifiConnectionStatus()
+		public static string LocalWifiConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
 			if (IsAdHocWiFiNetworkAvailable(out flags))

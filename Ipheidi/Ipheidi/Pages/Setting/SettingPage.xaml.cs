@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -35,8 +36,8 @@ namespace Ipheidi
 				App.WifiOnlyEnabled = wifiOnlySwitch.IsToggled;
 			};
 			App.NetworkManager.AddNetworkStateListener(this);
-			lblHostServerState.Text = "Host Server State: " + Utilities.SplitCamelCase(NetworkState.Reachable.ToString());
-			lblNetworkState.Text = "NetworkState: " + Utilities.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
+			lblHostServerState.Text = AppResources.AccesHoteLabel + Utilities.SplitCamelCase(NetworkState.Reachable.ToString());
+			lblNetworkState.Text = AppResources.EtatDuReseauLabel + Utilities.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
 
 			languePicker.Items.Add("fr");
 			languePicker.Items.Add("en");
@@ -48,6 +49,8 @@ namespace Ipheidi
 				var languageCookie = new Cookie() { Name = "language", Domain = App.Domain, Value = App.Language };
 				App.CookieManager.AddCookie(languageCookie);
 			};
+
+
 		}
 
 		/// <summary>
@@ -111,22 +114,20 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(NetworkState state)
+		public void OnNetworkStateUpdate(string state)
 		{
-			var data = Utilities.SplitCamelCase(state.ToString());
-			lblNetworkState.Text = "NetworkState: " + data;
+			lblNetworkState.Text = AppResources.EtatDuReseauLabel + state;
 		}
 
 		/// <summary>
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(NetworkState state)
+		public void OnHostServerStateUpdate(string state)
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				var data = Utilities.SplitCamelCase(state.ToString());
-				lblHostServerState.Text = "Host Server State: " + data;
+				lblHostServerState.Text = AppResources.AccesHoteLabel + state;
 			});
 		}
 	}

@@ -14,5 +14,22 @@ namespace Ipheidi
 
 			return r.Replace(s, " ");
 		}
+
+		/// <summary>
+		/// Check if numeric.
+		/// </summary>
+		/// <returns><c>true</c>, if is numeric, <c>false</c> otherwise.</returns>
+		/// <param name="value">The string to check.</param>
+		static public bool IsNumeric(string value)
+		{
+			foreach (char c in value)
+			{
+				if (c < '0' || c > '9')
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 }

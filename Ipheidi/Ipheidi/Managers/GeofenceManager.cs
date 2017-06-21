@@ -476,7 +476,7 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(NetworkState state)
+		public void OnNetworkStateUpdate(string state)
 		{
 
 		}
@@ -485,7 +485,7 @@ namespace Ipheidi
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(NetworkState state)
+		public void OnHostServerStateUpdate(string state)
 		{
 			if (state == NetworkState.Reachable && RescheduledGeofenceUpdates.Count > 0)
 			{

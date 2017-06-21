@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -27,13 +28,13 @@ namespace Ipheidi
 		bool visible = false;
 		Dictionary<string, double> precisionsList = new Dictionary<string, double>()
 		{
-			{"Best for Navigation", -2},
-			{"Best", -1},
-			{"Nearest ten meters", 10},
-			{"Hundred meters", 100},
-			{"Kilometers",1000},
-			{"Three Kilometers",3000},
-			{"Location Test mode",-3}
+			{AppResources.MeilleurNavigationOptionPrecision, -2},
+			{AppResources.MeilleurOptionPrecision, -1},
+			{AppResources.MoinsDeDixMetresOptionPrecision, 10},
+			{AppResources.CentMetresOptionPrecision, 100},
+			{AppResources.KilometreOptionPrecision,1000},
+			{AppResources.TroisKilometreOptionPrecision,3000},
+			{AppResources.ModeTestOptionPrecision,-3}
 		};
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.LocationPage"/> class.
@@ -60,18 +61,24 @@ namespace Ipheidi
 			}
 			mainLayout.BackgroundColor = Color.Black;
 
+			btnStop.Text = AppResources.ArreterBouton;
+			btnStart.Text = AppResources.DemarrerBouton;
+			btnGetMap.Text = AppResources.CarteButton;
+			btnGetData.Text = AppResources.DonneesBouton;
+			btnSendData.Text = AppResources.EnvoieDonneesBouton;
+
 			lblSpeed.Text = "0 km/h";
-			lblAltitude.Text = "Altitude: ";
-			lblLatitude.Text = "Latitude: ";
-			lblLongitude.Text = "Longitude: ";
-			lblDistance.Text = "Distance: ";
-			lblOrientation.Text = "Orientation: ";
-			lblAccuracy.Text = "Accuracy: ";
-			lblTime.Text = "Temps: ";
-			lblPowerSource.Text = "Source d'énergie: ";
-			lblBatteryStatus.Text = "Status de la batterie: ";
-			lblBatteryLevel.Text = "Batterie: ";
-			lblBatteryConsumption.Text = "Batterie utilisé: ";
+			lblAltitude.Text = AppResources.AltitudeLabel;
+			lblLatitude.Text = AppResources.LatitudeLabel;
+			lblLongitude.Text = AppResources.LongitudeLabel;
+			lblDistance.Text = AppResources.DistanceLabel;
+			lblOrientation.Text = AppResources.OrientationLabel;
+			lblAccuracy.Text = AppResources.PrecisionLabel;
+			lblTime.Text = AppResources.TempsLabel;
+			lblPowerSource.Text = AppResources.SourceEnergieLabel;
+			lblBatteryStatus.Text = AppResources.BatterieStatusLabel;
+			lblBatteryLevel.Text = AppResources.NiveauBatterieLabel;
+			lblBatteryConsumption.Text = AppResources.BatterieUtiliseeLabel;
 
 			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender, e);
 
@@ -97,7 +104,7 @@ namespace Ipheidi
 					List<Location> data = new List<Location>();
 					data.AddRange(PendingLocations);
 					PendingLocations.Clear();
-					NetworkState state = App.NetworkManager.GetNetworkState();
+					string state = App.NetworkManager.GetNetworkState();
 					if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 					{
 						Task.Run(async () =>
@@ -158,7 +165,7 @@ namespace Ipheidi
 		public void StartLocalisation()
 		{
 			//Envoie de données dans le cas où la base de donnée ne serait pas vide.
-			NetworkState state = App.NetworkManager.GetNetworkState();
+			string state = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 			{
 				Task.Run(async () =>
@@ -171,10 +178,10 @@ namespace Ipheidi
 			btnSendData.IsEnabled = false;
 			distance = 0;
 			time = 0;
-			lblTime.Text = "Temps: ";
+			lblTime.Text = AppResources.TempsLabel;
 			timerRun = true;
 			btnStart.IsVisible = false;
-			lblDistance.Text = "Distance: 0.0km";
+			lblDistance.Text = AppResources.DistanceLabel + "0.0km";
 			btnStop.IsVisible = true;
 			lblSpeed.IsVisible = true;
 			lblSpeed.Text = "0 km/h";
@@ -271,12 +278,12 @@ namespace Ipheidi
 				if (!App.IsInBackground && visible)
 				{
 					int remainingBattery = App.Battery.RemainingChargePercent;
-					lblTime.Text = "Temps: " + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
-					lblPowerSource.Text = "Source d'énergie: " + App.Battery.PowerSource.ToString();
-					lblBatteryStatus.Text = "Status de la batterie: " + App.Battery.Status.ToString();
-					lblBatteryLevel.Text = "Batterie: " + (remainingBattery >= 0 ? remainingBattery + "%" : "-");
+					lblTime.Text = AppResources.TempsLabel + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
+					lblPowerSource.Text = AppResources.SourceEnergieLabel + App.Battery.PowerSource.ToString();
+					lblBatteryStatus.Text = AppResources.BatterieStatusLabel + App.Battery.Status.ToString();
+					lblBatteryLevel.Text = AppResources.NiveauBatterieLabel + (remainingBattery >= 0 ? remainingBattery + "%" : "-");
 					if (remainingBattery > startBatteryLevel) startBatteryLevel = remainingBattery;
-					lblBatteryConsumption.Text = "Batterie utilisé: " + (remainingBattery < 0 ? "-" : startBatteryLevel - remainingBattery + "%");
+					lblBatteryConsumption.Text = AppResources.BatterieUtiliseeLabel + (remainingBattery < 0 ? "-" : startBatteryLevel - remainingBattery + "%");
 				}
 				return true;
 			}
@@ -293,12 +300,12 @@ namespace Ipheidi
 			if (!App.IsInBackground && visible)
 			{
 				lblSpeed.Text = (location.Speed >= 0 ? (int)(location.Speed * 3.6) : 0) + " km/h";
-				lblAltitude.Text = "Altitude: " + (int)(location.Altitude) + " m";
-				lblLatitude.Text = "Latitude: " + location.Latitude;
-				lblLongitude.Text = "Longitude: " + location.Longitude;
-				lblDistance.Text = "Distance: " + (distance / 1000).ToString("N1") + "km";
-				lblOrientation.Text = "Orientation: " + (int)location.Orientation + "°";
-				lblAccuracy.Text = "Accuracy: " + (int)location.Accuracy + "m";
+				lblAltitude.Text = AppResources.AltitudeLabel + (int)(location.Altitude) + " m";
+				lblLatitude.Text = AppResources.LatitudeLabel + location.Latitude;
+				lblLongitude.Text = AppResources.LongitudeLabel + location.Longitude;
+				lblDistance.Text = AppResources.DistanceLabel + (distance / 1000).ToString("N1") + "km";
+				lblOrientation.Text = AppResources.OrientationLabel + (int)location.Orientation + "°";
+				lblAccuracy.Text = AppResources.PrecisionLabel + (int)location.Accuracy + "m";
 			}
 		}
 
@@ -315,7 +322,7 @@ namespace Ipheidi
 			locationCell.SetBinding(LocationCellView.UtcProperty, "Utc");
 
 			ContentPage page = new ContentPage();
-			page.Title = "Liste de données(" + locations.Count + ")";
+			page.Title = string.Format(AppResources.ListeDonneesPageTitle, locations.Count);
 			ListView list = new ListView()
 			{
 				ItemTemplate = locationCell,
@@ -323,7 +330,7 @@ namespace Ipheidi
 				RowHeight = 110
 			};
 			Button btnClear = new Button();
-			btnClear.Text = "Clear Data";
+			btnClear.Text = AppResources.SupprimerDonneesBouton;
 			btnClear.Clicked += (sender, ev) =>
 			{
 				list.IsVisible = false;
@@ -486,7 +493,7 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(NetworkState state)
+		public void OnNetworkStateUpdate(string state)
 		{
 			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 			{
@@ -501,9 +508,9 @@ namespace Ipheidi
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(NetworkState state)
+		public void OnHostServerStateUpdate(string state)
 		{
-			NetworkState netState = App.NetworkManager.GetNetworkState();
+			string netState = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.Reachable && (netState == NetworkState.ReachableViaWiFiNetwork || (netState == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled)))
 			{
 				Task.Run(async () =>

@@ -3,166 +3,129 @@
 	xmlns ="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="Ipheidi.GeofenceCreatePage">
-
 	<ContentPage.Content>
-
 		<ScrollView>
-
 			<StackLayout
 				x:Name           ="mainLayout"
 				Padding          ="20,40"
 				HorizontalOptions="FillAndExpand"
 				Spacing          ="5">
-
 				<StackLayout
 					Orientation="Horizontal">
-
 					<Label
+						x:Name="labelLatitude"
 						Text                 ="Latitude: "
 						VerticalTextAlignment="Center" />
-
 					<Entry
 						x:Name           ="entryLatitude"
 						Placeholder      ="Latitude"
 						HorizontalOptions="FillAndExpand" />
-
 				</StackLayout>
-
 				<Label
 					x:Name   ="lblLatError"
 					TextColor="Red" />
-
 				<StackLayout
 					Orientation="Horizontal">
-
 					<Label
+						x:Name="labelLongitude"
 						Text                 ="Longitude:"
 						VerticalTextAlignment="Center" />
-
 					<Entry
 						x:Name           ="entryLongitude"
 						Placeholder      ="Longitude"
 						HorizontalOptions="FillAndExpand" />
-
 				</StackLayout>
-
 				<Label
 					x:Name   ="lblLongError"
 					TextColor="Red" />
-
 				<Button
-					x:Name="btnMap"
-					Text  ="Carte" />
-
+					x:Name="btnMap"/>
 				<Entry
 					x:Name     ="nameEntry"
 					Placeholder="Nom du lieu" />
-
 				<Label
 					x:Name   ="lblnameError"
 					TextColor="Red" />
-
 				<StackLayout
 					Orientation      ="Horizontal"
 					HorizontalOptions="FillAndExpand">
-
 					<Label
+						x:Name="notificationLabel"
 						Text                   ="Activer la notification:"
 						VerticalTextAlignment  ="Center"
 						HorizontalTextAlignment="Start" />
-
 					<Switch
 						x:Name           ="switchNotification"
 						HorizontalOptions="EndAndExpand" />
-
 				</StackLayout>
-
 				<StackLayout
 					Orientation      ="Horizontal"
 					HorizontalOptions="FillAndExpand"
 					x:Name           ="typeLayout">
-
-					<StackLayout x:Name="typeEnterLayout">
-
+					<StackLayout
+						x:Name="typeEnterLayout">
 						<Label
+							x:Name="enterActionLabel"
 							Text                 ="Action d'entrée"
 							VerticalTextAlignment="Center" />
-
 						<Picker
 							x:Name           ="EnterTypePicker"
 							HorizontalOptions="FillAndExpand" />
-
 						<Picker
 							x:Name           ="EnterSoustypePicker"
 							HorizontalOptions="FillAndExpand" />
-
 					</StackLayout>
-					<StackLayout x:Name="typeExitLayout">
-
+					<StackLayout
+						x:Name="typeExitLayout">
 						<Label
+							x:Name="exitActionLabel"
 							Text                 ="Action de Sortie"
 							VerticalTextAlignment="Center" />
-
 						<Picker
 							x:Name           ="ExitTypePicker"
 							HorizontalOptions="FillAndExpand" />
-
 						<Picker
 							x:Name           ="ExitSoustypePicker"
 							HorizontalOptions="FillAndExpand" />
-
 					</StackLayout>
 				</StackLayout>
-
 				<Label
+					x:Name="notificationDelaiLabel"
 					Text           ="Délai de notification"
 					VerticalOptions="Center" />
-
 				<StackLayout
 					Orientation="Horizontal">
-
 					<Entry
 						x:Name           ="minEntry"
 						Text             ="0"
 						HorizontalOptions="FillAndExpand"
 						Placeholder      ="Minutes" />
-
 					<Label
 						x:Name                 ="lblDelay2"
 						Text                   =":"
 						VerticalTextAlignment  ="Center"
 						HorizontalTextAlignment="Center"
 						WidthRequest           ="10" />
-
 					<Entry
 						x:Name           ="secEntry"
 						Text             ="0"
 						HorizontalOptions="FillAndExpand"
 						Placeholder      ="Secondes" />
-
 				</StackLayout>
-
 				<StackLayout
 					Orientation      ="Horizontal"
 					HorizontalOptions="CenterAndExpand"
 					Spacing          ="10">
-
 					<Button
 						x:Name           ="btnSave"
 						Text             ="Enregistrer"
 						HorizontalOptions="FillAndExpand" />
-
 					<Button
 						x:Name           ="btnCancel"
 						Text             ="Annuler"
 						HorizontalOptions="FillAndExpand" />
-
 				</StackLayout>
-
 			</StackLayout>
-
 		</ScrollView>
-
 	</ContentPage.Content>
-
 </ContentPage>
