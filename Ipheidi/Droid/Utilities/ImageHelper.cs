@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Android.Graphics;
 using Ipheidi.Droid;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ImageHelper))]
@@ -61,8 +62,8 @@ namespace Ipheidi.Droid
 				};
 
 				content.Add(streamContent);
-				content.Add(new StringContent(DateTime.Now.ToString()), "ModDate");
-				content.Add(new StringContent(DateTime.Now.ToString()), "CrDate");
+				content.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "ModDate");
+				content.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "CrDate");
 				content.Add(new StringContent("image"), "callType");
 				content.Add(new StringContent(pheidiparams["NOSEQ"]), "qfv");
 				content.Add(new StringContent("2"), "BD");
@@ -116,7 +117,7 @@ namespace Ipheidi.Droid
 									{
 										if (displayAlert)
 										{
-											App.NotificationManager.DisplayAlert("L'envoie de la photo fut complèté avec succès.", "Pheidi", "OK", () => { });
+											App.NotificationManager.DisplayAlert(AppResources.Alerte_OublierCompteMessage, "Pheidi", "OK", () => { });
 										}
 										return true;
 									}

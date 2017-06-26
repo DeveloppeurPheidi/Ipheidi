@@ -16,7 +16,7 @@ namespace Ipheidi.Resources {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources {
+    public class AppResources {
         
         private static System.Resources.ResourceManager resourceMan;
         
@@ -27,7 +27,7 @@ namespace Ipheidi.Resources {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
                     System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Ipheidi.Resources.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
@@ -38,7 +38,7 @@ namespace Ipheidi.Resources {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -47,433 +47,607 @@ namespace Ipheidi.Resources {
             }
         }
         
-        internal static string FilterNom {
+        public static string FilterNom {
             get {
                 return ResourceManager.GetString("FilterNom", resourceCulture);
             }
         }
         
-        internal static string FilterProximite {
+        public static string FilterProximite {
             get {
                 return ResourceManager.GetString("FilterProximite", resourceCulture);
             }
         }
         
-        internal static string FilterNotificationActive {
+        public static string FilterNotificationActive {
             get {
                 return ResourceManager.GetString("FilterNotificationActive", resourceCulture);
             }
         }
         
-        internal static string GeofencePageTitle {
+        public static string GeofencePageTitle {
             get {
                 return ResourceManager.GetString("GeofencePageTitle", resourceCulture);
             }
         }
         
-        internal static string NomLabel {
+        public static string NomLabel {
             get {
                 return ResourceManager.GetString("NomLabel", resourceCulture);
             }
         }
         
-        internal static string NomPlaceHolder {
+        public static string NomPlaceHolder {
             get {
                 return ResourceManager.GetString("NomPlaceHolder", resourceCulture);
             }
         }
         
-        internal static string LatitudeLabel {
+        public static string LatitudeLabel {
             get {
                 return ResourceManager.GetString("LatitudeLabel", resourceCulture);
             }
         }
         
-        internal static string LatitudePlaceHolder {
+        public static string LatitudePlaceHolder {
             get {
                 return ResourceManager.GetString("LatitudePlaceHolder", resourceCulture);
             }
         }
         
-        internal static string LongitudeLabel {
+        public static string LongitudeLabel {
             get {
                 return ResourceManager.GetString("LongitudeLabel", resourceCulture);
             }
         }
         
-        internal static string LongitudePlaceHolder {
+        public static string LongitudePlaceHolder {
             get {
                 return ResourceManager.GetString("LongitudePlaceHolder", resourceCulture);
             }
         }
         
-        internal static string ActionEntreeLabel {
+        public static string ActionEntreeLabel {
             get {
                 return ResourceManager.GetString("ActionEntreeLabel", resourceCulture);
             }
         }
         
-        internal static string ActionSortieLabel {
+        public static string ActionSortieLabel {
             get {
                 return ResourceManager.GetString("ActionSortieLabel", resourceCulture);
             }
         }
         
-        internal static string DelaiNotificationLabel {
+        public static string DelaiNotificationLabel {
             get {
                 return ResourceManager.GetString("DelaiNotificationLabel", resourceCulture);
             }
         }
         
-        internal static string MinutesPlaceHolder {
+        public static string MinutesPlaceHolder {
             get {
                 return ResourceManager.GetString("MinutesPlaceHolder", resourceCulture);
             }
         }
         
-        internal static string SecondesPlaceHolder {
+        public static string SecondesPlaceHolder {
             get {
                 return ResourceManager.GetString("SecondesPlaceHolder", resourceCulture);
             }
         }
         
-        internal static string CarteButton {
+        public static string CarteButton {
             get {
                 return ResourceManager.GetString("CarteButton", resourceCulture);
             }
         }
         
-        internal static string GeofenceCreatePageTitle {
+        public static string GeofenceCreatePageTitle {
             get {
                 return ResourceManager.GetString("GeofenceCreatePageTitle", resourceCulture);
             }
         }
         
-        internal static string NomLieuPlaceHolder {
+        public static string NomLieuPlaceHolder {
             get {
                 return ResourceManager.GetString("NomLieuPlaceHolder", resourceCulture);
             }
         }
         
-        internal static string ActiverNotificationLabel {
+        public static string ActiverNotificationLabel {
             get {
                 return ResourceManager.GetString("ActiverNotificationLabel", resourceCulture);
             }
         }
         
-        internal static string SauvegarderBouton {
+        public static string SauvegarderBouton {
             get {
                 return ResourceManager.GetString("SauvegarderBouton", resourceCulture);
             }
         }
         
-        internal static string EnregistrerBouton {
+        public static string EnregistrerBouton {
             get {
                 return ResourceManager.GetString("EnregistrerBouton", resourceCulture);
             }
         }
         
-        internal static string AnnulerBouton {
+        public static string AnnulerBouton {
             get {
                 return ResourceManager.GetString("AnnulerBouton", resourceCulture);
             }
         }
         
-        internal static string Oui {
+        public static string Oui {
             get {
                 return ResourceManager.GetString("Oui", resourceCulture);
             }
         }
         
-        internal static string Non {
+        public static string Non {
             get {
                 return ResourceManager.GetString("Non", resourceCulture);
             }
         }
         
-        internal static string DemarrerBouton {
+        public static string DemarrerBouton {
             get {
                 return ResourceManager.GetString("DemarrerBouton", resourceCulture);
             }
         }
         
-        internal static string ArreterBouton {
+        public static string ArreterBouton {
             get {
                 return ResourceManager.GetString("ArreterBouton", resourceCulture);
             }
         }
         
-        internal static string EnvoieDonneesBouton {
+        public static string EnvoieDonneesBouton {
             get {
                 return ResourceManager.GetString("EnvoieDonneesBouton", resourceCulture);
             }
         }
         
-        internal static string DonneesBouton {
+        public static string DonneesBouton {
             get {
                 return ResourceManager.GetString("DonneesBouton", resourceCulture);
             }
         }
         
-        internal static string AltitudeLabel {
+        public static string AltitudeLabel {
             get {
                 return ResourceManager.GetString("AltitudeLabel", resourceCulture);
             }
         }
         
-        internal static string DistanceLabel {
+        public static string DistanceLabel {
             get {
                 return ResourceManager.GetString("DistanceLabel", resourceCulture);
             }
         }
         
-        internal static string OrientationLabel {
+        public static string OrientationLabel {
             get {
                 return ResourceManager.GetString("OrientationLabel", resourceCulture);
             }
         }
         
-        internal static string PrecisionLabel {
+        public static string PrecisionLabel {
             get {
                 return ResourceManager.GetString("PrecisionLabel", resourceCulture);
             }
         }
         
-        internal static string TempsLabel {
+        public static string TempsLabel {
             get {
                 return ResourceManager.GetString("TempsLabel", resourceCulture);
             }
         }
         
-        internal static string SourceEnergieLabel {
+        public static string SourceEnergieLabel {
             get {
                 return ResourceManager.GetString("SourceEnergieLabel", resourceCulture);
             }
         }
         
-        internal static string NiveauBatterieLabel {
+        public static string NiveauBatterieLabel {
             get {
                 return ResourceManager.GetString("NiveauBatterieLabel", resourceCulture);
             }
         }
         
-        internal static string BatterieUtiliseeLabel {
+        public static string BatterieUtiliseeLabel {
             get {
                 return ResourceManager.GetString("BatterieUtiliseeLabel", resourceCulture);
             }
         }
         
-        internal static string BatterieStatusLabel {
+        public static string BatterieStatusLabel {
             get {
                 return ResourceManager.GetString("BatterieStatusLabel", resourceCulture);
             }
         }
         
-        internal static string SupprimerDonneesBouton {
+        public static string SupprimerDonneesBouton {
             get {
                 return ResourceManager.GetString("SupprimerDonneesBouton", resourceCulture);
             }
         }
         
-        internal static string ListeDonneesPageTitle {
+        public static string ListeDonneesPageTitle {
             get {
                 return ResourceManager.GetString("ListeDonneesPageTitle", resourceCulture);
             }
         }
         
-        internal static string MeilleurNavigationOptionPrecision {
+        public static string MeilleurNavigationOptionPrecision {
             get {
                 return ResourceManager.GetString("MeilleurNavigationOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string MeilleurOptionPrecision {
+        public static string MeilleurOptionPrecision {
             get {
                 return ResourceManager.GetString("MeilleurOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string MoinsDeDixMetresOptionPrecision {
+        public static string MoinsDeDixMetresOptionPrecision {
             get {
                 return ResourceManager.GetString("MoinsDeDixMetresOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string CentMetresOptionPrecision {
+        public static string CentMetresOptionPrecision {
             get {
                 return ResourceManager.GetString("CentMetresOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string KilometreOptionPrecision {
+        public static string KilometreOptionPrecision {
             get {
                 return ResourceManager.GetString("KilometreOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string TroisKilometreOptionPrecision {
+        public static string TroisKilometreOptionPrecision {
             get {
                 return ResourceManager.GetString("TroisKilometreOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string ModeTestOptionPrecision {
+        public static string ModeTestOptionPrecision {
             get {
                 return ResourceManager.GetString("ModeTestOptionPrecision", resourceCulture);
             }
         }
         
-        internal static string MapPageTitle {
+        public static string MapPageTitle {
             get {
                 return ResourceManager.GetString("MapPageTitle", resourceCulture);
             }
         }
         
-        internal static string CourrielPlaceHolder {
+        public static string CourrielPlaceHolder {
             get {
                 return ResourceManager.GetString("CourrielPlaceHolder", resourceCulture);
             }
         }
         
-        internal static string CourrielLabel {
+        public static string CourrielLabel {
             get {
                 return ResourceManager.GetString("CourrielLabel", resourceCulture);
             }
         }
         
-        internal static string MotDePasseLabel {
+        public static string MotDePasseLabel {
             get {
                 return ResourceManager.GetString("MotDePasseLabel", resourceCulture);
             }
         }
         
-        internal static string MotDePassePlaceHolder {
+        public static string MotDePassePlaceHolder {
             get {
                 return ResourceManager.GetString("MotDePassePlaceHolder", resourceCulture);
             }
         }
         
-        internal static string MemoriserLabel {
+        public static string MemoriserLabel {
             get {
                 return ResourceManager.GetString("MemoriserLabel", resourceCulture);
             }
         }
         
-        internal static string AutreCompteBouton {
+        public static string AutreCompteBouton {
             get {
                 return ResourceManager.GetString("AutreCompteBouton", resourceCulture);
             }
         }
         
-        internal static string ConnexionBouton {
+        public static string ConnexionBouton {
             get {
                 return ResourceManager.GetString("ConnexionBouton", resourceCulture);
             }
         }
         
-        internal static string RetourBouton {
+        public static string RetourBouton {
             get {
                 return ResourceManager.GetString("RetourBouton", resourceCulture);
             }
         }
         
-        internal static string Erreur_LaissezAucunChampVide {
+        public static string Erreur_LaissezAucunChampVide {
             get {
                 return ResourceManager.GetString("Erreur_LaissezAucunChampVide", resourceCulture);
             }
         }
         
-        internal static string Erreur_MauvaisEmailOuMdp {
+        public static string Erreur_MauvaisEmailOuMdp {
             get {
                 return ResourceManager.GetString("Erreur_MauvaisEmailOuMdp", resourceCulture);
             }
         }
         
-        internal static string Erreur_ProblemeConnexionServeur {
+        public static string Erreur_ProblemeConnexionServeur {
             get {
                 return ResourceManager.GetString("Erreur_ProblemeConnexionServeur", resourceCulture);
             }
         }
         
-        internal static string DeconnexionBouton {
+        public static string DeconnexionBouton {
             get {
                 return ResourceManager.GetString("DeconnexionBouton", resourceCulture);
             }
         }
         
-        internal static string RegenererBrowserBouton {
+        public static string RegenererBrowserBouton {
             get {
                 return ResourceManager.GetString("RegenererBrowserBouton", resourceCulture);
             }
         }
         
-        internal static string TransfertDonneesWifiLabel {
+        public static string TransfertDonneesWifiLabel {
             get {
                 return ResourceManager.GetString("TransfertDonneesWifiLabel", resourceCulture);
             }
         }
         
-        internal static string EtatDuReseauLabel {
+        public static string EtatDuReseauLabel {
             get {
                 return ResourceManager.GetString("EtatDuReseauLabel", resourceCulture);
             }
         }
         
-        internal static string AccessibleEtatReseau {
+        public static string AccessibleEtatReseau {
             get {
                 return ResourceManager.GetString("AccessibleEtatReseau", resourceCulture);
             }
         }
         
-        internal static string PasAccessibleEtatReseau {
+        public static string PasAccessibleEtatReseau {
             get {
                 return ResourceManager.GetString("PasAccessibleEtatReseau", resourceCulture);
             }
         }
         
-        internal static string AccessibleViaWifiEtatReseau {
+        public static string AccessibleViaWifiEtatReseau {
             get {
                 return ResourceManager.GetString("AccessibleViaWifiEtatReseau", resourceCulture);
             }
         }
         
-        internal static string AccessibleViaReseauMobileEtatReseau {
+        public static string AccessibleViaReseauMobileEtatReseau {
             get {
                 return ResourceManager.GetString("AccessibleViaReseauMobileEtatReseau", resourceCulture);
             }
         }
         
-        internal static string LangueLabel {
+        public static string LangueLabel {
             get {
                 return ResourceManager.GetString("LangueLabel", resourceCulture);
             }
         }
         
-        internal static string AccesHoteLabel {
+        public static string AccesHoteLabel {
             get {
                 return ResourceManager.GetString("AccesHoteLabel", resourceCulture);
             }
         }
         
-        internal static string LieuxEnregistresBouton {
+        public static string LieuxEnregistresBouton {
             get {
                 return ResourceManager.GetString("LieuxEnregistresBouton", resourceCulture);
             }
         }
         
-        internal static string OublierCompteBouton {
+        public static string OublierCompteBouton {
             get {
                 return ResourceManager.GetString("OublierCompteBouton", resourceCulture);
             }
         }
         
-        internal static string OublierTousLesComptesBouton {
+        public static string OublierTousLesComptesBouton {
             get {
                 return ResourceManager.GetString("OublierTousLesComptesBouton", resourceCulture);
             }
         }
         
-        internal static string _ {
+        public static string Alerte_OublierCompteMessage {
+            get {
+                return ResourceManager.GetString("Alerte_OublierCompteMessage", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_OublierTousLesComptesMessage {
+            get {
+                return ResourceManager.GetString("Alerte_OublierTousLesComptesMessage", resourceCulture);
+            }
+        }
+        
+        public static string AucuneAction {
+            get {
+                return ResourceManager.GetString("AucuneAction", resourceCulture);
+            }
+        }
+        
+        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader {
+            get {
+                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader", resourceCulture);
+            }
+        }
+        
+        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle {
+            get {
+                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle", resourceCulture);
+            }
+        }
+        
+        public static string ChargementLabel {
+            get {
+                return ResourceManager.GetString("ChargementLabel", resourceCulture);
+            }
+        }
+        
+        public static string VitesseLabel {
+            get {
+                return ResourceManager.GetString("VitesseLabel", resourceCulture);
+            }
+        }
+        
+        public static string LocalisationRequisePourApplication {
+            get {
+                return ResourceManager.GetString("LocalisationRequisePourApplication", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_EnvoiePhotoCompleteMessage {
+            get {
+                return ResourceManager.GetString("Alerte_EnvoiePhotoCompleteMessage", resourceCulture);
+            }
+        }
+        
+        public static string ChoisissezEditeurImage {
+            get {
+                return ResourceManager.GetString("ChoisissezEditeurImage", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_ImageUploadHoteInacessibleTitle {
+            get {
+                return ResourceManager.GetString("Alerte_ImageUploadHoteInacessibleTitle", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_ImageUploadHoteInacessibleMessage {
+            get {
+                return ResourceManager.GetString("Alerte_ImageUploadHoteInacessibleMessage", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_ImageUploadPasDeWifiTitle {
+            get {
+                return ResourceManager.GetString("Alerte_ImageUploadPasDeWifiTitle", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_ImageUploadPasDeWifiMessage {
+            get {
+                return ResourceManager.GetString("Alerte_ImageUploadPasDeWifiMessage", resourceCulture);
+            }
+        }
+        
+        public static string CameraFileChooser {
+            get {
+                return ResourceManager.GetString("CameraFileChooser", resourceCulture);
+            }
+        }
+        
+        public static string GaleriePhotoFileChooser {
+            get {
+                return ResourceManager.GetString("GaleriePhotoFileChooser", resourceCulture);
+            }
+        }
+        
+        public static string DocumentFileChooser {
+            get {
+                return ResourceManager.GetString("DocumentFileChooser", resourceCulture);
+            }
+        }
+        
+        public static string ChargeBatteryStatus {
+            get {
+                return ResourceManager.GetString("ChargeBatteryStatus", resourceCulture);
+            }
+        }
+        
+        public static string DechargeBatteryStatus {
+            get {
+                return ResourceManager.GetString("DechargeBatteryStatus", resourceCulture);
+            }
+        }
+        
+        public static string PleineBatteryStatus {
+            get {
+                return ResourceManager.GetString("PleineBatteryStatus", resourceCulture);
+            }
+        }
+        
+        public static string NeChargePasBatteryStatus {
+            get {
+                return ResourceManager.GetString("NeChargePasBatteryStatus", resourceCulture);
+            }
+        }
+        
+        public static string InconnuBatteryStatus {
+            get {
+                return ResourceManager.GetString("InconnuBatteryStatus", resourceCulture);
+            }
+        }
+        
+        public static string CourantPowerSource {
+            get {
+                return ResourceManager.GetString("CourantPowerSource", resourceCulture);
+            }
+        }
+        
+        public static string BatteriePowerSource {
+            get {
+                return ResourceManager.GetString("BatteriePowerSource", resourceCulture);
+            }
+        }
+        
+        public static string UsbPowerSource {
+            get {
+                return ResourceManager.GetString("UsbPowerSource", resourceCulture);
+            }
+        }
+        
+        public static string SansFilPowerSource {
+            get {
+                return ResourceManager.GetString("SansFilPowerSource", resourceCulture);
+            }
+        }
+        
+        public static string AutrePowerSource {
+            get {
+                return ResourceManager.GetString("AutrePowerSource", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_VoulezVousAssociezXCommelieuMessage {
+            get {
+                return ResourceManager.GetString("Alerte_VoulezVousAssociezXCommelieuMessage", resourceCulture);
+            }
+        }
+        
+        public static string iOS_Alerte_LocalisationRequiseMessage {
+            get {
+                return ResourceManager.GetString("iOS_Alerte_LocalisationRequiseMessage", resourceCulture);
+            }
+        }
+        
+        public static string _ {
             get {
                 return ResourceManager.GetString("", resourceCulture);
             }

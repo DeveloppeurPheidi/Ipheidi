@@ -78,5 +78,7 @@
 		<string>en</string>
 		<string>fr</string>
 	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>fr</string>
 </dict>
 </plist>

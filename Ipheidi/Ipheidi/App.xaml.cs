@@ -100,7 +100,7 @@ namespace Ipheidi
 				{
 					return Application.Current.Properties["Language"] as string;
 				}
-				return "";
+				return "fr";
 			}
 			set
 			{
@@ -118,7 +118,8 @@ namespace Ipheidi
 		static public ICookieService CookieManager;
 		static public ICredentialsService CredentialsManager;
 		static public IStatusBarService StatusBarManager;
-		static public ILocationService LocationManager;
+		static public ILocationService LocationService;
+		static public LocationManager LocationManager;
 		static public INotificationService NotificationManager;
 		static public ILocalization LocalizationManager;
 		static public IFileHelper FileHelper;
@@ -187,7 +188,7 @@ namespace Ipheidi
 				CookieManager = DependencyService.Get<ICookieService>();
 				CredentialsManager = DependencyService.Get<ICredentialsService>();
 				StatusBarManager = DependencyService.Get<IStatusBarService>();
-				LocationManager = DependencyService.Get<ILocationService>();
+				LocationService = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
 				FileHelper = DependencyService.Get<IFileHelper>();
 				ImageHelper = DependencyService.Get<IImageHelper>();
@@ -253,7 +254,9 @@ namespace Ipheidi
 				NetworkManager.AddNetworkStateListener(ImageHelper);
 			}
 			ActionManager.GetActionList();
+			LocationManager = new LocationManager();
 			NavBar = new PheidiTabbedPage();
+			LocationManager.StartLocalisation();
 			MainPage.Navigation.PushAsync(NavBar);
 
 		}
@@ -264,9 +267,6 @@ namespace Ipheidi
 		public void GetLoginPage()
 		{
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
-			foreach (var cred in App.Credentials)
-			{
-			}
 			Debug.WriteLine("App: Create Login Page");
 			var p = new LoginPage(App.Credentials.Count == 0);
 			var page = new NavigationPage(p);
@@ -280,11 +280,10 @@ namespace Ipheidi
 		public void Logout()
 		{
 			App.IsInLogin = true;
-			var locationPage = (LocationPage)NavBar.Children.Where(o => o is LocationPage).Single();
-			locationPage.StopLocalisation();
-			App.LocationManager.RemoveLocationListener(GeofenceManager);
+			LocationManager.StopLocalisation();
+			App.LocationService.RemoveLocationListener(GeofenceManager);
 			App.GeofenceManager = null;
-			App.LocationManager.RemoveLocationListener(locationPage);
+			App.LocationService.RemoveLocationListener(LocationManager);
 			App.NetworkManager.RemoveNetworkStateListener(ImageHelper);
 			MainPage.Navigation.PopAsync();
 		}

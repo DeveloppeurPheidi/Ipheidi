@@ -15,7 +15,7 @@ namespace Ipheidi.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+		public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
 		{
 
 			global::Xamarin.Forms.Forms.Init();
@@ -24,10 +24,10 @@ namespace Ipheidi.iOS
 			LoadApplication(new App());
 
 
-			Boolean result = base.FinishedLaunching(app, options);
+			Boolean result = base.FinishedLaunching(uiApplication, launchOptions);
 			UIColor colorPrimary = UIColor.FromRGB((nfloat)App.ColorPrimary.R, (nfloat)App.ColorPrimary.G, (nfloat)App.ColorPrimary.B);
 			UISwitch.Appearance.OnTintColor = colorPrimary;
-			app.KeyWindow.TintColor = colorPrimary;
+			uiApplication.KeyWindow.TintColor = colorPrimary;
 			UINavigationBar.Appearance.BarTintColor = colorPrimary;
 			UINavigationBar.Appearance.TintColor = UIColor.White;
 			UIBarButtonItem.Appearance.TintColor = UIColor.FromRGBA(0, 0, 0, 0.3f);
@@ -42,15 +42,16 @@ namespace Ipheidi.iOS
 			// Request notification permissions from the user
 			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
 			{
-				UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) =>
+				UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert|UNAuthorizationOptions.Sound|UNAuthorizationOptions.Badge|UNAuthorizationOptions.CarPlay, (approved, err) =>
 				{
 					// Handle approval
 				});
+
 			}
 			else
 			{
 				var settings = UIUserNotificationSettings.GetSettingsForTypes(
-				UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+					UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound 
 				, null);
 				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
 			}
@@ -60,12 +61,12 @@ namespace Ipheidi.iOS
 
 		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
 		{
+			// reset our badge
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber -= 1;
+
 			var action = JsonConvert.DeserializeObject<Action>(notification.UserInfo[new NSString("Action")] as NSString);
 
 			ActionManager.RunActionAnswer(action);
-
-			// reset our badge
-			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 		}
 	}
 }

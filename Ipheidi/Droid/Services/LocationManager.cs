@@ -12,6 +12,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Ipheidi.Droid;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Ipheidi.Droid.LocationManager))]
@@ -223,7 +224,7 @@ namespace Ipheidi.Droid
 			if (ActivityCompat.ShouldShowRequestPermissionRationale((Activity)Xamarin.Forms.Forms.Context, permission))
 			{
 				//Explain to the user why we need to read the contacts
-				Snackbar.Make(((Activity)Xamarin.Forms.Forms.Context).FindViewById(Android.Resource.Id.Content), "La localisation est requise pour cette application.", Snackbar.LengthIndefinite)
+				Snackbar.Make(((Activity)Xamarin.Forms.Forms.Context).FindViewById(Android.Resource.Id.Content),AppResources.LocalisationRequisePourApplication, Snackbar.LengthIndefinite)
 						.SetAction("OK", v => ActivityCompat.RequestPermissions((Activity)Xamarin.Forms.Forms.Context, PermissionsLocation, RequestLocationId))
 						.Show();
 
@@ -237,6 +238,11 @@ namespace Ipheidi.Droid
 		public void SendLocation(Location location)
 		{
 			OnLocationUpdate(location);
+		}
+
+		public bool CheckPermission()
+		{
+			return true;
 		}
 	}
 }

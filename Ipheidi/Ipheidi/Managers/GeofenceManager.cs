@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Ipheidi;
+using Ipheidi.Resources;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -41,7 +42,7 @@ namespace Ipheidi
 
 
 			UnknownLocationList = new List<Location>();
-			App.LocationManager.AddLocationListener(this);
+			App.LocationService.AddLocationListener(this);
 			TimerStartTime = DateTime.UtcNow;
 			TimeDelay = new TimeSpan(0, 60, 0);
 			Device.StartTimer(new TimeSpan(0, 5, 0), TimerTick);
@@ -210,8 +211,8 @@ namespace Ipheidi
 						list += g.Name + "\n";
 					}
 					var p = new MessagePage();
-					p.Title = "Localisation";
-					p.Header = "Plusieurs lieux correspondent à votre position actuelle. Voulez-vous en créer un nouveau?";
+					p.Title = AppResources.MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle;
+					p.Header = AppResources.MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader;
 					p.Message = list;
 					p.AddOnButtonConfirmationEvent((sender, e) =>
 					{
@@ -391,7 +392,7 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		void RefreshClosePositionGeofencesList()
 		{
-			LastClosePositionRefreshLocation = App.LocationManager.GetLocation();
+			LastClosePositionRefreshLocation = App.LocationService.GetLocation();
 			var data = Geofences.ToArray();
 			ClosePositionGeofences.Clear();
 			Debug.WriteLine("======New Close Position Geofence List======");

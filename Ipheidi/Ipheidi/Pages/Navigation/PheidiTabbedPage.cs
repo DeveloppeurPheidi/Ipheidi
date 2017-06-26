@@ -27,14 +27,16 @@ namespace Ipheidi
 			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();
 			LocationPage location = new LocationPage();
-			location.StartLocalisation();
 			BluetoothPage bluetooth = new BluetoothPage();
 			MenuPage menu = new MenuPage();
 			PropertyChanged += (sender, e) => Debug.WriteLine("TabbedPage: " + e.PropertyName + " changed");
 			Children.Add(browser);
 			Children.Add(setting);
+#if DEBUG
+			App.LocationManager.Page = location;
 			Children.Add(location);
 			Children.Add(bluetooth);
+#endif
 			Children.Add(menu);
 			ClearTitles();
 			foreach (var p in Children)

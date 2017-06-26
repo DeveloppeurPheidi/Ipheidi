@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Foundation;
 using Ipheidi.iOS;
+using Ipheidi.Resources;
 using UIKit;
 using Xamarin.Forms;
 
@@ -72,13 +73,13 @@ namespace Ipheidi.iOS
 							string message = "";
 							if (App.NetworkManager.GetHostServerState() == NetworkState.NotReachable)
 							{
-								title = "Le serveur hôte est présentement inacessible.";
-								message = "L'image sera envoyer lorsque la connexion sera récupérée.";
+								title = AppResources.Alerte_ImageUploadHoteInacessibleTitle;
+								message = AppResources.Alerte_ImageUploadHoteInacessibleMessage;
 							}
 							else if (App.WifiOnlyEnabled)
 							{
-								title = "L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.";
-								message = "Vous pouvez changer ce paramètre dans le menu de configuration en désactivant le \"Transfert de données sous Wifi seulement\" ";
+								title = AppResources.Alerte_ImageUploadPasDeWifiTitle;
+								message = AppResources.Alerte_ImageUploadPasDeWifiMessage;
 							}
 
 							App.NotificationManager.DisplayAlert(message, title, "OK", () => { });
@@ -145,8 +146,8 @@ namespace Ipheidi.iOS
 				imageStream = image.AsPNG().AsStream();
 				var streamContent = new StreamContent(imageStream);
 				content.Add(streamContent, "Filedata", filename);
-				content.Add(new StringContent(DateTime.Now.ToString()), "ModDate");
-				content.Add(new StringContent(DateTime.Now.ToString()), "CrDate");
+				content.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "ModDate");
+				content.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")), "CrDate");
 				content.Add(new StringContent("image"), "callType");
 				content.Add(new StringContent(pheidiparams["NOSEQ"]), "qfv");
 				content.Add(new StringContent("2"), "BD");
@@ -200,7 +201,7 @@ namespace Ipheidi.iOS
 									{
 										if (displayAlert)
 										{
-											App.NotificationManager.DisplayAlert("L'envoie de la photo fut complèté avec succès.", "Pheidi", "OK", () => { });
+											App.NotificationManager.DisplayAlert(AppResources.Alerte_EnvoiePhotoCompleteMessage, "Pheidi", "OK", () => { });
 										}
 										return true;
 									}

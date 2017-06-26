@@ -11,6 +11,7 @@ using Android.Provider;
 using Android.Support.V4.Content;
 using Android.Webkit;
 using Android.Widget;
+using Ipheidi.Resources;
 using Java.IO;
 using Java.Util;
 using Newtonsoft.Json;
@@ -53,14 +54,14 @@ namespace Ipheidi.Droid
 			{
 				c1.MoveToFirst();
 				String document_id = c1.GetString(0);
-				doc_id = document_id.Substring(document_id.LastIndexOf(":",StringComparison.OrdinalIgnoreCase) + 1);
+				doc_id = document_id.Substring(document_id.LastIndexOf(":", StringComparison.OrdinalIgnoreCase) + 1);
 			}
 
 			string path = null;
 
 			// The projection contains the columns we want to return in our query.
 			string selection = Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
-			using (var cursor = appActivity.ManagedQuery(Android.Provider.MediaStore.Images.Media.ExternalContentUri, null, selection, new string[] { doc_id }, null))
+			using (var cursor = appActivity.ContentResolver.Query(Android.Provider.MediaStore.Images.Media.ExternalContentUri, null, selection, new string[] { doc_id }, null))
 			{
 				if (cursor == null) return path;
 				var columnIndex = cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
@@ -105,7 +106,7 @@ namespace Ipheidi.Droid
 					editIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
 
 
-					appActivity.StartActivity(Intent.CreateChooser(editIntent, "Choisissez un editeur d'image"), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
+					appActivity.StartActivity(Intent.CreateChooser(editIntent, AppResources.ChoisissezEditeurImage), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
 				}
 				catch (Exception e)
 				{
@@ -122,7 +123,7 @@ namespace Ipheidi.Droid
 				editIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
 
 				var appActivity = context as MainActivity;
-				appActivity.StartActivity(Intent.CreateChooser(editIntent, "Choisissez un editeur d'image"), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
+				appActivity.StartActivity(Intent.CreateChooser(editIntent, AppResources.ChoisissezEditeurImage), IMAGE_EDITOR_RESULTCODE, OnActivityResult);
 			}
 			else if (requestCode == IMAGE_EDITOR_RESULTCODE)
 			{
@@ -140,13 +141,13 @@ namespace Ipheidi.Droid
 					string message = "";
 					if (App.NetworkManager.GetHostServerState() == NetworkState.NotReachable)
 					{
-						title = "Le serveur hôte est présentement inacessible.";
-						message = "L'image sera envoyer lorsque la connexion sera récupérée.";
+						title = AppResources.Alerte_ImageUploadHoteInacessibleTitle;
+						message = AppResources.Alerte_ImageUploadHoteInacessibleMessage;
 					}
 					else if (App.WifiOnlyEnabled)
 					{
-						title = "L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.";
-						message = "Vous pouvez changer ce paramètre dans le menu de configuration en désactivant le \"Transfert de données sous Wifi seulement\" ";
+						title = AppResources.Alerte_ImageUploadPasDeWifiTitle;
+						message = AppResources.Alerte_ImageUploadPasDeWifiMessage;
 					}
 					App.NotificationManager.DisplayAlert(message, title, "OK", () => { });
 					Task.Run(async () =>
@@ -181,9 +182,9 @@ namespace Ipheidi.Droid
 		{
 			List<string> items = new List<string>()
 			{
-				"Camera",
-				"Galerie Photo",
-				"Document"
+				AppResources.CameraFileChooser,
+				AppResources.GaleriePhotoFileChooser,
+				AppResources.DocumentFileChooser
 			};
 			string selectedItem = items[0];
 			int resultCode = 0;
@@ -198,26 +199,30 @@ namespace Ipheidi.Droid
 						   .SetPositiveButton("OK", (sender, e) =>
 							{
 								Intent intent = null;
-								switch (selectedItem)
+
+								if (selectedItem == AppResources.CameraFileChooser)
 								{
-									case "Camera":
-										intent = new Intent(MediaStore.ActionImageCapture);
-										CreateDirectoryForPictures();
-										_file = new File(_dir, String.Format("Pic_{0}.png", NoSeqGenerator.Generate()));
-										intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
+									intent = new Intent(MediaStore.ActionImageCapture);
+									CreateDirectoryForPictures();
+									_file = new File(_dir, String.Format("Pic_{0}.png", NoSeqGenerator.Generate()));
+									intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
 
-										resultCode = CAMERA_RESULTCODE;
+									resultCode = CAMERA_RESULTCODE;
 
-										break;
-									case "Galerie Photo":
-										intent = new Intent(Intent.ActionGetContent);
-										intent.SetType("image/*");
-										resultCode = IMAGE_CHOOSER_RESULTCODE;
-										break;
-									case "Document":
-										intent = fileChooserParams.CreateIntent();
-										resultCode = FILECHOOSER_RESULTCODE;
-										break;
+								}
+
+								else if (selectedItem == AppResources.GaleriePhotoFileChooser)
+								{
+									intent = new Intent(Intent.ActionGetContent);
+									intent.SetType("image/*");
+									resultCode = IMAGE_CHOOSER_RESULTCODE;
+
+								}
+								else if (selectedItem == AppResources.DocumentFileChooser)
+								{
+									intent = fileChooserParams.CreateIntent();
+									resultCode = FILECHOOSER_RESULTCODE;
+
 								}
 								if (intent != null)
 								{

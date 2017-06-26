@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -58,7 +58,7 @@ namespace Ipheidi
 			btnAdd.BackgroundColor = App.ColorPrimary;
 			btnAdd.Clicked += (sender, e) =>
 			{
-				var location = App.LocationManager.GetLocation();
+				var location = App.LocationService.GetLocation();
 				var geofence = new Geofence()
 				{
 					Longitude = location != null ? location.Longitude : 0,

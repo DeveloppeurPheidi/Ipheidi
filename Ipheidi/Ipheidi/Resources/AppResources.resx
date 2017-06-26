@@ -200,33 +200,223 @@
 		name="ModeTestOptionPrecision">
 		<value>Mode de test</value>
 	</data>
+	<data
+		name="MapPageTitle">
+		<value>Carte</value>
+	</data>
+	<data
+		name="CourrielPlaceHolder">
+		<value>Courriel</value>
+	</data>
+	<data
+		name="CourrielLabel">
+		<value>Courriel</value>
+	</data>
+	<data
+		name="MotDePasseLabel">
+		<value>Mot de passe</value>
+	</data>
+	<data
+		name="MotDePassePlaceHolder">
+		<value>Mot de passe</value>
+	</data>
+	<data
+		name="MemoriserLabel">
+		<value>Mémoriser</value>
+	</data>
+	<data
+		name="AutreCompteBouton">
+		<value>Se connecter avec un autre compte</value>
+	</data>
+	<data
+		name="ConnexionBouton">
+		<value>Se connecter</value>
+	</data>
+	<data
+		name="RetourBouton">
+		<value>Retour</value>
+	</data>
+	<data
+		name="Erreur_LaissezAucunChampVide">
+		<value>Veuillez laisser aucun champs vide</value>
+	</data>
+	<data
+		name="Erreur_MauvaisEmailOuMdp">
+		<value>L'adresse courriel ou le mot de passe saisi sont incorecte</value>
+	</data>
+	<data
+		name="Erreur_ProblemeConnexionServeur">
+		<value>Problème de connexion au serveur, veuillez réessayer plus tard</value>
+	</data>
+	<data
+		name="DeconnexionBouton">
+		<value>Déconnexion</value>
+	</data>
+	<data
+		name="RegenererBrowserBouton">
+		<value>Regénérer le navigateur</value>
+	</data>
+	<data
+		name="TransfertDonneesWifiLabel">
+		<value>Transfert de données sous Wifi seulement</value>
+	</data>
+	<data
+		name="EtatDuReseauLabel">
+		<value>Accès au réseau: </value>
+	</data>
+	<data
+		name="AccessibleEtatReseau">
+		<value>Accessible</value>
+	</data>
+	<data
+		name="PasAccessibleEtatReseau">
+		<value>Non Accessible</value>
+	</data>
+	<data
+		name="AccessibleViaWifiEtatReseau">
+		<value>Accessible par Wifi</value>
+	</data>
+	<data
+		name="AccessibleViaReseauMobileEtatReseau">
+		<value>Accessible via le reseau mobile</value>
+	</data>
+	<data
+		name="LangueLabel">
+		<value>Langue</value>
+	</data>
+	<data
+		name="AccesHoteLabel">
+		<value>Accès à l'hôte: </value>
+	</data>
+	<data
+		name="LieuxEnregistresBouton">
+		<value>Lieux enregistrés</value>
+	</data>
+	<data
+		name="OublierCompteBouton">
+		<value>Oublier ce compte</value>
+	</data>
+	<data
+		name="OublierTousLesComptesBouton">
+		<value>Oublier tous les comptes</value>
+	</data>
+	<data
+		name="Alerte_OublierCompteMessage">
+		<value>Voulez-vous vraiment oublier ce compte?</value>
+	</data>
+	<data
+		name="Alerte_OublierTousLesComptesMessage">Voulez-vous vraiment supprimer tous les comptes?<value></value></data>
+	<data
+		name="AucuneAction">
+		<value>Aucune</value>
+	</data>
+	<data
+		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader">
+		<value>Plusieurs lieux correspondent à votre position actuelle. Voulez-vous en créer un nouveau?</value>
+	</data>
+	<data
+		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle">
+		<value>Localisation</value>
+	</data>
+	<data
+		name="ChargementLabel">
+		<value>Chargement</value>
+	</data>
+	<data
+		name="VitesseLabel">
+		<value>Vitesse: </value>
+	</data>
+	<data
+		name="LocalisationRequisePourApplication">
+		<value>La localisation est requise pour profiter de certaines fonctionnalités.</value>
+	</data>
+	<data
+		name="Alerte_EnvoiePhotoCompleteMessage">
+		<value>L'envoie de la photo fut complèté avec succès.</value>
+	</data>
+	<data
+		name="ChoisissezEditeurImage">
+		<value>Choisissez un editeur d'image</value>
+	</data>
+	<data
+		name="Alerte_ImageUploadHoteInacessibleTitle">
+		<value>Le serveur hôte est présentement inacessible.</value>
+	</data>
+	<data
+		name="Alerte_ImageUploadHoteInacessibleMessage">
+		<value>L'image sera envoyé lorsque la connexion sera récupérée</value>
+	</data>
+	<data
+		name="Alerte_ImageUploadPasDeWifiTitle">
+		<value>L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.</value>
+	</data>
+	<data
+		name="Alerte_ImageUploadPasDeWifiMessage">
+		<value>Vous pouvez changer ce paramètre dans le menu de configuration en désactivant le \"Transfert de données sous Wifi seulement\"</value>
+	</data>
+	<data
+		name="CameraFileChooser">
+		<value>Camera</value>
+	</data>
+	<data
+		name="GaleriePhotoFileChooser">
+		<value>Galerie Photo</value>
+	</data>
+	<data
+		name="DocumentFileChooser">
+		<value>Document</value>
+	</data>
+	<data
+		name="ChargeBatteryStatus">
+		<value>En chargement</value>
+	</data>
+	<data
+		name="DechargeBatteryStatus">
+		<value>En décharge</value>
+	</data>
+	<data
+		name="PleineBatteryStatus">
+		<value>Pleine</value>
+	</data>
+	<data
+		name="NeChargePasBatteryStatus">
+		<value>Ne charge pas</value>
+	</data>
+	<data
+		name="InconnuBatteryStatus">
+		<value>Inconnu</value>
+	</data>
+	<data
+		name="CourantPowerSource">
+		<value>Courant</value>
+	</data>
+	<data
+		name="BatteriePowerSource">
+		<value>Batterie</value>
+	</data>
+	<data
+		name="UsbPowerSource">
+		<value>Usb</value>
+	</data>
+	<data
+		name="SansFilPowerSource">
+		<value>Sans fil</value>
+	</data>
+	<data
+		name="AutrePowerSource">
+		<value>Autre</value>
+	</data>
+	<data
+		name="Alerte_VoulezVousAssociezXCommelieuMessage">
+		<value>Voulez-vous associez "{0}" comme étant le lieu actuel?</value>
+	</data>
 
-	<data name="MapPageTitle"><value>Carte</value></data>
-		<data name="CourrielPlaceHolder"><value>Courriel</value></data>
-		<data name="CourrielLabel"><value>Courriel</value></data>
-		<data name="MotDePasseLabel"><value>Mot de passe</value></data>
-		<data name="MotDePassePlaceHolder"><value>Mot de passe</value></data>
-		<data name="MemoriserLabel"><value>Mémoriser</value></data>
-		<data name="AutreCompteBouton"><value>Se connecter avec un autre compte</value></data>
-		<data name="ConnexionBouton"><value>Se connecter</value></data>
-		<data name="RetourBouton"><value>Retour</value></data>
-		<data name="Erreur_LaissezAucunChampVide"><value>Veuillez laisser aucun champs vide</value></data>
-		<data name="Erreur_MauvaisEmailOuMdp"><value>L'adresse courriel ou le mot de passe saisi sont incorecte</value></data>
-		<data name="Erreur_ProblemeConnexionServeur"><value>Problème de connexion au serveur, veuillez réessayer plus tard</value></data>
-		<data name="DeconnexionBouton"><value>Déconnexion</value></data>
-		<data name="RegenererBrowserBouton"><value>Regénérer le navigateur</value></data>
-		<data name="TransfertDonneesWifiLabel"><value>Transfert de données sous Wifi seulement</value></data>
-		<data name="EtatDuReseauLabel"><value>Accès au réseau: </value></data>
-		<data name="AccessibleEtatReseau"><value>Accessible</value></data>
-		<data name="PasAccessibleEtatReseau"><value>Non Accessible</value></data>
-		<data name="AccessibleViaWifiEtatReseau"><value>Accessible par Wifi</value></data>
-		<data name="AccessibleViaReseauMobileEtatReseau"><value>Accessible via le reseau mobile</value></data>
-
-	<data name="LangueLabel"><value>Langue</value></data>
-	<data name="AccesHoteLabel"><value>Accès à l'hôte: </value></data>
-	<data name="LieuxEnregistresBouton"><value>Lieux enregistrés</value></data>
-	<data name="OublierCompteBouton"><value>Oublier ce compte</value></data>
-	<data name="OublierTousLesComptesBouton"><value>Oublier tous les comptes</value></data>
+	<data name="iOS_Alerte_LocalisationRequiseMessage"><value></value></data>
+	<data name=""><value></value></data>
+	<data name=""><value></value></data>
+	<data name=""><value></value></data>
+	<data name=""><value></value></data>
+	<data name=""><value></value></data>
 	<data name=""><value></value></data>
 	<data name=""><value></value></data>
 	<data name=""><value></value></data>

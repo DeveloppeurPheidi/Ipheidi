@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -11,7 +12,7 @@ namespace Ipheidi
 {
 	public class ActionManager
 	{
-		public const string Null = "Aucune";
+		static public string Null = AppResources.AucuneAction;
 		static List<Action> actionList;
 		static List<string> actionTypes;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -25,7 +26,7 @@ namespace Ipheidi
 				HorizontalTextAlignment = TextAlignment.Center,
 				TextColor = Color.White,
 				BackgroundColor = Color.Transparent,
-				Text = "Chargement..."
+				Text = AppResources.ChargementLabel + "..."
 			};
 
 			activityIndicator = new ActivityIndicator() { VerticalOptions = LayoutOptions.CenterAndExpand, HorizontalOptions = LayoutOptions.CenterAndExpand };

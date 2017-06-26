@@ -1,4 +1,5 @@
 ﻿using System;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -52,9 +53,9 @@ namespace Ipheidi
 		public LocationCellView()
 		{
 			cellWrapper = new StackLayout() { VerticalOptions = LayoutOptions.FillAndExpand };
-			speed = new Label() { Text = "Speed: " };
-			latitude = new Label() { Text = "Latitude: " };
-			longitude = new Label() { Text = "Longitude: " };
+			speed = new Label() { Text = AppResources.VitesseLabel };
+			latitude = new Label() { Text = AppResources.LatitudeLabel };
+			longitude = new Label() { Text = AppResources.LongitudeLabel };
 			utc = new Label() { Text = "Utc: " };
 			cellWrapper.Children.Add(utc);
 			cellWrapper.Children.Add(speed);
@@ -70,9 +71,9 @@ namespace Ipheidi
 			base.OnBindingContextChanged();
 			if (BindingContext != null)
 			{
-				speed.Text = "Speed: " + Speed;
-				latitude.Text = "Latitude: " + Latitude;
-				longitude.Text = "Longitude: " + Longitude;
+				speed.Text = AppResources.VitesseLabel + Speed;
+				latitude.Text = AppResources.LatitudeLabel + Latitude;
+				longitude.Text = AppResources.LongitudeLabel + Longitude;
 				utc.Text = "Utc: " + Utc;
 			}
 		}

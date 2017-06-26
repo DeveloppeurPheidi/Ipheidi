@@ -14,7 +14,7 @@ namespace Ipheidi
 		{
 			Title = AppResources.MapPageTitle;
 			InitializeComponent();
-			Location = App.LocationManager.GetLocation();
+			Location = App.LocationService.GetLocation();
 
 			if (Location != null)
 			{
@@ -85,11 +85,13 @@ namespace Ipheidi
 		/// </summary>
 		protected override void OnAppearing()
 		{
-			Debug.WriteLine("=============Location=============");
-			Debug.WriteLine("Accuracy: " + Location.Accuracy);
-			Debug.WriteLine("Longitude: " + Location.Longitude);
-			Debug.WriteLine("Latitude: " + Location.Latitude);
-
+			if (Location != null)
+			{
+				Debug.WriteLine("=============Location=============");
+				Debug.WriteLine("Accuracy: " + Location.Accuracy);
+				Debug.WriteLine("Longitude: " + Location.Longitude);
+				Debug.WriteLine("Latitude: " + Location.Latitude);
+			}
 			base.OnAppearing();
 		}
 

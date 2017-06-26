@@ -1,4 +1,5 @@
 ﻿using System;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -33,7 +34,7 @@ namespace Ipheidi
 			title.VerticalTextAlignment = TextAlignment.Center;
 			title.FontSize =  Device.GetNamedSize(NamedSize.Large, typeof(Label));
 			img.Source = "refresh.png";
-			title.Text = "Regénérer le navigateur";
+			title.Text = AppResources.RegenererBrowserBouton;
 			layout.Children.Add(img);
 			layout.Children.Add(title);
 			layout.BackgroundColor = IsDarkBackground ? Color.FromHex("#EEEEEE") : Color.White;

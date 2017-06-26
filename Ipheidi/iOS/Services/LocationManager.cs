@@ -151,12 +151,20 @@ namespace Ipheidi.iOS
 			};
 			OnLocationUpdate(loc);
 		}
-		bool CheckPermission()
+		public bool CheckPermission()
 		{
 			// iOS 8 has additional permissions requirements
 			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))//&& firstCheck)
 			{
 				locationManager.RequestAlwaysAuthorization();
+			}
+
+
+			if (!CLLocationManager.LocationServicesEnabled)
+			{
+				string message = "";
+				string title = "";
+				App.NotificationManager.DisplayAlert(message, title, "OK", () => { });
 			}
 			return CLLocationManager.LocationServicesEnabled;
 		}

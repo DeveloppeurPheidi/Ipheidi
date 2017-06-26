@@ -27,6 +27,7 @@ namespace Ipheidi.Droid
 			}
 			catch (CultureNotFoundException e1)
 			{
+				System.Diagnostics.Debug.WriteLine("LocalizationService: " + e1.Message);
 				// Android locale not valid .NET culture (eg. "en-ES" : English in Spain)
 				// fallback to first characters, in this case "en"
 				try
@@ -36,6 +37,7 @@ namespace Ipheidi.Droid
 				}
 				catch (CultureNotFoundException e2)
 				{
+					System.Diagnostics.Debug.WriteLine("LocalizationService: " + e2.Message);
 					// Android language not valid .NET culture, falling back to English
 					cultureInfo = new System.Globalization.CultureInfo("en");
 				}

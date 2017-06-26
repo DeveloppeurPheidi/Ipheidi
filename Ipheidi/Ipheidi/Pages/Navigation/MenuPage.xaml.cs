@@ -13,8 +13,8 @@ namespace Ipheidi
 	/// </summary>
 	public partial class MenuPage : ContentPage
 	{
-		
-		public  List<Page> pages;
+
+		public List<Page> pages;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.MenuPage"/> class.
@@ -38,8 +38,9 @@ namespace Ipheidi
 
 			pages.Add(logout);
 			pages.Add(refresh);
+#if DEBUG
 			pages.Add(new ContactPage());
-
+#endif
 			var MenuCell = new DataTemplate(typeof(MenuCellView));
 			MenuCell.SetBinding(MenuCellView.ImageSourceProperty, "Icon");
 			MenuCell.SetBinding(MenuCellView.TextProperty, "Title");

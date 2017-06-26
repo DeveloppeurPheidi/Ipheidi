@@ -30,33 +30,36 @@ namespace Ipheidi.iOS
 			if (CNContactStore.GetAuthorizationStatus(CNEntityType.Contacts) != CNAuthorizationStatus.Denied)
 			{
 				var cnContainers = store.GetContainers(null, out error);
-				foreach (var container in cnContainers)
+				if(cnContainers != null)
 				{
-					// Create predicate to locate requested contact
-					var predicate = CNContact.GetPredicateForContactsInContainer(container.Identifier);
-					var cnContacts = store.GetUnifiedContacts(predicate, fetchKeys, out error);
-					if (CNContactStore.GetAuthorizationStatus(CNEntityType.Contacts) == CNAuthorizationStatus.Authorized)
+					foreach (var container in cnContainers)
 					{
-						foreach (var c in cnContacts)
+						// Create predicate to locate requested contact
+						var predicate = CNContact.GetPredicateForContactsInContainer(container.Identifier);
+						var cnContacts = store.GetUnifiedContacts(predicate, fetchKeys, out error);
+						if (CNContactStore.GetAuthorizationStatus(CNEntityType.Contacts) == CNAuthorizationStatus.Authorized)
 						{
-							var con = new Contact();
-							con.Email = new List<string>();
-							foreach (var email in c.EmailAddresses)
+							foreach (var c in cnContacts)
 							{
-								con.Email.Add(email.ToString());
+								var con = new Contact();
+								con.Email = new List<string>();
+								foreach (var email in c.EmailAddresses)
+								{
+									con.Email.Add(email.ToString());
+								}
+								con.PhoneNumber = new List<string>();
+								foreach (var phone in c.PhoneNumbers)
+								{
+									con.PhoneNumber.Add(phone.ToString());
+								}
+								con.ID = c.Identifier;
+								con.FirsName = c.GivenName;
+								con.LastName = c.FamilyName;
+								con.ImageSource = c.ImageData != null ? ImageSource.FromStream(() => c.ImageData.AsStream()) : null;
+								con.DisplayName = c.GivenName + " " + c.FamilyName;
+								con.NickName = c.Nickname;
+								contacts.Add(con);
 							}
-							con.PhoneNumber = new List<string>();
-							foreach (var phone in c.PhoneNumbers)
-							{
-								con.PhoneNumber.Add(phone.ToString());
-							}
-							con.ID = c.Identifier;
-							con.FirsName = c.GivenName;
-							con.LastName = c.FamilyName;
-							con.ImageSource = c.ImageData!=null ? ImageSource.FromStream(() => c.ImageData.AsStream()): null;
-							con.DisplayName = c.GivenName + " " + c.FamilyName;
-							con.NickName = c.Nickname;
-							contacts.Add(con);
 						}
 					}
 				}

@@ -13,45 +13,24 @@ namespace Ipheidi
 	/// <summary>
 	/// Location page.
 	/// </summary>
-	public partial class LocationPage : ContentPage, ILocationListener, INetworkStateListener
+	public partial class LocationPage : ContentPage
 	{
-		Random rand = new Random();
-		int startBatteryLevel;
-		Location lastLocation;
-		List<Location> PendingLocations = new List<Location>();
-		double distance;
-		double precision;
-		bool IsInLocationTest;
-		bool timerExist = false;
-		bool timerRun = false;
-		int time = 0;
+
 		bool visible = false;
-		Dictionary<string, double> precisionsList = new Dictionary<string, double>()
-		{
-			{AppResources.MeilleurNavigationOptionPrecision, -2},
-			{AppResources.MeilleurOptionPrecision, -1},
-			{AppResources.MoinsDeDixMetresOptionPrecision, 10},
-			{AppResources.CentMetresOptionPrecision, 100},
-			{AppResources.KilometreOptionPrecision,1000},
-			{AppResources.TroisKilometreOptionPrecision,3000},
-			{AppResources.ModeTestOptionPrecision,-3}
-		};
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.LocationPage"/> class.
 		/// </summary>
 		public LocationPage()
 		{
+
 			NavigationPage.SetHasNavigationBar(this, false);
 			Icon = "nearby_square.png";
 			InitializeComponent();
 			BackgroundColor = Color.Black;
 			lblSpeed.FontSize *= 3;
 			lblSpeed.FontAttributes = FontAttributes.Bold;
-			if (App.LocationManager != null && !App.LocationManager.ContainsLocationListener(this))
-			{
-				App.LocationManager.AddLocationListener(this);
-			}
-
+			lblSpeed.IsVisible = true;
 			foreach (var child in mainLayout.Children)
 			{
 				if (child is Label)
@@ -83,60 +62,27 @@ namespace Ipheidi
 			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender, e);
 
 			//Precision Picker
-			foreach (var val in precisionsList)
+			foreach (var val in LocationManager.PrecisionsList)
 			{
 				precisionPicker.Items.Add(val.Key);
 			}
+			precisionPicker.SelectedIndex = 0;
 			precisionPicker.SelectedIndexChanged += (sender, e) =>
 			{
 				var key = precisionPicker.Items[precisionPicker.SelectedIndex];
-				precision = precisionsList[key];
+				LocationManager.Precision = LocationManager.PrecisionsList[key];
 			};
-			precisionPicker.SelectedIndex = 0;
+			foreach (var valKey in LocationManager.PrecisionsList)
+			{
+				if (!(valKey.Value - LocationManager.Precision < 0 || valKey.Value - LocationManager.Precision > 0))
+				{
+					precisionPicker.SelectedItem = valKey.Key;
+				}
+			}
+
+
 			RefreshMargin();
 
-			App.NetworkManager.AddNetworkStateListener(this);
-			//Envoie automatique des locations au 30 seconde si le reseau le permet.
-			Device.StartTimer(new TimeSpan(0, 0, 30), () =>
-			{
-				if (PendingLocations.Count > 0)
-				{
-					List<Location> data = new List<Location>();
-					data.AddRange(PendingLocations);
-					PendingLocations.Clear();
-					string state = App.NetworkManager.GetNetworkState();
-					if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
-					{
-						Task.Run(async () =>
-							{
-								Debug.WriteLine("LocationPage: Sending location data");
-
-								bool IsGood = await SendJsonData(JsonConvert.SerializeObject(data));
-								if (!IsGood)
-								{
-									Debug.WriteLine("LocationPage: Error while sending location data.");
-									foreach (var location in data)
-									{
-										await DatabaseHelper.Database.SaveItemAsync(location);
-									}
-								}
-							});
-					}
-					else
-					{
-						Task.Run(async () =>
-							{
-								Debug.WriteLine("LocationPage: Saving location data.");
-								foreach (var location in data)
-								{
-
-									await DatabaseHelper.Database.SaveItemAsync(location);
-								}
-							});
-					}
-				}
-				return true;
-			});
 		}
 
 		/// <summary>
@@ -146,7 +92,21 @@ namespace Ipheidi
 		/// <param name="e">E.</param>
 		void OnLocalisationStartClick(object sender, System.EventArgs e)
 		{
-			StartLocalisation();
+			App.LocationManager.StartLocalisation();
+		}
+
+		public void LocalisationStarted()
+		{
+			lblTime.Text = AppResources.TempsLabel;
+			lblDistance.Text = AppResources.DistanceLabel + "0.0km";
+			lblSpeed.Text = "0 km/h";
+            ToggleLocalisation(true);
+		}
+
+		public void LocalisationStopped()
+		{
+			lblSpeed.Text = "0 km/h";
+            ToggleLocalisation(false);
 		}
 
 		/// <summary>
@@ -156,146 +116,36 @@ namespace Ipheidi
 		/// <param name="e">E.</param>
 		void OnLocalisationStopClick(object sender, System.EventArgs e)
 		{
-			StopLocalisation();
+			App.LocationManager.StopLocalisation();
 		}
 
-		/// <summary>
-		/// Starts the localisation.
-		/// </summary>
-		public void StartLocalisation()
+		void ToggleLocalisation(bool on)
 		{
-			//Envoie de données dans le cas où la base de donnée ne serait pas vide.
-			string state = App.NetworkManager.GetNetworkState();
-			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
-			{
-				Task.Run(async () =>
-				{
-					await SendLocationsData();
-				});
-			}
-
-			precisionPicker.IsEnabled = false;
-			btnSendData.IsEnabled = false;
-			distance = 0;
-			time = 0;
-			lblTime.Text = AppResources.TempsLabel;
-			timerRun = true;
-			btnStart.IsVisible = false;
-			lblDistance.Text = AppResources.DistanceLabel + "0.0km";
-			btnStop.IsVisible = true;
-			lblSpeed.IsVisible = true;
-			lblSpeed.Text = "0 km/h";
-			lastLocation = null;
-			IsInLocationTest = -3 == (int)precision;
-			if (!IsInLocationTest)
-			{
-				App.LocationManager.StartLocationUpdate(precision);
-			}
-			startBatteryLevel = App.Battery.RemainingChargePercent;
-			if (!timerExist)
-			{
-				timerExist = true;
-				Device.StartTimer(new TimeSpan(0, 0, 1), TimerTick);
-			}
+			precisionPicker.IsEnabled = !on;
+			btnSendData.IsEnabled = !on;
+			btnStart.IsVisible = !on;
+			btnStop.IsVisible = on;
 		}
 
-		/// <summary>
-		/// Stops the localisation.
-		/// </summary>
-		public void StopLocalisation()
+		public void UpdateBatteryAndTime()
 		{
-			precisionPicker.IsEnabled = true;
-			btnSendData.IsEnabled = true;
-			btnStart.IsVisible = true;
-			btnStop.IsVisible = false;
-			timerRun = false;
-			App.LocationManager.StopLocationUpdate();
-			lblSpeed.Text = "0 km/h";
-			lastLocation = null;
-		}
-
-		/// <summary>
-		/// Obtient une mise à jour des données de localisations.
-		/// </summary>
-		/// <param name="location">Location.</param>
-		public void OnLocationUpdate(Location location)
-		{
-			if (lastLocation != null)
+			if (!App.IsInBackground && visible)
 			{
-				location.BatteryRemainingCharge = App.Battery.RemainingChargePercent;
-				location.PowerSource = App.Battery.PowerSource.ToString();
-				location.PowerStatus = App.Battery.Status.ToString();
-				location.User = App.Username;
-				location.Domain = App.Domain;
-				if ((Math.Abs(location.Latitude - lastLocation.Latitude) > 0.0000001 || Math.Abs(location.Longitude - lastLocation.Longitude) > 0.0000001))
-				{
-
-					double dis = lastLocation.GetDistanceFromOtherLocation(location);
-					if ((dis <= 100 && dis > 0))
-					{
-						PendingLocations.Add(location);
-						distance += dis;
-					}
-					DisplayLocation(location);
-				}
+				int remainingBattery = App.Battery.RemainingChargePercent;
+				lblTime.Text = AppResources.TempsLabel + TimeSpan.FromSeconds(App.LocationManager.Time).ToString(@"hh\:mm\:ss");
+				lblPowerSource.Text = AppResources.SourceEnergieLabel + App.Battery.PowerSource.Description();
+				lblBatteryStatus.Text = AppResources.BatterieStatusLabel + App.Battery.Status.Description();
+				lblBatteryLevel.Text = AppResources.NiveauBatterieLabel + (remainingBattery >= 0 ? remainingBattery + "%" : "-");
+				if (remainingBattery > App.LocationManager.StartBatteryLevel) App.LocationManager.StartBatteryLevel = remainingBattery;
+				lblBatteryConsumption.Text = AppResources.BatterieUtiliseeLabel + (remainingBattery < 0 ? "-" : App.LocationManager.StartBatteryLevel - remainingBattery + "%");
 			}
-			lastLocation = location;
-		}
-
-
-		/// <summary>
-		/// Methode appele lors d'un Tick du timer, on s'assure que le temps augmente seulement lorsque le timerRun est a true 
-		/// </summary>
-		/// <returns><c>true</c>, if timer needs to keep runnning, <c>false</c> otherwise.</returns>
-		private bool TimerTick()
-		{
-			if (timerRun)
-			{
-				//Si True, envoie des donnée de localisation au hazard à partir de la coordonnée actuelle.
-				if (IsInLocationTest)
-				{
-					if (lastLocation == null)
-					{
-						lastLocation = App.LocationManager.GetLocation();
-					}
-					if (lastLocation != null)
-					{
-						var loc = new Location();
-						loc.Latitude = lastLocation.Latitude;
-						loc.Longitude = lastLocation.Longitude;
-						double r = rand.Next(1, 5); //Direction: 1↓, 2←, 3↑, 4→ 
-						double dLat = r % 2 * (r - 2) * 0.0002;
-						loc.Latitude += dLat;
-						double dLon = (r - 1) % 2 * (r - 3) * 0.0002;
-						loc.Longitude += dLon;
-						loc.Speed = loc.GetDistanceFromOtherLocation(lastLocation);
-						loc.Orientation = (((2 - r) % 2) * 90 + 90 * (r % 2)) + (((r - 3) % 2) * 90 + 180 * ((r - 1) % 2));
-						loc.Utc = DateTime.UtcNow;
-						App.LocationManager.SendLocation(loc);
-					}
-				}
-				time++;
-				if (!App.IsInBackground && visible)
-				{
-					int remainingBattery = App.Battery.RemainingChargePercent;
-					lblTime.Text = AppResources.TempsLabel + TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss");
-					lblPowerSource.Text = AppResources.SourceEnergieLabel + App.Battery.PowerSource.ToString();
-					lblBatteryStatus.Text = AppResources.BatterieStatusLabel + App.Battery.Status.ToString();
-					lblBatteryLevel.Text = AppResources.NiveauBatterieLabel + (remainingBattery >= 0 ? remainingBattery + "%" : "-");
-					if (remainingBattery > startBatteryLevel) startBatteryLevel = remainingBattery;
-					lblBatteryConsumption.Text = AppResources.BatterieUtiliseeLabel + (remainingBattery < 0 ? "-" : startBatteryLevel - remainingBattery + "%");
-				}
-				return true;
-			}
-			timerExist = false;
-			return false;
 		}
 
 		/// <summary>
 		/// Displaies the location.
 		/// </summary>
 		/// <param name="location">Location.</param>
-		protected void DisplayLocation(Location location)
+		public void DisplayLocation(Location location)
 		{
 			if (!App.IsInBackground && visible)
 			{
@@ -303,7 +153,7 @@ namespace Ipheidi
 				lblAltitude.Text = AppResources.AltitudeLabel + (int)(location.Altitude) + " m";
 				lblLatitude.Text = AppResources.LatitudeLabel + location.Latitude;
 				lblLongitude.Text = AppResources.LongitudeLabel + location.Longitude;
-				lblDistance.Text = AppResources.DistanceLabel + (distance / 1000).ToString("N1") + "km";
+				lblDistance.Text = AppResources.DistanceLabel + (App.LocationManager.Distance / 1000).ToString("N1") + "km";
 				lblOrientation.Text = AppResources.OrientationLabel + (int)location.Orientation + "°";
 				lblAccuracy.Text = AppResources.PrecisionLabel + (int)location.Accuracy + "m";
 			}
@@ -358,81 +208,13 @@ namespace Ipheidi
 			btnStart.IsEnabled = false;
 			btnSendData.IsEnabled = false;
 			btnGetData.IsEnabled = false;
-			await SendLocationsData();
+			await App.LocationManager.SendLocationsData();
 			btnStart.IsEnabled = true;
 			btnSendData.IsEnabled = true;
 			btnGetData.IsEnabled = true;
 		}
 
-		/// <summary>
-		/// Récupère les données de localisation et fait la convertion
-		/// en json avant de faire appel à SendJsonData
-		/// </summary>
-		async public Task SendLocationsData()
-		{
-			List<Location> locations = await DatabaseHelper.Database.GetUserSpecificItems<Location>();
-			if (locations.Count > 0)
-			{
-				List<Location> locationsToSerialize = new List<Location>();
-				foreach (var l in locations)
-				{
-					if (l.Utc == DateTime.MinValue)
-					{
-						await DatabaseHelper.Database.DeleteItemAsync(l);
-					}
-					else if (locationsToSerialize.Count <= 100)
-					{
-						locationsToSerialize.Add(l);
-					}
-					else
-					{
-						if (await SendJsonData(JsonConvert.SerializeObject(locationsToSerialize)))
-						{
-							foreach (var toDelete in locationsToSerialize)
-							{
-								await DatabaseHelper.Database.DeleteItemAsync(toDelete);
-							}
-						}
-						locationsToSerialize = new List<Location>();
-					}
-				}
-				if (locationsToSerialize.Count > 0)
-				{
-					if (await SendJsonData(JsonConvert.SerializeObject(locationsToSerialize)))
-					{
-						foreach (var toDelete in locationsToSerialize)
-						{
-							await DatabaseHelper.Database.DeleteItemAsync(toDelete);
-						}
-					}
-				}
-			}
-		}
 
-		/// <summary>
-		/// Envoie une requête http au serveur contenant les données de localisation en format json.
-		/// </summary>
-		/// <param name="json">Json string</param>
-		public static async Task<bool> SendJsonData(string json)
-		{
-			var handler = new HttpClientHandler() { CookieContainer = App.CookieManager.GetAllCookies() };
-			using (var httpClient = new HttpClient(handler, true))
-			{
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "sendLocationData" }, { "pheidiparams", "value**:**" + json + "**,**" } };
-				HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
-				if (response != null)
-				{
-					if (response.StatusCode == HttpStatusCode.OK)
-					{
-						string responseContent = await response.Content.ReadAsStringAsync();
-						Debug.WriteLine("Reponse:" + responseContent);
-						return "Good" == responseContent;
-					}
-				}
-				Debug.WriteLine("Problème de connexion au serveur, veuillez réessayer plus tard");
-				return false;
-			}
-		}
 
 
 		/// <summary>
@@ -488,36 +270,6 @@ namespace Ipheidi
 			base.OnSizeAllocated(width, height);
 
 		}
-
-		/// <summary>
-		/// On the network state update.
-		/// </summary>
-		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(string state)
-		{
-			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
-			{
-				Task.Run(async () =>
-				{
-					await SendLocationsData();
-				});
-			}
-		}
-
-		/// <summary>
-		/// On the host server state update.
-		/// </summary>
-		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(string state)
-		{
-			string netState = App.NetworkManager.GetNetworkState();
-			if (state == NetworkState.Reachable && (netState == NetworkState.ReachableViaWiFiNetwork || (netState == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled)))
-			{
-				Task.Run(async () =>
-				{
-					await SendLocationsData();
-				});
-			}
-		}
 	}
 }
+

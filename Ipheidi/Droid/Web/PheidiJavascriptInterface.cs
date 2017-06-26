@@ -20,7 +20,7 @@ namespace Ipheidi.Droid
 		[JavascriptInterface]
 		public string Location()
 		{
-			var location = App.LocationManager.GetLocation();
+			var location = App.LocationService.GetLocation();
 			if (location != null)
 			{
 				return "Longitude**:**" + location.Longitude + "**,**Latitude**:**" + location.Latitude;
@@ -139,7 +139,7 @@ namespace Ipheidi.Droid
 							try
 							{
 
-								var location = App.LocationManager.GetLocation();
+								var location = App.LocationService.GetLocation();
 								string noseq = "";
 								data = "";
 								bool createNewGeo = true;

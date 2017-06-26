@@ -12,7 +12,7 @@ namespace Ipheidi.iOS
 {
 	public class NotificationService : INotificationService
 	{
-		int count = 0;
+		static public int count = 0;
 
 		public void DisplayAlert(string message, string title, string confirm, System.Action onConfirm)
 		{
@@ -49,54 +49,60 @@ namespace Ipheidi.iOS
 
 		public void SendNotification(string message, string title, string icon, Action action)
 		{
-			bool alertsAllowed = false;
-			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+			Device.BeginInvokeOnMainThread(() =>
 			{
-				// Get current notification settings
-				UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
+				nint num = UIApplication.SharedApplication.ApplicationIconBadgeNumber;
+				bool alertsAllowed = false;
+				if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
 				{
-					alertsAllowed = (settings.AlertSetting == UNNotificationSetting.Enabled);
-					if (alertsAllowed)
+					// Get current notification settings
+					UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
 					{
-						count++;
-						var content = new UNMutableNotificationContent();
-						content.Title = title;
-						content.Body = message;
-						content.Badge = 1;
+						alertsAllowed = (settings.AlertSetting == UNNotificationSetting.Enabled);
+						if (alertsAllowed)
+						{
+							count++;
+							var content = new UNMutableNotificationContent();
+							content.Title = title;
+							content.Body = message;
+							content.Badge = (uint)num + 1;
+							var data = new NSMutableDictionary();
+							string json = JsonConvert.SerializeObject(action);
+							data.Add(new NSString("Action"), new NSString(json));
+							content.UserInfo = data;
+							content.Sound = UNNotificationSound.Default;
+							var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(1, false);
+
+							var requestID = count.ToString();
+							var request = UNNotificationRequest.FromIdentifier(requestID, content, trigger);
+
+							UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) =>
+							{
+								if (err != null)
+								{
+									Debug.WriteLine(err.LocalizedDescription);
+								}
+							});
+						}
+					});
+				}
+				else
+				{
+						UILocalNotification notification = new UILocalNotification();
+						NSDate.FromTimeIntervalSinceNow(1);
+						//notification.AlertTitle = "Alert Title"; // required for Apple Watch notifications
+						notification.AlertAction = title;
+						notification.AlertBody = message;
+						notification.SoundName = UILocalNotification.DefaultSoundName;
+
 						var data = new NSMutableDictionary();
 						string json = JsonConvert.SerializeObject(action);
 						data.Add(new NSString("Action"), new NSString(json));
-						content.UserInfo = data;
-						content.Sound = UNNotificationSound.Default;
-						var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(1, false);
-
-						var requestID = count.ToString();
-						var request = UNNotificationRequest.FromIdentifier(requestID, content, trigger);
-
-						UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) =>
-						{
-							if (err != null)
-							{
-								Debug.WriteLine(err.LocalizedDescription);
-							}
-						});
-					}
-				});
-			}
-			else
-			{
-				UILocalNotification notification = new UILocalNotification();
-				NSDate.FromTimeIntervalSinceNow(1);
-				//notification.AlertTitle = "Alert Title"; // required for Apple Watch notifications
-				notification.AlertAction = title;
-				notification.AlertBody = message;
-				notification.SoundName = UILocalNotification.DefaultSoundName;
-				var data = new NSMutableDictionary();
-				string json = JsonConvert.SerializeObject(action);
-				data.Add(new NSString("Action"), new NSString(json));
-				notification.UserInfo = data;
-				UIApplication.SharedApplication.ScheduleLocalNotification(notification);
-			}
+						notification.UserInfo = data;
+						UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+						UIApplication.SharedApplication.ApplicationIconBadgeNumber = num + 1;
+				}
+			});
 		}
 	}
 }

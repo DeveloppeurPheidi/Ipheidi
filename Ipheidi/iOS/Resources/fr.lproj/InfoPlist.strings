@@ -1,0 +1,6 @@
+﻿"NSContactsUsageDescription"="Pour utiliser nos fonctionnalités de synchronisation de contacts.";
+"NSCameraUsageDescription"="Pour pouvoir prendre des photos à partir de l'application.";
+"NSPhotoLibraryUsageDescription"="Pour accèder à vos photos dans le cadre des fonctionnalités de l'application.";
+"kTCCServiceMediaLibrary"="Pour accèder à vos medias dans le cadre des fonctionnalités de l'application.";
+"NSMicrophoneUsageDescription"="Pour capturer du son lors de l'utilisation de la capture vidéo.";
+"NSLocationAlwaysUsageDescription"= "Pour localiser votre position et utiliser les fonctionnalités de géolocalisation.";

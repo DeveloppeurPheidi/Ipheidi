@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Net;
@@ -122,22 +123,19 @@ namespace Ipheidi.Droid
 		/// <returns><c>true</c>, if host was reachable, <c>false</c> otherwise.</returns>
 		protected override bool IsHostReachable()
 		{
-			// Create a request for the URL.
-			WebRequest request = WebRequest.Create(App.Url);
-			request.Timeout = 5000; // 5 Sec
-
-			try
+			return Task.Run(async() =>
 			{
-				using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+				try
 				{
+					var response = await PheidiNetworkManager.SendHttpRequestAsync(new Dictionary<string, string>(), new TimeSpan(0, 0, 5));
 					return response.StatusCode == HttpStatusCode.OK;
 				}
-			}
-			catch (Exception)
-			{
-				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
-				return false;
-			}
+				catch (Exception e)
+				{
+					System.Diagnostics.Debug.WriteLine(e.Message);
+					return false;
+				}
+			}).Result;
 		}
 
 	}

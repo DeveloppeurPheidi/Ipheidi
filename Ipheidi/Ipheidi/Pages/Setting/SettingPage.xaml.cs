@@ -38,6 +38,11 @@ namespace Ipheidi
 			App.NetworkManager.AddNetworkStateListener(this);
 			lblHostServerState.Text = AppResources.AccesHoteLabel + Utilities.SplitCamelCase(NetworkState.Reachable.ToString());
 			lblNetworkState.Text = AppResources.EtatDuReseauLabel + Utilities.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
+			lblLangue.Text = AppResources.LangueLabel;
+			lblWifiOnly.Text = AppResources.TransfertDonneesWifiLabel;
+			btnGeofences.Text = AppResources.LieuxEnregistresBouton;
+			forgetAccountBtn.Text = AppResources.OublierCompteBouton;
+			deleteAllAccountBtn.Text = AppResources.OublierTousLesComptesBouton;
 
 			languePicker.Items.Add("fr");
 			languePicker.Items.Add("en");
@@ -59,7 +64,7 @@ namespace Ipheidi
 		async void ForgetAccountButtonClicked(object sender, System.EventArgs e)
 		{
 
-			if (await DisplayAlert("Oublié ce compte", "Voulez-vous vraiment oublier ce compte?", "Oui", "Non"))
+			if (await DisplayAlert(AppResources.OublierCompteBouton, AppResources.Alerte_OublierCompteMessage, AppResources.Oui, AppResources.Non))
 			{
 				App.CredentialsManager.DeleteUser(App.Username);
 				App.Username = "";
@@ -72,7 +77,7 @@ namespace Ipheidi
 		async void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
 
-			if (await DisplayAlert("Supprimer tous les comptes", "Voulez-vous vraiment tous les comptes?", "Oui", "Non"))
+			if (await DisplayAlert(AppResources.OublierTousLesComptesBouton, AppResources.Alerte_OublierTousLesComptesMessage, AppResources.Oui,AppResources.Non))
 			{
 				App.CredentialsManager.DeleteCredentials();
 				App.Username = "";

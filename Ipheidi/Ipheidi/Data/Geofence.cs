@@ -41,7 +41,7 @@ namespace Ipheidi
 		{
 			get
 			{
-				var location = App.LocationManager.GetLocation();
+				var location = App.LocationService.GetLocation();
 				if (location == null)
 				{
 					return -1;

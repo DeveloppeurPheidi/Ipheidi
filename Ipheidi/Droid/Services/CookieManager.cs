@@ -80,11 +80,11 @@ namespace Ipheidi.Droid
 						if (cookiePieces.Length >= 2)
 						{
 							cookiePieces[0] = cookiePieces[0].Contains(":")
-							  ? cookiePieces[0].Substring(0, cookiePieces[0].IndexOf(":"))
+							                                 ? cookiePieces[0].Substring(0, cookiePieces[0].IndexOf(":", StringComparison.Ordinal))
 							  : cookiePieces[0];
 
               				           
-							cookiePieces[1] = cookiePieces[1].EndsWith(";")? cookiePieces[1].Substring(0, cookiePieces[1].Length - 1)
+							cookiePieces[1] = cookiePieces[1].EndsWith(";",StringComparison.Ordinal)? cookiePieces[1].Substring(0, cookiePieces[1].Length - 1)
 			                : cookiePieces[1];
 
 							yield return new Cookie()

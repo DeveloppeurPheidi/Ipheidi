@@ -1,0 +1,6 @@
+﻿"NSContactsUsageDescription"="To use our contact synching functionnalities.";
+"NSCameraUsageDescription"="To be able to take picture and use our functionnalities related to the camera.";
+"NSPhotoLibraryUsageDescription"="To be able to send pictures from your device.";
+"kTCCServiceMediaLibrary"="To get access to your file.";
+"NSMicrophoneUsageDescription"="To record sounds while video recording.";
+"NSLocationAlwaysUsageDescription"= "To be able to use our geolocation functionnalities";

@@ -12,6 +12,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Wapps.TOCrop;
 using System.Linq;
+using Ipheidi.Resources;
 
 namespace Ipheidi.iOS
 {
@@ -132,15 +133,15 @@ namespace Ipheidi.iOS
 							{
 								UIAlertController actionSheetAlert = UIAlertController.Create(null, null, UIAlertControllerStyle.ActionSheet);
 								// Add Actions
-								var a1 = UIAlertAction.Create("Prendre une Photo ou Video", UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.Camera, request));
+								var a1 = UIAlertAction.Create(AppResources.CameraFileChooser, UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.Camera, request));
 								a1.SetValueForKey(new UIImage("camera.png"), new NSString("image"));
 								actionSheetAlert.AddAction(a1);
 
-								var a2 = UIAlertAction.Create("Galerie de Photo", UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.PhotoLibrary, request));
+								var a2 = UIAlertAction.Create(AppResources.GaleriePhotoFileChooser, UIAlertActionStyle.Default, (action) => ImageHelper.ImageImport(UIImagePickerControllerSourceType.PhotoLibrary, request));
 								a2.SetValueForKey(new UIImage("sort.png"), new NSString("image"));
 								actionSheetAlert.AddAction(a2);
 
-								actionSheetAlert.AddAction(UIAlertAction.Create("Annuler", UIAlertActionStyle.Cancel, null));
+								actionSheetAlert.AddAction(UIAlertAction.Create(AppResources.AnnulerBouton, UIAlertActionStyle.Cancel, null));
 
 
 								UIViewController rootView = UIApplication.SharedApplication.KeyWindow.RootViewController;
@@ -198,7 +199,7 @@ namespace Ipheidi.iOS
 					{
 						if (param[i].Contains("pheidiparams"))
 						{
-							var location = App.LocationManager.GetLocation();
+							var location = App.LocationService.GetLocation();
 							string values = "";
 							string str = "";
 							if (location != null)
@@ -276,12 +277,12 @@ namespace Ipheidi.iOS
 									{
 										val = pp["VALUE"];
 									}
-									string message = "Voulez-vous associez \"" + val + "\" comme étant le lieux actuel?";
+									string message = string.Format(AppResources.Alerte_VoulezVousAssociezXCommelieuMessage, val); 
 									var a = new System.Action(() =>
 									{
 										try
 										{
-											var location = App.LocationManager.GetLocation();
+											var location = App.LocationService.GetLocation();
 											string noseq = "";
 											string pheidiParams = "";
 											data = "";
@@ -335,7 +336,7 @@ namespace Ipheidi.iOS
 
 									});
 
-									App.NotificationManager.DisplayAlert(message, "", "Oui", "Non", a, () => { CurrentlyProcessingRequestLocaly = false; });
+									App.NotificationManager.DisplayAlert(message, "", AppResources.Oui, AppResources.Non, a, () => { CurrentlyProcessingRequestLocaly = false; });
 								}
 								else
 								{
@@ -401,7 +402,16 @@ namespace Ipheidi.iOS
 		{
 			NSData nsdata = NSData.FromString(data);
 			NSMutableUrlRequest req = new NSMutableUrlRequest();
-			req.Headers = request.Headers;
+			NSMutableDictionary head = new NSMutableDictionary(request.Headers);
+			if (!head.ContainsKey(new NSString("User-Agent")))
+			{
+				head.Add(new NSString("User-Agent"), new NSString("Ipheidi " + Device.RuntimePlatform));
+			}
+			if (!head.ContainsKey(new NSString("UserHostAddress")))
+			{
+				head.Add(new NSString("UserHostAddress"),new NSString(App.NetworkManager.GetIPAddress()));
+			}
+			req.Headers = head;
 			req.NetworkServiceType = request.NetworkServiceType;
 			req.AllowsCellularAccess = request.AllowsCellularAccess;
 			req.ShouldHandleCookies = request.ShouldHandleCookies;

@@ -245,7 +245,6 @@ namespace Ipheidi
 					}
 				};
 
-
 				string category = ActionManager.Null;
 
 				if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))

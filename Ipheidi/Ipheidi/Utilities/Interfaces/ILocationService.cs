@@ -45,6 +45,8 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		void SendLocation(Location location);
 
+		bool CheckPermission();
+
 		/// <summary>
 		/// Gets the location.
 		/// </summary>
