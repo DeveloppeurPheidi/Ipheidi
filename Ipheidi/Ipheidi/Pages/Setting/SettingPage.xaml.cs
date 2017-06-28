@@ -36,26 +36,20 @@ namespace Ipheidi
 				App.WifiOnlyEnabled = wifiOnlySwitch.IsToggled;
 			};
 			App.NetworkManager.AddNetworkStateListener(this);
-			lblHostServerState.Text = AppResources.AccesHoteLabel + Utilities.SplitCamelCase(NetworkState.Reachable.ToString());
-			lblNetworkState.Text = AppResources.EtatDuReseauLabel + Utilities.SplitCamelCase(App.NetworkManager.GetNetworkState().ToString());
-			lblLangue.Text = AppResources.LangueLabel;
+			lblHostServerState.Text = AppResources.AccesHoteLabel + App.NetworkManager.GetHostServerState().Description();
+			lblNetworkState.Text = AppResources.EtatDuReseauLabel + App.NetworkManager.GetNetworkState().Description();
 			lblWifiOnly.Text = AppResources.TransfertDonneesWifiLabel;
 			btnGeofences.Text = AppResources.LieuxEnregistresBouton;
 			forgetAccountBtn.Text = AppResources.OublierCompteBouton;
 			deleteAllAccountBtn.Text = AppResources.OublierTousLesComptesBouton;
 
-			languePicker.Items.Add("fr");
-			languePicker.Items.Add("en");
-			languePicker.SelectedItem = App.Language;
-			languePicker.SelectedIndexChanged += (sender, e) =>
-			{
-				App.Language = languePicker.SelectedItem.ToString();
-				App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
-				var languageCookie = new Cookie() { Name = "language", Domain = App.Domain, Value = App.Language };
-				App.CookieManager.AddCookie(languageCookie);
-			};
+			settingsButton.Clicked += (sender, e) => App.SettingHelper.OpenApplicationSettings();
+			settingsButton.Text = AppResources.ReglageBouton;
 
-
+#if DEBUG
+			lblHostServerState.IsVisible = true;
+			lblNetworkState.IsVisible = true;
+#endif
 		}
 
 		/// <summary>
@@ -77,7 +71,7 @@ namespace Ipheidi
 		async void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
 
-			if (await DisplayAlert(AppResources.OublierTousLesComptesBouton, AppResources.Alerte_OublierTousLesComptesMessage, AppResources.Oui,AppResources.Non))
+			if (await DisplayAlert(AppResources.OublierTousLesComptesBouton, AppResources.Alerte_OublierTousLesComptesMessage, AppResources.Oui, AppResources.Non))
 			{
 				App.CredentialsManager.DeleteCredentials();
 				App.Username = "";
@@ -119,20 +113,23 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
-			lblNetworkState.Text = AppResources.EtatDuReseauLabel + state;
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				lblNetworkState.Text = AppResources.EtatDuReseauLabel + state.Description();
+			});
 		}
 
 		/// <summary>
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				lblHostServerState.Text = AppResources.AccesHoteLabel + state;
+				lblHostServerState.Text = AppResources.AccesHoteLabel + state.Description();
 			});
 		}
 	}

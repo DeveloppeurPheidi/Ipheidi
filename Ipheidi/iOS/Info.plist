@@ -69,8 +69,8 @@
 	<string>Pour accèder à vos medias</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Pour capturer du son</string>
-	<key>Custom Property</key>
-	<string></string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>CFBundleLocalizations</key>
@@ -78,7 +78,5 @@
 		<string>en</string>
 		<string>fr</string>
 	</array>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>fr</string>
 </dict>
 </plist>

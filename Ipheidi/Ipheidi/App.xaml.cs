@@ -119,6 +119,7 @@ namespace Ipheidi
 		static public ICredentialsService CredentialsManager;
 		static public IStatusBarService StatusBarManager;
 		static public ILocationService LocationService;
+		static public ISettingHelper SettingHelper;
 		static public LocationManager LocationManager;
 		static public INotificationService NotificationManager;
 		static public ILocalization LocalizationManager;
@@ -194,6 +195,7 @@ namespace Ipheidi
 				ImageHelper = DependencyService.Get<IImageHelper>();
 				LocalizationManager = DependencyService.Get<ILocalization>();
 				ThreadHelper.Initialize(Environment.CurrentManagedThreadId);
+				SettingHelper = DependencyService.Get<ISettingHelper>();
 			}
 			catch (Exception e)
 			{
@@ -335,12 +337,12 @@ namespace Ipheidi
 			base.OnPropertyChanged(propertyName);
 		}
 
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
 			Debug.WriteLine("App: Network State = " + state);
 		}
 
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			Debug.WriteLine("App: Host Server State = " + state);
 		}

@@ -242,7 +242,9 @@ namespace Ipheidi.Droid
 
 		public bool CheckPermission()
 		{
-			return true;
+			var appActivity = Forms.Context as MainActivity;
+			var permissionCheck = ContextCompat.CheckSelfPermission(appActivity, Manifest.Permission.AccessFineLocation);
+			return permissionCheck == Permission.Granted;
 		}
 	}
 }

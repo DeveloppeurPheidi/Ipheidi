@@ -18,27 +18,27 @@
 	</resheader>
 	<data
 		name="FilterNom">
-		<value>Nom</value>
+		<value>Name</value>
 	</data>
 	<data
 		name="FilterProximite">
-		<value>Proximité</value>
+		<value>Proximity</value>
 	</data>
 	<data
 		name="FilterNotificationActive">
-		<value>Notification Activé</value>
+		<value>Notification enabled</value>
 	</data>
 	<data
 		name="GeofencePageTitle">
-		<value>Lieux ({0})</value>
+		<value>Places ({0})</value>
 	</data>
 	<data
 		name="NomLabel">
-		<value>Nom: </value>
+		<value>Name: </value>
 	</data>
 	<data
 		name="NomPlaceHolder">
-		<value>Nom</value>
+		<value>Name</value>
 	</data>
 	<data
 		name="LatitudeLabel">
@@ -58,15 +58,15 @@
 	</data>
 	<data
 		name="ActionEntreeLabel">
-		<value>Action d'entrée</value>
+		<value>Enter action</value>
 	</data>
 	<data
 		name="ActionSortieLabel">
-		<value>Action de sortie</value>
+		<value>Exit action</value>
 	</data>
 	<data
 		name="DelaiNotificationLabel">
-		<value>Délai de notification</value>
+		<value>Notification delay</value>
 	</data>
 	<data
 		name="MinutesPlaceHolder">
@@ -74,23 +74,23 @@
 	</data>
 	<data
 		name="SecondesPlaceHolder">
-		<value>Secondes</value>
+		<value>Seconds</value>
 	</data>
 	<data
 		name="CarteButton">
-		<value>Carte</value>
+		<value>Map</value>
 	</data>
 	<data
 		name="GeofenceCreatePageTitle">
-		<value>Nouveau Lieu</value>
+		<value>New Place</value>
 	</data>
 	<data
 		name="NomLieuPlaceHolder">
-		<value>Nom du lieu</value>
+		<value>Place</value>
 	</data>
 	<data
 		name="ActiverNotificationLabel">
-		<value>Activer la notification</value>
+		<value>Enable notification</value>
 	</data>
 	<data
 		name="SauvegarderBouton">
@@ -98,39 +98,39 @@
 	</data>
 	<data
 		name="EnregistrerBouton">
-		<value>Enregistrer</value>
+		<value>Save</value>
 	</data>
 	<data
 		name="AnnulerBouton">
-		<value>Annuler</value>
+		<value>Cancel</value>
 	</data>
 	<data
 		name="Oui">
-		<value>Oui</value>
+		<value>Yes</value>
 	</data>
 	<data
 		name="Non">
-		<value>Non</value>
+		<value>No</value>
 	</data>
 	<data
 		name="DemarrerBouton">
-		<value>Démarrer</value>
+		<value>Start</value>
 	</data>
 	<data
 		name="ArreterBouton">
 		<value>
-		</value>Arrêter</data>
+		</value>Stop</data>
 	<data
 		name="EnvoieDonneesBouton">
-		<value>Envoie des donnée</value>
+		<value>Send data</value>
 	</data>
 	<data
 		name="DonneesBouton">
-		<value>Données</value>
+		<value>Data</value>
 	</data>
 	<data
 		name="AltitudeLabel">
-		<value>Altitude: </value>
+		<value>Height: </value>
 	</data>
 	<data
 		name="DistanceLabel">
@@ -142,179 +142,180 @@
 	</data>
 	<data
 		name="PrecisionLabel">
-		<value>Précision: </value>
+		<value>Accuracy: </value>
 	</data>
 	<data
 		name="TempsLabel">
-		<value>Temps: </value>
+		<value>Time: </value>
 	</data>
 	<data
 		name="SourceEnergieLabel">
-		<value>Source d'énergie: </value>
+		<value>Energy source: </value>
 	</data>
 	<data
 		name="NiveauBatterieLabel">
-		<value>Batterie: </value>
+		<value>Battery: </value>
 	</data>
 	<data
 		name="BatterieUtiliseeLabel">
-		<value>Batterie utilisé: </value>
+		<value>Used Battery: </value>
 	</data>
 	<data
 		name="BatterieStatusLabel">
-		<value>Status de la batterie: </value>
+		<value>Battery state: </value>
 	</data>
 	<data
 		name="SupprimerDonneesBouton">
-		<value>Supprimer les données</value>
+		<value>Delete data</value>
 	</data>
 	<data
 		name="ListeDonneesPageTitle">
-		<value>Liste de données({0})</value>
+		<value>Data ({0})</value>
 	</data>
 	<data
 		name="MeilleurNavigationOptionPrecision">
-		<value>Meilleur pour la navigation</value>
+		<value>Best for navigation</value>
 	</data>
 	<data
 		name="MeilleurOptionPrecision">
-		<value>Meilleur</value>
+		<value>Best</value>
 	</data>
 	<data
 		name="MoinsDeDixMetresOptionPrecision">
-		<value>Moins de dix mètres</value>
+		<value>Less then ten meters</value>
 	</data>
 	<data
 		name="CentMetresOptionPrecision">
-		<value>Cent mètres</value>
+		<value>Hundred meters</value>
 	</data>
 	<data
 		name="KilometreOptionPrecision">
-		<value>Kilomètre</value>
+		<value>Kilometer</value>
 	</data>
 	<data
 		name="TroisKilometreOptionPrecision">
-		<value>Trois kilomètres</value>
+		<value>Three kilometers</value>
 	</data>
 	<data
 		name="ModeTestOptionPrecision">
-		<value>Mode de test</value>
+		<value>Test mode</value>
 	</data>
 	<data
 		name="MapPageTitle">
-		<value>Carte</value>
+		<value>Map</value>
 	</data>
 	<data
 		name="CourrielPlaceHolder">
-		<value>Courriel</value>
+		<value>Email</value>
 	</data>
 	<data
 		name="CourrielLabel">
-		<value>Courriel</value>
+		<value>Email</value>
 	</data>
 	<data
 		name="MotDePasseLabel">
-		<value>Mot de passe</value>
+		<value>Password</value>
 	</data>
 	<data
 		name="MotDePassePlaceHolder">
-		<value>Mot de passe</value>
+		<value>Password</value>
 	</data>
 	<data
 		name="MemoriserLabel">
-		<value>Mémoriser</value>
+		<value>Remember</value>
 	</data>
 	<data
 		name="AutreCompteBouton">
-		<value>Se connecter avec un autre compte</value>
+		<value>Connect with an other account</value>
 	</data>
 	<data
 		name="ConnexionBouton">
-		<value>Se connecter</value>
+		<value>Login</value>
 	</data>
 	<data
 		name="RetourBouton">
-		<value>Retour</value>
+		<value>Back</value>
 	</data>
 	<data
 		name="Erreur_LaissezAucunChampVide">
-		<value>Veuillez laisser aucun champs vide</value>
+		<value>Some fields are still empty</value>
 	</data>
 	<data
 		name="Erreur_MauvaisEmailOuMdp">
-		<value>L'adresse courriel ou le mot de passe saisi sont incorecte</value>
+		<value>Wrong email or password</value>
 	</data>
 	<data
 		name="Erreur_ProblemeConnexionServeur">
-		<value>Problème de connexion au serveur, veuillez réessayer plus tard</value>
+		<value>Troubles with the network, try again later</value>
 	</data>
 	<data
 		name="DeconnexionBouton">
-		<value>Déconnexion</value>
+		<value>Deconnection</value>
 	</data>
 	<data
 		name="RegenererBrowserBouton">
-		<value>Regénérer le navigateur</value>
+		<value>Reset home page</value>
 	</data>
 	<data
 		name="TransfertDonneesWifiLabel">
-		<value>Transfert de données sous Wifi seulement</value>
+		<value>Data transfert under Wifi</value>
 	</data>
 	<data
 		name="EtatDuReseauLabel">
-		<value>Accès au réseau: </value>
+		<value>Network state: </value>
 	</data>
 	<data
 		name="AccessibleEtatReseau">
-		<value>Accessible</value>
+		<value>Reachable</value>
 	</data>
 	<data
 		name="PasAccessibleEtatReseau">
-		<value>Non Accessible</value>
+		<value>Not Reachable</value>
 	</data>
 	<data
 		name="AccessibleViaWifiEtatReseau">
-		<value>Accessible par Wifi</value>
+		<value>Reachable via Wifi network</value>
 	</data>
 	<data
 		name="AccessibleViaReseauMobileEtatReseau">
-		<value>Accessible via le reseau mobile</value>
+		<value>Reachable via carrier data network</value>
 	</data>
 	<data
 		name="LangueLabel">
-		<value>Langue</value>
+		<value>Language</value>
 	</data>
 	<data
 		name="AccesHoteLabel">
-		<value>Accès à l'hôte: </value>
+		<value>Host network state: </value>
 	</data>
 	<data
 		name="LieuxEnregistresBouton">
-		<value>Lieux enregistrés</value>
+		<value>Places</value>
 	</data>
 	<data
 		name="OublierCompteBouton">
-		<value>Oublier ce compte</value>
+		<value>Forget this account</value>
 	</data>
 	<data
 		name="OublierTousLesComptesBouton">
-		<value>Oublier tous les comptes</value>
+		<value>Forget all accounts</value>
 	</data>
 	<data
 		name="Alerte_OublierCompteMessage">
-		<value>Voulez-vous vraiment oublier ce compte?</value>
+		<value>Do you really want to forget this account?</value>
 	</data>
 	<data
 		name="Alerte_OublierTousLesComptesMessage">
-		<value>Voulez-vous vraiment oublier tous les comptes?</value>
+		<value>Do you really want to forget all accounts?</value>
 	</data>
 	<data
 		name="AucuneAction">
-		<value>Aucune</value>
+		<value>None</value>
 	</data>
 	<data
 		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader">
-		<value>Plusieurs lieux correspondent à votre position actuelle. Voulez-vous en créer un nouveau?</value>
+		<value>
+		Many places match with your current position, do you still want to create a new one?</value>
 	</data>
 	<data
 		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle">
@@ -322,39 +323,39 @@
 	</data>
 	<data
 		name="ChargementLabel">
-		<value>Chargement</value>
+		<value>Loading</value>
 	</data>
 	<data
 		name="VitesseLabel">
-		<value>Vitesse: </value>
+		<value>Speed: </value>
 	</data>
 	<data
 		name="LocalisationRequisePourApplication">
-		<value>La localisation est requise pour profiter de certaines fonctionnalités.</value>
+		<value>Localisation is required for some functionnalities.</value>
 	</data>
 	<data
 		name="Alerte_EnvoiePhotoCompleteMessage">
-		<value>L'envoie de la photo fut complèté avec succès.</value>
+		<value>Picture was sent succesfuly.</value>
 	</data>
 	<data
 		name="ChoisissezEditeurImage">
-		<value>Choisissez un editeur d'image</value>
+		<value>Choose an image editor</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadHoteInacessibleTitle">
-		<value>Le serveur hôte est présentement inacessible.</value>
+		<value>Host server is not reachable.</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadHoteInacessibleMessage">
-		<value>L'image sera envoyé lorsque la connexion sera récupérée</value>
+		<value>Image will be sent when the connection is restored.</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadPasDeWifiTitle">
-		<value>L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.</value>
+		<value>Image will be sent when Wifi is available.</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadPasDeWifiMessage">
-		<value>Vous pouvez changer ce paramètre dans le menu de configuration en désactivant le \"Transfert de données sous Wifi seulement\"</value>
+		<value>You can turn it off in the setting menu by disabling \"Data transfert under Wifi\"</value>
 	</data>
 	<data
 		name="CameraFileChooser">
@@ -362,7 +363,7 @@
 	</data>
 	<data
 		name="GaleriePhotoFileChooser">
-		<value>Galerie Photo</value>
+		<value>Photo Gallery</value>
 	</data>
 	<data
 		name="DocumentFileChooser">
@@ -370,31 +371,31 @@
 	</data>
 	<data
 		name="ChargeBatteryStatus">
-		<value>En chargement</value>
+		<value>Charging</value>
 	</data>
 	<data
 		name="DechargeBatteryStatus">
-		<value>En décharge</value>
+		<value>Discharging</value>
 	</data>
 	<data
 		name="PleineBatteryStatus">
-		<value>Pleine</value>
+		<value>Full</value>
 	</data>
 	<data
 		name="NeChargePasBatteryStatus">
-		<value>Ne charge pas</value>
+		<value>Not charging</value>
 	</data>
 	<data
 		name="InconnuBatteryStatus">
-		<value>Inconnu</value>
+		<value>Unknown</value>
 	</data>
 	<data
 		name="CourantPowerSource">
-		<value>Courant</value>
+		<value>AC</value>
 	</data>
 	<data
 		name="BatteriePowerSource">
-		<value>Batterie</value>
+		<value>Battery</value>
 	</data>
 	<data
 		name="UsbPowerSource">
@@ -402,23 +403,24 @@
 	</data>
 	<data
 		name="SansFilPowerSource">
-		<value>Sans fil</value>
+		<value>Wireless</value>
 	</data>
 	<data
 		name="AutrePowerSource">
-		<value>Autre</value>
+		<value>Other</value>
 	</data>
 	<data
 		name="Alerte_VoulezVousAssociezXCommelieuMessage">
-		<value>Voulez-vous associez "{0}" comme étant le lieu actuel?</value>
-	</data>
-	<data
-		name="Alerte_LocalisationRequiseMessage">
-		<value>La permission de localisation est requise pour activer les fonctionnalités de géolocalisation. Pour changer ce paramètre, cliquez sur le bouton "Réglages", puis autorisez la localisation.</value>
+		<value>Do you want to associate "{0}" as the current place?</value>
 	</data>
 	<data
 		name="ReglageBouton">
-		<value>Réglages</value>
+		<value>Settings</value>
 	</data>
-	<data name="CopyrightFooter"><value>© Copyright {0}. Pheidi inc. Tous droits réservés</value></data>
+	<data
+		name="Alerte_LocalisationRequiseMessage">
+		<value>TODO</value>
+	</data>
+
+	<data name="CopyrightFooter"><value>© Copyright {0}. Pheidi inc. All rights reserved</value></data>
 </root>

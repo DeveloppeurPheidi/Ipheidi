@@ -65,7 +65,7 @@ namespace Ipheidi
 
 		public int Time = 0;
 
-		static public Dictionary<string, double> PrecisionsList = new Dictionary<string, double>()
+		public Dictionary<string, double> PrecisionsList = new Dictionary<string, double>()
 		{
 			{AppResources.MeilleurNavigationOptionPrecision, -2},
 			{AppResources.MeilleurOptionPrecision, -1},
@@ -88,7 +88,7 @@ namespace Ipheidi
 					List<Location> data = new List<Location>();
 					data.AddRange(PendingLocations);
 					PendingLocations.Clear();
-					string state = App.NetworkManager.GetNetworkState();
+					NetworkState state = App.NetworkManager.GetNetworkState();
 					if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 					{
 						Task.Run(async () =>
@@ -131,7 +131,7 @@ namespace Ipheidi
 		public void StartLocalisation()
 		{
 			//Envoie de données dans le cas où la base de donnée ne serait pas vide.
-			string state = App.NetworkManager.GetNetworkState();
+			NetworkState state = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 			{
 				Task.Run(async () =>
@@ -260,7 +260,7 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
 			if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
 			{
@@ -275,9 +275,9 @@ namespace Ipheidi
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
-			string netState = App.NetworkManager.GetNetworkState();
+			NetworkState netState = App.NetworkManager.GetNetworkState();
 			if (state == NetworkState.Reachable && (netState == NetworkState.ReachableViaWiFiNetwork || (netState == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled)))
 			{
 				Task.Run(async () =>

@@ -9,10 +9,10 @@ namespace Ipheidi
 	/// </summary>
 	public abstract class NetworkService
 	{
-		protected string CurrentHostServerState = NetworkState.Default;
+		protected NetworkState CurrentHostServerState = NetworkState.Default;
 		protected List<INetworkStateListener> listeners;
 		protected bool ListeningToHostServerState = false;
-		protected string CurrentNetworkState = NetworkState.Default;
+		protected NetworkState CurrentNetworkState = NetworkState.Default;
 
 		/// <summary>
 		/// Updates the state of the host server.
@@ -89,10 +89,10 @@ namespace Ipheidi
 		/// Gets the state of the host server.
 		/// </summary>
 		/// <returns>The host server state.</returns>
-		public string GetHostServerState()
+		public NetworkState GetHostServerState()
 		{
 			bool IsReachable = IsHostReachable();
-			string state = IsReachable ? NetworkState.Reachable : NetworkState.NotReachable;
+			NetworkState state = IsReachable ? NetworkState.Reachable : NetworkState.NotReachable;
 			return state;
 		}
 
@@ -100,7 +100,7 @@ namespace Ipheidi
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			foreach (var l in listeners)
 			{
@@ -112,7 +112,7 @@ namespace Ipheidi
 		/// On the network state update. Notifies the current state of the network to the listeners.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
 			try
 			{

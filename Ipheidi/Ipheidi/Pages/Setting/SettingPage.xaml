@@ -3,57 +3,42 @@
 	xmlns ="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="Ipheidi.SettingPage">
-
 	<ContentPage.Content>
-
 		<StackLayout
 			x:Name           ="mainLayout"
 			Padding          ="20,40,20,0"
 			HorizontalOptions="FillAndExpand">
-
 			<Button
-				x:Name="forgetAccountBtn"
+				x:Name ="forgetAccountBtn"
 				Text   ="Oublier ce compte"
 				Clicked="ForgetAccountButtonClicked" />
-
 			<Button
-				x:Name="deleteAllAccountBtn"
+				x:Name ="deleteAllAccountBtn"
 				Text   ="Supprimer tous les comptes"
 				Clicked="DeleteAllUserButtonClicked" />
-
 			<Button
 				x:Name="btnGeofences"
 				Text  ="Lieux enregistrés" />
-
+			<Button
+				x:Name="settingsButton"
+				Text  ="Settings" />
 			<StackLayout
 				Orientation="Horizontal">
-
 				<Label
-					x:Name="lblWifiOnly"
+					x:Name               ="lblWifiOnly"
 					Text                 ="Transfert de données sous Wifi seulement"
 					VerticalTextAlignment="Center" />
-
 				<Switch
 					x:Name="wifiOnlySwitch" />
-
 			</StackLayout>
-
 			<Label
+				IsVisible="false"
 				x:Name="lblNetworkState"
 				Text  ="Network State: " />
-
 			<Label
+				IsVisible="false"
 				x:Name="lblHostServerState"
 				Text  ="Host Server State: " />
-
-			<StackLayout 
-				Orientation="Horizontal">
-				<Label x:Name="lblLangue" VerticalTextAlignment="Center" Text="Langue"/>
-				<Picker x:Name="languePicker" />
-			</StackLayout>
-
 		</StackLayout>
-
 	</ContentPage.Content>
-
 </ContentPage>

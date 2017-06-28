@@ -62,7 +62,7 @@ namespace Ipheidi.Droid
 						using (var battery = Android.App.Application.Context.RegisterReceiver(null, filter))
 						{
 							int status = battery.GetIntExtra(BatteryManager.ExtraStatus, -1);
-							var isCharging = status == (int)BatteryStatus.Charging || status == (int)BatteryStatus.Full;
+							var isCharging = status == (int)Android.OS.BatteryStatus.Charging || status == (int)Android.OS.BatteryStatus.Full;
 
 							var chargePlug = battery.GetIntExtra(BatteryManager.ExtraPlugged, -1);
 							var usbCharge = chargePlug == (int)BatteryPlugged.Usb;
@@ -76,13 +76,13 @@ namespace Ipheidi.Droid
 
 							switch (status)
 							{
-								case (int)BatteryStatus.Charging:
+								case (int)Android.OS.BatteryStatus.Charging:
 									return BatteryStatus.Charging;
-								case (int)BatteryStatus.Discharging:
+								case (int)Android.OS.BatteryStatus.Discharging:
 									return BatteryStatus.Discharging;
-								case (int)BatteryStatus.Full:
+								case (int)Android.OS.BatteryStatus.Full:
 									return BatteryStatus.Full;
-								case (int)BatteryStatus.NotCharging:
+								case (int)Android.OS.BatteryStatus.NotCharging:
 									return BatteryStatus.NotCharging;
 								default:
 									return BatteryStatus.Unknown;
@@ -113,7 +113,7 @@ namespace Ipheidi.Droid
 						using (var battery = Android.App.Application.Context.RegisterReceiver(null, filter))
 						{
 							int status = battery.GetIntExtra(BatteryManager.ExtraStatus, -1);
-							var isCharging = status == (int)BatteryStatus.Charging || status == (int)BatteryStatus.Full;
+							var isCharging = status == (int)Android.OS.BatteryStatus.Charging || status == (int)Android.OS.BatteryStatus.Full;
 
 							var chargePlug = battery.GetIntExtra(BatteryManager.ExtraPlugged, -1);
 							var usbCharge = chargePlug == (int)BatteryPlugged.Usb;

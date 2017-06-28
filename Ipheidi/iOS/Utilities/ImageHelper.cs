@@ -214,12 +214,12 @@ namespace Ipheidi.iOS
 			return false;
 		}
 
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			CheckForImageToUpload();
 		}
 
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
 			CheckForImageToUpload();
 		}

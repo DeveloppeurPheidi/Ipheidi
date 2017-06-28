@@ -93,7 +93,7 @@ namespace Ipheidi.Droid
 		/// Gets the state of the network.
 		/// </summary>
 		/// <returns>The network state.</returns>
-		public string GetNetworkState()
+		public NetworkState GetNetworkState()
 		{
 			if (CurrentNetworkState == NetworkState.Default)
 			{

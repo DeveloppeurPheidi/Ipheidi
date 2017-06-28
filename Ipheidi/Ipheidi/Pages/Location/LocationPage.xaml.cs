@@ -62,7 +62,7 @@ namespace Ipheidi
 			btnGetMap.Clicked += (sender, e) => OnGetMapClicked(sender, e);
 
 			//Precision Picker
-			foreach (var val in LocationManager.PrecisionsList)
+			foreach (var val in App.LocationManager.PrecisionsList)
 			{
 				precisionPicker.Items.Add(val.Key);
 			}
@@ -70,9 +70,9 @@ namespace Ipheidi
 			precisionPicker.SelectedIndexChanged += (sender, e) =>
 			{
 				var key = precisionPicker.Items[precisionPicker.SelectedIndex];
-				LocationManager.Precision = LocationManager.PrecisionsList[key];
+				LocationManager.Precision = App.LocationManager.PrecisionsList[key];
 			};
-			foreach (var valKey in LocationManager.PrecisionsList)
+			foreach (var valKey in App.LocationManager.PrecisionsList)
 			{
 				if (!(valKey.Value - LocationManager.Precision < 0 || valKey.Value - LocationManager.Precision > 0))
 				{

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace Ipheidi
 		bool IsInSecondPage;
 		bool firstPageExist;
 		int lastUserIndex = 0;
+		Picker languePicker = new Picker();
+		BoxView FooterLayout = new BoxView();
+		Label FooterLabel = new Label();
+
 		public LoginPage() : this(false)
 		{
 		}
@@ -56,10 +61,11 @@ namespace Ipheidi
 					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
 					string s = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
 					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
+
 					if (!string.IsNullOrEmpty(s))
 					{
 
-						await DisplayAlert("Problème de connexion", s, "OK");
+						//Device.BeginInvokeOnMainThread(async () => await DisplayAlert("Problème de connexion", s, "OK"));
 					}
 				});
 			};
@@ -131,10 +137,12 @@ namespace Ipheidi
 			passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
 			lblPassword.Text = AppResources.MotDePasseLabel;
 			lblRemember.Text = AppResources.MemoriserLabel;
-			btnOtherAccount.Text = AppResources.ConnexionBouton;
+			btnLogin.Text = AppResources.ConnexionBouton;
 			btnOtherAccount.Text = AppResources.AutreCompteBouton;
 			btnBackToFirstPage.Text = AppResources.RetourBouton;
 
+			SetFooter();
+			mainLayout.RaiseChild(AppLoadingView);
 			AppLoadingView.SetVisibility(false);
 			Debug.WriteLine("TOTAL: " + watch.Elapsed.Milliseconds);
 		}
@@ -177,14 +185,8 @@ namespace Ipheidi
 		/// <param name="visible">Défini la visibilité</param>
 		void EntriesVisible(bool visible)
 		{
-			btnOtherAccount.IsVisible = !visible;
-			userPicker.IsVisible = !visible;
-			lblCourriel.IsVisible = visible;
-			lblPassword.IsVisible = visible;
-			lblRemember.IsVisible = visible;
-			passwordEntry.IsVisible = visible;
-			usernameEntry.IsVisible = visible;
-			rememberSwitch.IsVisible = visible;
+			registeredUserLayout.IsVisible = !visible;
+			entryLayout.IsVisible = visible;
 			urlPicker.IsEnabled = visible;
 		}
 
@@ -238,6 +240,71 @@ namespace Ipheidi
 			return AppResources.Erreur_ProblemeConnexionServeur;
 		}
 
+		void SetFooter()
+		{
+			if (!mainLayout.Children.Contains(languePicker))
+			{
+				string currentlanguage = "";
+				foreach (var lang in ApplicationConst.Langues)
+				{
+					languePicker.Items.Add(lang.Key);
+					if (lang.Value == App.Language)
+					{
+						currentlanguage = lang.Key;
+					}
+				}
+				languePicker.SelectedItem = currentlanguage != "" ? currentlanguage : languePicker.Items[0];
+				languePicker.SelectedIndexChanged += (sender, e) =>
+				{
+					App.Language = languePicker.SelectedItem.ToString().Substring(0, 2).ToLower();
+					App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
+					var languageCookie = new Cookie() { Name = "language", Domain = App.Domain, Value = App.Language };
+					App.CookieManager.AddCookie(languageCookie);
+					usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
+					lblCourriel.Text = AppResources.CourrielLabel;
+					passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
+					lblPassword.Text = AppResources.MotDePasseLabel;
+					lblRemember.Text = AppResources.MemoriserLabel;
+					btnLogin.Text = AppResources.ConnexionBouton;
+					btnOtherAccount.Text = AppResources.AutreCompteBouton;
+					btnBackToFirstPage.Text = AppResources.RetourBouton;
+					FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
+				};
+
+				FooterLayout.BackgroundColor = App.ColorPrimary;
+
+				FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
+				FooterLabel.TextColor = App.ColorDark;//Color.FromRgba(1.0,1.0,1.0,0.5);
+				FooterLabel.FontSize *= 0.75;
+				languePicker.BackgroundColor = App.ColorDark;//Color.FromRgba(0.0, 0.0, 0.0, 0.2);
+				languePicker.TextColor = App.ColorPrimary;
+				languePicker.HorizontalOptions = LayoutOptions.Center;
+
+				var h = urlPicker.Height;
+				Func<RelativeLayout, double> getpickerWidth = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Width;
+				Func<RelativeLayout, double> getpickerHeight = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Height;
+
+				mainLayout.Children.Add(languePicker,
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.7; }),
+										Constraint.RelativeToParent((parent) => { return parent.Height - 5 - getpickerHeight(parent); }),
+									Constraint.RelativeToParent((parent) => { return parent.Width * 0.25; }));
+
+				mainLayout.Children.Add(FooterLayout,
+										Constraint.RelativeToParent((parent) => { return 0; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, view) => { return view.Y - 5; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, View) => { return View.Height + 10; }));
+
+				mainLayout.Children.Add(FooterLabel,
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.05; }),
+										Constraint.RelativeToView(FooterLayout, (RelativeLayout, view) => { return view.Y; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.6; }),
+										Constraint.RelativeToView(FooterLayout, (RelativeLayout, View) => { return View.Height; }));
+
+				mainLayout.RaiseChild(languePicker);
+			}
+		}
+
 		/// <summary>
 		/// On size allocation.
 		/// </summary>
@@ -250,10 +317,17 @@ namespace Ipheidi
 			{
 				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
-
+			var w = bodyLayout.Width / 2;
+			leftEntryLayout.WidthRequest = w;
+			rightEntryLayout.WidthRequest = w;
+			var h = usernameEntry.Measure(rightEntryLayout.Width, rightEntryLayout.Height).Request.Height;
+			lblCourriel.HeightRequest = h;
+			lblPassword.HeightRequest = h;
+			bottomButtonLayout.Padding = new Thickness( width * 0.1,0);
 			base.OnSizeAllocated(width, height);
 		}
 
+	
 		protected override void OnAppearing()
 		{
 			if (!IsInSecondPage)

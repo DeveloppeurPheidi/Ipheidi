@@ -27,6 +27,8 @@ namespace Ipheidi
 		private Geofence PendingValidationGeofence;
 		private DateTime TimerStartTime;
 		private TimeSpan TimeDelay;
+		private Location lastLocation;
+
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceManager"/> class.
@@ -404,7 +406,6 @@ namespace Ipheidi
 					Debug.WriteLine(geofence.Name);
 				}
 			}
-
 		}
 
 		/// <summary>
@@ -419,11 +420,19 @@ namespace Ipheidi
 			{
 				RefreshClosePositionGeofencesList();
 			}
-			foreach (Geofence geo in ClosePositionGeofences)
+			if (lastLocation == null)
 			{
-				if (geo.CheckIfLocationInsideFence(location))
+				lastLocation = location;
+			}
+			double dis = lastLocation.GetDistanceFromOtherLocation(location);
+			if ((dis <= 100 && dis >= 0))
+			{
+				foreach (Geofence geo in ClosePositionGeofences)
 				{
-					//IsUnknowLocation = false;
+					if (geo.CheckIfLocationInsideFence(location))
+					{
+						//IsUnknowLocation = false;
+					}
 				}
 			}
 
@@ -477,7 +486,7 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnNetworkStateUpdate(string state)
+		public void OnNetworkStateUpdate(NetworkState state)
 		{
 
 		}
@@ -486,7 +495,7 @@ namespace Ipheidi
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		public void OnHostServerStateUpdate(string state)
+		public void OnHostServerStateUpdate(NetworkState state)
 		{
 			if (state == NetworkState.Reachable && RescheduledGeofenceUpdates.Count > 0)
 			{

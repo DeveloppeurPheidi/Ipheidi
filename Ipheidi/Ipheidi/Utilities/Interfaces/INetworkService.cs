@@ -3,16 +3,38 @@ using Ipheidi.Resources;
 
 namespace Ipheidi
 {
-	static public class NetworkState
+	public enum NetworkState
 	{
-		static public string NotReachable = AppResources.PasAccessibleEtatReseau;
-		static public string ReachableViaCarrierDataNetwork = AppResources.AccessibleViaReseauMobileEtatReseau;
-		static public string ReachableViaWiFiNetwork = AppResources.AccessibleViaWifiEtatReseau;
-		static public string Reachable = AppResources.AccessibleEtatReseau;
-		static public string Default = "";
+		NotReachable,
+		ReachableViaCarrierDataNetwork,
+		ReachableViaWiFiNetwork,
+		Reachable,
+		Default
 	}
+	public static class NetWorkStateExtention
+	{
+		public static string Description(this NetworkState state)
+		{
+			switch (state)
+			{
+				case NetworkState.Reachable:
+					return AppResources.AccessibleEtatReseau;
 
+				case NetworkState.NotReachable:
+					return AppResources.PasAccessibleEtatReseau;
 
+				case NetworkState.ReachableViaCarrierDataNetwork:
+					return AppResources.AccessibleViaReseauMobileEtatReseau;
+
+				case NetworkState.ReachableViaWiFiNetwork:
+					return AppResources.AccessibleViaWifiEtatReseau;
+
+				case NetworkState.Default:
+					return "";
+			}
+			return "";
+		}
+	}
 
 	public interface INetworkService
 	{
@@ -26,7 +48,7 @@ namespace Ipheidi
 		/// Gets the state of the network.
 		/// </summary>
 		/// <returns>The network state.</returns>
-		string GetNetworkState();
+		NetworkState GetNetworkState();
 
 		/// <summary>
 		/// Listens to the state of the network.
@@ -42,7 +64,7 @@ namespace Ipheidi
 		/// On the network state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		void OnNetworkStateUpdate(string state);
+		void OnNetworkStateUpdate(NetworkState state);
 
 		/// <summary>
 		/// Adds a network state listener.
@@ -70,13 +92,13 @@ namespace Ipheidi
 		/// Gets the state of the host server.
 		/// </summary>
 		/// <returns>The host server state.</returns>
-		string GetHostServerState();
+		NetworkState GetHostServerState();
 
 		/// <summary>
 		/// On the host server state update.
 		/// </summary>
 		/// <param name="state">State.</param>
-		void OnHostServerStateUpdate(string state);
+		void OnHostServerStateUpdate(NetworkState state);
 
 		/// <summary>
 		/// Notifies the current state of the network.

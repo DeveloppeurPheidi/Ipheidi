@@ -16,21 +16,21 @@ namespace Ipheidi.Resources {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResources {
+    public class AppResources_en {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources() {
+        internal AppResources_en() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Ipheidi.Resources.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Ipheidi.Resources.AppResources.en", typeof(AppResources_en).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -641,21 +641,21 @@ namespace Ipheidi.Resources {
             }
         }
         
-        public static string Alerte_LocalisationRequiseMessage {
-            get {
-                return ResourceManager.GetString("Alerte_LocalisationRequiseMessage", resourceCulture);
-            }
-        }
-        
         public static string ReglageBouton {
             get {
                 return ResourceManager.GetString("ReglageBouton", resourceCulture);
             }
         }
         
-        public static string CopyrightFooter {
+        public static string Alerte_LocalisationRequiseMessage {
             get {
-                return ResourceManager.GetString("CopyrightFooter", resourceCulture);
+                return ResourceManager.GetString("Alerte_LocalisationRequiseMessage", resourceCulture);
+            }
+        }
+        
+        public static string _ {
+            get {
+                return ResourceManager.GetString("", resourceCulture);
             }
         }
     }
