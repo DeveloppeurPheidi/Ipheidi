@@ -307,10 +307,19 @@ namespace Ipheidi.iOS
 													NotificationEnabled = true,
 													User = App.Username,
 													Domain = App.Domain,
-													NotificationDelay = 0,
-													Name = val,
+													NotificationDelay = ApplicationConst.DefaultGeofenceTriggerTime,
+													Radius =ApplicationConst.DefaultGeofenceRadius,
+													Name = val
 												};
-												geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+												if (pp.ContainsKey("ENTERACTIONNOSEQ"))
+												{
+													geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];
+												}
+												if (pp.ContainsKey("EXITACTIONNOSEQ"))
+												{
+													geo.EnterActionNoSeq = pp["EXITACTIONNOSEQ"];
+												}
+												geo.Radius= ApplicationConst.DefaultGeofenceRadius;
 												App.GeofenceManager.AddGeofence(geo);
 												noseq = geo.NoSeq;
 											}

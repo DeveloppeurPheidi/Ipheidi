@@ -420,5 +420,32 @@
 		name="ReglageBouton">
 		<value>Réglages</value>
 	</data>
-	<data name="CopyrightFooter"><value>© Copyright {0}. Pheidi inc. Tous droits réservés</value></data>
+	<data
+		name="CopyrightFooter">
+		<value>© Copyright {0}. Pheidi inc. Tous droits réservés</value>
+	</data>
+	<data
+		name="LocalisationSettingTitle">
+		<value>Paramètres de localisation</value>
+	</data>
+	<data
+		name="LocalisationSettingBouton">
+		<value>Paramètres de localisation</value>
+	</data>
+	<data
+		name="LocalisationActiveLabel">
+		<value>Localisation activée</value>
+	</data>
+	<data
+		name="IntervalLocalisationLabel">
+		<value>Interval d'envoie de données</value>
+	</data>
+	<data
+		name="LocalisationPrecisionLabel">
+		<value>Précision</value>
+	</data>
+
+	<data name="RayonLabel"><value>Rayon:</value></data>
+	<data name="RayonPlaceHolder"><value>Mètres</value></data>
+	<data name=""><value></value></data>
 </root>

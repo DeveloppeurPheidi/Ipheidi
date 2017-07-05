@@ -163,10 +163,20 @@ namespace Ipheidi.Droid
 										NotificationEnabled = true,
 										User = App.Username,
 										Domain = App.Domain,
-										NotificationDelay = 0,
+										NotificationDelay = ApplicationConst.DefaultGeofenceTriggerTime,
 										Name = val,
+										Radius = ApplicationConst.DefaultGeofenceRadius
 									};
-									geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+
+									if (pp.ContainsKey("ENTERACTIONNOSEQ"))
+									{
+										geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];
+									}
+									if (pp.ContainsKey("EXITACTIONNOSEQ"))
+									{
+										geo.EnterActionNoSeq = pp["EXITACTIONNOSEQ"];
+									}
+									geo.Radius = ApplicationConst.DefaultGeofenceRadius;
 									App.GeofenceManager.AddGeofence(geo);
 									noseq = geo.NoSeq;
 								}
@@ -182,7 +192,7 @@ namespace Ipheidi.Droid
 							}
 						});
 
-						App.NotificationManager.DisplayAlert(message, "", "Oui", "Non", a, () => { EndOfProcess = true;});
+						App.NotificationManager.DisplayAlert(message, "", "Oui", "Non", a, () => { EndOfProcess = true; });
 
 						while (!EndOfProcess)
 						{

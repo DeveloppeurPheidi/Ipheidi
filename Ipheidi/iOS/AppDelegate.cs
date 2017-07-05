@@ -56,6 +56,7 @@ namespace Ipheidi.iOS
 				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
 			}
 
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 			return result;
 		}
 

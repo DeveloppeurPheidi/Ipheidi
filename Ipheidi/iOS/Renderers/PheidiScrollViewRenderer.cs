@@ -11,7 +11,7 @@ namespace Ipheidi.iOS
 		protected override void OnElementChanged(VisualElementChangedEventArgs e)
 		{
 			base.OnElementChanged(e);
-			Bounces = false;
+			//Bounces = false;
 		}
 	}
 

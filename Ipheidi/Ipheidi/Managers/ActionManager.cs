@@ -16,14 +16,16 @@ namespace Ipheidi
 		static List<Action> actionList;
 		static List<string> actionTypes;
 
+		static string currentCulture = "";
 		static public List<Action> GetActionList()
 		{
 			if (actionList == null)
 			{
 				actionList = new List<Action>();
 			}
-			if (actionList.Count == 0)
+			if (actionList.Count == 0 && currentCulture != App.Language)
 			{
+				currentCulture = App.Language;
 				Task.Run(async () =>
 				{
 					actionList = await GetActions();

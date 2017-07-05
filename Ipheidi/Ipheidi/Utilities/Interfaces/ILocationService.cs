@@ -47,6 +47,8 @@ namespace Ipheidi
 
 		bool CheckPermission();
 
+		void SetDistanceFilter(double distance);
+
 		/// <summary>
 		/// Gets the location.
 		/// </summary>

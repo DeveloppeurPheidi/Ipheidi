@@ -4,41 +4,47 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="Ipheidi.SettingPage">
 	<ContentPage.Content>
-		<StackLayout
-			x:Name           ="mainLayout"
-			Padding          ="20,40,20,0"
-			HorizontalOptions="FillAndExpand">
-			<Button
-				x:Name ="forgetAccountBtn"
-				Text   ="Oublier ce compte"
-				Clicked="ForgetAccountButtonClicked" />
-			<Button
-				x:Name ="deleteAllAccountBtn"
-				Text   ="Supprimer tous les comptes"
-				Clicked="DeleteAllUserButtonClicked" />
-			<Button
-				x:Name="btnGeofences"
-				Text  ="Lieux enregistrés" />
-			<Button
-				x:Name="settingsButton"
-				Text  ="Settings" />
+		<ScrollView>
 			<StackLayout
-				Orientation="Horizontal">
+				x:Name           ="mainLayout"
+				Padding          ="20,40,20,20"
+				Spacing          ="15"
+				HorizontalOptions="FillAndExpand">
+				<Button
+					x:Name ="forgetAccountBtn"
+					Text   ="Oublier ce compte"
+					Clicked="ForgetAccountButtonClicked" />
+				<Button
+					x:Name ="deleteAllAccountBtn"
+					Text   ="Supprimer tous les comptes"
+					Clicked="DeleteAllUserButtonClicked" />
+				<Button
+					x:Name="btnGeofences"
+					Text  ="Lieux enregistrés" />
+				<Button
+					x:Name="settingsButton"
+					Text  ="Settings" />
+				<Button
+					x:Name="localisationSettingButton" />
+				<StackLayout
+					Orientation="Horizontal">
+					<Label
+						x:Name               ="lblWifiOnly"
+						Text                 ="Transfert de données sous Wifi seulement"
+						VerticalTextAlignment="Center" />
+					<Switch
+						x:Name           ="wifiOnlySwitch"
+						HorizontalOptions="EndAndExpand" />
+				</StackLayout>
 				<Label
-					x:Name               ="lblWifiOnly"
-					Text                 ="Transfert de données sous Wifi seulement"
-					VerticalTextAlignment="Center" />
-				<Switch
-					x:Name="wifiOnlySwitch" />
+					IsVisible="false"
+					x:Name   ="lblNetworkState"
+					Text     ="Network State: " />
+				<Label
+					IsVisible="false"
+					x:Name   ="lblHostServerState"
+					Text     ="Host Server State: " />
 			</StackLayout>
-			<Label
-				IsVisible="false"
-				x:Name="lblNetworkState"
-				Text  ="Network State: " />
-			<Label
-				IsVisible="false"
-				x:Name="lblHostServerState"
-				Text  ="Host Server State: " />
-		</StackLayout>
+		</ScrollView>
 	</ContentPage.Content>
 </ContentPage>

@@ -658,5 +658,53 @@ namespace Ipheidi.Resources {
                 return ResourceManager.GetString("CopyrightFooter", resourceCulture);
             }
         }
+        
+        public static string LocalisationSettingTitle {
+            get {
+                return ResourceManager.GetString("LocalisationSettingTitle", resourceCulture);
+            }
+        }
+        
+        public static string LocalisationSettingBouton {
+            get {
+                return ResourceManager.GetString("LocalisationSettingBouton", resourceCulture);
+            }
+        }
+        
+        public static string LocalisationActiveLabel {
+            get {
+                return ResourceManager.GetString("LocalisationActiveLabel", resourceCulture);
+            }
+        }
+        
+        public static string IntervalLocalisationLabel {
+            get {
+                return ResourceManager.GetString("IntervalLocalisationLabel", resourceCulture);
+            }
+        }
+        
+        public static string LocalisationPrecisionLabel {
+            get {
+                return ResourceManager.GetString("LocalisationPrecisionLabel", resourceCulture);
+            }
+        }
+        
+        public static string RayonLabel {
+            get {
+                return ResourceManager.GetString("RayonLabel", resourceCulture);
+            }
+        }
+        
+        public static string RayonPlaceHolder {
+            get {
+                return ResourceManager.GetString("RayonPlaceHolder", resourceCulture);
+            }
+        }
+        
+        public static string _ {
+            get {
+                return ResourceManager.GetString("", resourceCulture);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Ipheidi
 		protected bool IsInside = false;
 		protected bool timerRunning = false;
 
+
 		public string Name { get; set; }
 
 		public double Latitude { get; set; }
@@ -31,6 +33,9 @@ namespace Ipheidi
 
 		[JsonIgnore]
 		public bool NotificationEnabled { get; set; }
+
+
+	
 
 
 		[JsonIgnore]
@@ -54,7 +59,7 @@ namespace Ipheidi
 		{
 			CreationDate = DateTime.Now;
 			LastModification = CreationDate;
-			NotificationDelay = 30;
+			NotificationDelay = ApplicationConst.DefaultGeofenceTriggerTime;
 		}
 
 
@@ -135,40 +140,63 @@ namespace Ipheidi
 		/// <param name="loc">Location.</param>
 		private bool IsLocationInside(Location loc)
 		{
+			
+			double r = GetRadiusInDegree();
 			double x = (loc.Longitude - Longitude);
 			x = x > 0 ? x : -x;
-			if (x > Radius) return false;
+			if (x > r) return false;
 
 			double y = (loc.Latitude - Latitude);
 			y = y > 0 ? y : -y;
-			if (y > Radius) return false;
+			if (y > r) return false;
 
-			return x * x + y * y <= Radius * Radius;
+			return x * x + y * y <= r * r;
+		}
+
+		public bool SetRadiusInMeters()
+		{
+			if (Radius < 1)
+			{
+				Radius = Math.Round(DegreeToMeters(Radius));
+				return true;
+			}
+			return false;
 		}
 
 		/// <summary>
 		/// Sets the radius from meters to degree.
 		/// </summary>
 		/// <param name="meters">Meters.</param>
-		public void SetRadiusFromMetersToDegree(double meters)
+		public double GetRadiusInDegree()
 		{
-			Radius = meters / (111319.9 * Math.Cos(DegreeToRadian(Latitude)));
+			return MetersToDegree(Radius);
+		}
+
+		double MetersToDegree(double meters)
+		{
+			return meters / (111319.9 * Math.Cos(DegreeToRadian(Latitude)));
+		}
+
+		double DegreeToMeters(double degree)
+		{
+			return degree * (111319.9 * Math.Cos(DegreeToRadian(Latitude)));
 		}
 
 		void ExecuteAction(string actionNoSeq, GeofenceEvent ev)
 		{
-
-			Task.Run(() =>
+			if (!string.IsNullOrEmpty(actionNoSeq))
 			{
-				var pheidiParams = new Dictionary<string, string>();
-				pheidiParams.Add("Name", Name);
-				pheidiParams.Add("GeofenceEvent", ev.ToString());
-				pheidiParams.Add("Latitude", Latitude.ToString());
-				pheidiParams.Add("Longitude", Longitude.ToString());
-				pheidiParams.Add("GeofenceNoseq", NoSeq);
-				ActionManager.ExecuteAction(pheidiParams, actionNoSeq);
-			});
-
+				Task.Run(() =>
+				{
+					var pheidiParams = new Dictionary<string, string>();
+					pheidiParams.Add("Name", Name);
+					pheidiParams.Add("GeofenceEvent", ev.ToString());
+					pheidiParams.Add("Latitude", Latitude.ToString());
+					pheidiParams.Add("Longitude", Longitude.ToString());
+					pheidiParams.Add("GeofenceNoseq", NoSeq);
+					ActionManager.ExecuteAction(pheidiParams, actionNoSeq);
+				});
+			}
 			/*Task.Run(async () =>
 			{
 				Debug.WriteLine("Geofence: Get Action");
@@ -243,5 +271,7 @@ namespace Ipheidi
 		{
 			return (degree * Math.PI) / 180;
 		}
+
+
 	}
 }

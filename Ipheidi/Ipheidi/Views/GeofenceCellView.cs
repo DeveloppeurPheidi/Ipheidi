@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -20,7 +21,30 @@ namespace Ipheidi
 		public static readonly BindableProperty NotificationProperty =
 					BindableProperty.Create("NotificationEnabled", typeof(bool), typeof(LocationCellView), default(bool));
 
+
 		static bool IsDarkBackground = false;
+		static List<GeofenceCellView> GeofenceCellViews = new List<GeofenceCellView>();
+		static bool _deleteEnabled = false;
+		public static void ToggleDelete(bool enabled)
+		{
+			_deleteEnabled = enabled;
+			List<int> todelete = new List<int>();
+			for (int i = 0; i < GeofenceCellViews.Count; i++)
+			{
+				if (GeofenceCellViews[i] == null)
+				{
+					todelete.Add(i);
+				}
+				else
+				{
+					GeofenceCellViews[i].DeleteEnabled = enabled;
+				}
+			}
+			foreach (var i in todelete)
+			{
+				GeofenceCellViews.RemoveAt(i);
+			}
+		}
 		public double Longitude
 		{
 			get { return (double)GetValue(LongitudeProperty); }
@@ -56,6 +80,18 @@ namespace Ipheidi
 			set { SetValue(NotificationProperty, value); }
 		}
 
+		public bool DeleteEnabled
+		{
+			get
+			{
+				return btnDelete.IsVisible;
+			}
+			set
+			{
+				btnDelete.IsVisible = value;
+			}
+		}
+
 		StackLayout cellWrapper;
 		Label lblName;
 		Label lblDistance;
@@ -64,12 +100,12 @@ namespace Ipheidi
 
 		public GeofenceCellView()
 		{
-			cellWrapper = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand, Orientation = StackOrientation.Horizontal };
-			btnDelete = new Button() { TextColor = Color.Red, Text = "X", FontAttributes = FontAttributes.Bold, WidthRequest = 50 };
+			cellWrapper = new StackLayout() { VerticalOptions = LayoutOptions.FillAndExpand, Orientation = StackOrientation.Horizontal };
+			btnDelete = new Button() { TextColor = Color.White, BackgroundColor = Color.Red, Text = "X", FontAttributes = FontAttributes.Bold, WidthRequest = 50, Margin = new Thickness(0, 1, 0, 1) };
 			lblName = new Label() { Text = Name, VerticalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.FillAndExpand, LineBreakMode = LineBreakMode.TailTruncation };
 			lblDistance = new Label { VerticalTextAlignment = TextAlignment.Center, LineBreakMode = LineBreakMode.NoWrap, HorizontalOptions = LayoutOptions.Fill };
 			UpdateDistanceFromCurrentLocation();
-			notificationsSwitch = new Switch() { IsToggled = NotificationEnabled, VerticalOptions = LayoutOptions.Center };
+			notificationsSwitch = new Switch() { IsToggled = NotificationEnabled, VerticalOptions = LayoutOptions.CenterAndExpand };
 			notificationsSwitch.Toggled += (sender, e) =>
 			{
 				if (notificationsSwitch.IsToggled != NotificationEnabled)
@@ -80,7 +116,7 @@ namespace Ipheidi
 					App.GeofenceManager.LocalGeofenceUpdate(geo);
 				}
 			};
-
+			btnDelete.IsVisible = false;
 			btnDelete.Clicked += (sender, e) =>
 			{
 				System.Diagnostics.Debug.WriteLine("Deleted " + Name + " " + ID);
@@ -96,7 +132,7 @@ namespace Ipheidi
 			cellWrapper.Children.Add(btnDelete);
 			IsDarkBackground = !IsDarkBackground;
 			View = cellWrapper;
-
+			GeofenceCellView.GeofenceCellViews.Add(this);
 		}
 		protected override void OnBindingContextChanged()
 		{
@@ -106,6 +142,7 @@ namespace Ipheidi
 				lblName.Text = Name;
 				notificationsSwitch.IsToggled = NotificationEnabled;
 				UpdateDistanceFromCurrentLocation();
+				btnDelete.IsVisible = _deleteEnabled;
 			}
 		}
 
@@ -120,7 +157,6 @@ namespace Ipheidi
 			var p = new GeofenceEditPage(geo);
 			App.Instance.PushPage(p);
 		}
-
 		public void SetColors(Color color)
 		{
 			cellWrapper.BackgroundColor = color;

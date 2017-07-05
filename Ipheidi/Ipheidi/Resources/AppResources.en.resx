@@ -421,6 +421,32 @@
 		name="Alerte_LocalisationRequiseMessage">
 		<value>TODO</value>
 	</data>
+	<data
+		name="CopyrightFooter">
+		<value>© Copyright {0}. Pheidi inc. All rights reserved</value>
+	</data>
+	<data
+		name="LocalisationSettingTitle">
+		<value>Localisation settings</value>
+	</data>
+	<data
+		name="LocalisationSettingBouton">
+		<value>Localisation settings</value>
+	</data>
+	<data
+		name="LocalisationActiveLabel">
+		<value>Localisation enabled</value>
+	</data>
+	<data
+		name="IntervalLocalisationLabel">
+		<value>Data sending interval</value>
+	</data>
+	<data
+		name="LocalisationPrecisionLabel">
+		<value>Precision</value>
+	</data>
 
-	<data name="CopyrightFooter"><value>© Copyright {0}. Pheidi inc. All rights reserved</value></data>
+	<data name="RayonLabel"><value>Radius:</value></data>
+	<data name="RayonPlaceHolder"><value>Meters</value></data>
+	<data name=""><value></value></data>
 </root>

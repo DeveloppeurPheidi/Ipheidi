@@ -42,7 +42,14 @@ namespace Ipheidi
 			btnGeofences.Text = AppResources.LieuxEnregistresBouton;
 			forgetAccountBtn.Text = AppResources.OublierCompteBouton;
 			deleteAllAccountBtn.Text = AppResources.OublierTousLesComptesBouton;
-
+			localisationSettingButton.Text = AppResources.LocalisationSettingBouton;
+			localisationSettingButton.Clicked += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					Navigation.PushAsync(new LocationSettingsPage());
+				});
+			};
 			settingsButton.Clicked += (sender, e) => App.SettingHelper.OpenApplicationSettings();
 			settingsButton.Text = AppResources.ReglageBouton;
 

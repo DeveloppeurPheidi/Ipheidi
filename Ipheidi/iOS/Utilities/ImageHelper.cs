@@ -64,7 +64,7 @@ namespace Ipheidi.iOS
 						{
 							Task.Run(async () =>
 							{
-								await UploadImageToServer(image, filename, pp);
+								await UploadImageToServer(image, filename, filepath, pp);
 							});
 						}
 						else
@@ -114,18 +114,31 @@ namespace Ipheidi.iOS
 		{
 			if (imageUpload != null)
 			{
-				string filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), imageUpload.FileName);
-				NSData data = NSData.FromStream(App.FileHelper.GetStreamFromImageFile(filepath));
-				var image = UIImage.LoadFromData(data);
+				try
+				{
+					string filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), imageUpload.FileName);
+					NSData data = NSData.FromStream(App.FileHelper.GetStreamFromImageFile(filepath));
+					var image = UIImage.LoadFromData(data);
 
-				PheidiParams pp = new PheidiParams();
-				pp.Add("NOSEQ", imageUpload.QueryFieldValue);
-				pp.Add("FIELD", imageUpload.Field);
-				return await UploadImageToServer(image, imageUpload.FileName, pp, false);
+					PheidiParams pp = new PheidiParams();
+					pp.Add("NOSEQ", imageUpload.QueryFieldValue);
+					pp.Add("FIELD", imageUpload.Field);
+					bool success = await UploadImageToServer(image, imageUpload.FileName, filepath, pp, false);
+					if (success)
+					{
+						File.Delete(filepath);
+					}
+					return success;
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e.Message);
+					await DatabaseHelper.Database.DeleteItemAsync(imageUpload);
+				}
 			}
 			return false;
 		}
-		static public async Task<bool> UploadImageToServer(UIImage image, string filename, PheidiParams pheidiparams, bool displayAlert = true)
+		static public async Task<bool> UploadImageToServer(UIImage image, string filename, string filepath, PheidiParams pheidiparams, bool displayAlert = true)
 		{
 
 			string p = "";
@@ -202,6 +215,14 @@ namespace Ipheidi.iOS
 										if (displayAlert)
 										{
 											App.NotificationManager.DisplayAlert(AppResources.Alerte_EnvoiePhotoCompleteMessage, "Pheidi", "OK", () => { });
+											try
+											{
+												File.Delete(filepath);
+											}
+											catch (Exception e)
+											{
+												Debug.WriteLine(e.Message);
+											}
 										}
 										return true;
 									}

@@ -25,6 +25,7 @@ namespace Ipheidi.Droid
 	{
 		string Provider;
 		double Precision;
+		float distanceFilter = 25;
 		public static Android.Locations.LocationManager locationManager;
 		List<ILocationListener> observers;
 		private Location LastLocation;
@@ -79,7 +80,7 @@ namespace Ipheidi.Droid
 				Provider = locationManager.GetBestProvider(new Criteria() { PowerRequirement = Power.NoRequirement, Accuracy = accuracy }, true);
 				if (Provider != null)
 				{
-					locationManager.RequestLocationUpdates(Provider, 1, 25, this);
+					locationManager.RequestLocationUpdates(Provider,1,distanceFilter, this);
 				}
 				else
 				{
@@ -117,7 +118,7 @@ namespace Ipheidi.Droid
 				}
 				if (loc != null)
 				{
-					if (loc.Accuracy <= App.GeofenceRadius)
+					if (loc.Accuracy <= ApplicationConst.MaxLocationAccuracy)
 					{
 						return new Location()
 						{
@@ -158,7 +159,7 @@ namespace Ipheidi.Droid
 		/// <param name="location">Location.</param>
 		public void OnLocationChanged(Android.Locations.Location location)
 		{
-			if (location.Accuracy < App.GeofenceRadius)
+			if (location.Accuracy < ApplicationConst.MaxLocationAccuracy)
 			{
 				LastLocation = new Location()
 				{
@@ -245,6 +246,13 @@ namespace Ipheidi.Droid
 			var appActivity = Forms.Context as MainActivity;
 			var permissionCheck = ContextCompat.CheckSelfPermission(appActivity, Manifest.Permission.AccessFineLocation);
 			return permissionCheck == Permission.Granted;
+		}
+
+		public void SetDistanceFilter(double distance)
+		{
+			distanceFilter = (float)distance;
+			StopLocationUpdate();
+			StartLocationUpdate(Precision);
 		}
 	}
 }

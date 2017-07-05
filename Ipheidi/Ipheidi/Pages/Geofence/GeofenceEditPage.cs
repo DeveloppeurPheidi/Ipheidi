@@ -20,6 +20,8 @@ namespace Ipheidi
 		Label latitudelbl;
 		Entry latitudeEntry;
 		Label longitudelbl;
+		Label radiuslbl;
+		Entry radiusEntry;
 		Entry secEntry;
 		Entry minEntry;
 		Label delaylbl2;
@@ -92,6 +94,23 @@ namespace Ipheidi
 									};
 			lblLayout.Children.Add(longitudelbl);
 			entryLayout.Children.Add(longitudeEntry);
+
+			radiuslbl = new Label() { Text = AppResources.RayonLabel, VerticalTextAlignment = TextAlignment.Center };
+			radiusEntry = new Entry() { Text = geofence.Radius.ToString(), Placeholder = AppResources.RayonPlaceHolder, HorizontalOptions = LayoutOptions.FillAndExpand };
+			radiusEntry.Unfocused += (sender, e) =>
+			{
+				double val = geofence.Radius;
+				double.TryParse(radiusEntry.Text, out val);
+				val = val <= 0 ? geofence.Radius : val > ApplicationConst.GeofenceMaxRadius ? ApplicationConst.GeofenceMaxRadius : val;
+				radiusEntry.Text = val.ToString();
+				if (geofence.Radius > val || geofence.Radius < val)
+				{
+					geofence.Radius = val;
+					didChange = true;
+				}
+			};
+			entryLayout.Children.Add(radiusEntry);
+			lblLayout.Children.Add(radiuslbl);
 			formLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
 			formLayout.Children.Add(lblLayout);
 			formLayout.Children.Add(entryLayout);
@@ -222,9 +241,10 @@ namespace Ipheidi
 
 			if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
 			{
-				if (ActionManager.GetActionList().Any(a => geofence.ExitActionNoSeq == a.NoSeq))
+				var list = (ActionManager.GetActionList());
+				if (list.Any(a => geofence.ExitActionNoSeq == a.NoSeq))
 				{
-					var exitAction = ActionManager.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+					var exitAction = list.First(a => geofence.ExitActionNoSeq == a.NoSeq);
 					category = exitAction.Category;
 				}
 				else

@@ -23,7 +23,6 @@ namespace Ipheidi
 		//Must be added to every Exception catch output.
 		public const string ಠ_ಠ = "(╯°□°）╯︵ ┻━┻";
 
-		static public int GeofenceRadius = 100;
 		static public double Heigth;
 		static public double Width;
 		static public CookieContainer CookieContainer = new CookieContainer();
@@ -47,6 +46,34 @@ namespace Ipheidi
 			}
 		}
 
+		static public bool LocalisationEnabled
+		{
+			get
+			{
+				bool isEnabled = true;
+				if (Current.Properties.ContainsKey("LocalisationEnabled"))
+				{
+					string s = Current.Properties["LocalisationEnabled"] as string;
+					bool.TryParse(s, out isEnabled);
+				}
+				return isEnabled;
+			}
+			set
+			{
+
+				if (Current.Properties.ContainsKey("LocalisationEnabled"))
+				{
+					Current.Properties["LocalisationEnabled"] = value.ToString();
+				}
+				else
+				{
+					Current.Properties.Add("LocalisationEnabled", value.ToString());
+				}
+				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				NetworkManager.NotifyCurrentNetworkState();
+			}
+		}
+
 		static public bool WifiOnlyEnabled
 		{
 			get
@@ -61,7 +88,7 @@ namespace Ipheidi
 			}
 			set
 			{
-				
+
 				if (Current.Properties.ContainsKey("WifiOnlyEnabled"))
 				{
 					Current.Properties["WifiOnlyEnabled"] = value.ToString();
@@ -105,7 +132,7 @@ namespace Ipheidi
 			set
 			{
 				Application.Current.Properties["Language"] = value;
-				Task.Run(async() => { await Application.Current.SavePropertiesAsync(); });
+				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -258,7 +285,10 @@ namespace Ipheidi
 			ActionManager.GetActionList();
 			LocationManager = new LocationManager();
 			NavBar = new PheidiTabbedPage();
-			LocationManager.StartLocalisation();
+			if (LocalisationEnabled)
+			{
+				LocationManager.StartLocalisation();
+			}
 			MainPage.Navigation.PushAsync(NavBar);
 
 		}

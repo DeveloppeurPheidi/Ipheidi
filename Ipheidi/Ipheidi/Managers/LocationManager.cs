@@ -13,6 +13,44 @@ namespace Ipheidi
 	public class LocationManager : ILocationListener, INetworkStateListener
 	{
 
+		static public int IntervaleDataSending
+		{
+			get
+			{
+
+				if (Application.Current.Properties.ContainsKey("IntervaleDataSending"))
+				{
+					try
+					{
+						var data = Application.Current.Properties["IntervaleDataSending"].ToString();
+						return int.Parse(data);
+					}
+					catch (Exception e)
+					{
+						IntervaleDataSending = 30;
+						Debug.WriteLine(e.Message);
+					}
+				}
+				return 30;
+			}
+			set
+			{
+				try
+				{
+					Application.Current.Properties["IntervaleDataSending"] = value;
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e);
+					Application.Current.Properties["IntervaleDataSending"] = 30;
+				}
+				finally
+				{
+					Device.BeginInvokeOnMainThread(() => { Task.Run(async () => { await Application.Current.SavePropertiesAsync(); }); });
+				}
+
+			}
+		}
 		static public double Precision
 		{
 			get
@@ -53,7 +91,7 @@ namespace Ipheidi
 		}
 
 		public LocationPage Page;
-
+		public double currentDistanceFilter = 25;
 		Random rand = new Random();
 		public int StartBatteryLevel;
 		Location lastLocation;
@@ -75,48 +113,54 @@ namespace Ipheidi
 			{AppResources.TroisKilometreOptionPrecision,3000},
 			{AppResources.ModeTestOptionPrecision,-3}
 		};
+		int dataSendingTimer = 0;
 		public LocationManager()
 		{
 			if (App.LocationService != null && !App.LocationService.ContainsLocationListener(this))
 			{
 				App.LocationService.AddLocationListener(this);
 			}
-			Device.StartTimer(new TimeSpan(0, 0, 30), () =>
+			Device.StartTimer(new TimeSpan(0, 0, 1), () =>
 			{
-				if (PendingLocations.Count > 0)
+				dataSendingTimer++;
+				if (dataSendingTimer >= IntervaleDataSending)
 				{
-					List<Location> data = new List<Location>();
-					data.AddRange(PendingLocations);
-					PendingLocations.Clear();
-					NetworkState state = App.NetworkManager.GetNetworkState();
-					if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
+					dataSendingTimer = 0;
+					if (PendingLocations.Count > 0)
 					{
-						Task.Run(async () =>
-							{
-								Debug.WriteLine("LocationPage: Sending location data");
-
-								bool IsGood = await SendJsonData(JsonConvert.SerializeObject(data));
-								if (!IsGood)
+						List<Location> data = new List<Location>();
+						data.AddRange(PendingLocations);
+						PendingLocations.Clear();
+						NetworkState state = App.NetworkManager.GetNetworkState();
+						if (state == NetworkState.ReachableViaWiFiNetwork || (state == NetworkState.ReachableViaCarrierDataNetwork && !App.WifiOnlyEnabled))
+						{
+							Task.Run(async () =>
 								{
-									Debug.WriteLine("LocationPage: Error while sending location data.");
+									Debug.WriteLine("LocationPage: Sending location data");
+
+									bool IsGood = await SendJsonData(JsonConvert.SerializeObject(data));
+									if (!IsGood)
+									{
+										Debug.WriteLine("LocationPage: Error while sending location data.");
+										foreach (var location in data)
+										{
+											await DatabaseHelper.Database.SaveItemAsync(location);
+										}
+									}
+								});
+						}
+						else
+						{
+							Task.Run(async () =>
+								{
+									Debug.WriteLine("LocationPage: Saving location data.");
 									foreach (var location in data)
 									{
+
 										await DatabaseHelper.Database.SaveItemAsync(location);
 									}
-								}
-							});
-					}
-					else
-					{
-						Task.Run(async () =>
-							{
-								Debug.WriteLine("LocationPage: Saving location data.");
-								foreach (var location in data)
-								{
-
-									await DatabaseHelper.Database.SaveItemAsync(location);
-								}
-							});
+								});
+						}
 					}
 				}
 				return true;
@@ -160,6 +204,7 @@ namespace Ipheidi
 			{
 				Page.LocalisationStarted();
 			}
+			App.LocationService.SetDistanceFilter(5);
 		}
 
 		/// <summary>
@@ -184,16 +229,21 @@ namespace Ipheidi
 		{
 			if (lastLocation != null)
 			{
+				if (lastLocation.Speed > 0)
+				{
+					CheckDistanceFilter(lastLocation.Speed);
+				}
 				location.BatteryRemainingCharge = App.Battery.RemainingChargePercent;
 				location.PowerSource = App.Battery.PowerSource.Description();
 				location.PowerStatus = App.Battery.Status.Description();
 				location.User = App.Username;
 				location.Domain = App.Domain;
+				location.Orientation = currentDistanceFilter;
 				if ((Math.Abs(location.Latitude - lastLocation.Latitude) > 0.0000001 || Math.Abs(location.Longitude - lastLocation.Longitude) > 0.0000001))
 				{
 
 					double dis = lastLocation.GetDistanceFromOtherLocation(location);
-					if ((dis <= 100 && dis > 0))
+					if ((dis <= 300 && dis > 0) && location.Speed>=0)
 					{
 						PendingLocations.Add(location);
 						Distance += dis;
@@ -210,7 +260,8 @@ namespace Ipheidi
 			lastLocation = location;
 		}
 
-
+		int testSpeed = 1;
+		int increase = 1;
 		/// <summary>
 		/// Methode appele lors d'un Tick du timer, on s'assure que le temps augmente seulement lorsque le timerRun est a true 
 		/// </summary>
@@ -228,7 +279,7 @@ namespace Ipheidi
 					}
 					if (lastLocation != null)
 					{
-						var loc = new Location();
+						/*var loc = new Location();
 						loc.Latitude = lastLocation.Latitude;
 						loc.Longitude = lastLocation.Longitude;
 						double r = rand.Next(1, 5); //Direction: 1↓, 2←, 3↑, 4→ 
@@ -238,7 +289,22 @@ namespace Ipheidi
 						loc.Longitude += dLon;
 						loc.Speed = loc.GetDistanceFromOtherLocation(lastLocation);
 						loc.Orientation = (((2 - r) % 2) * 90 + 90 * (r % 2)) + (((r - 3) % 2) * 90 + 180 * ((r - 1) % 2));
+						loc.Utc = DateTime.UtcNow;*/
+
+						var loc = new Location();
+						loc.Latitude = lastLocation.Latitude + (0.00899832856 /1000) * testSpeed;
+						loc.Longitude = lastLocation.Longitude;
+						loc.Speed = testSpeed;
 						loc.Utc = DateTime.UtcNow;
+						testSpeed+= increase;
+						if (testSpeed > 40 && increase == 1)
+						{
+							increase = -1;
+						}
+						else if (testSpeed == 0 && increase == -1)
+						{
+							increase = 1;
+						}
 						App.LocationService.SendLocation(loc);
 					}
 				}
@@ -356,6 +422,55 @@ namespace Ipheidi
 				Debug.WriteLine("Problème de connexion au serveur, veuillez réessayer plus tard");
 				return false;
 			}
+		}
+
+		bool ChangingDistanceFilter = false;
+		void CheckDistanceFilter(double speed)
+		{
+			double distanceFilter = GetDistanceFilterForSpeed(speed);
+			if (distanceFilter < currentDistanceFilter)
+			{
+				App.LocationService.SetDistanceFilter(distanceFilter);
+				currentDistanceFilter = distanceFilter;
+				ChangingDistanceFilter = false;
+			}
+			else if (Math.Abs(distanceFilter - currentDistanceFilter) < 0.000001)
+			{
+				ChangingDistanceFilter = false;
+			}
+			else if (!ChangingDistanceFilter)
+			{
+				ChangingDistanceFilter = true;
+				int count = 0;
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+					{
+						if (ChangingDistanceFilter == false)
+						{
+							return false;
+						}
+						count++;
+						double distanceFilterCheck = GetDistanceFilterForSpeed(lastLocation.Speed);
+						if (distanceFilterCheck > distanceFilter)
+						{
+							distanceFilter = distanceFilterCheck;
+						}
+						if (count >= 5)
+						{
+							App.LocationService.SetDistanceFilter(distanceFilter);
+							currentDistanceFilter = distanceFilter;
+							ChangingDistanceFilter = false;
+						}
+						return ChangingDistanceFilter;
+					});
+				});
+			}
+		}
+		double GetDistanceFilterForSpeed(double speed)
+		{
+			double speedKMH = speed * 3.6;
+			return speedKMH < 40 ? 5 : speedKMH < 80 ? 10 : speedKMH < 90 ? 25 : 100;
 		}
 	}
 }

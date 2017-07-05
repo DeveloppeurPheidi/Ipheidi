@@ -83,7 +83,7 @@ namespace Ipheidi.iOS
 				}
 				else if (locationManager.Location != null )
 				{
-					if (locationManager.Location.HorizontalAccuracy <= App.GeofenceRadius)
+					if (locationManager.Location.HorizontalAccuracy <= ApplicationConst.MaxLocationAccuracy)
 					{
 						return new Location()
 						{
@@ -111,7 +111,7 @@ namespace Ipheidi.iOS
 		/// <param name="location">Location.</param>
 		public void OnLocationUpdate(Location location)
 		{
-			if (location.Accuracy <= App.GeofenceRadius)
+			if (location.Accuracy <= ApplicationConst.MaxLocationAccuracy)
 			{
 				LastLocation = location;
 				foreach (var o in observers)
@@ -136,6 +136,7 @@ namespace Ipheidi.iOS
 			}
 
 		}
+
 
 		public void DidUpdateLocation(CLLocation clLoc)
 		{
@@ -182,6 +183,10 @@ namespace Ipheidi.iOS
 			OnLocationUpdate(location);
 		}
 
-
+		public void SetDistanceFilter(double distance)
+		{
+			locationManager.DistanceFilter = distance;
+			Debug.WriteLine("Distance Filter switched to: " + distance);
+		}
 	}
 }

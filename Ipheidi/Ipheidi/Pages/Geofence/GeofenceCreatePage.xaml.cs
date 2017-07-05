@@ -21,7 +21,7 @@ namespace Ipheidi
 		public GeofenceCreatePage(Location loc)
 		{
 			Geofence = new Geofence() { Latitude = loc.Latitude, Longitude = loc.Longitude };
-			Geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+			Geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
 			Initialize();
 		}
 
@@ -58,7 +58,7 @@ namespace Ipheidi
 			}
 
 			InitializeComponent();
-
+			switchNotification.IsToggled = true;
 			labelLongitude.Text = AppResources.LongitudeLabel;
 			entryLongitude.Placeholder = AppResources.LongitudePlaceHolder;
 			labelLatitude.Text = AppResources.LatitudeLabel;
@@ -94,11 +94,15 @@ namespace Ipheidi
 					{
 						Geofence.Name = nameEntry.Text;
 						Geofence.NotificationEnabled = switchNotification.IsToggled;
-						Geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+						Geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
 						Geofence.User = App.Username;
 						Geofence.Domain = App.Domain;
 						App.GeofenceManager.AddGeofence(Geofence);
 						Navigation.PopAsync();
+					}
+					else
+					{
+						nameEntry.PlaceholderColor = Color.Red;
 					}
 				};
 
@@ -107,21 +111,21 @@ namespace Ipheidi
 					Navigation.PopAsync();
 				};
 
+				nameEntry.Focused += (sender, e) =>
+				{
+					nameEntry.PlaceholderColor = Color.Gray;
+				};
 
 				nameEntry.Unfocused += (sender, e) =>
 				{
-					int maxSize = 50;
-					if (string.IsNullOrEmpty(nameEntry.Text))
+
+					if (nameEntry.Text.Length > ApplicationConst.GeofenceNameMaxSize)
 					{
-						lblnameError.Text = "Le champs de nom ne peut pas être vide";
+						nameEntry.Text = nameEntry.Text.Substring(0, ApplicationConst.GeofenceNameMaxSize);
 					}
-					else if (nameEntry.Text.Length > maxSize)
+					else if (string.IsNullOrEmpty(nameEntry.Text))
 					{
-						lblnameError.Text = "Le nom est trop long, la limite est de " + maxSize + " caractères";
-					}
-					else
-					{
-						lblnameError.Text = "";
+						nameEntry.PlaceholderColor = Color.Red;
 					}
 				};
 				entryLatitude.Unfocused += (sender, e) =>
@@ -130,11 +134,10 @@ namespace Ipheidi
 					if (double.TryParse(entryLatitude.Text, out lat))
 					{
 						Geofence.Latitude = lat;
-						lblLatError.Text = "";
 					}
 					else
 					{
-						lblLatError.Text = "La Latitude entrée est invalide";
+						entryLatitude.Text = Geofence.Latitude.ToString();
 					}
 				};
 
@@ -147,7 +150,7 @@ namespace Ipheidi
 					}
 					else
 					{
-						lblLongError.Text = "La Longitude entrée est invalide";
+						entryLongitude.Text = Geofence.Longitude.ToString();
 					}
 				};
 
@@ -286,7 +289,12 @@ namespace Ipheidi
 				};
 				minEntry.Unfocused += ev;
 				secEntry.Unfocused += ev;
-				secEntry.Text = "30";
+				secEntry.Text = ApplicationConst.DefaultGeofenceTriggerTime.ToString();
+
+				entryRadius.Placeholder = AppResources.RayonPlaceHolder;
+				labelRadius.Text = AppResources.RayonLabel;
+				CheckEntryRadius();
+				entryRadius.Unfocused += (sender, e) => CheckEntryRadius();
 			}
 		}
 		protected override void OnAppearing()
@@ -295,6 +303,14 @@ namespace Ipheidi
 			base.OnAppearing();
 		}
 
+		void CheckEntryRadius()
+		{
+			double val = Geofence.Radius;
+			double.TryParse(entryRadius.Text, out val);
+			val = val <= 0 ? Geofence.Radius : val > ApplicationConst.GeofenceMaxRadius ? ApplicationConst.GeofenceMaxRadius : val;
+			entryRadius.Text = val.ToString();
+			Geofence.Radius = val;
+		}
 		/// <summary>
 		/// On size allocation.
 		/// </summary>
@@ -307,6 +323,9 @@ namespace Ipheidi
 			{
 				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
+			labelLatitude.HeightRequest = entryLatitude.Height;
+			labelRadius.HeightRequest = entryRadius.Height;
+			labelLongitude.HeightRequest = entryLongitude.Height;
 			AdjustWidth(width);
 			base.OnSizeAllocated(width, height);
 		}

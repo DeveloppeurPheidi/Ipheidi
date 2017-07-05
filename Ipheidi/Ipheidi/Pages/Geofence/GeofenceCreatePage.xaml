@@ -7,50 +7,51 @@
 		<ScrollView>
 			<StackLayout
 				x:Name           ="mainLayout"
-				Padding          ="20,40"
+				Padding          ="20,20"
 				HorizontalOptions="FillAndExpand"
 				Spacing          ="5">
 				<StackLayout
 					Orientation="Horizontal">
-					<Label
-						x:Name="labelLatitude"
-						Text                 ="Latitude: "
-						VerticalTextAlignment="Center" />
-					<Entry
-						x:Name           ="entryLatitude"
-						Placeholder      ="Latitude"
-						HorizontalOptions="FillAndExpand" />
+					<StackLayout
+						x:Name="labelLayout" VerticalOptions="FillAndExpand">
+						<Label
+							x:Name               ="labelLatitude"
+							Text                 ="Latitude: "
+							VerticalTextAlignment="Center" />
+						<Label
+							x:Name               ="labelLongitude"
+							Text                 ="Longitude:"
+							VerticalTextAlignment="Center" />
+						<Label
+							x:Name               ="labelRadius"
+							VerticalTextAlignment="Center" />
+					</StackLayout>
+					<StackLayout
+						x:Name="entryLayout" HorizontalOptions="FillAndExpand">
+						<Entry
+							x:Name           ="entryLatitude"
+							Placeholder      ="Latitude"
+							HorizontalOptions="FillAndExpand" />
+						<Entry
+							x:Name           ="entryLongitude"
+							Placeholder      ="Longitude"
+							HorizontalOptions="FillAndExpand" />
+						<Entry
+							x:Name           ="entryRadius"
+							HorizontalOptions="FillAndExpand" />
+					</StackLayout>
 				</StackLayout>
-				<Label
-					x:Name   ="lblLatError"
-					TextColor="Red" />
-				<StackLayout
-					Orientation="Horizontal">
-					<Label
-						x:Name="labelLongitude"
-						Text                 ="Longitude:"
-						VerticalTextAlignment="Center" />
-					<Entry
-						x:Name           ="entryLongitude"
-						Placeholder      ="Longitude"
-						HorizontalOptions="FillAndExpand" />
-				</StackLayout>
-				<Label
-					x:Name   ="lblLongError"
-					TextColor="Red" />
 				<Button
-					x:Name="btnMap"/>
+					x:Name="btnMap" />
 				<Entry
 					x:Name     ="nameEntry"
 					Placeholder="Nom du lieu" />
-				<Label
-					x:Name   ="lblnameError"
-					TextColor="Red" />
 				<StackLayout
 					Orientation      ="Horizontal"
-					HorizontalOptions="FillAndExpand">
+					HorizontalOptions="FillAndExpand"
+					Padding          ="0,10,0,10">
 					<Label
-						x:Name="notificationLabel"
+						x:Name                 ="notificationLabel"
 						Text                   ="Activer la notification:"
 						VerticalTextAlignment  ="Center"
 						HorizontalTextAlignment="Start" />
@@ -65,7 +66,7 @@
 					<StackLayout
 						x:Name="typeEnterLayout">
 						<Label
-							x:Name="enterActionLabel"
+							x:Name               ="enterActionLabel"
 							Text                 ="Action d'entrée"
 							VerticalTextAlignment="Center" />
 						<Picker
@@ -78,7 +79,7 @@
 					<StackLayout
 						x:Name="typeExitLayout">
 						<Label
-							x:Name="exitActionLabel"
+							x:Name               ="exitActionLabel"
 							Text                 ="Action de Sortie"
 							VerticalTextAlignment="Center" />
 						<Picker
@@ -90,7 +91,7 @@
 					</StackLayout>
 				</StackLayout>
 				<Label
-					x:Name="notificationDelaiLabel"
+					x:Name         ="notificationDelaiLabel"
 					Text           ="Délai de notification"
 					VerticalOptions="Center" />
 				<StackLayout

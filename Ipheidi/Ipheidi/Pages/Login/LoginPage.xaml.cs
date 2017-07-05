@@ -19,8 +19,9 @@ namespace Ipheidi
 		bool IsInSecondPage;
 		bool firstPageExist;
 		int lastUserIndex = 0;
-		Picker languePicker = new Picker();
+		PheidiPicker languePicker = new PheidiPicker();
 		BoxView FooterLayout = new BoxView();
+		BoxView FooterLayoutBorder = new BoxView();
 		Label FooterLabel = new Label();
 
 		public LoginPage() : this(false)
@@ -230,6 +231,27 @@ namespace Ipheidi
 						//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 						App.CookieManager.AddCookie(App.WebSession);
 						App.CookieManager.AddCookie(uaCookie);
+
+						string p = "";
+						var dic = new Dictionary<string, string>();
+						dic.Add("VALUE", App.Language);
+
+						foreach (var d in dic)
+						{
+							p += d.Key + "**:**" + d.Value + "**,**";
+						}
+						//parameters = new Dictionary<string, string> { { "pheidiaction", "CON_A_LANGUAGE" }, { "pheidiparams", p } };
+						parameters = new Dictionary<string, string> { { "pheidiaction", "SET_CON_A_LANGUAGE" }, { "pheidiparams", p } };
+						response = null;
+						response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 2400));
+						if (response != null)
+						{
+							if (response.StatusCode == HttpStatusCode.OK)
+							{
+								string responseContent = response.Content.ReadAsStringAsync().Result;
+								Debug.WriteLine("Reponse:" + responseContent);
+							}
+						}
 						App.IsInLogin = false;
 						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
 						return "";
@@ -272,22 +294,29 @@ namespace Ipheidi
 				};
 
 				FooterLayout.BackgroundColor = App.ColorPrimary;
-
+				FooterLayoutBorder.BackgroundColor = App.ColorDark;
 				FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
 				FooterLabel.TextColor = App.ColorDark;//Color.FromRgba(1.0,1.0,1.0,0.5);
 				FooterLabel.FontSize *= 0.75;
 				languePicker.BackgroundColor = App.ColorDark;//Color.FromRgba(0.0, 0.0, 0.0, 0.2);
 				languePicker.TextColor = App.ColorPrimary;
-				languePicker.HorizontalOptions = LayoutOptions.Center;
-
+				languePicker.HorizontalOptions = LayoutOptions.FillAndExpand;
+				languePicker.TextAlignment = TextAlignment.Center;
 				var h = urlPicker.Height;
 				Func<RelativeLayout, double> getpickerWidth = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Width;
 				Func<RelativeLayout, double> getpickerHeight = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Height;
 
+				double space = 10;
 				mainLayout.Children.Add(languePicker,
-										Constraint.RelativeToParent((parent) => { return parent.Width * 0.7; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.75 - space; }),
 										Constraint.RelativeToParent((parent) => { return parent.Height - 5 - getpickerHeight(parent); }),
 									Constraint.RelativeToParent((parent) => { return parent.Width * 0.25; }));
+
+				mainLayout.Children.Add(FooterLayoutBorder,
+										Constraint.RelativeToParent((parent) => { return 0; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, view) => { return view.Y - 6; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, View) => { return View.Height + 11; }));
 
 				mainLayout.Children.Add(FooterLayout,
 										Constraint.RelativeToParent((parent) => { return 0; }),
@@ -295,10 +324,11 @@ namespace Ipheidi
 										Constraint.RelativeToParent((parent) => { return parent.Width; }),
 										Constraint.RelativeToView(languePicker, (RelativeLayout, View) => { return View.Height + 10; }));
 
+
 				mainLayout.Children.Add(FooterLabel,
-										Constraint.RelativeToParent((parent) => { return parent.Width * 0.05; }),
+										Constraint.RelativeToParent((parent) => { return space; }),
 										Constraint.RelativeToView(FooterLayout, (RelativeLayout, view) => { return view.Y; }),
-										Constraint.RelativeToParent((parent) => { return parent.Width * 0.6; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.75 - 2 * space; }),
 										Constraint.RelativeToView(FooterLayout, (RelativeLayout, View) => { return View.Height; }));
 
 				mainLayout.RaiseChild(languePicker);
@@ -323,11 +353,11 @@ namespace Ipheidi
 			var h = usernameEntry.Measure(rightEntryLayout.Width, rightEntryLayout.Height).Request.Height;
 			lblCourriel.HeightRequest = h;
 			lblPassword.HeightRequest = h;
-			bottomButtonLayout.Padding = new Thickness( width * 0.1,0);
+			bottomButtonLayout.Padding = new Thickness(width * 0.1, 0);
 			base.OnSizeAllocated(width, height);
 		}
 
-	
+
 		protected override void OnAppearing()
 		{
 			if (!IsInSecondPage)

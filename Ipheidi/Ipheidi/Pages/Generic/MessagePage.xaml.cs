@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -10,7 +10,8 @@ namespace Ipheidi
 		public MessagePage()
 		{
 			InitializeComponent();
-
+			btnCancel.Text = AppResources.Non;
+			btnConfirmation.Text = AppResources.Oui;
 			btnConfirmation.Clicked += (sender, e) => Navigation.PopAsync();
 			btnCancel.Clicked += (sender, e) => Navigation.PopAsync(); 
 		}

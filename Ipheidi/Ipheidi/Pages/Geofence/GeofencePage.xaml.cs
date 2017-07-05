@@ -23,7 +23,7 @@ namespace Ipheidi
 
 		static bool IsCurrentlySorting = false;
 		static int FilterIndex = -1;
-
+		static public bool DeleteEnabled = false;
 		ObservableCollection<Geofence> geofenceCollection;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofencePage"/> class.
@@ -65,9 +65,35 @@ namespace Ipheidi
 					Latitude = location != null ? location.Latitude : 0,
 					Name = ""
 				};
-				geofence.SetRadiusFromMetersToDegree(App.GeofenceRadius);
+				geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
 
 				App.GeofenceManager.CreateGeofenceAtCurrentLocation(geofence);
+			};
+
+			btnDelete.Clicked += (sender, e) =>
+			{
+				GeofenceManager.DeleteEnabled = !GeofenceManager.DeleteEnabled;
+
+				if (GeofenceManager.DeleteEnabled)
+				{
+					btnDelete.TextColor = Color.White;
+					btnDelete.BackgroundColor = Color.Red;
+				}
+				else
+				{
+					btnDelete.TextColor = Color.Gray;
+					btnDelete.BackgroundColor = Color.White;
+				}
+				/*Task.Run(() =>
+				{
+					for (int i = 0; i < geofenceCollection.Count; i++)
+					{
+						var geo = geofenceCollection[i];
+						geo.DeleteEnabled = GeofenceManager.DeleteEnabled;
+						geofenceCollection[i] = geo;
+					}
+				});*/
+				GeofenceCellView.ToggleDelete(GeofenceManager.DeleteEnabled);
 			};
 
 			foreach (var filter in filters)
@@ -75,10 +101,10 @@ namespace Ipheidi
 				sortingPicker.Items.Add(filter);
 			}
 			sortingPicker.SelectedIndexChanged += (sender, e) =>
-			{
-				FilterIndex = sortingPicker.SelectedIndex;
-				SortList();
-			};
+						{
+							FilterIndex = sortingPicker.SelectedIndex;
+							SortList();
+						};
 			sortingPicker.SelectedIndex = FilterIndex == -1 ? 0 : FilterIndex;
 		}
 
@@ -132,6 +158,7 @@ namespace Ipheidi
 				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			btnAdd.WidthRequest = btnAdd.Height;
+			btnDelete.WidthRequest = btnDelete.Height;
 			base.OnSizeAllocated(width, height);
 		}
 	}

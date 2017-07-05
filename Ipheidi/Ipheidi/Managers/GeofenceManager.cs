@@ -28,7 +28,8 @@ namespace Ipheidi
 		private DateTime TimerStartTime;
 		private TimeSpan TimeDelay;
 		private Location lastLocation;
-
+		private double largestRadius =0;
+		public static bool DeleteEnabled = false;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceManager"/> class.
@@ -106,6 +107,10 @@ namespace Ipheidi
 				else if (!Geofences.Any((arg) => arg.NoSeq == geofence.NoSeq))
 				{
 					Geofences.Add(geofence);
+					if (geofence.SetRadiusInMeters())
+					{
+						UpdateGeofence(geofence);
+					}
 				}
 			}
 			RefreshClosePositionGeofencesList();
@@ -202,7 +207,7 @@ namespace Ipheidi
 		{
 			if (geofence != null)
 			{
-				geofence.Name = geofence.Name.Length > 50 ? "" : geofence.Name;
+				geofence.Name = geofence.Name.Length > ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0,ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
 				List<Geofence> overlappingList = GetOverlappingGeofences(geofence);
 
 				if (overlappingList.Count > 0)
@@ -247,7 +252,7 @@ namespace Ipheidi
 			bool selecting = true;
 			if (geofence != null)
 			{
-				geofence.Name = geofence.Name.Length > 50 ? "" : geofence.Name;
+				geofence.Name = geofence.Name.Length >ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0,ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
 				List<Geofence> overlappingList = GetOverlappingGeofences(geofence);
 
 				ObservableCollection<Geofence> list = new ObservableCollection<Geofence>();
@@ -395,13 +400,15 @@ namespace Ipheidi
 		void RefreshClosePositionGeofencesList()
 		{
 			LastClosePositionRefreshLocation = App.LocationService.GetLocation();
+			largestRadius = 0;
 			var data = Geofences.ToArray();
 			ClosePositionGeofences.Clear();
 			Debug.WriteLine("======New Close Position Geofence List======");
 			foreach (var geofence in data)
 			{
-				if (geofence.NotificationEnabled && geofence.DistanceFromCurrentPosition < ApplicationConst.ClosePositionDistance)
+				if (geofence.NotificationEnabled && geofence.DistanceFromCurrentPosition < ApplicationConst.ClosePositionDistance + ApplicationConst.GeofenceMaxRadius)
 				{
+					largestRadius = largestRadius < geofence.Radius ? geofence.Radius : largestRadius;
 					ClosePositionGeofences.Add(geofence);
 					Debug.WriteLine(geofence.Name);
 				}
@@ -416,7 +423,7 @@ namespace Ipheidi
 		{
 			//bool IsUnknowLocation = true;
 
-			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ApplicationConst.ClosePositionDistance - ApplicationConst.DefaultGeofenceRadius * 2.5)
+			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ApplicationConst.ClosePositionDistance)
 			{
 				RefreshClosePositionGeofencesList();
 			}
