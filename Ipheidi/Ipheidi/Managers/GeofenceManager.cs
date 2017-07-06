@@ -125,7 +125,6 @@ namespace Ipheidi
 			Task.Run(async () =>
 			{
 				await DatabaseHelper.Database.SaveItemAsync(geofence);
-				geofence.NoSeq = (await DatabaseHelper.Database.GetAllItems<Geofence>()).First((arg) => arg.NoSeq == geofence.NoSeq).NoSeq;
 				Geofences.Add(geofence);
 				RefreshClosePositionGeofencesList();
 				await SendGeofenceToServer(geofence);

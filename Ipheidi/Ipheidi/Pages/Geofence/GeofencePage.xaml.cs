@@ -47,14 +47,12 @@ namespace Ipheidi
 			geofenceCell.SetBinding(GeofenceCellView.NotificationProperty, "NotificationEnabled");
 			listViewGeofence.ItemTemplate = geofenceCell;
 			listViewGeofence.ItemsSource = geofenceCollection;
-			listViewGeofence.ItemAppearing += (sender, e) =>
+
+			geofenceCollection.CollectionChanged += (sender, e) =>
 			{
 				RefreshTitle();
 			};
-			listViewGeofence.ItemDisappearing += (sender, e) =>
-			{
-				RefreshTitle();
-			};
+
 			btnAdd.BackgroundColor = App.ColorPrimary;
 			btnAdd.Clicked += (sender, e) =>
 			{
@@ -129,16 +127,27 @@ namespace Ipheidi
 					{
 						list = geofenceCollection.OrderByDescending((arg) => arg.NotificationEnabled).ToList();
 					}
-
-					geofenceCollection.Clear();
-					for (int i = 0; i < list.Count; i++)
+					Device.BeginInvokeOnMainThread(() =>
 					{
-						geofenceCollection.Insert(i, list[i]);
-					}
+						geofenceCollection.Clear();
+						for (int i = 0; i < list.Count; i++)
+						{
+							geofenceCollection.Insert(i, list[i]);
+						}
+					});
 					Task.Delay(50);
 					IsCurrentlySorting = false;
 				});
 			}
+		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			GeofenceManager.DeleteEnabled = false;
+			btnDelete.TextColor = Color.Gray;
+			btnDelete.BackgroundColor = Color.White;
+			GeofenceCellView.ToggleDelete(GeofenceManager.DeleteEnabled);
 		}
 		void RefreshTitle()
 		{

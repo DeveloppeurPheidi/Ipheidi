@@ -33,7 +33,7 @@ namespace Ipheidi
 		Button map;
 		StackLayout typeEnterLayout;
 		StackLayout typeExitLayout;
-
+		Button setPublic;
 
 		public GeofenceEditPage(Geofence geofence)
 		{
@@ -304,11 +304,35 @@ namespace Ipheidi
 								var loc = new Location() { Latitude = geofence.Latitude, Longitude = geofence.Longitude };
 								App.Instance.PushPage(new MapPage(loc));
 							};
+
 			layout.Children.Add(formLayout);
 			layout.Children.Add(map);
 			layout.Children.Add(typeLayout);
 			layout.Children.Add(delaylbl);
 			layout.Children.Add(delayLayout);
+
+
+			if (geofence.PublicFlag == 1)
+			{
+				setPublic = new Button() { WidthRequest = App.Width / 2, Text = AppResources.GeofencePublicBouton };
+				setPublic.Clicked += (sender, e) =>
+				{
+					string message = string.Format(AppResources.Alerte_RendreXGeofencePublic_Message, geofence.Name);
+					string title = AppResources.Alerte_RendreGeofencePublic_Title;
+					string confirm = AppResources.Oui;
+					string cancel = AppResources.Non;
+					System.Action onConfirm = () =>
+					{
+						geofence.PublicFlag = 0;
+						didChange = true;
+						Device.BeginInvokeOnMainThread(() => { setPublic.IsVisible = false; });
+					};
+					System.Action onCancel = () => { };
+					App.NotificationManager.DisplayAlert(message, title, confirm, cancel, onConfirm, onCancel);
+				};
+				layout.Children.Add(setPublic);
+			}
+
 			Content = layout;
 		}
 

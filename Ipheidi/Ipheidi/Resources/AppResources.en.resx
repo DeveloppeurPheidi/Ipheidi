@@ -34,7 +34,7 @@
 	</data>
 	<data
 		name="NomLabel">
-		<value>Name: </value>
+		<value>Name </value>
 	</data>
 	<data
 		name="NomPlaceHolder">
@@ -42,7 +42,7 @@
 	</data>
 	<data
 		name="LatitudeLabel">
-		<value>Latitude: </value>
+		<value>Latitude </value>
 	</data>
 	<data
 		name="LatitudePlaceHolder">
@@ -50,7 +50,7 @@
 	</data>
 	<data
 		name="LongitudeLabel">
-		<value>Longitude: </value>
+		<value>Longitude </value>
 	</data>
 	<data
 		name="LongitudePlaceHolder">
@@ -446,7 +446,19 @@
 		<value>Precision</value>
 	</data>
 
-	<data name="RayonLabel"><value>Radius:</value></data>
+	<data name="RayonLabel"><value>Radius</value></data>
 	<data name="RayonPlaceHolder"><value>Meters</value></data>
-	<data name=""><value></value></data>
+
+	<data name="AccesGeofenceLabel"><value>Access</value></data>
+	<data name="AccesGeofencePrivate"><value>Private</value></data>
+	<data name="AccesGeofencePublic"><value>Public</value></data>
+
+		<data
+		name="GeofencePublicBouton">
+		<value>Make public</value>
+	</data>
+
+	<data name="Alerte_RendreGeofencePublic_Title"><value>Warning</value></data>
+	
+	<data name="Alerte_RendreXGeofencePublic_Message"><value>Do you realy want to set "{0}" as a public place for other users?</value></data>
 </root>

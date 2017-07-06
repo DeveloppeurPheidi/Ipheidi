@@ -34,7 +34,7 @@
 	</data>
 	<data
 		name="NomLabel">
-		<value>Nom: </value>
+		<value>Nom </value>
 	</data>
 	<data
 		name="NomPlaceHolder">
@@ -42,7 +42,7 @@
 	</data>
 	<data
 		name="LatitudeLabel">
-		<value>Latitude: </value>
+		<value>Latitude </value>
 	</data>
 	<data
 		name="LatitudePlaceHolder">
@@ -50,7 +50,7 @@
 	</data>
 	<data
 		name="LongitudeLabel">
-		<value>Longitude: </value>
+		<value>Longitude </value>
 	</data>
 	<data
 		name="LongitudePlaceHolder">
@@ -444,8 +444,36 @@
 		name="LocalisationPrecisionLabel">
 		<value>Précision</value>
 	</data>
-
-	<data name="RayonLabel"><value>Rayon:</value></data>
-	<data name="RayonPlaceHolder"><value>Mètres</value></data>
-	<data name=""><value></value></data>
+	<data
+		name="RayonLabel">
+		<value>Rayon</value>
+	</data>
+	<data
+		name="RayonPlaceHolder">
+		<value>Mètres</value>
+	</data>
+	<data
+		name="AccesGeofenceLabel">
+		<value>Accès</value>
+	</data>
+	<data
+		name="AccesGeofencePrivate">
+		<value>Privé</value>
+	</data>
+	<data
+		name="AccesGeofencePublic">
+		<value>Public</value>
+	</data>
+	<data
+		name="GeofencePublicBouton">
+		<value>Rendre public</value>
+	</data>
+	<data
+		name="Alerte_RendreGeofencePublic_Title">
+		<value>Attention</value>
+	</data>
+	<data
+		name="Alerte_RendreXGeofencePublic_Message">
+		<value>Voulez-vous vraiment rendre "{0}" accèssible aux autres usagés?</value>
+	</data>
 </root>

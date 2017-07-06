@@ -13,7 +13,8 @@
 				<StackLayout
 					Orientation="Horizontal">
 					<StackLayout
-						x:Name="labelLayout" VerticalOptions="FillAndExpand">
+						x:Name         ="labelLayout"
+						VerticalOptions="FillAndExpand">
 						<Label
 							x:Name               ="labelLatitude"
 							Text                 ="Latitude: "
@@ -27,7 +28,8 @@
 							VerticalTextAlignment="Center" />
 					</StackLayout>
 					<StackLayout
-						x:Name="entryLayout" HorizontalOptions="FillAndExpand">
+						x:Name           ="entryLayout"
+						HorizontalOptions="FillAndExpand">
 						<Entry
 							x:Name           ="entryLatitude"
 							Placeholder      ="Latitude"
@@ -114,6 +116,16 @@
 						Placeholder      ="Secondes" />
 				</StackLayout>
 				<StackLayout
+					Orientation="Horizontal">
+					<Label
+						x:Name               ="accessLabel"
+						VerticalTextAlignment="Center" />
+					<Picker
+						x:Name           ="accessPicker"
+						HorizontalOptions="FillAndExpand" />
+				</StackLayout>
+				<StackLayout
+					Margin           ="0,20,0,20"
 					Orientation      ="Horizontal"
 					HorizontalOptions="CenterAndExpand"
 					Spacing          ="10">

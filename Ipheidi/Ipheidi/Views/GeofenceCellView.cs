@@ -101,7 +101,7 @@ namespace Ipheidi
 		public GeofenceCellView()
 		{
 			cellWrapper = new StackLayout() { VerticalOptions = LayoutOptions.FillAndExpand, Orientation = StackOrientation.Horizontal };
-			btnDelete = new Button() { TextColor = Color.White, BackgroundColor = Color.Red, Text = "X", FontAttributes = FontAttributes.Bold, WidthRequest = 50, Margin = new Thickness(0, 1, 0, 1) };
+			btnDelete = new Button() { TextColor = Color.White, BackgroundColor = Color.Red, Text = "X", FontAttributes = FontAttributes.Bold, WidthRequest = 44, Margin = new Thickness(3) };
 			lblName = new Label() { Text = Name, VerticalTextAlignment = TextAlignment.Center, HorizontalOptions = LayoutOptions.FillAndExpand, LineBreakMode = LineBreakMode.TailTruncation };
 			lblDistance = new Label { VerticalTextAlignment = TextAlignment.Center, LineBreakMode = LineBreakMode.NoWrap, HorizontalOptions = LayoutOptions.Fill };
 			UpdateDistanceFromCurrentLocation();
@@ -119,6 +119,7 @@ namespace Ipheidi
 			btnDelete.IsVisible = false;
 			btnDelete.Clicked += (sender, e) =>
 			{
+				btnDelete.IsEnabled = false;
 				System.Diagnostics.Debug.WriteLine("Deleted " + Name + " " + ID);
 				//View = new StackLayout() { BackgroundColor = Color.Transparent };
 				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceByID(ID));
@@ -157,6 +158,7 @@ namespace Ipheidi
 			var p = new GeofenceEditPage(geo);
 			App.Instance.PushPage(p);
 		}
+
 		public void SetColors(Color color)
 		{
 			cellWrapper.BackgroundColor = color;

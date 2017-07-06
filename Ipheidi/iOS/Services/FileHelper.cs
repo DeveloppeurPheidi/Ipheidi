@@ -55,12 +55,12 @@ namespace Ipheidi.iOS
 			NSData data = NSData.FromArray(byteArray);
 
 			//Save dans l'album, utile pour le debug.
-			var someImage = UIImage.LoadFromData(data);
+			/*var someImage = UIImage.LoadFromData(data);
 			someImage.SaveToPhotosAlbum((image, error) =>
 			{
 				var o = image as UIImage;
 				Console.WriteLine("error:" + error);
-			});
+			});*/
 		}
 	}
 }

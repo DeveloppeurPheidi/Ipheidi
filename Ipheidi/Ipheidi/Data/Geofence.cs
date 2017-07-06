@@ -34,7 +34,7 @@ namespace Ipheidi
 		[JsonIgnore]
 		public bool NotificationEnabled { get; set; }
 
-
+		public int PublicFlag { get; set; }
 	
 
 

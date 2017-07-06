@@ -126,7 +126,10 @@ namespace Ipheidi.iOS
 					bool success = await UploadImageToServer(image, imageUpload.FileName, filepath, pp, false);
 					if (success)
 					{
-						File.Delete(filepath);
+						if (File.Exists(filepath))
+						{
+							File.Delete(filepath);
+						}
 					}
 					return success;
 				}
@@ -217,7 +220,7 @@ namespace Ipheidi.iOS
 											App.NotificationManager.DisplayAlert(AppResources.Alerte_EnvoiePhotoCompleteMessage, "Pheidi", "OK", () => { });
 											try
 											{
-												File.Delete(filepath);
+												DeleteImageInDirectory(filename);
 											}
 											catch (Exception e)
 											{
@@ -233,6 +236,13 @@ namespace Ipheidi.iOS
 				}
 			}
 			return false;
+		}
+
+		static public void DeleteImageInDirectory(string pictureName)
+		{
+			var documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal); 
+			string filepath = System.IO.Path.Combine(documentsDirectory, pictureName); 
+			System.IO.File.Delete(filepath);
 		}
 
 		public void OnHostServerStateUpdate(NetworkState state)

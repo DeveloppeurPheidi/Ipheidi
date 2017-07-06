@@ -49,7 +49,7 @@ namespace Ipheidi
 		/// <returns>The items.</returns>
 		public Task<List<T>> GetUserSpecificItems<T>() where T : DatabaseData, new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			return database.Table<T>().Where(l => l.Domain == App.Domain && l.User == App.Username).ToListAsync();
 		}
 
@@ -59,7 +59,7 @@ namespace Ipheidi
 		/// <returns>The items.</returns>
 		public Task<List<T>> GetAllItems<T>() where T : new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			return database.Table<T>().ToListAsync();
 		}
 
@@ -71,14 +71,14 @@ namespace Ipheidi
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public Task<T> GetItem<T>(string NoSeq) where T : DatabaseData, new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			return database.Table<T>().Where(i => i.NoSeq == NoSeq).FirstAsync();
 		}
 
 
 		public async Task UpdateItem<T>(T item) where T : DatabaseData, new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			Debug.WriteLine("DatabaseHelper: Updating " + typeof(T) + " " + item.NoSeq);
 			await database.InsertOrReplaceAsync(item);
 		}
@@ -90,12 +90,20 @@ namespace Ipheidi
 		/// <param name="item">Item.</param>
 		public async Task<bool> SaveItemAsync<T>(T item) where T : DatabaseData, new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			if (item != null)
 			{
 				Debug.WriteLine("DatabaseHelper: Saving new " + typeof(T) + " " + item.NoSeq);
-				await database.InsertAsync(item);
-				return true;
+				try
+				{
+					int code = await database.InsertAsync(item);
+					return true;
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e.Message);
+				}
+
 			}
 			return false;
 		}
@@ -107,7 +115,7 @@ namespace Ipheidi
 		/// <param name="item">Item.</param>
 		public Task<int> DeleteItemAsync<T>(T item) where T : DatabaseData, new()
 		{
-			CheckIfTableExist<T>();
+			CheckIfTableIsValid<T>();
 			Debug.WriteLine("DatabaseHelper: Deleting " + typeof(T) + " " + item.NoSeq);
 			return database.DeleteAsync(item);
 		}
@@ -130,30 +138,51 @@ namespace Ipheidi
 			database.CreateTableAsync<T>().Wait();
 		}
 
+		List<Type> ValidatedDatabase = new List<Type>();
 		/// <summary>
 		/// Checks if table exist.
 		/// </summary>
 		/// <typeparam name="T">The type parameter.</typeparam>
-		public void CheckIfTableExist<T>() where T : new()
+		public void CheckIfTableIsValid<T>() where T : new()
 		{
-			try
+			if (!ValidatedDatabase.Contains(typeof(T)))
 			{
-				database.Table<T>().FirstOrDefaultAsync().Wait();
-				Debug.WriteLine("Table " + typeof(T) + " Exist"); 
-			}
-			catch
-			{
+				var item = new T();
 				try
 				{
-					database.DropTableAsync<T>().Wait();
-					Debug.WriteLine("Dropped Table " + typeof(T));
+					database.Table<T>().FirstOrDefaultAsync().Wait();
+
+					database.InsertAsync(item).Wait();
+					database.UpdateAsync(item).Wait();
+					database.DeleteAsync(item).Wait();
+
+					Debug.WriteLine("Table " + typeof(T) + " is Valid");
+					ValidatedDatabase.Add(typeof(T));
 				}
-				finally
+				catch
 				{
-					database.CreateTableAsync<T>().Wait();
-					Debug.WriteLine("Created Table " + typeof(T));
+
+					List<T> list = new List<T>();
+					try
+					{
+						list = database.Table<T>().ToListAsync().Result;
+						database.DropTableAsync<T>().Wait();
+						Debug.WriteLine("Dropped Table " + typeof(T));
+					}
+					finally
+					{
+						database.CreateTableAsync<T>().Wait();
+						if (list.Contains(item))
+						{
+							list.Remove(item);
+						}
+
+						database.InsertAllAsync(list);
+						Debug.WriteLine("Created Table " + typeof(T));
+					}
 				}
 			}
 		}
 	}
+
 }

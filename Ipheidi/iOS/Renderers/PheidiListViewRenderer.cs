@@ -15,7 +15,7 @@ namespace Ipheidi.iOS
 		{
 			base.OnElementChanged(e);
 
-			Control.Bounces = false;
+			//Control.Bounces = false;
 		}
 	}
 }

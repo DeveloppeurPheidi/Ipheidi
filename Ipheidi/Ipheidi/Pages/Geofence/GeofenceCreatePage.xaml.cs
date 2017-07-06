@@ -295,6 +295,15 @@ namespace Ipheidi
 				labelRadius.Text = AppResources.RayonLabel;
 				CheckEntryRadius();
 				entryRadius.Unfocused += (sender, e) => CheckEntryRadius();
+
+				accessLabel.Text = AppResources.AccesGeofenceLabel;
+				accessPicker.Items.Add(AppResources.AccesGeofencePrivate);
+				accessPicker.Items.Add(AppResources.AccesGeofencePublic);
+				accessPicker.SelectedIndexChanged += (sender, e) =>
+				{
+					Geofence.PublicFlag = accessPicker.SelectedItem.ToString() == AppResources.AccesGeofencePrivate ? 0 : 1;
+				};
+				accessPicker.SelectedItem = AppResources.AccesGeofencePrivate;
 			}
 		}
 		protected override void OnAppearing()
