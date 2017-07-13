@@ -9,7 +9,7 @@
 				x:Name           ="mainLayout"
 				Padding          ="20,20"
 				HorizontalOptions="FillAndExpand"
-				Spacing          ="5">
+				Spacing          ="15">
 				<StackLayout
 					Orientation="Horizontal">
 					<StackLayout
@@ -38,8 +38,8 @@
 							x:Name           ="entryLongitude"
 							Placeholder      ="Longitude"
 							HorizontalOptions="FillAndExpand" />
-						<Entry
-							x:Name           ="entryRadius"
+						<Picker
+							x:Name           ="radiusPicker"
 							HorizontalOptions="FillAndExpand" />
 					</StackLayout>
 				</StackLayout>
@@ -50,8 +50,7 @@
 					Placeholder="Nom du lieu" />
 				<StackLayout
 					Orientation      ="Horizontal"
-					HorizontalOptions="FillAndExpand"
-					Padding          ="0,10,0,10">
+					HorizontalOptions="FillAndExpand">
 					<Label
 						x:Name                 ="notificationLabel"
 						Text                   ="Activer la notification:"
@@ -92,43 +91,18 @@
 							HorizontalOptions="FillAndExpand" />
 					</StackLayout>
 				</StackLayout>
-				<Label
-					x:Name         ="notificationDelaiLabel"
-					Text           ="Délai de notification"
-					VerticalOptions="Center" />
 				<StackLayout
-					Orientation="Horizontal">
-					<Entry
-						x:Name           ="minEntry"
-						Text             ="0"
-						HorizontalOptions="FillAndExpand"
-						Placeholder      ="Minutes" />
-					<Label
-						x:Name                 ="lblDelay2"
-						Text                   =":"
-						VerticalTextAlignment  ="Center"
-						HorizontalTextAlignment="Center"
-						WidthRequest           ="10" />
-					<Entry
-						x:Name           ="secEntry"
-						Text             ="0"
-						HorizontalOptions="FillAndExpand"
-						Placeholder      ="Secondes" />
+					x:Name="delayLayout">
 				</StackLayout>
 				<StackLayout
-					Orientation="Horizontal">
-					<Label
-						x:Name               ="accessLabel"
-						VerticalTextAlignment="Center" />
-					<Picker
-						x:Name           ="accessPicker"
-						HorizontalOptions="FillAndExpand" />
+					x:Name="AccesLayout">
 				</StackLayout>
 				<StackLayout
 					Margin           ="0,20,0,20"
 					Orientation      ="Horizontal"
-					HorizontalOptions="CenterAndExpand"
-					Spacing          ="10">
+					HorizontalOptions="Fill"
+					Spacing          ="10"
+					x:Name="btnLayout">
 					<Button
 						x:Name           ="btnSave"
 						Text             ="Enregistrer"

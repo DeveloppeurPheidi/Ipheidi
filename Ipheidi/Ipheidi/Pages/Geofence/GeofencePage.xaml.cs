@@ -52,7 +52,14 @@ namespace Ipheidi
 			{
 				RefreshTitle();
 			};
-
+			listViewGeofence.ItemAppearing += (sender, e) =>
+			{
+				RefreshTitle();
+			};
+			listViewGeofence.ItemDisappearing += (sender, e) =>
+			{
+				RefreshTitle();
+			};
 			btnAdd.BackgroundColor = App.ColorPrimary;
 			btnAdd.Clicked += (sender, e) =>
 			{
@@ -108,6 +115,7 @@ namespace Ipheidi
 
 		void SortList()
 		{
+			RefreshTitle();
 			if (!IsCurrentlySorting)
 			{
 				IsCurrentlySorting = true;
@@ -154,6 +162,12 @@ namespace Ipheidi
 			Title = string.Format(AppResources.GeofencePageTitle, geofenceCollection.Count);
 		}
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			btnAdd.WidthRequest = btnAdd.Height;
+			btnDelete.WidthRequest = btnDelete.Height;
+		}
 		/// <summary>
 		/// On size allocation.
 		/// </summary>

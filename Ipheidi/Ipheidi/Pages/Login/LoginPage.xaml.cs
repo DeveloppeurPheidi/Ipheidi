@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Ipheidi
 	/// </summary>
 	public partial class LoginPage : ContentPage
 	{
+		
 		bool IsInSecondPage;
 		bool firstPageExist;
 		int lastUserIndex = 0;
@@ -56,18 +58,21 @@ namespace Ipheidi
 			btnLogin.FontAttributes = FontAttributes.Bold;
 			btnLogin.Clicked += (sender, e) =>
 			{
-				App.Url = App.UrlList[App.Domain];
-				Task.Run(async () =>
+				Device.BeginInvokeOnMainThread(() =>
 				{
-					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
-					string s = await UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled);
-					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
-
-					if (!string.IsNullOrEmpty(s))
+					Task.Run(async () =>
 					{
+						Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
+						string s = await PheidiNetworkManager.UserLogin(usernameEntry.Text, passwordEntry.Text, rememberSwitch.IsToggled && IsInSecondPage);
+						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
+						Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
 
-						//Device.BeginInvokeOnMainThread(async () => await DisplayAlert("Problème de connexion", s, "OK"));
-					}
+						if (!string.IsNullOrEmpty(s))
+						{
+
+							//Device.BeginInvokeOnMainThread(async () => await DisplayAlert("Problème de connexion", s, "OK"));
+						}
+					});
 				});
 			};
 
@@ -77,20 +82,21 @@ namespace Ipheidi
 			Debug.WriteLine("Url Picker: " + watch.Elapsed.Milliseconds);
 			//Url Picker
 			urlPicker.IsEnabled = secondePage;
-			foreach (var domain in App.UrlList.Keys)
+			foreach (var server in App.ServerInfoList)
 			{
-				urlPicker.Items.Add(domain);
+				urlPicker.Items.Add(server.Domain);
 			}
 
 			urlPicker.Title = "Sélectionnez une adresse";
 			urlPicker.SelectedIndexChanged += (sender, e) =>
 			{
-				App.Domain = urlPicker.Items[urlPicker.SelectedIndex];
-				App.Url = App.UrlList[App.Domain];
+				string item = urlPicker.SelectedItem.ToString();
+				App.CurrentServer = App.ServerInfoList.First(sein => sein.Domain == item);
+				App.ServerInfoNoseq = App.CurrentServer.Noseq;
 			};
-			if (!string.IsNullOrEmpty(App.Domain))
+			if (App.CurrentServer != null)
 			{
-				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.Domain);
+				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.CurrentServer.Domain);
 			}
 
 			Debug.WriteLine("User Picker: " + watch.Elapsed.Milliseconds);
@@ -100,11 +106,11 @@ namespace Ipheidi
 
 				foreach (var account in App.Credentials)
 				{
-					if (account.Value.ContainsKey("Username") && account.Value.ContainsKey("Domain"))
+					if (account.Value.ContainsKey("Username") && account.Value.ContainsKey("ServerNoseq"))
 					{
-						if (App.UrlList.ContainsKey(account.Value["Domain"]))
+						if (App.ServerInfoList.Any((arg) => account.Value["ServerNoseq"] == arg.Noseq))
 						{
-							userPicker.Items.Add(account.Key);
+							userPicker.Items.Add(account.Value["Username"] + " (" + App.ServerInfoList.First((arg) => account.Value["ServerNoseq"] == arg.Noseq).Domain + ")");
 						}
 					}
 				}
@@ -119,18 +125,20 @@ namespace Ipheidi
 					{
 						lastUserIndex = userPicker.SelectedIndex;
 						string account = userPicker.Items[userPicker.SelectedIndex];
-						if (App.Credentials.ContainsKey(account))
+						if (App.Credentials.Any((arg) => account == arg.Value["Username"] + " (" + App.ServerInfoList.First((si) => si.Noseq == arg.Value["ServerNoseq"]).Domain + ")"))
 						{
-							var properties = App.Credentials[account];
-							App.Username = properties["Username"];
-							App.Domain = properties["Domain"];
-							usernameEntry.Text = properties["Username"];
-							passwordEntry.Text = properties["Password"];
-							urlPicker.SelectedIndex = urlPicker.Items.IndexOf(properties["Domain"]);
+							var user = App.Credentials.First((arg) => account == arg.Value["Username"] + " (" + App.ServerInfoList.First((si) => si.Noseq == arg.Value["ServerNoseq"]).Domain + ")");
+							App.UserNoseq = user.Key;
+							App.ServerInfoNoseq = user.Value["ServerNoseq"];
+							App.CurrentServer = App.ServerInfoList.First((arg) => arg.Noseq == App.ServerInfoNoseq);
+							usernameEntry.Text = user.Value["Username"];
+							passwordEntry.Text = user.Value["Password"];
+							urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.CurrentServer.Domain);
 						}
 					}
 				};
-				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
+				userPicker.SelectedIndex = string.IsNullOrEmpty(App.UserNoseq) || App.CurrentServer == null ? 0 : App.Credentials.ContainsKey(App.UserNoseq) ? userPicker.Items.IndexOf(App.Credentials[App.UserNoseq]["Username"] + " (" + App.CurrentServer.Domain + ")") : 0;
+
 			}
 
 			usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
@@ -153,7 +161,7 @@ namespace Ipheidi
 		{
 			EntriesVisible(true);
 			IsInSecondPage = true;
-			App.Username = "";
+			App.UserNoseq = "";
 			usernameEntry.Text = "";
 			passwordEntry.Text = "";
 			if (Device.RuntimePlatform == Device.iOS)
@@ -191,77 +199,10 @@ namespace Ipheidi
 			urlPicker.IsEnabled = visible;
 		}
 
+
 		/// <summary>
-		///Méthode qui envoie la requête http permettant de se connecter à partir de l'application mobile.
+		/// Sets the footer.
 		/// </summary>
-		/// <param name="username"></param>
-		/// <param name="password"></param>
-		/// <param name="rememberUser"></param>
-		public async Task<string> UserLogin(string username, string password, bool rememberUser)
-		{
-			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(App.Url))
-			{
-				return AppResources.Erreur_LaissezAucunChampVide;
-			}
-
-			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexAction" }, { "pheidiparams", "action**:**getWebSession**,**Username**:**" + username + "**,**Password**:**" + password + "**,**" } };
-			HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 10));
-			if (response != null)
-			{
-				if (response.StatusCode == HttpStatusCode.OK)
-				{
-					string rc = await response.Content.ReadAsStringAsync();
-					Debug.WriteLine("WEBSESSION: " + rc);
-					App.WebSession = new Cookie() { Name = "WEBSESSION", Domain = App.Domain, Value = rc };
-					var userAgent = App.AppName + " " + Xamarin.Forms.Device.RuntimePlatform;
-					var uaCookie = new Cookie() { Name = "IPHEIDI_USERAGENT", Domain = App.Domain, Value = userAgent };
-					if (!string.IsNullOrEmpty(rc) && Utilities.IsNumeric(rc))
-					{
-						Debug.WriteLine(rc);
-						if (rememberUser || !IsInSecondPage)
-						{
-							if (rememberUser)
-							{
-								App.CredentialsManager.SaveCredentials(username, password);
-							}
-						}
-						App.Username = username;
-						App.CookieContainer.GetCookies(new Uri(App.Url));
-
-						//Ajoute le cookie de WEBSESSION et envoie vers la page web.
-						App.CookieManager.AddCookie(App.WebSession);
-						App.CookieManager.AddCookie(uaCookie);
-
-						string p = "";
-						var dic = new Dictionary<string, string>();
-						dic.Add("VALUE", App.Language);
-
-						foreach (var d in dic)
-						{
-							p += d.Key + "**:**" + d.Value + "**,**";
-						}
-						//parameters = new Dictionary<string, string> { { "pheidiaction", "CON_A_LANGUAGE" }, { "pheidiparams", p } };
-						parameters = new Dictionary<string, string> { { "pheidiaction", "SET_CON_A_LANGUAGE" }, { "pheidiparams", p } };
-						response = null;
-						response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 2400));
-						if (response != null)
-						{
-							if (response.StatusCode == HttpStatusCode.OK)
-							{
-								string responseContent = response.Content.ReadAsStringAsync().Result;
-								Debug.WriteLine("Reponse:" + responseContent);
-							}
-						}
-						App.IsInLogin = false;
-						Device.BeginInvokeOnMainThread(App.Instance.GetToApplication);
-						return "";
-					}
-					return AppResources.Erreur_MauvaisEmailOuMdp;
-				}
-			}
-			return AppResources.Erreur_ProblemeConnexionServeur;
-		}
-
 		void SetFooter()
 		{
 			if (!mainLayout.Children.Contains(languePicker))
@@ -280,7 +221,7 @@ namespace Ipheidi
 				{
 					App.Language = languePicker.SelectedItem.ToString().Substring(0, 2).ToLower();
 					App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
-					var languageCookie = new Cookie() { Name = "language", Domain = App.Domain, Value = App.Language };
+					var languageCookie = new Cookie() { Name = "language", Domain = App.CurrentServer.Domain, Value = App.Language };
 					App.CookieManager.AddCookie(languageCookie);
 					usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
 					lblCourriel.Text = AppResources.CourrielLabel;
@@ -357,14 +298,76 @@ namespace Ipheidi
 			base.OnSizeAllocated(width, height);
 		}
 
+		protected override void OnDisappearing()
+		{
+			App.Credentials = App.CredentialsManager.GetAllCredentials().Where((arg) => arg.Value["IsSystem"] == false.ToString()).ToDictionary((arg) => arg.Key, (arg) => arg.Value);
+			userPicker.Items.Clear();
+			foreach (var account in App.Credentials)
+			{
+				if (account.Value.ContainsKey("Username") && account.Value.ContainsKey("ServerNoseq"))
+				{
+					if (App.ServerInfoList.Any((arg) => account.Value["ServerNoseq"] == arg.Noseq))
+					{
+						userPicker.Items.Add(account.Value["Username"] + " (" + App.ServerInfoList.First((arg) => account.Value["ServerNoseq"] == arg.Noseq).Domain + ")");
+					}
+				}
+			}
+			userPicker.SelectedIndex = -1;
+			userPicker.SelectedIndex = string.IsNullOrEmpty(App.UserNoseq) || App.CurrentServer == null ? 0 : App.Credentials.ContainsKey(App.UserNoseq) ? userPicker.Items.IndexOf(App.Credentials[App.UserNoseq]["Username"] + " (" + App.CurrentServer.Domain + ")") : 0;
+
+			usernameEntry.Text = "";
+			passwordEntry.Text = "";
+			rememberSwitch.IsToggled = false;
+
+			if (App.Credentials.Count > 0 && IsInSecondPage)
+			{
+				EntriesVisible(false);
+				IsInSecondPage = false;
+				if (Device.RuntimePlatform == Device.iOS)
+				{
+					btnBackToFirstPage.IsVisible = false;
+				}
+			}
+
+			if (App.Credentials.Count == 0 && !IsInSecondPage)
+			{
+				OnOtherAccountButtonClicked(null, null);
+			}
+
+			base.OnDisappearing();
+		}
+
 
 		protected override void OnAppearing()
 		{
-			if (!IsInSecondPage)
+			App.Credentials = App.CredentialsManager.GetAllCredentials().Where((arg) => arg.Value["IsSystem"] == false.ToString()).ToDictionary((arg) => arg.Key, (arg) => arg.Value);
+			userPicker.Items.Clear();
+			foreach (var account in App.Credentials)
 			{
-				userPicker.SelectedIndex = -1;
-				userPicker.SelectedIndex = string.IsNullOrEmpty(App.Username) || string.IsNullOrEmpty(App.Domain) ? 0 : userPicker.Items.IndexOf(App.Username + " (" + App.Domain + ")");
+				if (account.Value.ContainsKey("Username") && account.Value.ContainsKey("ServerNoseq"))
+				{
+					if (App.ServerInfoList.Any((arg) => account.Value["ServerNoseq"] == arg.Noseq))
+					{
+						userPicker.Items.Add(account.Value["Username"] + " (" + App.ServerInfoList.First((arg) => account.Value["ServerNoseq"] == arg.Noseq).Domain + ")");
+					}
+				}
+			}
+			userPicker.SelectedIndex = -1;
+			userPicker.SelectedIndex = string.IsNullOrEmpty(App.UserNoseq) || App.CurrentServer == null ? 0 : App.Credentials.ContainsKey(App.UserNoseq) ? userPicker.Items.IndexOf(App.Credentials[App.UserNoseq]["Username"] + " (" + App.CurrentServer.Domain + ")") : 0;
 
+			if (App.Credentials.Count > 0 && IsInSecondPage)
+			{
+				EntriesVisible(false);
+				IsInSecondPage = false;
+				if (Device.RuntimePlatform == Device.iOS)
+				{
+					btnBackToFirstPage.IsVisible = false;
+				}
+			}
+
+			if (App.Credentials.Count == 0 && !IsInSecondPage)
+			{
+				OnOtherAccountButtonClicked(null, null);
 			}
 			base.OnAppearing();
 		}

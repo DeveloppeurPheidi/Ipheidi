@@ -313,11 +313,11 @@
 		<value>Aucune</value>
 	</data>
 	<data
-		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader">
-		<value>Plusieurs lieux correspondent à votre position actuelle. Voulez-vous en créer un nouveau?</value>
+		name="Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message">
+		<value>Plusieurs lieux correspondent à votre position actuelle. Souhaitez-vous tout de même en créer un nouveau?</value>
 	</data>
 	<data
-		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle">
+		name="Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title">
 		<value>Localisation</value>
 	</data>
 	<data
@@ -475,5 +475,17 @@
 	<data
 		name="Alerte_RendreXGeofencePublic_Message">
 		<value>Voulez-vous vraiment rendre "{0}" accèssible aux autres usagés?</value>
+	</data>
+	<data
+		name="SuivantBouton">
+		<value>Suivamt</value>
+	</data>
+	<data
+		name="ContinuerBouton">
+		<value>Continuer</value>
+	</data>
+	<data
+		name="Erreur_Title">
+		<value>Erreur</value>
 	</data>
 </root>

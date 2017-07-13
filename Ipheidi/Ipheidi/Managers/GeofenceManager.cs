@@ -20,7 +20,7 @@ namespace Ipheidi
 	{
 		private ObservableCollection<Geofence> Geofences = new ObservableCollection<Geofence>();
 		private List<Geofence> ClosePositionGeofences = new List<Geofence>();
-
+		static public List<int> GeofenceRadius = new List<int>();
 		private Location LastClosePositionRefreshLocation;
 		private List<Geofence> RescheduledGeofenceUpdates = new List<Geofence>();
 		private List<Location> UnknownLocationList;
@@ -36,6 +36,24 @@ namespace Ipheidi
 		/// </summary>
 		public GeofenceManager()
 		{
+			if (GeofenceRadius.Count == 0)
+			{
+				int gap = 10;
+				for (int i = gap; i <= ApplicationConst.GeofenceMaxRadius && i<= 100; i += gap)
+				{
+					GeofenceRadius.Add(i);
+				}
+				gap = 25;
+				for (int i = 100 + gap; i <= ApplicationConst.GeofenceMaxRadius && i <= 300; i += gap)
+				{
+					GeofenceRadius.Add(i);
+				}
+				gap = 50;
+				for (int i = 300 + gap; i <= ApplicationConst.GeofenceMaxRadius; i += gap)
+				{
+					GeofenceRadius.Add(i);
+				}
+			}
 			GetGeofenceFromDatabase();
 			Task.Run(async () =>
 			{
@@ -216,11 +234,11 @@ namespace Ipheidi
 					{
 						list += g.Name + "\n";
 					}
-					var p = new MessagePage();
-					p.Title = AppResources.MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle;
-					p.Header = AppResources.MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader;
-					p.Message = list;
-					p.AddOnButtonConfirmationEvent((sender, e) =>
+					string Title = AppResources.Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title;
+					string Message = AppResources.Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message;
+					string confirm = AppResources.Oui;
+					string cancel = AppResources.Non;
+					System.Action onConfirm = () =>
 					{
 						var geo = new Geofence()
 						{
@@ -229,9 +247,8 @@ namespace Ipheidi
 							Longitude = geofence.Longitude
 						};
 						App.Instance.PushPage(new GeofenceCreatePage(geo));
-					});
-
-					App.Instance.PushPage(p);
+					};
+					App.NotificationManager.DisplayAlert(Message, Title, confirm, cancel, onConfirm, () => { });
 				}
 				else
 				{

@@ -117,7 +117,7 @@ namespace Ipheidi.Droid
 							System.Diagnostics.Debug.WriteLine("Reponse:" + responseContent);
 							try
 							{
-								answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
+								answer = PheidiNetworkManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
 							}
 							catch (Exception e)
 							{
@@ -161,13 +161,13 @@ namespace Ipheidi.Droid
 										Latitude = location.Latitude,
 										Longitude = location.Longitude,
 										NotificationEnabled = true,
-										User = App.Username,
-										Domain = App.Domain,
+										User = App.UserNoseq,
+										ServerNoseq = App.CurrentServer.Noseq,
 										NotificationDelay = ApplicationConst.DefaultGeofenceTriggerTime,
 										Name = val,
 										Radius = ApplicationConst.DefaultGeofenceRadius
 									};
-
+									geo.SetIsInside(true);
 									if (pp.ContainsKey("ENTERACTIONNOSEQ"))
 									{
 										geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];

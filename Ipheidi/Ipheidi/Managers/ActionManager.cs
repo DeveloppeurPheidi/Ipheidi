@@ -92,7 +92,7 @@ namespace Ipheidi
 		{
 			try
 			{
-				var fields = ActionManager.GetFields(action.ActionAnswer);
+				var fields = PheidiNetworkManager.GetFields(action.ActionAnswer);
 				if (fields != null)
 				{
 					foreach (var f in fields)
@@ -526,49 +526,6 @@ status = ""success"";
 			return action;
 		}*/
 
-		static public List<Dictionary<string, object>> GetFields(string actionAnswer)
-		{
-			var result = new List<Dictionary<string, object>>();
-			try
-			{
-				var data = JsonHelper.Deserialize(actionAnswer) as Dictionary<string, object>;
-				if (data != null)
-				{
-					if (data.ContainsKey("groupRefresh"))
-					{
-						var groupRefresh = data["groupRefresh"] as List<object>;
-						if (groupRefresh != null)
-						{
-							foreach (var v in groupRefresh)
-							{
-								var value = v as Dictionary<string, object>;
-								if (value != null)
-								{
-									if (value.ContainsKey("fields"))
-									{
-
-										var fields = value["fields"] as List<object>;
-										foreach (var f in fields)
-										{
-											var field = f as Dictionary<string, object>;
-											if (field != null)
-											{
-												result.Add(field);
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			catch (Exception e)
-			{
-				Debug.WriteLine(e.Message);
-			}
-			return result;
-		}
 
 		static async Task<List<Action>> GetActions()
 		{

@@ -27,7 +27,7 @@ namespace Ipheidi
 
 			InitializeComponent();
 
-			BrowserWeb.Source = "http://" + App.Domain + "/connect";
+			BrowserWeb.Source = App.CurrentServer.Address + "/connect";
 
 			/*
 			var htmlSource = new HtmlWebViewSource();
@@ -124,7 +124,7 @@ background:#ccc;
 		static public void CheckWebSession()
 		{
 			bool webSessionExistAndNotNull = false;
-			foreach (Cookie c in App.CookieManager.GetAllCookies().GetCookies(new Uri(App.Url)))
+			foreach (Cookie c in App.CookieManager.GetAllCookies().GetCookies(new Uri(App.CurrentServer.Address)))
 			{
 				if (c.Name == "WEBSESSION" && c.Value != "")
 				{

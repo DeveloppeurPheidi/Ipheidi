@@ -246,7 +246,7 @@
 	</data>
 	<data
 		name="Erreur_ProblemeConnexionServeur">
-		<value>Troubles with the network, try again later</value>
+		<value>Problems with the server connection, try again later</value>
 	</data>
 	<data
 		name="DeconnexionBouton">
@@ -313,12 +313,11 @@
 		<value>None</value>
 	</data>
 	<data
-		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader">
-		<value>
-		Many places match with your current position, do you still want to create a new one?</value>
+		name="Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message">
+		<value>Many places match with your current position, do you still want to create a new one?</value>
 	</data>
 	<data
-		name="MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle">
+		name="Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title">
 		<value>Localisation</value>
 	</data>
 	<data
@@ -445,20 +444,45 @@
 		name="LocalisationPrecisionLabel">
 		<value>Precision</value>
 	</data>
-
-	<data name="RayonLabel"><value>Radius</value></data>
-	<data name="RayonPlaceHolder"><value>Meters</value></data>
-
-	<data name="AccesGeofenceLabel"><value>Access</value></data>
-	<data name="AccesGeofencePrivate"><value>Private</value></data>
-	<data name="AccesGeofencePublic"><value>Public</value></data>
-
-		<data
+	<data
+		name="RayonLabel">
+		<value>Radius</value>
+	</data>
+	<data
+		name="RayonPlaceHolder">
+		<value>Meters</value>
+	</data>
+	<data
+		name="AccesGeofenceLabel">
+		<value>Access</value>
+	</data>
+	<data
+		name="AccesGeofencePrivate">
+		<value>Private</value>
+	</data>
+	<data
+		name="AccesGeofencePublic">
+		<value>Public</value>
+	</data>
+	<data
 		name="GeofencePublicBouton">
 		<value>Make public</value>
 	</data>
-
-	<data name="Alerte_RendreGeofencePublic_Title"><value>Warning</value></data>
-	
-	<data name="Alerte_RendreXGeofencePublic_Message"><value>Do you realy want to set "{0}" as a public place for other users?</value></data>
+	<data
+		name="Alerte_RendreGeofencePublic_Title">
+		<value>Warning</value>
+	</data>
+	<data
+		name="SuivantBouton">
+		<value>Next</value>
+	</data>
+	<data
+		name="ContinuerBouton">
+		<value>Continue</value>
+	</data>
+	<data
+		name="Alerte_RendreXGeofencePublic_Message">
+		<value>Do you really want to set "{0}" as a public place for other users?</value>
+	</data>
+	<data name="Erreur_Title"><value>Error</value></data>
 </root>

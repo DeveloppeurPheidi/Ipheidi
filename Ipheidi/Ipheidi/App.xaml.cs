@@ -27,21 +27,22 @@ namespace Ipheidi
 		static public double Width;
 		static public CookieContainer CookieContainer = new CookieContainer();
 		static public string AppName = "IPheidi";
-		static public string Url = "";
 
-		static public string Domain
+		public static ServerInfo CurrentServer { get; set; }
+
+		static public string ServerInfoNoseq
 		{
 			get
 			{
-				if (Application.Current.Properties.ContainsKey("LastDomain"))
+				if (Application.Current.Properties.ContainsKey("LastServerNoseq"))
 				{
-					return Application.Current.Properties["LastDomain"] as string;
+					return Application.Current.Properties["LastServerNoseq"] as string;
 				}
 				return "";
 			}
 			set
 			{
-				Application.Current.Properties["LastDomain"] = value;
+				Application.Current.Properties["LastServerNoseq"] = value;
 				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
 			}
 		}
@@ -102,7 +103,7 @@ namespace Ipheidi
 			}
 		}
 
-		static public string Username
+		static public string UserNoseq
 		{
 			get
 			{
@@ -160,13 +161,9 @@ namespace Ipheidi
 		static public Color ColorPrimary = Color.FromHex("#92C851");
 		static public Color ColorDark = Color.FromHex("#577830");
 		static public Dictionary<string, Dictionary<string, string>> Credentials;
-		static public Dictionary<string, string> UrlList = new Dictionary<string, string>
-			{
-				{"10.1.50.220", "http://10.1.50.220/default.aspx"},
-				{"v2_5.pheidi.net", "http://v2_5.pheidi.net/default.aspx"},
-				{ "www.pheidi.com", "https://www.pheidi.com/default.aspx"},
-				{"app.solutionskpi.com","https://app.solutionskpi.com/default.aspx"}
-			};
+		static public Dictionary<string, string> PMH = new Dictionary<string, string>();
+		static public KeyValuePair<string, Dictionary<string, string>> SystemCredentials;
+		static public List<ServerInfo> ServerInfoList;
 
 		public PheidiTabbedPage NavBar;
 
@@ -259,13 +256,21 @@ namespace Ipheidi
 			var listViewStyle = new Style(typeof(ListView))
 			{
 				Setters = {
-					new Setter{ Property = ListView.BackgroundColorProperty, Value =  Color.FromHex("#BBBBBB")}
+					new Setter{ Property = VisualElement.BackgroundColorProperty, Value =  Color.FromHex("#BBBBBB")}
+				}
+			};
+
+			var HMSTimePickerStyle = new Style(typeof(HMSTimePicker))
+			{
+				Setters = {
+					new Setter {Property = VisualElement.BackgroundColorProperty, Value = Color.White}
 				}
 			};
 			Resources = new ResourceDictionary();
 			Resources.Add(labelStyle);
 			Resources.Add(buttonStyle);
 			Resources.Add(listViewStyle);
+			Resources.Add(HMSTimePickerStyle);
 		}
 
 		/// <summary>
@@ -289,7 +294,13 @@ namespace Ipheidi
 			{
 				LocationManager.StartLocalisation();
 			}
+			if (MainPage == null)
+			{
+				MainPage = new NavigationPage(new SystemLoginPage());
+			}
+
 			MainPage.Navigation.PushAsync(NavBar);
+
 
 		}
 
@@ -299,11 +310,107 @@ namespace Ipheidi
 		public void GetLoginPage()
 		{
 			App.Credentials = App.CredentialsManager.GetAllCredentials();
-			Debug.WriteLine("App: Create Login Page");
-			var p = new LoginPage(App.Credentials.Count == 0);
-			var page = new NavigationPage(p);
-			Debug.WriteLine("App: Set Login Page");
-			MainPage = page;
+			App.SystemCredentials = App.CredentialsManager.GetSystemCredentials();
+			var p1 = new SystemLoginPage();
+			var page = new NavigationPage(p1);
+			if (!string.IsNullOrEmpty(SystemCredentials.Key))
+			{
+				int count = 0;
+				string sysLogin = "";
+				bool toContinue = false;
+				Task.Run(async () =>
+				{
+					while (sysLogin != PheidiNetworkManager.GoodResult && count < 10)
+					{
+						sysLogin = await PheidiNetworkManager.SystemLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"]);
+						count++;
+					}
+					toContinue = true;
+				});
+
+				while (!toContinue)
+				{
+					Task.Delay(500).Wait();
+				}
+				if (sysLogin == PheidiNetworkManager.GoodResult)
+				{
+					Page p2 = new ServerLoginPage();
+					if (ServerInfoList.Count == 0)
+					{
+						//TODO display alert
+					}
+					else if (ServerInfoList.Count == 1)
+					{
+						bool autologging = true;
+						string answer = "";
+						Task.Run(async () =>
+						{
+							if (App.Credentials.Any((arg) => arg.Value["SystemCredentialsNoseq"] == App.SystemCredentials.Key && arg.Value["ServerNoseq"] == App.ServerInfoNoseq))
+							{
+								var credentials = App.Credentials.First((arg) => arg.Value["SystemCredentialsNoseq"] == App.SystemCredentials.Key && arg.Value["ServerNoseq"] == App.ServerInfoList[0].Noseq);
+								answer = await PheidiNetworkManager.UserLogin(credentials.Value["Username"], credentials.Value["Password"], false);
+								if (answer != PheidiNetworkManager.GoodResult)
+								{
+									App.CredentialsManager.DeleteUser(credentials.Key);
+								}
+							}
+							else
+							{
+								answer = await PheidiNetworkManager.UserLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"], false);
+							}
+							autologging = false;
+						});
+
+						while (autologging)
+						{
+							Task.Delay(500).Wait();
+						}
+
+						if (answer != PheidiNetworkManager.GoodResult)
+						{
+							page.Navigation.PushAsync(p2);
+							MainPage = page;
+						}
+						else
+						{
+							answer = string.Empty;
+							Task.Run(async () =>
+							{
+								answer = await PheidiNetworkManager.GetPMH();
+							});
+							while (string.IsNullOrEmpty(answer))
+							{
+								Task.Delay(500).Wait();
+							}
+							if (PMH.Count > 1)
+							{
+								Page p3 = new PmhPage();
+								page.Navigation.PushAsync(p3);
+								MainPage = page;
+							}
+							else
+							{
+								App.Instance.GetToApplication();
+							}
+						}
+
+					}
+					else
+					{
+						page.Navigation.PushAsync(p2);
+						MainPage = page;
+					}
+				}
+				else
+				{
+					App.CredentialsManager.DeleteSystemCredentials();
+					GetLoginPage();
+				}
+			}
+			else
+			{
+				MainPage = page;
+			}
 		}
 
 		/// <summary>
@@ -311,12 +418,14 @@ namespace Ipheidi
 		/// </summary>
 		public void Logout()
 		{
+			App.Credentials = App.CredentialsManager.GetAllCredentials();
 			App.IsInLogin = true;
 			LocationManager.StopLocalisation();
 			App.LocationService.RemoveLocationListener(GeofenceManager);
 			App.GeofenceManager = null;
 			App.LocationService.RemoveLocationListener(LocationManager);
 			App.NetworkManager.RemoveNetworkStateListener(ImageHelper);
+
 			MainPage.Navigation.PopAsync();
 		}
 
@@ -376,6 +485,7 @@ namespace Ipheidi
 		{
 			Debug.WriteLine("App: Host Server State = " + state);
 		}
+
 
 	}
 }

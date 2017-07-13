@@ -2932,6 +2932,9 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c003c
 			public const int always = 2131492924;
 			
+			// aapt resource value: 0x7f0c00b6
+			public const int amPm = 2131493046;
+			
 			// aapt resource value: 0x7f0c0014
 			public const int auto = 2131492884;
 			
@@ -3046,6 +3049,9 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c0033
 			public const int homeAsUp = 2131492915;
 			
+			// aapt resource value: 0x7f0c00b3
+			public const int hour = 2131493043;
+			
 			// aapt resource value: 0x7f0c0049
 			public const int icon = 2131492937;
 			
@@ -3082,8 +3088,8 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c0048
 			public const int list_item = 2131492936;
 			
-			// aapt resource value: 0x7f0c00b4
-			public const int masked = 2131493044;
+			// aapt resource value: 0x7f0c00b9
+			public const int masked = 2131493049;
 			
 			// aapt resource value: 0x7f0c00a0
 			public const int media_actions = 2131493024;
@@ -3093,6 +3099,9 @@ namespace Ipheidi.Droid
 			
 			// aapt resource value: 0x7f0c0027
 			public const int mini = 2131492903;
+			
+			// aapt resource value: 0x7f0c00b4
+			public const int minute = 2131493044;
 			
 			// aapt resource value: 0x7f0c008c
 			public const int mr_art = 2131493004;
@@ -3268,6 +3277,9 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c0071
 			public const int search_voice_btn = 2131492977;
 			
+			// aapt resource value: 0x7f0c00b5
+			public const int seconds = 2131493045;
+			
 			// aapt resource value: 0x7f0c0072
 			public const int select_dialog_listview = 2131492978;
 			
@@ -3352,6 +3364,9 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c00a5
 			public const int time = 2131493029;
 			
+			// aapt resource value: 0x7f0c00b2
+			public const int timePicker = 2131493042;
+			
 			// aapt resource value: 0x7f0c004a
 			public const int title = 2131492938;
 			
@@ -3361,8 +3376,8 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c0057
 			public const int title_template = 2131492951;
 			
-			// aapt resource value: 0x7f0c00b2
-			public const int toolbar = 2131493042;
+			// aapt resource value: 0x7f0c00b7
+			public const int toolbar = 2131493047;
 			
 			// aapt resource value: 0x7f0c001e
 			public const int top = 2131492894;
@@ -3388,8 +3403,8 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f0c0002
 			public const int view_offset_helper = 2131492866;
 			
-			// aapt resource value: 0x7f0c00b3
-			public const int visible = 2131493043;
+			// aapt resource value: 0x7f0c00b8
+			public const int visible = 2131493048;
 			
 			// aapt resource value: 0x7f0c0092
 			public const int volume_item_container = 2131493010;
@@ -3689,7 +3704,13 @@ namespace Ipheidi.Droid
 			public const int Tabbar = 2130903107;
 			
 			// aapt resource value: 0x7f030044
-			public const int Toolbar = 2130903108;
+			public const int time_picker_dialog = 2130903108;
+			
+			// aapt resource value: 0x7f030045
+			public const int time_picker_widget = 2130903109;
+			
+			// aapt resource value: 0x7f030046
+			public const int Toolbar = 2130903110;
 			
 			static Layout()
 			{

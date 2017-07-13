@@ -3,7 +3,7 @@
 	xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi"
 	xmlns     ="http://xamarin.com/schemas/2014/forms"
 	xmlns:x    ="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class    ="Ipheidi.LoginPage">
+	x:Class    ="Ipheidi.SystemLoginPage">
 	<RelativeLayout
 		x:Name           ="mainLayout"
 		VerticalOptions  ="Fill"
@@ -35,27 +35,14 @@
 				x:Name           ="bodyLayout"
 				Spacing          ="10"
 				HorizontalOptions="Fill"
-				Margin           ="0,0,0,20">
-				<Picker
-					x:Name="urlPicker" />
-				<StackLayout
-					x:Name ="registeredUserLayout"
-					Spacing="10">
-					<Picker
-						x:Name="userPicker" />
-					<Button
-						x:Name         ="btnOtherAccount"
-						Clicked        ="OnOtherAccountButtonClicked"
-						BackgroundColor="Transparent"
-						BorderWidth    ="1"
-						BorderColor    ="Silver"
-						Margin         ="0,0,0,30" />
-				</StackLayout>
+				Margin           ="0,20,0,20">
 				<StackLayout
 					x:Name     ="entryLayout"
 					Orientation="Horizontal"
 					Margin     ="0,0,0,20">
+
 					<StackLayout
+						IsVisible="false"
 						Spacing="10"
 						x:Name ="leftEntryLayout">
 						<Label
@@ -65,23 +52,18 @@
 							x:Name         ="lblPassword"
 							VerticalOptions="Center" />
 					</StackLayout>
+
 					<StackLayout
-						Spacing="10"
-						x:Name ="rightEntryLayout">
+						Spacing          ="10"
+						x:Name           ="rightEntryLayout"
+						HorizontalOptions="FillAndExpand">
 						<Entry
-							x:Name="usernameEntry" />
+							x:Name           ="usernameEntry"
+							HorizontalOptions="FillAndExpand" />
 						<Entry
-							x:Name    ="passwordEntry"
-							IsPassword="true" />
-						<StackLayout
-							Orientation="Horizontal">
-							<Label
-								x:Name         ="lblRemember"
-								VerticalOptions="Center" />
-							<Switch
-								HorizontalOptions="EndAndExpand"
-								x:Name           ="rememberSwitch" />
-						</StackLayout>
+							x:Name           ="passwordEntry"
+							IsPassword       ="true"
+							HorizontalOptions="FillAndExpand" />
 					</StackLayout>
 				</StackLayout>
 				<StackLayout
@@ -89,12 +71,6 @@
 					<Button
 						x:Name="btnLogin"
 						Margin="0,0,0,20" />
-					<Button
-						x:Name         ="btnBackToFirstPage"
-						BackgroundColor="Transparent"
-						BorderWidth    ="1"
-						BorderColor    ="Silver"
-						Margin         ="0,0,0,20" />
 				</StackLayout>
 			</StackLayout>
 		</ScrollView>

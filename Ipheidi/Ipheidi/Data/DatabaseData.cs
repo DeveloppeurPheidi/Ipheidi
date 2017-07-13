@@ -13,7 +13,7 @@ namespace Ipheidi
 		}
 
 		[JsonIgnore]
-		public string Domain { get; set; }
+		public string ServerNoseq { get; set; }
 
 		[JsonIgnore]
 		public string User { get; set; }

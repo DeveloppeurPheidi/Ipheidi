@@ -491,15 +491,15 @@ namespace Ipheidi.Resources {
             }
         }
         
-        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader {
+        public static string Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message {
             get {
-                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader", resourceCulture);
+                return ResourceManager.GetString("Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message", resourceCulture);
             }
         }
         
-        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle {
+        public static string Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title {
             get {
-                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle", resourceCulture);
+                return ResourceManager.GetString("Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title", resourceCulture);
             }
         }
         
@@ -701,9 +701,45 @@ namespace Ipheidi.Resources {
             }
         }
         
-        public static string _ {
+        public static string AccesGeofenceLabel {
             get {
-                return ResourceManager.GetString("", resourceCulture);
+                return ResourceManager.GetString("AccesGeofenceLabel", resourceCulture);
+            }
+        }
+        
+        public static string AccesGeofencePrivate {
+            get {
+                return ResourceManager.GetString("AccesGeofencePrivate", resourceCulture);
+            }
+        }
+        
+        public static string AccesGeofencePublic {
+            get {
+                return ResourceManager.GetString("AccesGeofencePublic", resourceCulture);
+            }
+        }
+        
+        public static string GeofencePublicBouton {
+            get {
+                return ResourceManager.GetString("GeofencePublicBouton", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_RendreGeofencePublic_Title {
+            get {
+                return ResourceManager.GetString("Alerte_RendreGeofencePublic_Title", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_RendreXGeofencePublic_Message {
+            get {
+                return ResourceManager.GetString("Alerte_RendreXGeofencePublic_Message", resourceCulture);
+            }
+        }
+        
+        public static string SuivantBouton {
+            get {
+                return ResourceManager.GetString("SuivantBouton", resourceCulture);
             }
         }
     }

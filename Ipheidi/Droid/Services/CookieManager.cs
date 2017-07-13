@@ -24,7 +24,7 @@ namespace Ipheidi.Droid
 		{
 			string cookieValue = cookie.Name + "=" + cookie.Value + ";" + cookie.Domain;
 			Android.Webkit.CookieManager.Instance.SetAcceptCookie(true);
-			Android.Webkit.CookieManager.Instance.SetCookie(App.Url, cookieValue);
+			Android.Webkit.CookieManager.Instance.SetCookie(App.CurrentServer.GetDefaultUrl(), cookieValue);
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace Ipheidi.Droid
 			{
 				// .GetCookie returns ALL cookies related to the URL as a single, long          
 				// string which we have to split and parse         
-				var allCookiesForUrl = Android.Webkit.CookieManager.Instance.GetCookie(App.Url);
+				var allCookiesForUrl = Android.Webkit.CookieManager.Instance.GetCookie(App.CurrentServer.GetDefaultUrl());
 
 				if (string.IsNullOrWhiteSpace(allCookiesForUrl))
 				{
@@ -92,7 +92,7 @@ namespace Ipheidi.Droid
 								Name = cookiePieces[0],
 								Value = cookiePieces[1],
 								Path = "/",
-								Domain = new Uri(App.Url).DnsSafeHost,
+								Domain = new Uri(App.CurrentServer.GetDefaultUrl()).DnsSafeHost,
 							};
 						}
 					}

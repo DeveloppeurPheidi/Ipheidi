@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -236,8 +236,8 @@ namespace Ipheidi
 				location.BatteryRemainingCharge = App.Battery.RemainingChargePercent;
 				location.PowerSource = App.Battery.PowerSource.Description();
 				location.PowerStatus = App.Battery.Status.Description();
-				location.User = App.Username;
-				location.Domain = App.Domain;
+				location.User = App.UserNoseq;
+				location.ServerNoseq = App.CurrentServer.Noseq;
 				location.Orientation = currentDistanceFilter;
 				if ((Math.Abs(location.Latitude - lastLocation.Latitude) > 0.0000001 || Math.Abs(location.Longitude - lastLocation.Longitude) > 0.0000001))
 				{

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -91,8 +91,8 @@ namespace Ipheidi.iOS
 									FilePath = filepath,
 									Field = pp["FIELD"],
 									QueryFieldValue = pp["NOSEQ"],
-									User = App.Username,
-									Domain = App.Domain
+									User = App.UserNoseq,
+									ServerNoseq = App.CurrentServer.Noseq
 								};
 								await DatabaseHelper.Database.SaveItemAsync(iu);
 							});
@@ -147,7 +147,7 @@ namespace Ipheidi.iOS
 			string p = "";
 			var dic = new Dictionary<string, string>();
 			var uploadId = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString("F0");
-			var url = "http://" + App.Domain + "/upload.ashx";
+			var url = App.CurrentServer.Address + "/upload.ashx";
 			var parameters = new Dictionary<string, string> { { "uploadID", uploadId } };
 
 			var timeout = new TimeSpan(0, 0, 240);

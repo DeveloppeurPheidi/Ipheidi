@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi"
+	xmlns     ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x    ="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class    ="Ipheidi.ServerLoginPage">
+	<ContentPage.Content>
+		<RelativeLayout
+			x:Name           ="mainLayout"
+			VerticalOptions  ="Fill"
+			HorizontalOptions="Fill">
+			<Image
+				x:Name                         ="demiCercle"
+				Source                         ="demi_cercle_vert.png"
+				Aspect                         ="Fill"
+				RelativeLayout.YConstraint     ="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.275,Constant=0}" />
+			<Image
+				Source                         ="logo.png"
+				RelativeLayout.YConstraint     ="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0,Constant=0}"
+				RelativeLayout.XConstraint     ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.375,Constant=0}"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=.25,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=.25,Constant=0}" />
+			<ScrollView
+				RelativeLayout.YConstraint     ="{ConstraintExpression Type=RelativeToView,ElementName=demiCercle,Property=Height,Factor=1.05,Constant=0}"
+				RelativeLayout.XConstraint     ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.05,Constant=0}"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=0.9,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.6,Constant=0}"
+				IsClippedToBounds              ="true"
+				VerticalOptions                ="Start"
+				Orientation                    ="Vertical"
+				x:Name                         ="scroll">
+				<StackLayout
+					VerticalOptions  ="FillAndExpand"
+					x:Name           ="bodyLayout"
+					Spacing          ="10"
+					HorizontalOptions="Fill"
+					Margin           ="0,20,0,20">
+					<Picker
+						x:Name="urlPicker" />
+					
+						<StackLayout
+							HorizontalOptions="FillAndExpand"
+							Spacing          ="10"
+							x:Name           ="entryLayout">
+							<Entry
+								x:Name           ="usernameEntry"
+								HorizontalOptions="FillAndExpand" />
+							<Entry
+								x:Name           ="passwordEntry"
+								HorizontalOptions="FillAndExpand"
+								IsPassword       ="true" />
+						</StackLayout>
+					<StackLayout
+						x:Name="bottomButtonLayout">
+						<Button
+							x:Name="btnLogin"
+							Margin="0,0,0,20" />
+					</StackLayout>
+				</StackLayout>
+			</ScrollView>
+			<local:AppLoadingView
+				x:Name                         ="AppLoadingView"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}" />
+		</RelativeLayout>
+	</ContentPage.Content>
+</ContentPage>

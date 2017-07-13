@@ -12,16 +12,17 @@ namespace Ipheidi
 	/// </summary>
 	public partial class GeofenceCreatePage : ContentPage
 	{
-		private Geofence Geofence;
-
+		private Geofence geofence;
+		private Label delayLabel;
+		private HMSTimePicker delayPicker;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceCreatePage"/> class.
 		/// </summary>
 		/// <param name="loc">Location.</param>
 		public GeofenceCreatePage(Location loc)
 		{
-			Geofence = new Geofence() { Latitude = loc.Latitude, Longitude = loc.Longitude };
-			Geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
+			geofence = new Geofence() { Latitude = loc.Latitude, Longitude = loc.Longitude };
+			geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
 			Initialize();
 		}
 
@@ -29,13 +30,12 @@ namespace Ipheidi
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceCreatePage"/> class.
 		/// </summary>
 		/// <param name="geofence">Geofence.</param>
-		public GeofenceCreatePage(Geofence geofence)
+		public GeofenceCreatePage(Geofence _geofence)
 		{
-			Geofence = geofence;
+			geofence = _geofence;
 			Title = AppResources.GeofenceCreatePageTitle;
 			Initialize();
-			nameEntry.Text = Geofence.Name;
-			secEntry.Text = Geofence.NotificationDelay + "";
+			nameEntry.Text = geofence.Name;
 		}
 
 		/// <summary>
@@ -51,10 +51,10 @@ namespace Ipheidi
 		/// </summary>
 		private void Initialize()
 		{
-			if (Geofence == null)
+			if (geofence == null)
 			{
 				var data = App.GeofenceManager.GetPendingGeofenceRequest();
-				Geofence = data ?? new Geofence() { Latitude = 0, Longitude = 0 };
+				geofence = data ?? new Geofence() { Latitude = 0, Longitude = 0 };
 			}
 
 			InitializeComponent();
@@ -68,21 +68,18 @@ namespace Ipheidi
 			notificationLabel.Text = AppResources.ActiverNotificationLabel;
 			enterActionLabel.Text = AppResources.ActionEntreeLabel;
 			exitActionLabel.Text = AppResources.ActionSortieLabel;
-			notificationDelaiLabel.Text = AppResources.DelaiNotificationLabel;
-			minEntry.Placeholder = AppResources.MinutesPlaceHolder;
-			secEntry.Placeholder = AppResources.SecondesPlaceHolder;
 			btnSave.Text = AppResources.EnregistrerBouton;
 			btnCancel.Text = AppResources.AnnulerBouton;
 
 
-			if (Geofence != null)
+			if (geofence != null)
 			{
-				entryLatitude.Text = Geofence.Latitude.ToString();
-				entryLongitude.Text = Geofence.Longitude.ToString();
+				entryLatitude.Text = geofence.Latitude.ToString();
+				entryLongitude.Text = geofence.Longitude.ToString();
 
 				btnMap.Clicked += (sender, e) =>
 				{
-					var loc = new Location() { Latitude = Geofence.Latitude, Longitude = Geofence.Longitude };
+					var loc = new Location() { Latitude = geofence.Latitude, Longitude = geofence.Longitude };
 					var map = new MapPage(loc);
 					Navigation.PushAsync(map);
 				};
@@ -92,12 +89,12 @@ namespace Ipheidi
 				{
 					if (!string.IsNullOrEmpty(nameEntry.Text))
 					{
-						Geofence.Name = nameEntry.Text;
-						Geofence.NotificationEnabled = switchNotification.IsToggled;
-						Geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
-						Geofence.User = App.Username;
-						Geofence.Domain = App.Domain;
-						App.GeofenceManager.AddGeofence(Geofence);
+						geofence.Name = nameEntry.Text;
+						geofence.NotificationEnabled = switchNotification.IsToggled;
+						geofence.Radius = ApplicationConst.DefaultGeofenceRadius;
+						geofence.User = App.UserNoseq;
+						geofence.ServerNoseq = App.ServerInfoList.First((arg) => App.ServerInfoNoseq == arg.Noseq).Domain;
+						App.GeofenceManager.AddGeofence(geofence);
 						Navigation.PopAsync();
 					}
 					else
@@ -133,11 +130,11 @@ namespace Ipheidi
 					double lat = 0;
 					if (double.TryParse(entryLatitude.Text, out lat))
 					{
-						Geofence.Latitude = lat;
+						geofence.Latitude = lat;
 					}
 					else
 					{
-						entryLatitude.Text = Geofence.Latitude.ToString();
+						entryLatitude.Text = geofence.Latitude.ToString();
 					}
 				};
 
@@ -146,11 +143,11 @@ namespace Ipheidi
 					double lon = 0;
 					if (double.TryParse(entryLongitude.Text, out lon))
 					{
-						Geofence.Longitude = lon;
+						geofence.Longitude = lon;
 					}
 					else
 					{
-						entryLongitude.Text = Geofence.Longitude.ToString();
+						entryLongitude.Text = geofence.Longitude.ToString();
 					}
 				};
 
@@ -174,9 +171,9 @@ namespace Ipheidi
 					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
 					if (EnterSoustypePicker.IsEnabled)
 					{
-						if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))
+						if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 						{
-							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == Geofence.EnterActionNoSeq).Description);
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
 						}
 						else
 						{
@@ -192,14 +189,14 @@ namespace Ipheidi
 					if (value != "")
 					{
 						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
-						if (Geofence.EnterActionNoSeq != action.NoSeq)
+						if (geofence.EnterActionNoSeq != action.NoSeq)
 						{
-							Geofence.EnterActionNoSeq = action.NoSeq;
+							geofence.EnterActionNoSeq = action.NoSeq;
 						}
 					}
 					else
 					{
-						Geofence.EnterActionNoSeq = "";
+						geofence.EnterActionNoSeq = "";
 					}
 				};
 
@@ -219,9 +216,9 @@ namespace Ipheidi
 					ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
 					if (ExitSoustypePicker.IsEnabled)
 					{
-						if (!string.IsNullOrEmpty(Geofence.ExitActionNoSeq))
+						if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
 						{
-							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == Geofence.ExitActionNoSeq).Description);
+							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == geofence.ExitActionNoSeq).Description);
 						}
 						else
 						{
@@ -237,36 +234,36 @@ namespace Ipheidi
 					if (value != "")
 					{
 						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
-						if (Geofence.ExitActionNoSeq != action.NoSeq)
+						if (geofence.ExitActionNoSeq != action.NoSeq)
 						{
-							Geofence.ExitActionNoSeq = action.NoSeq;
+							geofence.ExitActionNoSeq = action.NoSeq;
 						}
 					}
 					else
 					{
-						Geofence.ExitActionNoSeq = "";
+						geofence.ExitActionNoSeq = "";
 					}
 				};
 
 				string category = ActionManager.Null;
 
-				if (!string.IsNullOrEmpty(Geofence.EnterActionNoSeq))
+				if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
 				{
-					var enterAction = ActionManager.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					var enterAction = ActionManager.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
 					category = enterAction.Category;
 				}
 				EnterTypePicker.SelectedItem = category;
 
 				category = ActionManager.Null;
 
-				if (!string.IsNullOrEmpty(Geofence.ExitActionNoSeq))
+				if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
 				{
-					var exitAction = ActionManager.GetActionList().First(a => Geofence.EnterActionNoSeq == a.NoSeq);
+					var exitAction = ActionManager.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
 					category = exitAction.Category;
 				}
 				ExitTypePicker.SelectedItem = category;
 
-				EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
+				/*EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
 				{
 					uint m = 0;
 					uint s = 0;
@@ -289,36 +286,62 @@ namespace Ipheidi
 				};
 				minEntry.Unfocused += ev;
 				secEntry.Unfocused += ev;
-				secEntry.Text = ApplicationConst.DefaultGeofenceTriggerTime.ToString();
+				secEntry.Text = ApplicationConst.DefaultGeofenceTriggerTime.ToString();*/
 
-				entryRadius.Placeholder = AppResources.RayonPlaceHolder;
-				labelRadius.Text = AppResources.RayonLabel;
-				CheckEntryRadius();
-				entryRadius.Unfocused += (sender, e) => CheckEntryRadius();
-
-				accessLabel.Text = AppResources.AccesGeofenceLabel;
-				accessPicker.Items.Add(AppResources.AccesGeofencePrivate);
-				accessPicker.Items.Add(AppResources.AccesGeofencePublic);
-				accessPicker.SelectedIndexChanged += (sender, e) =>
+				delayLabel = new Label() { Text = AppResources.DelaiNotificationLabel, VerticalTextAlignment = TextAlignment.Center };
+				delayLayout.Children.Add(delayLabel);
+				var delaytp = new HMSTimePicker { HorizontalOptions = LayoutOptions.FillAndExpand };
+				try
 				{
-					Geofence.PublicFlag = accessPicker.SelectedItem.ToString() == AppResources.AccesGeofencePrivate ? 0 : 1;
+					delaytp.Time = new TimeSpan(0, ApplicationConst.DefaultGeofenceTriggerTime / 60, ApplicationConst.DefaultGeofenceTriggerTime % 60);
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e.Message);
+				}
+				delaytp.Unfocused += (sender, e) =>
+				{
+					var time = (uint)delaytp.Time.TotalSeconds;
+					if (time > uint.MaxValue)
+					{
+						time = uint.MaxValue;
+					}
+					if (time != geofence.NotificationDelay)
+					{
+						geofence.NotificationDelay = time;
+					}
 				};
-				accessPicker.SelectedItem = AppResources.AccesGeofencePrivate;
+				delayLayout.Children.Add(delaytp);
+
+				labelRadius.Text = AppResources.RayonLabel;
+				foreach (var rad in GeofenceManager.GeofenceRadius)
+				{
+					radiusPicker.Items.Add(rad.ToString());
+				}
+				radiusPicker.SelectedIndexChanged += (sender, e) => CheckEntryRadius();
+				radiusPicker.SelectedItem = ApplicationConst.DefaultGeofenceRadius.ToString();
+
+				ChoiceSwitch accesSwitch = new ChoiceSwitch() { LeftOption = AppResources.AccesGeofencePrivate, RightOption = AppResources.AccesGeofencePublic };
+
+				accesSwitch.SelectedIndexChanged += (sender, e) =>
+				{
+					geofence.PublicFlag = accesSwitch.SelectedIndex;
+				};
+				AccesLayout.Children.Add(accesSwitch);
 			}
 		}
 		protected override void OnAppearing()
 		{
-			AdjustWidth(this.Width);
 			base.OnAppearing();
 		}
 
 		void CheckEntryRadius()
 		{
-			double val = Geofence.Radius;
-			double.TryParse(entryRadius.Text, out val);
-			val = val <= 0 ? Geofence.Radius : val > ApplicationConst.GeofenceMaxRadius ? ApplicationConst.GeofenceMaxRadius : val;
-			entryRadius.Text = val.ToString();
-			Geofence.Radius = val;
+			double val = geofence.Radius;
+			double.TryParse(radiusPicker.SelectedItem.ToString(), out val);
+			val = val <= 0 ? geofence.Radius : val > ApplicationConst.GeofenceMaxRadius ? ApplicationConst.GeofenceMaxRadius : val;
+			radiusPicker.SelectedItem = val.ToString();
+			geofence.Radius = val;
 		}
 		/// <summary>
 		/// On size allocation.
@@ -333,23 +356,16 @@ namespace Ipheidi
 				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			labelLatitude.HeightRequest = entryLatitude.Height;
-			labelRadius.HeightRequest = entryRadius.Height;
+			labelRadius.HeightRequest = radiusPicker.Height;
 			labelLongitude.HeightRequest = entryLongitude.Height;
-			AdjustWidth(width);
-			base.OnSizeAllocated(width, height);
-		}
-
-		void AdjustWidth(double width)
-		{
-			double size = width * 0.5 - lblDelay2.Width - mainLayout.Padding.Left;
-			minEntry.WidthRequest = size;
-			secEntry.WidthRequest = size;
-
+			double size = (btnLayout.Width - btnLayout.Spacing) * 0.5;
 			btnSave.WidthRequest = size;
 			btnCancel.WidthRequest = size;
 
 			typeEnterLayout.WidthRequest = typeLayout.Width / 2;
 			typeExitLayout.WidthRequest = typeLayout.Width / 2;
+			base.OnSizeAllocated(width, height);
 		}
+
 	}
 }

@@ -77,10 +77,15 @@ namespace Ipheidi
 		{
 			if (!ListeningToHostServerState)
 			{
+				ListeningToHostServerState = true;
 				if (!IsHostReachable())
 				{
 					ListenToHostServerState();
 					OnHostServerStateUpdate(NetworkState.NotReachable);
+				}
+				else
+				{
+					ListeningToHostServerState = false;
 				}
 			}
 		}

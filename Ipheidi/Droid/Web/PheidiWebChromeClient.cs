@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.App;
@@ -162,8 +162,8 @@ namespace Ipheidi.Droid
 							FileName = _file.Name,
 							Field = FileChooserPheidiParams["FIELD"],
 							QueryFieldValue = FileChooserPheidiParams["QUERYFIELDVALUE"],
-							Domain = App.Domain,
-							User = App.Username
+							ServerNoseq = App.CurrentServer.Noseq,
+							User = App.UserNoseq
 						};
 						await DatabaseHelper.Database.SaveItemAsync(iu);
 					});

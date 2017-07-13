@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
@@ -50,7 +50,7 @@ namespace Ipheidi
 		public Task<List<T>> GetUserSpecificItems<T>() where T : DatabaseData, new()
 		{
 			CheckIfTableIsValid<T>();
-			return database.Table<T>().Where(l => l.Domain == App.Domain && l.User == App.Username).ToListAsync();
+			return database.Table<T>().Where(l => l.ServerNoseq == App.ServerInfoNoseq && l.User == App.UserNoseq).ToListAsync();
 		}
 
 		/// <summary>

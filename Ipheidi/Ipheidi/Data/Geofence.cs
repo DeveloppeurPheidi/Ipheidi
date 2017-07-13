@@ -272,6 +272,14 @@ namespace Ipheidi
 			return (degree * Math.PI) / 180;
 		}
 
+		/// <summary>
+		/// Sets the IsInside property.
+		/// </summary>
+		/// <param name="isInside">If set to <c>true</c> is inside.</param>
+		public void SetIsInside(bool isInside)
+		{
+			IsInside = isInside;
+		}
 
 	}
 }

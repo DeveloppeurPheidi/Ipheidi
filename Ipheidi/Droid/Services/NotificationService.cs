@@ -58,7 +58,7 @@ namespace Ipheidi.Droid
 			Activity mcontext = (Activity)Xamarin.Forms.Forms.Context;
 			var tcs = new TaskCompletionSource<MessageResult>();
 
-			var builder = new AlertDialog.Builder(mcontext,Resource.Style.AppCompatDialogStyle);
+			var builder = new AlertDialog.Builder(mcontext);//,Resource.Style.AppCompatDialogStyle);
 			builder.SetTitle(title);
 			builder.SetMessage(message);
 

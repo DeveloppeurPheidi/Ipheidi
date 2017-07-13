@@ -57,32 +57,54 @@ namespace Ipheidi
 			lblHostServerState.IsVisible = true;
 			lblNetworkState.IsVisible = true;
 #endif
+
+			if (App.ServerInfoList.Count == 1)
+			{
+				deleteAllAccountBtn.IsVisible = false;
+			}
 		}
+
 
 		/// <summary>
 		/// Forgets the account.
 		/// </summary>
-		async void ForgetAccountButtonClicked(object sender, System.EventArgs e)
+		void ForgetAccountButtonClicked(object sender, System.EventArgs e)
 		{
-
-			if (await DisplayAlert(AppResources.OublierCompteBouton, AppResources.Alerte_OublierCompteMessage, AppResources.Oui, AppResources.Non))
+			System.Action onConfirm = () =>
 			{
-				App.CredentialsManager.DeleteUser(App.Username);
-				App.Username = "";
-			}
+				if (App.ServerInfoList.Count > 1)
+				{
+					App.CredentialsManager.DeleteUser(App.UserNoseq);
+				}
+				else
+				{
+					App.CredentialsManager.DeleteCredentials();
+					App.CredentialsManager.DeleteSystemCredentials();
+					App.UserNoseq = "";
+				}
+				App.UserNoseq = "";
+
+				App.Instance.Logout();
+			};
+
+			App.NotificationManager.DisplayAlert(AppResources.Alerte_OublierCompteMessage, AppResources.OublierCompteBouton, AppResources.Oui, AppResources.Non, onConfirm, () => { });
+
 		}
 
 		/// <summary>
 		/// Deletes all user.
 		/// </summary>
-		async void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
+		void DeleteAllUserButtonClicked(object sender, System.EventArgs e)
 		{
-
-			if (await DisplayAlert(AppResources.OublierTousLesComptesBouton, AppResources.Alerte_OublierTousLesComptesMessage, AppResources.Oui, AppResources.Non))
+			System.Action onConfirm = () =>
 			{
 				App.CredentialsManager.DeleteCredentials();
-				App.Username = "";
-			}
+				App.CredentialsManager.DeleteSystemCredentials();
+				App.UserNoseq = "";
+				App.Instance.Logout();
+			};
+			App.NotificationManager.DisplayAlert(AppResources.Alerte_OublierTousLesComptesMessage, AppResources.OublierTousLesComptesBouton, AppResources.Oui, AppResources.Non, onConfirm, () => { });
+
 		}
 
 		/// <summary>

@@ -92,7 +92,7 @@ namespace Ipheidi.iOS
 										Debug.WriteLine("Reponse:" + responseContent);
 										try
 										{
-											answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
+											answer = PheidiNetworkManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
 										}
 										catch (Exception e)
 										{
@@ -262,7 +262,7 @@ namespace Ipheidi.iOS
 										Debug.WriteLine("Reponse:" + responseContent);
 										try
 										{
-											answer = ActionManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
+											answer = PheidiNetworkManager.GetFields(responseContent)[0][dic["FIELD"]] as string;
 										}
 										catch (Exception e)
 										{
@@ -305,12 +305,13 @@ namespace Ipheidi.iOS
 													Latitude = location.Latitude,
 													Longitude = location.Longitude,
 													NotificationEnabled = true,
-													User = App.Username,
-													Domain = App.Domain,
+													User = App.UserNoseq,
+													ServerNoseq = App.CurrentServer.Domain,
 													NotificationDelay = ApplicationConst.DefaultGeofenceTriggerTime,
 													Radius =ApplicationConst.DefaultGeofenceRadius,
 													Name = val
 												};
+												geo.SetIsInside(true);
 												if (pp.ContainsKey("ENTERACTIONNOSEQ"))
 												{
 													geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];

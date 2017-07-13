@@ -491,15 +491,15 @@ namespace Ipheidi.Resources {
             }
         }
         
-        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader {
+        public static string Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message {
             get {
-                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationHeader", resourceCulture);
+                return ResourceManager.GetString("Alerte_PlusieurLieuxPositionNouvelleLocalisation_Message", resourceCulture);
             }
         }
         
-        public static string MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle {
+        public static string Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title {
             get {
-                return ResourceManager.GetString("MessagePage_PlusieurLieuxPositionNouvelleLocalisationTitle", resourceCulture);
+                return ResourceManager.GetString("Alerte_PlusieurLieuxPositionNouvelleLocalisation_Title", resourceCulture);
             }
         }
         
@@ -734,6 +734,24 @@ namespace Ipheidi.Resources {
         public static string Alerte_RendreXGeofencePublic_Message {
             get {
                 return ResourceManager.GetString("Alerte_RendreXGeofencePublic_Message", resourceCulture);
+            }
+        }
+        
+        public static string SuivantBouton {
+            get {
+                return ResourceManager.GetString("SuivantBouton", resourceCulture);
+            }
+        }
+        
+        public static string ContinuerBouton {
+            get {
+                return ResourceManager.GetString("ContinuerBouton", resourceCulture);
+            }
+        }
+        
+        public static string Erreur_Title {
+            get {
+                return ResourceManager.GetString("Erreur_Title", resourceCulture);
             }
         }
     }

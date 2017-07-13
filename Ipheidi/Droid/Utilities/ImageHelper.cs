@@ -41,7 +41,7 @@ namespace Ipheidi.Droid
 			string p = "";
 			var dic = new Dictionary<string, string>();
 			var uploadId = (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString("F0");
-			var url = "http://" + App.Domain + "/upload.ashx";
+			var url = App.CurrentServer.Address + "/upload.ashx";
 			var parameters = new Dictionary<string, string> { { "uploadID", uploadId } };
 
 			var timeout = new TimeSpan(0, 0, 240);

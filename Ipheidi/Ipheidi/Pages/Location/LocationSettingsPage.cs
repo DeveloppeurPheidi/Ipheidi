@@ -10,7 +10,7 @@ namespace Ipheidi
 
 		StackLayout layoutInterval;
 		Label labelInterval;
-		Entry entryInterval;
+		HMSTimePicker timePickerInterval;
 
 		StackLayout layoutToggleLocalisation;
 		Label labelToggleLocalisation;
@@ -51,7 +51,7 @@ namespace Ipheidi
 			//Precision Picker
 			precisionLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
 			precisionLabel = new Label() { VerticalTextAlignment = TextAlignment.Center, Text = AppResources.LocalisationPrecisionLabel };
-			precisionPicker = new Picker() {};
+			precisionPicker = new Picker() { };
 			foreach (var val in App.LocationManager.PrecisionsList)
 			{
 				precisionPicker.Items.Add(val.Key);
@@ -79,18 +79,16 @@ namespace Ipheidi
 			//Interval
 			layoutInterval = new StackLayout() { Orientation = StackOrientation.Horizontal };
 			labelInterval = new Label() { VerticalTextAlignment = TextAlignment.Center, Text = AppResources.IntervalLocalisationLabel };
-			entryInterval = new Entry() { Placeholder = AppResources.SecondesPlaceHolder, Text = LocationManager.IntervaleDataSending.ToString() };
-			entryInterval.Unfocused += (sender, e) =>
+		
+			int sec = LocationManager.IntervaleDataSending ;
+			timePickerInterval = new HMSTimePicker() { Time = new TimeSpan(0, 0, sec)};
+			timePickerInterval.Unfocused += (sender, e) =>
 			{
-				uint s = 30;
-				uint.TryParse(entryInterval.Text, out s);
-				s = s < 1 ? 1 : s > int.MaxValue ? int.MaxValue : s;
-				entryInterval.Text = s + "";
-				LocationManager.IntervaleDataSending = (int)s;
+				LocationManager.IntervaleDataSending = (int)timePickerInterval.Time.TotalSeconds;
 			};
 
 			layoutInterval.Children.Add(labelInterval);
-			layoutInterval.Children.Add(entryInterval);
+			layoutInterval.Children.Add(timePickerInterval);
 			mainLayout.Children.Add(layoutInterval);
 			mainLayout.BackgroundColor = Color.White;
 			BackgroundColor = Color.Gray;
@@ -104,7 +102,7 @@ namespace Ipheidi
 			double w = precisionLayout.Width / 2;
 			precisionLabel.WidthRequest = w;
 			precisionPicker.WidthRequest = w;
-			entryInterval.WidthRequest = w;
+			timePickerInterval.WidthRequest = w;
 			labelInterval.WidthRequest = w;
 		}
 	}
