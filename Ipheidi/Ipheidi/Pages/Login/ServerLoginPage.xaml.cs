@@ -19,7 +19,7 @@ namespace Ipheidi
 
 	public partial class ServerLoginPage : ContentPage
 	{
-
+		bool HasBackButton = true;
 		PheidiPicker languePicker = new PheidiPicker();
 		BoxView FooterLayout = new BoxView();
 		BoxView FooterLayoutBorder = new BoxView();
@@ -33,6 +33,14 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 			InitializeComponent();
 			EntriesVisible(false);
+
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				btnBack.TextColor = App.ColorPrimary;
+				btnBack.Clicked += (sender, e) => OnBackButtonPressed();
+				btnBack.IsVisible = HasBackButton;
+				btnBack.Text = AppResources.RetourBouton;
+			}
 
 			btnLogin.Clicked += (sender, e) =>
 			{
@@ -241,10 +249,29 @@ namespace Ipheidi
 			base.OnDisappearing();
 		}
 
+		protected override bool OnBackButtonPressed()
+		{
+			if (HasBackButton)
+			{
+				Navigation.PopAsync();
+			}
+			return true;
+		}
+
 
 		protected override void OnAppearing()
 		{
-
+			if (languePicker != null)
+			{
+				foreach (var lang in ApplicationConst.Langues)
+				{
+					languePicker.Items.Add(lang.Key);
+					if (lang.Value == App.Language)
+					{
+						languePicker.SelectedItem = lang.Key;
+					}
+				}
+			}
 			base.OnAppearing();
 		}
 

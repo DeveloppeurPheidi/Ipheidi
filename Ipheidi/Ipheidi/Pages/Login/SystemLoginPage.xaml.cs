@@ -158,6 +158,17 @@ namespace Ipheidi
 
 		protected override void OnAppearing()
 		{
+			if (languePicker != null)
+			{
+				foreach (var lang in ApplicationConst.Langues)
+				{
+					languePicker.Items.Add(lang.Key);
+					if (lang.Value == App.Language)
+					{
+						languePicker.SelectedItem = lang.Key;
+					}
+				}
+			}
 			base.OnAppearing();
 		}
 		protected override void OnDisappearing()

@@ -57,6 +57,13 @@
 						<Button
 							x:Name="btnLogin"
 							Margin="0,0,0,20" />
+						<Button
+							x:Name         ="btnBack"
+							BackgroundColor="Transparent"
+							IsVisible      ="false"
+							BorderWidth    ="1"
+							BorderColor    ="Silver"
+							Margin         ="0,0,0,20" />
 					</StackLayout>
 				</StackLayout>
 			</ScrollView>

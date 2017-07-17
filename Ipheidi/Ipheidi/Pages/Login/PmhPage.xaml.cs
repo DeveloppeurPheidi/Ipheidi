@@ -8,14 +8,27 @@ namespace Ipheidi
 {
 	public partial class PmhPage : ContentPage
 	{
+		PheidiPicker languePicker = new PheidiPicker();
+		BoxView FooterLayout = new BoxView();
+		BoxView FooterLayoutBorder = new BoxView();
+		Label FooterLabel = new Label();
+		bool HasBackButton = false;
 		string noseq = "";
-		public PmhPage()
+		public PmhPage(bool hasBackButton = true)
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			foreach (var pmh in App.PMH)
 			{
 				pmhPicker.Items.Add(pmh.Key);
+			}
+			HasBackButton = hasBackButton;
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				btnBack.TextColor = App.ColorPrimary;
+				btnBack.Clicked += (sender, e) => OnBackButtonPressed();
+				btnBack.IsVisible = hasBackButton;
+				btnBack.Text = AppResources.RetourBouton;
 			}
 			pmhPicker.SelectedIndexChanged += (sender, e) =>
 			{
@@ -38,7 +51,7 @@ namespace Ipheidi
 							{
 								App.Instance.GetToApplication();
 
-//CRASH SUR ANDROID, https://bugzilla.xamarin.com/show_bug.cgi?id=53179
+								//CRASH SUR ANDROID, https://bugzilla.xamarin.com/show_bug.cgi?id=53179
 								if (Device.RuntimePlatform != Device.Android)
 								{
 									Navigation.RemovePage(this);
@@ -62,6 +75,15 @@ namespace Ipheidi
 		{
 			base.OnSizeAllocated(width, height);
 			bottomButtonLayout.Padding = new Thickness(width * 0.1, 0);
+		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			if (HasBackButton)
+			{
+				Navigation.PopAsync();
+			}
+			return true;
 		}
 	}
 }
