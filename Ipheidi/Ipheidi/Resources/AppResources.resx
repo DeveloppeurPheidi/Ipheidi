@@ -254,7 +254,7 @@
 	</data>
 	<data
 		name="RegenererBrowserBouton">
-		<value>Regénérer le navigateur</value>
+		<value>Regénérer la page principale</value>
 	</data>
 	<data
 		name="TransfertDonneesWifiLabel">
@@ -487,5 +487,9 @@
 	<data
 		name="Erreur_Title">
 		<value>Erreur</value>
+	</data>
+	<data
+		name="SelectAdresse">
+		<value>Sélectionnez une adresse</value>
 	</data>
 </root>

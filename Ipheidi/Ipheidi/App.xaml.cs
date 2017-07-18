@@ -353,10 +353,18 @@ namespace Ipheidi
 								{
 									App.CredentialsManager.DeleteUser(credentials.Key);
 								}
+								else
+								{
+									UserNoseq = credentials.Key;
+								}
 							}
 							else
 							{
 								answer = await PheidiNetworkManager.UserLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"], false);
+								if (answer == PheidiNetworkManager.GoodResult)
+								{
+									UserNoseq = SystemCredentials.Key;
+								}
 							}
 							autologging = false;
 						});

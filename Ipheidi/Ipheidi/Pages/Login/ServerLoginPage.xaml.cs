@@ -65,10 +65,18 @@ namespace Ipheidi
 							{
 								var credentials = App.Credentials.First((arg) => arg.Value["SystemCredentialsNoseq"] == App.SystemCredentials.Key && arg.Value["ServerNoseq"] == App.ServerInfoNoseq);
 								s = await PheidiNetworkManager.UserLogin(credentials.Value["Username"], credentials.Value["Password"], false);
+								if (s == PheidiNetworkManager.GoodResult)
+								{
+									App.UserNoseq = credentials.Key;
+								}
 							}
 							else
 							{
 								s = await PheidiNetworkManager.UserLogin(App.SystemCredentials.Value["Username"], App.SystemCredentials.Value["Password"], false);
+								if (s == PheidiNetworkManager.GoodResult)
+								{
+									App.UserNoseq = App.SystemCredentials.Key;
+								}
 							}
 
 							if (s == AppResources.Erreur_MauvaisEmailOuMdp)
@@ -113,7 +121,7 @@ namespace Ipheidi
 				urlPicker.Items.Add(server.Domain);
 			}
 
-			urlPicker.Title = "Sélectionnez une adresse";
+			urlPicker.Title = AppResources.SelectAdresse;
 			urlPicker.SelectedIndexChanged += (sender, e) =>
 			{
 				string item = urlPicker.SelectedItem.ToString();
@@ -126,6 +134,9 @@ namespace Ipheidi
 			{
 				urlPicker.SelectedIndex = urlPicker.Items.IndexOf(App.CurrentServer.Domain);
 			}
+
+			urlPicker.SelectedIndex = urlPicker.SelectedIndex >= 0 ? urlPicker.SelectedIndex : 0;
+
 
 
 
@@ -177,6 +188,8 @@ namespace Ipheidi
 					usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
 					passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
 					btnLogin.Text = AppResources.ContinuerBouton;
+					btnBack.Text = AppResources.RetourBouton;
+					urlPicker.Title = AppResources.SelectAdresse;
 					FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
 				};
 
@@ -265,7 +278,6 @@ namespace Ipheidi
 			{
 				foreach (var lang in ApplicationConst.Langues)
 				{
-					languePicker.Items.Add(lang.Key);
 					if (lang.Value == App.Language)
 					{
 						languePicker.SelectedItem = lang.Key;

@@ -162,7 +162,6 @@ namespace Ipheidi
 			{
 				foreach (var lang in ApplicationConst.Langues)
 				{
-					languePicker.Items.Add(lang.Key);
 					if (lang.Value == App.Language)
 					{
 						languePicker.SelectedItem = lang.Key;

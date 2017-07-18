@@ -731,15 +731,33 @@ namespace Ipheidi.Resources {
             }
         }
         
+        public static string SuivantBouton {
+            get {
+                return ResourceManager.GetString("SuivantBouton", resourceCulture);
+            }
+        }
+        
+        public static string ContinuerBouton {
+            get {
+                return ResourceManager.GetString("ContinuerBouton", resourceCulture);
+            }
+        }
+        
         public static string Alerte_RendreXGeofencePublic_Message {
             get {
                 return ResourceManager.GetString("Alerte_RendreXGeofencePublic_Message", resourceCulture);
             }
         }
         
-        public static string SuivantBouton {
+        public static string Erreur_Title {
             get {
-                return ResourceManager.GetString("SuivantBouton", resourceCulture);
+                return ResourceManager.GetString("Erreur_Title", resourceCulture);
+            }
+        }
+        
+        public static string SelectAdresse {
+            get {
+                return ResourceManager.GetString("SelectAdresse", resourceCulture);
             }
         }
     }

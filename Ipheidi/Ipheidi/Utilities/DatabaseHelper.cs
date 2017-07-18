@@ -169,17 +169,19 @@ namespace Ipheidi
 						database.DropTableAsync<T>().Wait();
 						Debug.WriteLine("Dropped Table " + typeof(T));
 					}
-					finally
+					catch (Exception e)
 					{
-						database.CreateTableAsync<T>().Wait();
-						if (list.Contains(item))
-						{
-							list.Remove(item);
-						}
-
-						database.InsertAllAsync(list);
-						Debug.WriteLine("Created Table " + typeof(T));
+						Debug.WriteLine(e.Message);
 					}
+					database.CreateTableAsync<T>().Wait();
+					if (list.Contains(item))
+					{
+						list.Remove(item);
+					}
+
+					database.InsertAllAsync(list);
+					Debug.WriteLine("Created Table " + typeof(T));
+
 				}
 			}
 		}

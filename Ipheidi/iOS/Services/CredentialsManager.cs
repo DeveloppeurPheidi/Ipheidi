@@ -70,7 +70,11 @@ namespace Ipheidi.iOS
 		/// <param name="username">Username.</param>
 		public void DeleteUser(string username)
 		{
-			AccountStore.Create().Delete(AccountStore.Create().FindAccountsForService(App.AppName).Where(a => a.Username == username).FirstOrDefault(), App.AppName);
+			var user = AccountStore.Create().FindAccountsForService(App.AppName).FirstOrDefault(a => a.Username == username);
+			if (user != null)
+			{
+				AccountStore.Create().Delete(user, App.AppName);
+			}
 		}
 
 		/// <summary>
@@ -97,7 +101,7 @@ namespace Ipheidi.iOS
 
 		public KeyValuePair<string, Dictionary<string, string>> GetSystemCredentials()
 		{
-			KeyValuePair<string, Dictionary<string, string>> credentials = new KeyValuePair<string, Dictionary<string, string>>("",null);
+			KeyValuePair<string, Dictionary<string, string>> credentials = new KeyValuePair<string, Dictionary<string, string>>("", null);
 
 			foreach (var account in AccountStore.Create().FindAccountsForService(App.AppName))
 			{

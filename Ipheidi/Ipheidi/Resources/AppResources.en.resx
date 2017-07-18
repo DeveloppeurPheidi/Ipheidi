@@ -485,4 +485,5 @@
 		<value>Do you really want to set "{0}" as a public place for other users?</value>
 	</data>
 	<data name="Erreur_Title"><value>Error</value></data>
+	<data name="SelectAdresse"><value>Pick an address</value></data>
 </root>

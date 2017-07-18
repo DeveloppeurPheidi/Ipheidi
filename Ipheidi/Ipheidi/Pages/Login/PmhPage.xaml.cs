@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
 using System.Threading.Tasks;
 using Ipheidi.Resources;
 using Xamarin.Forms;
@@ -49,13 +51,22 @@ namespace Ipheidi
 						{
 							Device.BeginInvokeOnMainThread(() =>
 							{
-								App.Instance.GetToApplication();
+								
+
 
 								//CRASH SUR ANDROID, https://bugzilla.xamarin.com/show_bug.cgi?id=53179
 								if (Device.RuntimePlatform != Device.Android)
 								{
+									App.Instance.GetToApplication();
 									Navigation.RemovePage(this);
 								}
+								//Work Around
+								else
+								{
+									Navigation.PopAsync();
+									App.Instance.GetToApplication();
+								}
+
 							});
 						}
 						else
@@ -67,8 +78,79 @@ namespace Ipheidi
 				});
 			};
 			btnContinue.Text = AppResources.ContinuerBouton;
-
+			SetFooter();
+			mainLayout.RaiseChild(AppLoadingView);
 			AppLoadingView.IsVisible = false;
+		}
+
+		/// <summary>
+		/// Sets the footer.
+		/// </summary>
+		void SetFooter()
+		{
+			if (!mainLayout.Children.Contains(languePicker))
+			{
+				string currentlanguage = "";
+				foreach (var lang in ApplicationConst.Langues)
+				{
+					languePicker.Items.Add(lang.Key);
+					if (lang.Value == App.Language)
+					{
+						currentlanguage = lang.Key;
+					}
+				}
+				languePicker.SelectedItem = currentlanguage != "" ? currentlanguage : languePicker.Items[0];
+				languePicker.SelectedIndexChanged += (sender, e) =>
+				{
+					App.Language = languePicker.SelectedItem.ToString().Substring(0, 2).ToLower();
+					App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
+					var languageCookie = new Cookie() { Name = "language", Domain = App.CurrentServer.Domain, Value = App.Language };
+					App.CookieManager.AddCookie(languageCookie);
+					btnContinue.Text = AppResources.ContinuerBouton;
+					btnBack.Text = AppResources.RetourBouton;
+					FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
+				};
+
+				FooterLayout.BackgroundColor = App.ColorPrimary;
+				FooterLayoutBorder.BackgroundColor = App.ColorDark;
+				FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
+				FooterLabel.TextColor = App.ColorDark;//Color.FromRgba(1.0,1.0,1.0,0.5);
+				FooterLabel.FontSize *= 0.75;
+				languePicker.BackgroundColor = App.ColorDark;//Color.FromRgba(0.0, 0.0, 0.0, 0.2);
+				languePicker.TextColor = App.ColorPrimary;
+				languePicker.HorizontalOptions = LayoutOptions.FillAndExpand;
+				languePicker.TextAlignment = TextAlignment.Center;
+
+				Func<RelativeLayout, double> getpickerWidth = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Width;
+				Func<RelativeLayout, double> getpickerHeight = (parent) => languePicker.Measure(parent.Width, parent.Height).Request.Height;
+
+				double space = 10;
+				mainLayout.Children.Add(languePicker,
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.75 - space; }),
+										Constraint.RelativeToParent((parent) => { return parent.Height - 5 - getpickerHeight(parent); }),
+									Constraint.RelativeToParent((parent) => { return parent.Width * 0.25; }));
+
+				mainLayout.Children.Add(FooterLayoutBorder,
+										Constraint.RelativeToParent((parent) => { return 0; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, view) => { return view.Y - 6; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, View) => { return View.Height + 11; }));
+
+				mainLayout.Children.Add(FooterLayout,
+										Constraint.RelativeToParent((parent) => { return 0; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, view) => { return view.Y - 5; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width; }),
+										Constraint.RelativeToView(languePicker, (RelativeLayout, View) => { return View.Height + 10; }));
+
+
+				mainLayout.Children.Add(FooterLabel,
+										Constraint.RelativeToParent((parent) => { return space; }),
+										Constraint.RelativeToView(FooterLayout, (RelativeLayout, view) => { return view.Y; }),
+										Constraint.RelativeToParent((parent) => { return parent.Width * 0.75 - 2 * space; }),
+										Constraint.RelativeToView(FooterLayout, (RelativeLayout, View) => { return View.Height; }));
+
+				mainLayout.RaiseChild(languePicker);
+			}
 		}
 
 		protected override void OnSizeAllocated(double width, double height)
@@ -84,6 +166,22 @@ namespace Ipheidi
 				Navigation.PopAsync();
 			}
 			return true;
+		}
+
+
+		protected override void OnAppearing()
+		{
+			if (languePicker != null)
+			{
+				foreach (var lang in ApplicationConst.Langues)
+				{
+					if (lang.Value == App.Language)
+					{
+						languePicker.SelectedItem = lang.Key;
+					}
+				}
+			}
+			base.OnAppearing();
 		}
 	}
 }

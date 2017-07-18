@@ -290,18 +290,18 @@ namespace Ipheidi
 
 				delayLabel = new Label() { Text = AppResources.DelaiNotificationLabel, VerticalTextAlignment = TextAlignment.Center };
 				delayLayout.Children.Add(delayLabel);
-				var delaytp = new HMSTimePicker { HorizontalOptions = LayoutOptions.FillAndExpand };
+				delayPicker = new HMSTimePicker { HorizontalOptions = LayoutOptions.FillAndExpand };
 				try
 				{
-					delaytp.Time = new TimeSpan(0, ApplicationConst.DefaultGeofenceTriggerTime / 60, ApplicationConst.DefaultGeofenceTriggerTime % 60);
+					delayPicker.Time = new TimeSpan(0, ApplicationConst.DefaultGeofenceTriggerTime / 60, ApplicationConst.DefaultGeofenceTriggerTime % 60);
 				}
 				catch (Exception e)
 				{
 					Debug.WriteLine(e.Message);
 				}
-				delaytp.Unfocused += (sender, e) =>
+				delayPicker.Unfocused += (sender, e) =>
 				{
-					var time = (uint)delaytp.Time.TotalSeconds;
+					var time = (uint)delayPicker.Time.TotalSeconds;
 					if (time > uint.MaxValue)
 					{
 						time = uint.MaxValue;
@@ -311,7 +311,7 @@ namespace Ipheidi
 						geofence.NotificationDelay = time;
 					}
 				};
-				delayLayout.Children.Add(delaytp);
+				delayLayout.Children.Add(delayPicker);
 
 				labelRadius.Text = AppResources.RayonLabel;
 				foreach (var rad in GeofenceManager.GeofenceRadius)

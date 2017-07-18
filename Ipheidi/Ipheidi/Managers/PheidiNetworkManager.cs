@@ -185,6 +185,10 @@ namespace Ipheidi
 			var list = new List<string>();
 			try
 			{
+				if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+				{
+					return AppResources.Erreur_LaissezAucunChampVide;
+				}
 				string websession = "";
 				string noseq = "";
 

@@ -754,5 +754,11 @@ namespace Ipheidi.Resources {
                 return ResourceManager.GetString("Erreur_Title", resourceCulture);
             }
         }
+        
+        public static string SelectAdresse {
+            get {
+                return ResourceManager.GetString("SelectAdresse", resourceCulture);
+            }
+        }
     }
 }

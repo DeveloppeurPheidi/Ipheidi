@@ -34,66 +34,13 @@ namespace Ipheidi.Droid
 		{
 			PheidiParams pp = new PheidiParams();
 			pp.Load(pheidiparams);
-			if (objectAction == "geofenceAutoCreate")
+
+			if (pp.ContainsKey("FILECHOOSER"))
 			{
-
-				string data = "";
-				/*
-				string answer = "";
-				string p = "";
-				var dic = new Dictionary<string, string>();
-				dic.Add("FieldName", "DEP_A_Geofence");
-				dic.Add("TableName", "dbo.DEP_Depense");
-				dic.Add("ComparisonField", "DEP_A_Noseq");
-				dic.Add("ComparisonValue", pp["NOSEQ"]);
-				foreach (var d in dic)
-				{
-					p += d.Key + "**:**" + d.Value + "**,**";
-				}
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "GetTableField" }, { "pheidiparams", p } };
-				HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
-				if (response != null)
-				{
-					if (response.StatusCode == HttpStatusCode.OK)
-					{
-						string responseContent = response.Content.ReadAsStringAsync().Result;
-						System.Diagnostics.Debug.WriteLine("Reponse:" + responseContent);
-						try
-						{
-							answer = ActionManager.GetFields(responseContent)[0][dic["FieldName"]] as string;
-						}
-						catch (Exception e)
-						{
-							System.Diagnostics.Debug.WriteLine(e.Message);
-						}
-					}
-				}
-				string noseq = "";
-				if (string.IsNullOrEmpty(answer))
-				{
-					var location = App.LocationManager.GetLocation();
-					var geo = new Geofence()
-					{
-						Latitude = location.Latitude,
-						Longitude = location.Longitude,
-						NotificationEnabled = true,
-						User = App.Username,
-						Domain = App.Domain,
-						NotificationDelay = 0,
-						Name = pp["VALUE"],
-					};
-					System.Diagnostics.Debug.WriteLine("On main thread: " + ThreadHelper.IsOnMainThread);
-					geo.SetRadiusFromMetersToDegree(App.GeofenceRadius);
-					noseq = App.GeofenceManager.CreateOrSelectGeofenceAtCurrentLocation(geo);
-				}
-				else
-				{
-					noseq = answer;
-				}
-				data = PheidiParams.InsertValueInString(pheidiparams, "IPheidi_Params", noseq);
-				System.Diagnostics.Debug.WriteLine(data);
-				return data;*/
-
+				PheidiWebChromeClient.FileChooserPheidiParams = pp;
+			}
+			else if (objectAction == "geofenceAutoCreate")
+			{
 				try
 				{
 					string answer = "";
@@ -141,7 +88,6 @@ namespace Ipheidi.Droid
 
 								var location = App.LocationService.GetLocation();
 								string noseq = "";
-								data = "";
 								bool createNewGeo = true;
 								if (location != null)
 								{
@@ -206,10 +152,6 @@ namespace Ipheidi.Droid
 
 				}
 
-			}
-			else if (pp.ContainsKey("FILECHOOSER"))
-			{
-				PheidiWebChromeClient.FileChooserPheidiParams = pp;
 			}
 			return pheidiparams;
 		}
