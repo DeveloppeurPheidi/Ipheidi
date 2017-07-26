@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Ipheidi.Resources;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,20 +31,47 @@ namespace Ipheidi
 
 		public static ServerInfo CurrentServer { get; set; }
 
+		static public bool DeviceIsShared
+		{
+			get
+			{
+				bool isPublic = false;
+				if (Current.Properties.ContainsKey("DeviceIsPublic"))
+				{
+					string s = Current.Properties["DeviceIsPublic"] as string;
+					bool.TryParse(s, out isPublic);
+				}
+				return isPublic;
+			}
+			set
+			{
+
+				if (Current.Properties.ContainsKey("DeviceIsPublic"))
+				{
+					Current.Properties["DeviceIsPublic"] = value.ToString();
+				}
+				else
+				{
+					Current.Properties.Add("DeviceIsPublic", value.ToString());
+				}
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
+			}
+		}
+
 		static public string ServerInfoNoseq
 		{
 			get
 			{
-				if (Application.Current.Properties.ContainsKey("LastServerNoseq"))
+				if (Current.Properties.ContainsKey("LastServerNoseq"))
 				{
-					return Application.Current.Properties["LastServerNoseq"] as string;
+					return Current.Properties["LastServerNoseq"] as string;
 				}
 				return "";
 			}
 			set
 			{
-				Application.Current.Properties["LastServerNoseq"] = value;
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				Current.Properties["LastServerNoseq"] = value;
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -70,7 +98,7 @@ namespace Ipheidi
 				{
 					Current.Properties.Add("LocalisationEnabled", value.ToString());
 				}
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
 				NetworkManager.NotifyCurrentNetworkState();
 			}
 		}
@@ -98,7 +126,7 @@ namespace Ipheidi
 				{
 					Current.Properties.Add("WifiOnlyEnabled", value.ToString());
 				}
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
 				NetworkManager.NotifyCurrentNetworkState();
 			}
 		}
@@ -107,16 +135,16 @@ namespace Ipheidi
 		{
 			get
 			{
-				if (Application.Current.Properties.ContainsKey("LastUser"))
+				if (Current.Properties.ContainsKey("LastUser"))
 				{
-					return Application.Current.Properties["LastUser"] as string;
+					return Current.Properties["LastUser"] as string;
 				}
 				return "";
 			}
 			set
 			{
-				Application.Current.Properties["LastUser"] = value;
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				Current.Properties["LastUser"] = value;
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -124,16 +152,16 @@ namespace Ipheidi
 		{
 			get
 			{
-				if (Application.Current.Properties.ContainsKey("Language"))
+				if (Current.Properties.ContainsKey("Language"))
 				{
-					return Application.Current.Properties["Language"] as string;
+					return Current.Properties["Language"] as string;
 				}
 				return "fr";
 			}
 			set
 			{
-				Application.Current.Properties["Language"] = value;
-				Task.Run(async () => { await Application.Current.SavePropertiesAsync(); });
+				Current.Properties["Language"] = value;
+				Task.Run(async () => { await Current.SavePropertiesAsync(); });
 			}
 		}
 
@@ -175,7 +203,7 @@ namespace Ipheidi
 			InitializeApplication();
 			NetworkManager.AddNetworkStateListener(this);
 			NetworkManager.ListenToNetworkState();
-			App.Instance = this;
+			Instance = this;
 			GetLoginPage();
 		}
 
@@ -223,7 +251,7 @@ namespace Ipheidi
 			}
 			catch (Exception e)
 			{
-				System.Diagnostics.Debug.WriteLine(App.ಠ_ಠ);
+				System.Diagnostics.Debug.WriteLine(ಠ_ಠ);
 				Debug.WriteLine(e.Message);
 			}
 		}
@@ -278,6 +306,11 @@ namespace Ipheidi
 		/// </summary>
 		public void GetToApplication()
 		{
+			if (DeviceIsShared)
+			{
+				CredentialsManager.DeleteSystemCredentials();
+				CredentialsManager.DeleteCredentials();
+			}
 			if (GeofenceManager == null)
 			{
 				GeofenceManager = new GeofenceManager();
@@ -309,30 +342,30 @@ namespace Ipheidi
 		/// </summary>
 		public void GetLoginPage()
 		{
-			App.Credentials = App.CredentialsManager.GetAllCredentials();
-			App.SystemCredentials = App.CredentialsManager.GetSystemCredentials();
+			Credentials = CredentialsManager.GetAllCredentials();
+			SystemCredentials = CredentialsManager.GetSystemCredentials();
 			var p1 = new SystemLoginPage();
 			var page = new NavigationPage(p1);
 			if (!string.IsNullOrEmpty(SystemCredentials.Key))
 			{
-				int count = 0;
-				string sysLogin = "";
-				bool toContinue = false;
+				int sysLoginCount = 0;
+				string sysLoginAnswer = "";
+				bool sysLoginFinished = false;
 				Task.Run(async () =>
 				{
-					while (sysLogin != PheidiNetworkManager.GoodResult && count < 10)
+					while (sysLoginAnswer != PheidiNetworkManager.GoodResult && sysLoginAnswer != AppResources.Erreur_MauvaisEmailOuMdp && sysLoginCount < 10)
 					{
-						sysLogin = await PheidiNetworkManager.SystemLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"]);
-						count++;
+						sysLoginAnswer = await PheidiNetworkManager.SystemLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"]);
+						sysLoginCount++;
 					}
-					toContinue = true;
+					sysLoginFinished = true;
 				});
 
-				while (!toContinue)
+				while (!sysLoginFinished)
 				{
 					Task.Delay(500).Wait();
 				}
-				if (sysLogin == PheidiNetworkManager.GoodResult)
+				if (sysLoginAnswer == PheidiNetworkManager.GoodResult)
 				{
 					Page p2 = new ServerLoginPage();
 					if (ServerInfoList.Count == 0)
@@ -341,17 +374,18 @@ namespace Ipheidi
 					}
 					else if (ServerInfoList.Count == 1)
 					{
-						bool autologging = true;
+						bool serverLoginFinished = false;
+						int serverLoginCount = 0;
 						string answer = "";
 						Task.Run(async () =>
 						{
-							if (App.Credentials.Any((arg) => arg.Value["SystemCredentialsNoseq"] == App.SystemCredentials.Key && arg.Value["ServerNoseq"] == App.ServerInfoNoseq))
+							if (Credentials.Any((arg) => arg.Value["SystemCredentialsNoseq"] == SystemCredentials.Key && arg.Value["ServerNoseq"] == ServerInfoNoseq))
 							{
-								var credentials = App.Credentials.First((arg) => arg.Value["SystemCredentialsNoseq"] == App.SystemCredentials.Key && arg.Value["ServerNoseq"] == App.ServerInfoList[0].Noseq);
+								var credentials = Credentials.First((arg) => arg.Value["SystemCredentialsNoseq"] == SystemCredentials.Key && arg.Value["ServerNoseq"] == ServerInfoList[0].Noseq);
 								answer = await PheidiNetworkManager.UserLogin(credentials.Value["Username"], credentials.Value["Password"], false);
 								if (answer != PheidiNetworkManager.GoodResult)
 								{
-									App.CredentialsManager.DeleteUser(credentials.Key);
+									CredentialsManager.DeleteUser(credentials.Key);
 								}
 								else
 								{
@@ -360,16 +394,21 @@ namespace Ipheidi
 							}
 							else
 							{
-								answer = await PheidiNetworkManager.UserLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"], false);
+								while ((answer != PheidiNetworkManager.GoodResult && answer != AppResources.Erreur_MauvaisEmailOuMdp) && serverLoginCount < 10)
+								{
+									answer = await PheidiNetworkManager.UserLogin(SystemCredentials.Value["Username"], SystemCredentials.Value["Password"], false);
+									serverLoginCount++;
+								}
+
 								if (answer == PheidiNetworkManager.GoodResult)
 								{
 									UserNoseq = SystemCredentials.Key;
 								}
 							}
-							autologging = false;
+							serverLoginFinished = true;
 						});
 
-						while (autologging)
+						while (!serverLoginFinished)
 						{
 							Task.Delay(500).Wait();
 						}
@@ -379,7 +418,7 @@ namespace Ipheidi
 							page.Navigation.PushAsync(p2);
 							MainPage = page;
 						}
-						else
+						else if (answer == PheidiNetworkManager.GoodResult)
 						{
 							answer = string.Empty;
 							Task.Run(async () =>
@@ -398,7 +437,7 @@ namespace Ipheidi
 							}
 							else
 							{
-								App.Instance.GetToApplication();
+								Instance.GetToApplication();
 							}
 						}
 
@@ -411,13 +450,22 @@ namespace Ipheidi
 				}
 				else
 				{
-					App.CredentialsManager.DeleteSystemCredentials();
-					GetLoginPage();
+					MainPage = page;
 				}
 			}
 			else
 			{
 				MainPage = page;
+				if (!Current.Properties.ContainsKey("DeviceIsPublic"))
+				{
+					string message = AppResources.Alerte_SeulUsagerAppareil_Message;
+					string title = AppResources.Alerte_SeulUsagerAppareil_Title;
+					string confirm = AppResources.Oui;
+					string cancel = AppResources.Non;
+					System.Action onConfirm = () => { DeviceIsShared = false; };
+					System.Action onCancel = () => { DeviceIsShared = true; };
+					NotificationManager.DisplayAlert(message, title, confirm, cancel, onConfirm, onCancel);
+				}
 			}
 		}
 
@@ -426,15 +474,20 @@ namespace Ipheidi
 		/// </summary>
 		public void Logout()
 		{
-			App.Credentials = App.CredentialsManager.GetAllCredentials();
-			App.IsInLogin = true;
+			if (DeviceIsShared)
+			{
+				CredentialsManager.DeleteSystemCredentials();
+				CredentialsManager.DeleteCredentials();
+			}
+			Credentials = CredentialsManager.GetAllCredentials();
+			IsInLogin = true;
 			LocationManager.StopLocalisation();
-			App.LocationService.RemoveLocationListener(GeofenceManager);
-			App.GeofenceManager = null;
-			App.LocationService.RemoveLocationListener(LocationManager);
-			App.NetworkManager.RemoveNetworkStateListener(ImageHelper);
+			LocationService.RemoveLocationListener(GeofenceManager);
+			GeofenceManager = null;
+			LocationService.RemoveLocationListener(LocationManager);
+			NetworkManager.RemoveNetworkStateListener(ImageHelper);
 
-			MainPage.Navigation.PopAsync();
+			MainPage.Navigation.PopToRootAsync();
 		}
 
 		/// <summary>

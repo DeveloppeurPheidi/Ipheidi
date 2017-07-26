@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns ="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="Ipheidi.SettingPage">
+	xmlns     ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x    ="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class    ="Ipheidi.SettingPage"
+	xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi">
 	<ContentPage.Content>
 		<ScrollView>
 			<StackLayout
@@ -30,11 +31,27 @@
 					Orientation="Horizontal">
 					<Label
 						x:Name               ="lblWifiOnly"
-						Text                 ="Transfert de données sous Wifi seulement"
 						VerticalTextAlignment="Center" />
 					<Switch
 						x:Name           ="wifiOnlySwitch"
-						HorizontalOptions="EndAndExpand" />
+						HorizontalOptions="EndAndExpand"
+						VerticalOptions  ="Center" />
+				</StackLayout>
+				<StackLayout
+					Orientation="Horizontal">
+					<StackLayout
+						Orientation="Horizontal">
+						<Label
+							x:Name               ="lblDeviceIsShared"
+							VerticalTextAlignment="Center" />
+						<local:IconView
+							x:Name         ="imgDeviceIsSharedInfo"
+							VerticalOptions="Center" />
+					</StackLayout>
+					<Switch
+						x:Name           ="switchDeviceIsShared"
+						HorizontalOptions="EndAndExpand"
+						VerticalOptions  ="Center" />
 				</StackLayout>
 				<Label
 					IsVisible="false"

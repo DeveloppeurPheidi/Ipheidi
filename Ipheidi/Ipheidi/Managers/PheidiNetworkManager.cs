@@ -51,7 +51,7 @@ namespace Ipheidi
 
 					try
 					{
-							App.NetworkManager.CheckHostServerState();
+						App.NetworkManager.CheckHostServerState();
 					}
 					catch (Exception ex2)
 					{
@@ -223,14 +223,14 @@ namespace Ipheidi
 				parameters.Add("pheidiaction", "complexAction");
 				parameters.Add("pheidiparams", "action**:**Get_UserNoseqWithWebSession**,**WES_A_WebSession**:**" + websession + "**,**");
 				response = null;
-				response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30), App.CurrentServer.GetDefaultUrl());
+				response = await SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30), App.CurrentServer.GetDefaultUrl());
 				if (response != null)
 				{
 					if (response.StatusCode == HttpStatusCode.OK)
 					{
 						var content = await response.Content.ReadAsStringAsync();
 						Debug.WriteLine("GET NOSEQ FOR WEBSESSION: " + content);
-						noseq = PheidiNetworkManager.GetFields(content)[0]["WES_CON_A_NoSeq"].ToString();
+						noseq = GetFields(content)[0]["WES_CON_A_NoSeq"].ToString();
 					}
 				}
 
@@ -243,7 +243,7 @@ namespace Ipheidi
 				parameters.Add("pheidiaction", "complexAction");
 				parameters.Add("pheidiparams", "action**:**Get_IpheidiServerList**,**CON_A_NoSeq**:**" + noseq + "**,**");
 				response = null;
-				response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30), App.CurrentServer.GetDefaultUrl());
+				response = await SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30), App.CurrentServer.GetDefaultUrl());
 				if (response != null)
 				{
 					if (response.StatusCode == HttpStatusCode.OK)
@@ -309,7 +309,7 @@ namespace Ipheidi
 					if (!string.IsNullOrEmpty(rc) && Utilities.IsNumeric(rc))
 					{
 						Debug.WriteLine(rc);
-						if (rememberUser)
+						if (rememberUser && !App.DeviceIsShared)
 						{
 							App.UserNoseq = App.CredentialsManager.SaveCredentials(username, password, App.SystemCredentials.Key);
 						}
@@ -319,26 +319,12 @@ namespace Ipheidi
 						//Ajoute le cookie de WEBSESSION et envoie vers la page web.
 						App.CookieManager.AddCookie(App.WebSession);
 						App.CookieManager.AddCookie(uaCookie);
-
-						string p = "";
-						var dic = new Dictionary<string, string>();
-						dic.Add("VALUE", App.Language);
-
-						foreach (var d in dic)
+						string setLanguageResult = "";
+						int setLanguageTriesCount = 0;
+						while (setLanguageResult != GoodResult && setLanguageTriesCount < 10)
 						{
-							p += d.Key + "**:**" + d.Value + "**,**";
-						}
-						//parameters = new Dictionary<string, string> { { "pheidiaction", "CON_A_LANGUAGE" }, { "pheidiparams", p } };
-						parameters = new Dictionary<string, string> { { "pheidiaction", "SET_CON_A_LANGUAGE" }, { "pheidiparams", p } };
-						response = null;
-						response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 240));
-						if (response != null)
-						{
-							if (response.StatusCode == HttpStatusCode.OK)
-							{
-								string responseContent = response.Content.ReadAsStringAsync().Result;
-								Debug.WriteLine("Reponse:" + responseContent);
-							}
+							setLanguageResult = await SendNewLanguage();
+							setLanguageTriesCount++;
 						}
 						App.IsInLogin = false;
 						return GoodResult;
@@ -349,6 +335,30 @@ namespace Ipheidi
 			return AppResources.Erreur_ProblemeConnexionServeur;
 		}
 
+		static public async Task<string> SendNewLanguage()
+		{
+			string p = "";
+			var dic = new Dictionary<string, string>();
+			dic.Add("VALUE", App.Language);
+
+			foreach (var d in dic)
+			{
+				p += d.Key + "**:**" + d.Value + "**,**";
+			}
+			var parameters = new Dictionary<string, string> { { "pheidiaction", "SET_CON_A_LANGUAGE" }, { "pheidiparams", p } };
+
+			var response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 240));
+			if (response != null)
+			{
+				if (response.StatusCode == HttpStatusCode.OK)
+				{
+					string responseContent = response.Content.ReadAsStringAsync().Result;
+					Debug.WriteLine("Reponse:" + responseContent);
+				}
+				return GoodResult;
+			}
+			return BadResult;
+		}
 
 		static public async Task<string> GetPMH()
 		{
@@ -384,6 +394,15 @@ namespace Ipheidi
 					string content = await response.Content.ReadAsStringAsync();
 
 					Debug.WriteLine(content);
+
+					string setLanguageResult = "";
+					int setLanguageTriesCount = 0;
+					while (setLanguageResult != GoodResult && setLanguageTriesCount < 10)
+					{
+						setLanguageResult = await SendNewLanguage();
+						setLanguageTriesCount++;
+					}
+
 					return GoodResult;
 				}
 			}

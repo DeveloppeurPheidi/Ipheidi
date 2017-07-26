@@ -12,7 +12,14 @@ namespace Ipheidi
 {
 	public class ActionManager
 	{
-		static public string Null = AppResources.AucuneAction;
+		static public string Null
+		{
+			get
+			{ 
+				return AppResources.AucuneAction; 
+			}
+
+		}
 		static List<Action> actionList;
 		static List<string> actionTypes;
 
@@ -23,7 +30,7 @@ namespace Ipheidi
 			{
 				actionList = new List<Action>();
 			}
-			if (actionList.Count == 0 && currentCulture != App.Language)
+			if (actionList.Count == 0 || currentCulture != App.Language)
 			{
 				currentCulture = App.Language;
 				Task.Run(async () =>
@@ -81,8 +88,8 @@ namespace Ipheidi
 					}
 				}
 				Debug.WriteLine("Return Action");
-	//action = SetParametersLanguage(action);
-	return action;
+				//action = SetParametersLanguage(action);
+				return action;
 			});
 		}
 

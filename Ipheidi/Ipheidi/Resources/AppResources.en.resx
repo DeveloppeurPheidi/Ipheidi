@@ -484,6 +484,34 @@
 		name="Alerte_RendreXGeofencePublic_Message">
 		<value>Do you really want to set "{0}" as a public place for other users?</value>
 	</data>
-	<data name="Erreur_Title"><value>Error</value></data>
-	<data name="SelectAdresse"><value>Pick an address</value></data>
+	<data
+		name="Erreur_Title">
+		<value>Error</value>
+	</data>
+	<data
+		name="SelectAdresse">
+		<value>Pick an address</value>
+	</data>
+	<data
+		name="Alerte_SeulUsagerAppareil_Title">
+		<value>Are you the only user of this device?</value>
+	</data>
+	<data
+		name="Alerte_SeulUsagerAppareil_Message">
+		<value>If you share this device with other users, select "No".</value>
+	</data>
+	<data
+		name="AppareilPartageLabel">
+		<value>Do you share this device?</value>
+	</data>
+	<data
+		name="Alerte_Info_SeulUsagerAppareil_Title">
+		<value>Are you the only user of this device?</value>
+	</data>
+	<data
+		name="Alerte_Info_SeulUsagerAppareil_Message">
+		<value>If you share this device with other users, you can enable this parameter by toggling the switch.
+
+The change will be applied when you log out.</value>
+	</data>
 </root>

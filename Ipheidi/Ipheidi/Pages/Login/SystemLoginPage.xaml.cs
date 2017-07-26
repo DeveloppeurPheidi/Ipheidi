@@ -25,8 +25,6 @@ namespace Ipheidi
 			InitializeComponent();
 
 			//Bouton de login
-			btnLogin.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button)); ;
-			btnLogin.FontAttributes = FontAttributes.Bold;
 			btnLogin.Clicked += (sender, e) =>
 			{
 				Task.Run(async () =>
@@ -37,6 +35,7 @@ namespace Ipheidi
 					{
 						App.CredentialsManager.DeleteSystemCredentials();
 						App.CredentialsManager.SaveSystemCredentials(usernameEntry.Text, passwordEntry.Text);
+
 						Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
 					}
 					else
@@ -52,16 +51,106 @@ namespace Ipheidi
 
 
 			usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
-			lblCourriel.Text = AppResources.CourrielLabel;
 			passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
-			lblPassword.Text = AppResources.MotDePasseLabel;
 			btnLogin.Text = AppResources.ConnexionBouton;
+
+			var systemAccount = App.CredentialsManager.GetSystemCredentials();
+			SetEntryLayoutVisibility(string.IsNullOrEmpty(systemAccount.Key));
+			if (systemAccount.Value != null)
+			{
+				btnCurrentAccount.Text = systemAccount.Value["Username"];
+			}
+			btnCurrentAccount.BackgroundColor = App.ColorPrimary;
+			btnCurrentAccount.TextColor = Color.White;
+			//btnCurrentAccount.BorderColor = App.ColorPrimary;
+			btnCurrentAccount.Clicked += (sender, e) =>
+			{
+				Task.Run(async () =>
+				{
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
+					int count = 0;
+					string answer = "";
+					var credentials = App.CredentialsManager.GetSystemCredentials();
+					while (answer != PheidiNetworkManager.GoodResult && answer != AppResources.Erreur_MauvaisEmailOuMdp && count < 5)
+					{
+
+						answer = await PheidiNetworkManager.SystemLogin(credentials.Value["Username"], credentials.Value["Password"]);
+						count++;
+					}
+					if (answer == PheidiNetworkManager.GoodResult)
+					{
+						Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
+					}
+					else if (answer == AppResources.Erreur_MauvaisEmailOuMdp)
+					{
+						Device.BeginInvokeOnMainThread(() => updateEntryLayout.IsVisible = true);
+					}
+					else
+					{
+						App.NotificationManager.DisplayAlert(answer, AppResources.Erreur_Title, "OK", () => { });
+					}
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
+				});
+			};
+
+			btnOtherAccount.TextColor = App.ColorPrimary;
+			btnOtherAccount.BorderColor = App.ColorPrimary;
+			btnOtherAccount.BackgroundColor = Color.White;
+			btnOtherAccount.Text = AppResources.AutreCompteBouton;
+			btnOtherAccount.Clicked += (sender, e) =>
+			{
+				SetEntryLayoutVisibility(true);
+			};
+
+			btnBackToMainAccount.IsVisible = !string.IsNullOrEmpty(systemAccount.Key);
+			btnBackToMainAccount.TextColor = App.ColorPrimary;
+			btnBackToMainAccount.BorderColor = App.ColorPrimary;
+			btnBackToMainAccount.BackgroundColor = Color.White;
+			btnBackToMainAccount.Text = AppResources.RetourBouton;
+			btnBackToMainAccount.Clicked += (sender, e) =>
+			{
+				SetEntryLayoutVisibility(false);
+			};
+
+			demiCercle.Foreground = App.ColorPrimary;
+
+			updateUsernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
+			updatePasswordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
+			btnUpdateLogin.Text = AppResources.ConnexionBouton;
+			//Bouton de login
+			btnUpdateLogin.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button));
+			btnUpdateLogin.Clicked += (sender, e) =>
+			{
+				Task.Run(async () =>
+				{
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(true));
+					string answer = await PheidiNetworkManager.SystemLogin(updateUsernameEntry.Text, updatePasswordEntry.Text);
+					if (answer == PheidiNetworkManager.GoodResult)
+					{
+						var credentials = App.CredentialsManager.GetSystemCredentials();
+						credentials.Value["Password"] = updatePasswordEntry.Text;
+						credentials.Value["Username"] = updateUsernameEntry.Text;
+						App.CredentialsManager.UpdateSystemCredentials(credentials);
+						Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
+					}
+					else
+					{
+						App.NotificationManager.DisplayAlert(answer, AppResources.Erreur_Title, "OK", () => { });
+					}
+					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
+				});
+			};
 
 			SetFooter();
 			mainLayout.RaiseChild(AppLoadingView);
 			AppLoadingView.SetVisibility(false);
 		}
 
+		void SetEntryLayoutVisibility(bool isVisible)
+		{
+			entryLayout.IsVisible = isVisible;
+			AutoConnectLayout.IsVisible = !isVisible;
+		}
 
 		/// <summary>
 		/// Sets the footer.
@@ -85,9 +174,9 @@ namespace Ipheidi
 					App.Language = languePicker.SelectedItem.ToString().Substring(0, 2).ToLower();
 					App.LocalizationManager.SetLocale(new CultureInfo(App.Language));
 					usernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
-					lblCourriel.Text = AppResources.CourrielLabel;
 					passwordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
-					lblPassword.Text = AppResources.MotDePasseLabel;
+					btnOtherAccount.Text = AppResources.AutreCompteBouton;
+					btnBackToMainAccount.Text = AppResources.RetourBouton;
 					btnLogin.Text = AppResources.ConnexionBouton;
 					FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
 				};
@@ -145,19 +234,22 @@ namespace Ipheidi
 			{
 				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
-			//var w = bodyLayout.Width / 2;
-			//leftEntryLayout.WidthRequest = w;
-			//rightEntryLayout.WidthRequest = w;
-			var h = usernameEntry.Measure(rightEntryLayout.Width, rightEntryLayout.Height).Request.Height;
-			lblCourriel.HeightRequest = h;
-			lblPassword.HeightRequest = h;
-			bottomButtonLayout.Padding = new Thickness(width * 0.1, 0);
 			base.OnSizeAllocated(width, height);
 		}
 
 
 		protected override void OnAppearing()
 		{
+			var systemAccount = App.CredentialsManager.GetSystemCredentials();
+			SetEntryLayoutVisibility(string.IsNullOrEmpty(systemAccount.Key));
+			btnBackToMainAccount.IsVisible = !string.IsNullOrEmpty(systemAccount.Key);
+			if (systemAccount.Value != null)
+			{
+				btnCurrentAccount.Text = systemAccount.Value["Username"];
+
+			}
+
+
 			if (languePicker != null)
 			{
 				foreach (var lang in ApplicationConst.Langues)

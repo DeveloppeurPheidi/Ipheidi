@@ -8,7 +8,7 @@
 		x:Name           ="mainLayout"
 		VerticalOptions  ="Fill"
 		HorizontalOptions="Fill">
-		<Image
+		<local:IconView
 			x:Name                         ="demiCercle"
 			Source                         ="demi_cercle_vert.png"
 			Aspect                         ="Fill"
@@ -37,40 +37,46 @@
 				HorizontalOptions="Fill"
 				Margin           ="0,20,0,20">
 				<StackLayout
-					x:Name     ="entryLayout"
-					Orientation="Horizontal"
-					Margin     ="0,0,0,20">
-
-					<StackLayout
-						IsVisible="false"
-						Spacing="10"
-						x:Name ="leftEntryLayout">
-						<Label
-							x:Name         ="lblCourriel"
-							VerticalOptions="Center" />
-						<Label
-							x:Name         ="lblPassword"
-							VerticalOptions="Center" />
-					</StackLayout>
-
-					<StackLayout
-						Spacing          ="10"
-						x:Name           ="rightEntryLayout"
-						HorizontalOptions="FillAndExpand">
-						<Entry
-							x:Name           ="usernameEntry"
-							HorizontalOptions="FillAndExpand" />
-						<Entry
-							x:Name           ="passwordEntry"
-							IsPassword       ="true"
-							HorizontalOptions="FillAndExpand" />
-					</StackLayout>
-				</StackLayout>
-				<StackLayout
-					x:Name="bottomButtonLayout">
+					x:Name ="entryLayout"
+					Spacing="20"
+					Margin ="0,0,0,20">
+					<Entry
+						x:Name           ="usernameEntry"
+						HorizontalOptions="FillAndExpand" />
+					<Entry
+						x:Name           ="passwordEntry"
+						IsPassword       ="true"
+						HorizontalOptions="FillAndExpand" />
 					<Button
 						x:Name="btnLogin"
-						Margin="0,0,0,20" />
+						Margin="20,0,20,0" />
+					<Button
+						x:Name="btnBackToMainAccount"
+						Margin="20,0,20,0" />
+				</StackLayout>
+				<StackLayout
+					x:Name ="AutoConnectLayout"
+					Spacing="20">
+					<Button
+						x:Name="btnCurrentAccount" />
+					<StackLayout
+						x:Name   ="updateEntryLayout"
+						IsVisible="false"
+						Spacing  ="20"
+						Margin   ="0,0,0,20">
+						<Entry
+							x:Name           ="updateUsernameEntry"
+							HorizontalOptions="FillAndExpand" />
+						<Entry
+							x:Name           ="updatePasswordEntry"
+							IsPassword       ="true"
+							HorizontalOptions="FillAndExpand" />
+						<Button
+							x:Name="btnUpdateLogin"
+							Margin="20,0,20,0" />
+					</StackLayout>
+					<Button
+						x:Name="btnOtherAccount" />
 				</StackLayout>
 			</StackLayout>
 		</ScrollView>

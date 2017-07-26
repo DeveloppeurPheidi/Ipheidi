@@ -33,7 +33,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 			InitializeComponent();
 			EntriesVisible(false);
-
+			demiCercle.Foreground = App.ColorPrimary;
 			if (Device.RuntimePlatform == Device.iOS)
 			{
 				btnBack.TextColor = App.ColorPrimary;
@@ -57,6 +57,13 @@ namespace Ipheidi
 							if (s != PheidiNetworkManager.GoodResult)
 							{
 								App.NotificationManager.DisplayAlert(s, AppResources.Erreur_Title, "Ok", () => { });
+							}
+							else
+							{
+								if (Application.Current.Properties.ContainsKey("LastGeofenceSync"))
+								{
+									Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
+								}
 							}
 						}
 						if (loginState == LoginState.ServerAutoLogin)

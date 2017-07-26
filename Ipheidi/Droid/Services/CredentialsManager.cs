@@ -124,5 +124,15 @@ namespace Ipheidi.Droid
 				}
 			}
 		}
+
+		public void UpdateSystemCredentials(KeyValuePair<string, Dictionary<string, string>> credentials)
+		{
+			if (!string.IsNullOrEmpty(credentials.Key) && credentials.Value != null)
+			{
+				Account account = new Account(credentials.Key, credentials.Value);
+				DeleteSystemCredentials();
+				AccountStore.Create(Forms.Context).Save(account, App.AppName);
+			}
+		}
 	}
 }

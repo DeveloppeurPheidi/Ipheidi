@@ -20,6 +20,7 @@ namespace Ipheidi
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
+			demiCercle.Foreground = App.ColorPrimary;
 			foreach (var pmh in App.PMH)
 			{
 				pmhPicker.Items.Add(pmh.Key);
@@ -155,6 +156,12 @@ namespace Ipheidi
 
 		protected override void OnSizeAllocated(double width, double height)
 		{
+			//Permet d'afficher correctement la bar de status sur iOS
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+			}
+
 			base.OnSizeAllocated(width, height);
 			bottomButtonLayout.Padding = new Thickness(width * 0.1, 0);
 		}

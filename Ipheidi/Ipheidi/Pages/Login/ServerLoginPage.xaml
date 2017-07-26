@@ -9,7 +9,7 @@
 			x:Name           ="mainLayout"
 			VerticalOptions  ="Fill"
 			HorizontalOptions="Fill">
-			<Image
+			<local:IconView
 				x:Name                         ="demiCercle"
 				Source                         ="demi_cercle_vert.png"
 				Aspect                         ="Fill"
@@ -34,7 +34,7 @@
 				<StackLayout
 					VerticalOptions  ="FillAndExpand"
 					x:Name           ="bodyLayout"
-					Spacing          ="10"
+					Spacing          ="20"
 					HorizontalOptions="Fill"
 					Margin           ="0,20,0,20">
 					<Picker
@@ -42,7 +42,7 @@
 					
 						<StackLayout
 							HorizontalOptions="FillAndExpand"
-							Spacing          ="10"
+							Spacing          ="20"
 							x:Name           ="entryLayout">
 							<Entry
 								x:Name           ="usernameEntry"
@@ -53,17 +53,18 @@
 								IsPassword       ="true" />
 						</StackLayout>
 					<StackLayout
-						x:Name="bottomButtonLayout">
+						x:Name="bottomButtonLayout"
+						Spacing="20">
 						<Button
 							x:Name="btnLogin"
-							Margin="0,0,0,20" />
+							Margin="0,0,0,0" />
 						<Button
 							x:Name         ="btnBack"
 							BackgroundColor="Transparent"
 							IsVisible      ="false"
 							BorderWidth    ="1"
 							BorderColor    ="Silver"
-							Margin         ="0,0,0,20" />
+							Margin         ="0,0,0,0" />
 					</StackLayout>
 				</StackLayout>
 			</ScrollView>

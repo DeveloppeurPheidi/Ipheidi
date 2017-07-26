@@ -760,5 +760,35 @@ namespace Ipheidi.Resources {
                 return ResourceManager.GetString("SelectAdresse", resourceCulture);
             }
         }
+        
+        public static string Alerte_SeulUsagerAppareil_Title {
+            get {
+                return ResourceManager.GetString("Alerte_SeulUsagerAppareil_Title", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_SeulUsagerAppareil_Message {
+            get {
+                return ResourceManager.GetString("Alerte_SeulUsagerAppareil_Message", resourceCulture);
+            }
+        }
+        
+        public static string AppareilPartageLabel {
+            get {
+                return ResourceManager.GetString("AppareilPartageLabel", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_Info_SeulUsagerAppareil_Title {
+            get {
+                return ResourceManager.GetString("Alerte_Info_SeulUsagerAppareil_Title", resourceCulture);
+            }
+        }
+        
+        public static string Alerte_Info_SeulUsagerAppareil_Message {
+            get {
+                return ResourceManager.GetString("Alerte_Info_SeulUsagerAppareil_Message", resourceCulture);
+            }
+        }
     }
 }

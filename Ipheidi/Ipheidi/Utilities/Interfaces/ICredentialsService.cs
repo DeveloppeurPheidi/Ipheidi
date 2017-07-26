@@ -40,6 +40,8 @@ namespace Ipheidi
 		/// <returns>The all credentials.</returns>
 		Dictionary<string, Dictionary<string, string>> GetAllCredentials();
 
+		void UpdateSystemCredentials(KeyValuePair<string, Dictionary<string, string>> credentials);
+
 		KeyValuePair<string, Dictionary<string, string>> GetSystemCredentials();
 	}
 }

@@ -492,4 +492,27 @@
 		name="SelectAdresse">
 		<value>Sélectionnez une adresse</value>
 	</data>
+	<data
+		name="Alerte_SeulUsagerAppareil_Title">
+		<value>Êtes-vous la seule personne à utiliser cette appareil?</value>
+	</data>
+	<data
+		name="Alerte_SeulUsagerAppareil_Message">
+		<value>Si vous partager cette appareil avec d'autres usagers, choisissez "Non".</value>
+	</data>
+	<data
+		name="AppareilPartageLabel">
+		<value>Cette appareil est partagé?</value>
+	</data>
+
+	<data
+		name="Alerte_Info_SeulUsagerAppareil_Title">
+		<value>Êtes-vous la seule personne à utiliser cette appareil?</value>
+	</data>
+	<data
+		name="Alerte_Info_SeulUsagerAppareil_Message">
+		<value>Si vous partager cette appareil avec d'autres usagers, activez ce paramètre en ajustant le levier.
+
+Le changement prendra effet lors de votre prochaine déconnexion.</value>
+	</data>
 </root>

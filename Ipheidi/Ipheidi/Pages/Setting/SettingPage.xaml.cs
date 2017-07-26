@@ -62,6 +62,27 @@ namespace Ipheidi
 			{
 				deleteAllAccountBtn.IsVisible = false;
 			}
+			if (App.DeviceIsShared)
+			{
+				deleteAllAccountBtn.IsVisible = false;
+				forgetAccountBtn.IsVisible = false;
+			}
+
+			lblDeviceIsShared.Text = AppResources.AppareilPartageLabel;
+			switchDeviceIsShared.IsToggled = App.DeviceIsShared;
+			switchDeviceIsShared.Toggled += (sender, e) =>
+			{
+				App.DeviceIsShared = e.Value;
+			};
+
+			var tap = new TapGestureRecognizer();
+			tap.Tapped += (sender, e) =>
+			{
+				App.NotificationManager.DisplayAlert(AppResources.Alerte_Info_SeulUsagerAppareil_Message, AppResources.Alerte_Info_SeulUsagerAppareil_Title, "OK", () => { });
+			};
+			imgDeviceIsSharedInfo.Source = "info_icon.png";
+			imgDeviceIsSharedInfo.GestureRecognizers.Add(tap);
+			imgDeviceIsSharedInfo.Foreground = App.ColorPrimary;
 		}
 
 
@@ -119,6 +140,9 @@ namespace Ipheidi
 			{
 				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
+			lblDeviceIsShared.WidthRequest = mainLayout.Width / 2;
+			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height/2;
+			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height/2;
 			base.OnSizeAllocated(width, height);
 		}
 
@@ -127,6 +151,8 @@ namespace Ipheidi
 		/// </summary>
 		protected override void OnAppearing()
 		{
+			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height/2;
+			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height/2;
 			base.OnAppearing();
 		}
 
