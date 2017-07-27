@@ -81,12 +81,12 @@ namespace Ipheidi
 					{
 						Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
 					}
-					else if (answer == AppResources.Erreur_MauvaisEmailOuMdp)
-					{
-						Device.BeginInvokeOnMainThread(() => updateEntryLayout.IsVisible = true);
-					}
 					else
 					{
+						if (answer == AppResources.Erreur_MauvaisEmailOuMdp)
+						{
+							Device.BeginInvokeOnMainThread(() => updateEntryLayout.IsVisible = true);
+						}
 						App.NotificationManager.DisplayAlert(answer, AppResources.Erreur_Title, "OK", () => { });
 					}
 					Device.BeginInvokeOnMainThread(() => AppLoadingView.SetVisibility(false));
@@ -178,6 +178,9 @@ namespace Ipheidi
 					btnOtherAccount.Text = AppResources.AutreCompteBouton;
 					btnBackToMainAccount.Text = AppResources.RetourBouton;
 					btnLogin.Text = AppResources.ConnexionBouton;
+					btnUpdateLogin.Text = AppResources.ConnexionBouton;
+					updateUsernameEntry.Placeholder = AppResources.CourrielPlaceHolder;
+					updatePasswordEntry.Placeholder = AppResources.MotDePassePlaceHolder;
 					FooterLabel.Text = string.Format(AppResources.CopyrightFooter, DateTime.Now.Year);
 				};
 

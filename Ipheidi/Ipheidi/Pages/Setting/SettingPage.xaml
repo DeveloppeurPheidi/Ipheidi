@@ -40,13 +40,16 @@
 				<StackLayout
 					Orientation="Horizontal">
 					<StackLayout
-						Orientation="Horizontal">
+						Orientation="Horizontal"
+						Spacing    ="0">
 						<Label
 							x:Name               ="lblDeviceIsShared"
 							VerticalTextAlignment="Center" />
 						<local:IconView
 							x:Name         ="imgDeviceIsSharedInfo"
-							VerticalOptions="Center" />
+							VerticalOptions="Center"
+							HorizontalOptions="Start"
+						/>
 					</StackLayout>
 					<Switch
 						x:Name           ="switchDeviceIsShared"

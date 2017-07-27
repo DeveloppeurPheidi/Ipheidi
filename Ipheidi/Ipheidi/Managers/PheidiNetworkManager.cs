@@ -213,6 +213,14 @@ namespace Ipheidi
 							App.CookieManager.AddCookie(App.WebSession);
 						}
 					}
+					else
+					{
+						return AppResources.Erreur_ProblemeConnexionServeur;
+					}
+				}
+				else
+				{
+					return AppResources.Erreur_ProblemeConnexionServeur;
 				}
 
 				if (string.IsNullOrEmpty(websession))

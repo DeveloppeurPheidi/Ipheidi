@@ -140,7 +140,6 @@ namespace Ipheidi
 			{
 				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
-			lblDeviceIsShared.WidthRequest = mainLayout.Width / 2;
 			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height/2;
 			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height/2;
 			base.OnSizeAllocated(width, height);

@@ -370,7 +370,8 @@ namespace Ipheidi
 					Page p2 = new ServerLoginPage();
 					if (ServerInfoList.Count == 0)
 					{
-						//TODO display alert
+						MainPage = page;
+						NotificationManager.DisplayAlert(AppResources.Erreur_AucunServeur, AppResources.Erreur_Title, "OK", () => { });
 					}
 					else if (ServerInfoList.Count == 1)
 					{

@@ -6,16 +6,35 @@ using Foundation;
 using Ipheidi;
 using System;
 using CoreGraphics;
+using System.Linq;
 
 [assembly: ExportRenderer(typeof(HMSTimePicker), typeof(HMSTimePickeRenderer))]
 
 namespace Ipheidi.iOS
 {
+
+
 	public class HMSTimePickeRenderer : PickerRenderer
 	{
-		public static double DisplayScale = UIScreen.MainScreen.Scale;
-		public static int DispalyHeight = (int)UIScreen.MainScreen.NativeBounds.Height;
-		public static int DisplayWidth = (int)UIScreen.MainScreen.NativeBounds.Width;
+		UILabel hoursLabel;
+		UILabel minutesLabel;
+		UILabel secondsLabel;
+		public static double DisplayScale
+		{
+			get { return UIScreen.MainScreen.Scale; }
+		}
+		public static int DisplayHeight
+		{
+			get { return (int)UIScreen.MainScreen.NativeBounds.Height; }
+		}
+
+		public static int DisplayWidth
+		{
+			get
+			{
+				return (int)UIScreen.MainScreen.NativeBounds.Width;
+			}
+		}
 
 		internal const int ComponentCount = 6;
 
@@ -56,21 +75,42 @@ namespace Ipheidi.iOS
 
 		private void CreatePickerLabels(UIPickerView customModelPickerView)
 		{
+			double width = DeviceOrientation.GetOrientation() == DeviceOrientations.Portrait ? DisplayWidth : DisplayHeight;
 			nfloat verticalPosition = (customModelPickerView.Frame.Size.Height / 2) - (_labelSize / 2);
-			nfloat componentWidth = new nfloat(DisplayWidth / ComponentCount / DisplayScale);
+			nfloat componentWidth = new nfloat(width / ComponentCount / DisplayScale);
 
-			var hoursLabel = new UILabel(new CGRect(componentWidth, verticalPosition, _labelSize, _labelSize));
+			try
+			{
+				if (hoursLabel != null)
+				{
+					hoursLabel.RemoveFromSuperview();
+				}
+				if (minutesLabel != null)
+				{
+					minutesLabel.RemoveFromSuperview();
+				}
+				if (secondsLabel != null)
+				{
+					secondsLabel.RemoveFromSuperview();
+				}
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.Message);
+			}
+			hoursLabel = new UILabel(new CGRect(componentWidth, verticalPosition, _labelSize, _labelSize));
 			hoursLabel.Text = "h";
 
-			var minutesLabel = new UILabel(new CGRect((componentWidth * 3) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+			minutesLabel = new UILabel(new CGRect((componentWidth * 3) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
 			minutesLabel.Text = "m";
 
-			var secondsLabel = new UILabel(new CGRect((componentWidth * 5) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+			secondsLabel = new UILabel(new CGRect((componentWidth * 5) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
 			secondsLabel.Text = "s";
 
 			customModelPickerView.AddSubview(hoursLabel);
 			customModelPickerView.AddSubview(minutesLabel);
 			customModelPickerView.AddSubview(secondsLabel);
+
 		}
 
 		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -79,8 +119,12 @@ namespace Ipheidi.iOS
 
 			if (Control == null)
 				return;
-
-			if (e.PropertyName == Picker.SelectedIndexProperty.PropertyName)
+			if (e.PropertyName == VisualElement.WidthProperty.PropertyName)
+			{
+				var customModelPickerView = (UIPickerView)Control.InputView;
+				CreatePickerLabels(customModelPickerView);
+			}
+			else if (e.PropertyName == Picker.SelectedIndexProperty.PropertyName)
 			{
 				var customModelPickerView = (UIPickerView)Control.InputView;
 
@@ -154,7 +198,7 @@ namespace Ipheidi.iOS
 
 			public override nfloat GetComponentWidth(UIPickerView pickerView, nint component)
 			{
-				var screenWidth = DisplayWidth;
+				var screenWidth = DeviceOrientation.GetOrientation() == DeviceOrientations.Portrait ? DisplayWidth : DisplayHeight;
 
 				var componentWidth = screenWidth /
 					ComponentCount /
@@ -162,6 +206,8 @@ namespace Ipheidi.iOS
 
 				return new nfloat(componentWidth);
 			}
+
+
 		}
 	}
 }

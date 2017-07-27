@@ -790,5 +790,11 @@ namespace Ipheidi.Resources {
                 return ResourceManager.GetString("Alerte_Info_SeulUsagerAppareil_Message", resourceCulture);
             }
         }
+        
+        public static string Erreur_AucunServeur {
+            get {
+                return ResourceManager.GetString("Erreur_AucunServeur", resourceCulture);
+            }
+        }
     }
 }

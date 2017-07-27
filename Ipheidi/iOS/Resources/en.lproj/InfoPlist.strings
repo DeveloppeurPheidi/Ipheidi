@@ -1,6 +1,6 @@
 ﻿"NSContactsUsageDescription"="To use our contact synching functionnalities.";
-"NSCameraUsageDescription"="To be able to take picture and use our functionnalities related to the camera.";
-"NSPhotoLibraryUsageDescription"="To be able to send pictures from your device.";
+"NSCameraUsageDescription"="To be able to take picture and use some functionalities related to the camera.";
+"NSPhotoLibraryUsageDescription"="To be able to edit and send pictures from this device.";
 "kTCCServiceMediaLibrary"="To get access to your file.";
 "NSMicrophoneUsageDescription"="To record sounds while video recording.";
-"NSLocationAlwaysUsageDescription"= "To be able to use our geolocation functionnalities";
+"NSLocationAlwaysUsageDescription"= "Some functionalities require real time location updates to work properly. You can enable/disable location anytime in the settings page.";

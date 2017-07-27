@@ -502,7 +502,7 @@
 	</data>
 	<data
 		name="AppareilPartageLabel">
-		<value>Do you share this device?</value>
+		<value>Is this device shared with other users?</value>
 	</data>
 	<data
 		name="Alerte_Info_SeulUsagerAppareil_Title">
@@ -512,6 +512,10 @@
 		name="Alerte_Info_SeulUsagerAppareil_Message">
 		<value>If you share this device with other users, you can enable this parameter by toggling the switch.
 
+It will prevent other users from auto login into your account.
+
 The change will be applied when you log out.</value>
 	</data>
+
+	<data name="Erreur_AucunServeur"><value>No server available, try again later.</value></data>
 </root>

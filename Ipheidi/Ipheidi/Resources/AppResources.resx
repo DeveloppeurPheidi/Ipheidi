@@ -502,7 +502,7 @@
 	</data>
 	<data
 		name="AppareilPartageLabel">
-		<value>Cette appareil est partagé?</value>
+		<value>Cette appareil est-il partagé?</value>
 	</data>
 
 	<data
@@ -513,6 +513,9 @@
 		name="Alerte_Info_SeulUsagerAppareil_Message">
 		<value>Si vous partager cette appareil avec d'autres usagers, activez ce paramètre en ajustant le levier.
 
+Cela empêchera d'autres utilisateurs de se connecter automatiquement à votre compte.
+
 Le changement prendra effet lors de votre prochaine déconnexion.</value>
 	</data>
+	<data name="Erreur_AucunServeur"><value>Aucun serveur de disponible, veuillez réessayer plus tard.</value></data>
 </root>
