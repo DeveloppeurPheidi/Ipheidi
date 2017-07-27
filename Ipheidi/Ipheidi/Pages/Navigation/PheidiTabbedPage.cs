@@ -11,8 +11,10 @@ namespace Ipheidi
 	/// </summary>
 	public class PheidiTabbedPage:Xamarin.Forms.TabbedPage
 	{
-		int indexLastPage = 0;
-		int indexCurrentPage = 0;
+		int indexLastPage;
+		int indexCurrentPage;
+
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.CustomTabbedPage"/> class.
 		/// </summary>
@@ -22,7 +24,7 @@ namespace Ipheidi
 			NavigationPage.SetHasNavigationBar(this, false);
 			NavigationPage.SetHasBackButton(this, false);
 
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+			On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
 
 			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();
@@ -60,6 +62,11 @@ namespace Ipheidi
 			{
 				child.Title = "";
 			}
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 		}
 
 		/// <summary>

@@ -149,9 +149,15 @@ background:#ccc;
 			if (Device.RuntimePlatform == Device.iOS)
 			{
 				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				BrowserWeb.HeightRequest = height - (App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? 0 : 20);
+			}
+			else
+			{
+				BrowserWeb.HeightRequest = height;
 			}
 			BrowserWeb.WidthRequest = width;
-			BrowserWeb.HeightRequest = height;
+
+
 			base.OnSizeAllocated(width, height);
 		}
 
