@@ -138,15 +138,28 @@ namespace Ipheidi
 		/// Adds the geofence.
 		/// </summary>
 		/// <param name="geofence">Fence.</param>
-		public void AddGeofence(Geofence geofence)
+		public async Task<bool> AddGeofence(Geofence geofence)
 		{
-			Task.Run(async () =>
+			try
 			{
 				await DatabaseHelper.Database.SaveItemAsync(geofence);
 				Geofences.Add(geofence);
 				RefreshClosePositionGeofencesList();
-				await SendGeofenceToServer(geofence);
-			});
+				if (!await SendGeofenceToServer(geofence))
+				{
+					if (RescheduledGeofenceUpdates.Any((arg) => arg.NoSeq == geofence.NoSeq))
+					{
+						RescheduledGeofenceUpdates.Remove(RescheduledGeofenceUpdates.First((arg) => arg.NoSeq == geofence.NoSeq));
+					}
+					RescheduledGeofenceUpdates.Add(geofence);
+				}
+				return true;
+			}
+			catch(Exception e)
+			{
+				Debug.WriteLine(e.Message);
+			}
+			return false;
 		}
 
 		/// <summary>

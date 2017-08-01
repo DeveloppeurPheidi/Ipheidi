@@ -41,7 +41,7 @@
 					Orientation="Horizontal">
 					<StackLayout
 						Orientation="Horizontal"
-						Spacing    ="0">
+						Spacing    ="5">
 						<Label
 							x:Name               ="lblDeviceIsShared"
 							VerticalTextAlignment="Center" />

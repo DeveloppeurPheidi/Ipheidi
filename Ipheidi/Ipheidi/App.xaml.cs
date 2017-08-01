@@ -480,6 +480,7 @@ namespace Ipheidi
 				CredentialsManager.DeleteSystemCredentials();
 				CredentialsManager.DeleteCredentials();
 			}
+			ActionManager.CleanActionList();
 			Credentials = CredentialsManager.GetAllCredentials();
 			IsInLogin = true;
 			LocationManager.StopLocalisation();

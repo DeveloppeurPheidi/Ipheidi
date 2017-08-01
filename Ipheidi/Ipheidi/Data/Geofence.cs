@@ -35,7 +35,7 @@ namespace Ipheidi
 		public bool NotificationEnabled { get; set; }
 
 		public int PublicFlag { get; set; }
-	
+
 
 
 		[JsonIgnore]
@@ -140,7 +140,7 @@ namespace Ipheidi
 		/// <param name="loc">Location.</param>
 		private bool IsLocationInside(Location loc)
 		{
-			
+
 			double r = GetRadiusInDegree();
 			double x = (loc.Longitude - Longitude);
 			x = x > 0 ? x : -x;
@@ -189,7 +189,12 @@ namespace Ipheidi
 				Task.Run(() =>
 				{
 					var pheidiParams = new Dictionary<string, string>();
+
+					//TODO Supprimer les references vers Name, utiliser plutot GeofenceName
 					pheidiParams.Add("Name", Name);
+					//TODO Supprimer les references vers Name, utiliser plutot GeofenceName
+
+					pheidiParams.Add("GeofenceName", Name);
 					pheidiParams.Add("GeofenceEvent", ev.ToString());
 					pheidiParams.Add("Latitude", Latitude.ToString());
 					pheidiParams.Add("Longitude", Longitude.ToString());

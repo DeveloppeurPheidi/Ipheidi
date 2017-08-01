@@ -26,7 +26,7 @@ namespace Ipheidi
 				pmhPicker.Items.Add(pmh.Key);
 			}
 			HasBackButton = hasBackButton;
-			if (Device.RuntimePlatform == Device.iOS)
+			//if (Device.RuntimePlatform == Device.iOS)
 			{
 				btnBack.TextColor = App.ColorPrimary;
 				btnBack.Clicked += (sender, e) => OnBackButtonPressed();

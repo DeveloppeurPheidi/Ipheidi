@@ -34,7 +34,7 @@ namespace Ipheidi
 			InitializeComponent();
 			EntriesVisible(false);
 			demiCercle.Foreground = App.ColorPrimary;
-			if (Device.RuntimePlatform == Device.iOS)
+			//if (Device.RuntimePlatform == Device.iOS)
 			{
 				btnBack.TextColor = App.ColorPrimary;
 				btnBack.Clicked += (sender, e) => OnBackButtonPressed();
