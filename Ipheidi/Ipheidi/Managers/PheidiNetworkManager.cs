@@ -57,7 +57,7 @@ namespace Ipheidi
 					{
 						Debug.WriteLine(ex2.Message);
 					}
-				};
+				}
 				if (response != null)
 				{
 					return response;

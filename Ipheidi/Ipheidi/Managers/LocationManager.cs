@@ -111,7 +111,9 @@ namespace Ipheidi
 			{AppResources.CentMetresOptionPrecision, 100},
 			{AppResources.KilometreOptionPrecision,1000},
 			{AppResources.TroisKilometreOptionPrecision,3000},
+			#if DEBUG
 			{AppResources.ModeTestOptionPrecision,-3}
+			#endif
 		};
 		int dataSendingTimer = 0;
 		public LocationManager()

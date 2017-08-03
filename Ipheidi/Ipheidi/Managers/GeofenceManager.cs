@@ -28,7 +28,7 @@ namespace Ipheidi
 		private DateTime TimerStartTime;
 		private TimeSpan TimeDelay;
 		private Location lastLocation;
-		private double largestRadius =0;
+		private double largestRadius = 0;
 		public static bool DeleteEnabled = false;
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Ipheidi
 			if (GeofenceRadius.Count == 0)
 			{
 				int gap = 10;
-				for (int i = gap; i <= ApplicationConst.GeofenceMaxRadius && i<= 100; i += gap)
+				for (int i = gap; i <= ApplicationConst.GeofenceMaxRadius && i <= 100; i += gap)
 				{
 					GeofenceRadius.Add(i);
 				}
@@ -155,7 +155,7 @@ namespace Ipheidi
 				}
 				return true;
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				Debug.WriteLine(e.Message);
 			}
@@ -237,7 +237,7 @@ namespace Ipheidi
 		{
 			if (geofence != null)
 			{
-				geofence.Name = geofence.Name.Length > ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0,ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
+				geofence.Name = geofence.Name.Length > ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0, ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
 				List<Geofence> overlappingList = GetOverlappingGeofences(geofence);
 
 				if (overlappingList.Count > 0)
@@ -281,7 +281,7 @@ namespace Ipheidi
 			bool selecting = true;
 			if (geofence != null)
 			{
-				geofence.Name = geofence.Name.Length >ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0,ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
+				geofence.Name = geofence.Name.Length > ApplicationConst.GeofenceNameMaxSize ? geofence.Name.Substring(0, ApplicationConst.GeofenceNameMaxSize) : geofence.Name;
 				List<Geofence> overlappingList = GetOverlappingGeofences(geofence);
 
 				ObservableCollection<Geofence> list = new ObservableCollection<Geofence>();
@@ -552,7 +552,7 @@ namespace Ipheidi
 			{
 				Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
 			}
-			var parameters = new Dictionary<string, string> { { "pheidiaction", "getGeofences" }, { "pheidiparams", "value**:**" + Application.Current.Properties["LastGeofenceSync"] + "**,**" } };
+			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexaction" }, { "pheidiparams", "action**:**GetGeofenceUpdate**,**Last_Update_Date**:**" + Application.Current.Properties["LastGeofenceSync"] + "**,**" } };
 			HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
 			if (response != null)
 			{
@@ -560,84 +560,139 @@ namespace Ipheidi
 				{
 					string responseContent = response.Content.ReadAsStringAsync().Result;
 					Debug.WriteLine("Reponse:" + responseContent);
-					var answer = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
-					if (answer["STATUS"] == "Good")
+					try
 					{
-						if (answer.ContainsKey("VALUE"))
+
+						if (Geofences == null)
 						{
-							if (Geofences == null)
+							GetGeofenceFromDatabase();
+						}
+						List<Geofence> list = new List<Geofence>();
+						var geo = new Geofence();
+						try
+						{
+							var fields = PheidiNetworkManager.GetFields(responseContent);
+							foreach (var field in fields)
 							{
-								GetGeofenceFromDatabase();
+								geo = new Geofence();
+								geo.NoSeq = field.ContainsKey("GEO_A_NoSeq") ? field["GEO_A_NoSeq"]?.ToString() : string.Empty;
+
+								geo.EnterActionName = field.ContainsKey("GAR_ACO_A_Action_EnterAction") ? field["GAR_ACO_A_Action_EnterAction"]?.ToString() : string.Empty;
+
+								geo.ExitActionName = field.ContainsKey("GAR_ACO_A_Action_ExitAction") ? field["GAR_ACO_A_Action_ExitAction"]?.ToString() : string.Empty;
+
+								geo.Name = field.ContainsKey("GEO_A_Name") ? field["GEO_A_Name"]?.ToString() : string.Empty;
+
+								geo.DeleteFlag = field.ContainsKey("GEO_B_DeleteFlag") ? (bool.Parse(field["GEO_B_DeleteFlag"]?.ToString() ?? false.ToString()) ? 1 : 0) : 0;
+
+								geo.CreationDate = field.ContainsKey("GEO_S_CrDate") ? DateTime.Parse(field["GEO_S_CrDate"]?.ToString()) : DateTime.Now;
+
+								geo.LastModification = field.ContainsKey("GEO_S_LastModDate") ? DateTime.Parse(field["GEO_S_LastModDate"]?.ToString()) : DateTime.Now;
+
+								geo.Latitude = field.ContainsKey("GEO_N_Latitude") ? double.Parse(field["GEO_N_Latitude"]?.ToString()) : 0;
+
+								geo.Longitude = field.ContainsKey("GEO_N_Longitude") ? double.Parse(field["GEO_N_Longitude"]?.ToString()) : 0;
+
+								geo.NotificationEnabled = field.ContainsKey("GAR_B_NotificationFlag") ? bool.Parse(field["GAR_B_NotificationFlag"]?.ToString() ?? false.ToString()) : true;
+
+								geo.PublicFlag = field.ContainsKey("GEO_B_PublicFlag") ? bool.Parse(field["GEO_B_PublicFlag"]?.ToString() ?? false.ToString()) ? 1 : 0 : 0;
+
+								geo.Radius = field.ContainsKey("GEO_N_Radius") ? double.Parse(field["GEO_N_Radius"]?.ToString()) : ApplicationConst.DefaultGeofenceRadius;
+
+
+								list.Add(geo);
 							}
-							List<Geofence> list = new List<Geofence>();
+							Debug.WriteLine("List Generated");
+						}
+						catch (Exception e)
+						{
+							Debug.WriteLine(e.Message);
+						}
+						List<Geofence> toRemove = new List<Geofence>();
+						foreach (var geofence in list)
+						{
 							try
 							{
-								list = JsonConvert.DeserializeObject<List<Geofence>>(answer["VALUE"]);
-								Debug.WriteLine("List Generated");
+								if (Geofences.Any(g => g.NoSeq == geofence.NoSeq))
+								{
+									//Delete la copie local si celle au serveur à déjà été supprimée.
+									if (geofence.DeleteFlag == 1)
+									{
+										var data = await DatabaseHelper.Database.GetItem<Geofence>(geofence.NoSeq);
+										await DatabaseHelper.Database.DeleteItemAsync<Geofence>(data);
+										toRemove.Add(geofence);
+									}
+									//Update la copie local pour correspondre à celle du serveur.
+									else
+									{
+										var data = Geofences.First(g => g.NoSeq == geofence.NoSeq);
+										data.DeleteFlag = geofence.DeleteFlag;
+										data.Latitude = geofence.Latitude;
+										data.Longitude = geofence.Longitude;
+										data.Name = geofence.Name;
+										data.Radius = geofence.Radius;
+										data.LastModification = DateTime.Now;
+										data.EnterActionName = geofence.EnterActionName;
+										data.ExitActionName = geofence.ExitActionName;
+										data.NotificationEnabled = geofence.NotificationEnabled;
+										await DatabaseHelper.Database.UpdateItem(data);
+									}
+								}
+								else
+								{
+									//Ajoute une nouvelle geofence si la copie locale n'existe pas.
+									if (geofence.DeleteFlag == 0)
+									{
+										await DatabaseHelper.Database.SaveItemAsync(geofence);
+									}
+								}
 							}
 							catch (Exception e)
 							{
 								Debug.WriteLine(e.Message);
 							}
-							List<Geofence> toRemove = new List<Geofence>();
-							foreach (var geofence in list)
-							{
-								try
-								{
-									if (Geofences.Any(g => g.NoSeq == geofence.NoSeq))
-									{
-										//Delete la copie local si celle au serveur à déjà été supprimée.
-										if (geofence.DeleteFlag == 1)
-										{
-											var data = await DatabaseHelper.Database.GetItem<Geofence>(geofence.NoSeq);
-											await DatabaseHelper.Database.DeleteItemAsync<Geofence>(data);
-											toRemove.Add(geofence);
-										}
-										//Update la copie local pour correspondre à celle du serveur.
-										else
-										{
-											var data = Geofences.First(g => g.NoSeq == geofence.NoSeq);
-											data.DeleteFlag = geofence.DeleteFlag;
-											data.Latitude = geofence.Latitude;
-											data.Longitude = geofence.Longitude;
-											data.Name = geofence.Name;
-											data.Radius = geofence.Radius;
-											data.LastModification = DateTime.Now;
-											data.EnterActionNoSeq = geofence.EnterActionNoSeq;
-											data.ExitActionNoSeq = geofence.ExitActionNoSeq;
-											await DatabaseHelper.Database.UpdateItem(data);
-										}
-									}
-
-
-									else
-									{
-										//Ajoute une nouvelle geofence si la copie locale n'existe pas.
-										if (geofence.DeleteFlag == 0)
-										{
-											await DatabaseHelper.Database.SaveItemAsync(geofence);
-										}
-									}
-								}
-								catch (Exception e)
-								{
-									Debug.WriteLine(e.Message);
-								}
-							}
-							foreach (var geofence in toRemove)
-							{
-								Geofences.Remove(Geofences.FirstOrDefault((arg) => arg.NoSeq == geofence.NoSeq));
-							}
-							Application.Current.Properties["LastGeofenceSync"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-							await Application.Current.SavePropertiesAsync();
 						}
+						foreach (var geofence in toRemove)
+						{
+							Geofences.Remove(Geofences.FirstOrDefault((arg) => arg.NoSeq == geofence.NoSeq));
+						}
+						Application.Current.Properties["LastGeofenceSync"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+						await Application.Current.SavePropertiesAsync();
+
 						return true;
+					}
+					catch (Exception e)
+					{
+						Debug.WriteLine(e.Message);
 					}
 				}
 			}
 			return false;
 		}
 
+		public void ExecuteAction(string actionName, GeofenceEvent ev, Geofence geofence)
+		{
+			if (!string.IsNullOrEmpty(actionName))
+			{
+				Task.Run(() =>
+				{
+					var pheidiParams = new Dictionary<string, string>();
+
+					pheidiParams.Add("GeofenceName", geofence.Name);
+					pheidiParams.Add("GeofenceEvent", ev.ToString());
+					pheidiParams.Add("GeofenceLatitude", geofence.Latitude.ToString());
+					pheidiParams.Add("GeofenceLongitude", geofence.Longitude.ToString());
+					pheidiParams.Add("GeofenceNoseq", geofence.NoSeq);
+
+					var action = new Action()
+					{
+						Name = actionName,
+						Params = pheidiParams
+					};
+					ActionManager.ExecuteAction(action);
+				});
+			}
+		}
 	}
 }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -61,45 +62,6 @@ namespace Ipheidi
 			return actionTypes;
 		}
 
-		static public async Task<Action> GetAction(string NoSeq)
-		{
-			return await Task.Run(async () =>
-			{
-				var action = new Action();
-				var parameters = new Dictionary<string, string> { { "pheidiaction", "GetIpheidiAction" }, { "pheidiparams", "actionNoSeq**:**" + NoSeq + "**,**" } };
-				HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30));
-				if (response != null)
-				{
-					if (response.StatusCode == HttpStatusCode.OK)
-					{
-						string responseContent = response.Content.ReadAsStringAsync().Result;
-						Debug.WriteLine("Reponse:" + responseContent);
-						var answer = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
-						if (answer["STATUS"] == "Good")
-						{
-							if (answer.ContainsKey("VALUE"))
-							{
-								try
-								{
-									action = JsonConvert.DeserializeObject<Action>(answer["VALUE"]);
-									Debug.WriteLine("Action deserialized");
-								}
-								catch (Exception e)
-								{
-									Debug.WriteLine(e.Message);
-								}
-							}
-						}
-
-					}
-				}
-				Debug.WriteLine("Return Action");
-				//action = SetParametersLanguage(action);
-				return action;
-			});
-		}
-
-
 
 		public static void RunActionAnswer(Action action)
 		{
@@ -113,35 +75,34 @@ namespace Ipheidi
 						var field = f as Dictionary<string, object>;
 						if (field != null)
 						{
-							if (field.ContainsKey("pheidiAlert"))
+							if (field.ContainsKey("autoClick"))
 							{
-								string message = field["pheidiAlert"] as string;
+								var autoClick = field["autoClick"] as string;
+								string script = "AutoClick(" + autoClick + ",0,0);";
+
+								BrowserPage.InsertJavscript(script);
+							}
+
+							if (field.ContainsKey("message" + App.Language.ToUpper()))
+							{
+								string lang = App.Language.ToUpper();
+								string message = field["message" + lang] as string;
 								string title = "Pheidi";
-								string onConfirm = "";
-								string onCancel = "";
 								string textConfirm = "Ok";
 								string textCancel = "Cancel";
 								foreach (var key in field.Keys)
 								{
-									switch (key)
-									{
-										case "onConfirm":
-											onConfirm = field["onConfirm"] as string;
-											break;
-										case "onCancel":
-											onCancel = field["onCancel"] as string;
-											break;
-										case "textCancel":
-											textCancel = field["textCancel"] as string;
-											break;
-										case "textConfirm":
-											textCancel = field["textConfirm"] as string;
-											break;
-										case "title":
-											title = field["title"] as string;
-											break;
-									}
+									if (key == "bCancel" + lang)
+										textCancel = field["bCancel"+lang] as string;
+
+									else if (key == "bConfirm" + lang)
+										textConfirm = field["bConfirm" + lang] as string;
+
+									else if (key == "title" + lang)
+										title = field["title" + lang] as string;
+
 								}
+
 								if (App.IsInBackground)
 								{
 									App.NotificationManager.SendNotification(message, title, "nearby_square", action);
@@ -149,24 +110,21 @@ namespace Ipheidi
 								else
 								{
 									System.Action confirm = () => { };
-									if (onConfirm != "")
+									confirm = () =>
 									{
-										confirm = () =>
-										{
-											ExecuteAction(action.Params, onConfirm);
-										};
-									}
-									if (field.ContainsKey("onCancel"))
+										action.Event = "onConfirm";
+										ExecuteAction(action);
+									};
+
+
+									System.Action cancel = () =>
 									{
-										onCancel = field["onCancel"] as string;
-										System.Action cancel = () => { };
-										if (onCancel != "")
-										{
-											cancel = () =>
-											{
-												ExecuteAction(action.Params, onCancel);
-											};
-										}
+										action.Event = "onCancel";
+										ExecuteAction(action);
+									};
+
+									if (!string.IsNullOrEmpty(textCancel))
+									{
 										App.NotificationManager.DisplayAlert(message, title, textConfirm, textCancel, confirm, cancel);
 									}
 									else
@@ -175,30 +133,21 @@ namespace Ipheidi
 									}
 								}
 							}
-							else if (field.ContainsKey("autoClick"))
-							{
-								var autoClick = field["autoClick"] as string;
-								string script = "AutoClick(" + autoClick + ",0,0);";
-
-								BrowserPage.InsertJavscript(script);
-							}
 						}
 					}
 				}
 			}
+
 			catch (Exception e)
 			{
 				Debug.WriteLine(e.Message);
 			}
 		}
 
-
-		public static void ExecuteAction(Dictionary<string, string> pheidiParams, string NoSeq)
+		public static void ExecuteAction(Action action)
 		{
 			Task.Run(async () =>
 			{
-				var action = await ActionManager.GetAction(NoSeq);
-				action.Params = pheidiParams;
 				if (!action.Params.ContainsKey("action"))
 				{
 					action.Params.Add("action", action.Name);
@@ -210,12 +159,14 @@ namespace Ipheidi
 					action.Params.Add("language", App.Language);
 				}
 				action.Params["language"] = App.Language;
+
+
 				string param = "";
 				foreach (var data in action.Params)
 				{
 					param += data.Key + "**:**" + data.Value + "**,**";
 				}
-				var parameters = new Dictionary<string, string> { { "pheidiaction", action.Name }, { "pheidiparams", param } };
+				var parameters = new Dictionary<string, string> { { "pheidiaction", action.Name },{ "Pheidi_Param[pheidiEvent]", action.Event }, { "pheidiparams", param } };
 				HttpResponseMessage response = await PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 240));
 
 				if (response != null)
@@ -233,43 +184,7 @@ namespace Ipheidi
 
 
 
-		/*static public Action SetParametersLanguage(Action action)
-		{
-			string lng = App.LocalizationManager.GetCurrentCultureInfo().TwoLetterISOLanguageName.ToLower();
-			var Values = new Dictionary<string, string>[0];
-			try
-			{
-				Values = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(action.Value);
-			}
-			catch (Exception e)
-			{
-				Debug.WriteLine(e.Message);
-			}
-			for (int i = 0; i < Values.Length; i++)
-			{
-				foreach (var data in Values[i].ToList())
-				{
-					string key = data.Key;
-					if (Values[i][key].StartsWith("{", StringComparison.OrdinalIgnoreCase) && Values[i][key].EndsWith("}", StringComparison.OrdinalIgnoreCase))
-					{
-						try
-						{
-							var multiLangueValue = JsonConvert.DeserializeObject<Dictionary<string, string>>(Values[i][key]);
-							if (multiLangueValue.ContainsKey(lng))
-							{
-								Values[i][key] = multiLangueValue[lng];
-							}
-						}
-						catch
-						{
 
-						}
-					}
-				}
-			}
-			action.Value = JsonConvert.SerializeObject(Values);
-			return action;
-		}*/
 
 
 		static async Task<List<Action>> GetActions()
@@ -299,8 +214,9 @@ namespace Ipheidi
 								};
 								list.Add(action);
 							}
-						}
 
+							list.OrderBy((arg) => arg.Category).ThenBy((arg) => arg.Description);
+						}
 						catch
 						{
 							var answer = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
@@ -326,5 +242,6 @@ namespace Ipheidi
 				return list;
 			});
 		}
+
 	}
 }

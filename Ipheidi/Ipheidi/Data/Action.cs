@@ -22,5 +22,6 @@ namespace Ipheidi
 
 		public string ActionAnswer { get; set; }
 		public Dictionary<string, string> Params { get; set; }
+		public string Event { get; set; }
 	}
 }

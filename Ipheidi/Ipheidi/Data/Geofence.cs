@@ -9,7 +9,7 @@ using Xamarin.Forms;
 //[{"action":"pheidiAlert","message":"Salut!","title":"[[Name]]"},{"action":"pheidiAlert","message":"Vous [[GeofenceEvent]] [[Name]]","title":"[[Name]],"entering":"êtes arrivé chez","leaving":"avez quitté"}]
 namespace Ipheidi
 {
-	enum GeofenceEvent
+	public enum GeofenceEvent
 	{
 		Entering,
 		Leaving
@@ -28,10 +28,9 @@ namespace Ipheidi
 
 		public double Radius { get; set; }
 
-		public string EnterActionNoSeq { get; set; }
-		public string ExitActionNoSeq { get; set; }
+		public string EnterActionName { get; set; }
+		public string ExitActionName { get; set; }
 
-		[JsonIgnore]
 		public bool NotificationEnabled { get; set; }
 
 		public int PublicFlag { get; set; }
@@ -104,11 +103,11 @@ namespace Ipheidi
 							{
 								if (IsInside)
 								{
-									ExecuteAction(EnterActionNoSeq, GeofenceEvent.Entering);
+									App.GeofenceManager.ExecuteAction(EnterActionName, GeofenceEvent.Entering,this);
 								}
 								else
 								{
-									ExecuteAction(ExitActionNoSeq, GeofenceEvent.Leaving);
+App.GeofenceManager.ExecuteAction(ExitActionName, GeofenceEvent.Leaving,this);
 								}
 							}
 						});
@@ -182,90 +181,6 @@ namespace Ipheidi
 			return degree * (111319.9 * Math.Cos(DegreeToRadian(Latitude)));
 		}
 
-		void ExecuteAction(string actionNoSeq, GeofenceEvent ev)
-		{
-			if (!string.IsNullOrEmpty(actionNoSeq))
-			{
-				Task.Run(() =>
-				{
-					var pheidiParams = new Dictionary<string, string>();
-
-					//TODO Supprimer les references vers Name, utiliser plutot GeofenceName
-					pheidiParams.Add("Name", Name);
-					//TODO Supprimer les references vers Name, utiliser plutot GeofenceName
-
-					pheidiParams.Add("GeofenceName", Name);
-					pheidiParams.Add("GeofenceEvent", ev.ToString());
-					pheidiParams.Add("Latitude", Latitude.ToString());
-					pheidiParams.Add("Longitude", Longitude.ToString());
-					pheidiParams.Add("GeofenceNoseq", NoSeq);
-					ActionManager.ExecuteAction(pheidiParams, actionNoSeq);
-				});
-			}
-			/*Task.Run(async () =>
-			{
-				Debug.WriteLine("Geofence: Get Action");
-				var action = await ActionManager.GetAction(EnterActionNoSeq);
-				Debug.WriteLine("Geofence: Get Values for " + action.Name);
-				var Values = new Dictionary<string, string>[0];
-				try
-				{
-					Debug.WriteLine(action.Value);
-					Values = JsonConvert.DeserializeObject<Dictionary<string, string>[]>(action.Value);
-				}
-				catch (Exception ex)
-				{
-					Debug.WriteLine(ex);
-				}
-				Debug.WriteLine("Geofence: Run through each Values...");
-				for (int i = 0; i < Values.Length; i++)
-				{
-					Debug.WriteLine("Geofence: Values [" + (i+1) +"/"+ Values.Length + "]");
-					foreach (var data in Values[i].ToList())
-					{
-						string key = data.Key;
-						Debug.WriteLine("Geofence: Data[" + key + "] = " + data.Value);
-						while (Values[i][key].Contains("[[") && Values[i][key].Contains("]]"))
-						{
-							int startIndex = Values[i][key].IndexOf("[[", StringComparison.Ordinal);
-							int endIndex = Values[i][key].IndexOf("]]", StringComparison.Ordinal) + 2;
-
-							int length = endIndex - startIndex;
-							var varName = Values[i][key].Substring(startIndex, length);
-
-							switch (varName.ToUpper())
-							{
-								case "[[NAME]]":
-									Values[i][key] = Values[i][key].Replace(varName, Name);
-									break;
-								case "[[LONGITUDE]]":
-									Values[i][key] = Values[i][key].Replace(varName, Longitude.ToString());
-									break;
-								case "[[LATITUDE]]":
-									Values[i][key] = Values[i][key].Replace(varName, Latitude.ToString());
-									break;
-								case "[[GEOFENCEEVENT]]":
-									string eventDescription = Values[i].ContainsKey(ev.ToString().ToLower()) ? Values[i][ev.ToString().ToLower()] : ev.ToString();
-									Values[i][key] = Values[i][key].Replace(varName, eventDescription);
-									break;
-							}
-							Debug.WriteLine("Geofence: Data[" + key + "] value changed to: " + Values[i][key]);
-						}
-					}
-				}
-				try
-				{
-					Debug.WriteLine("Geofence: Serialize Values");
-					action.Value = JsonConvert.SerializeObject(Values);
-					Debug.WriteLine("Geofence: Execute action " + action.Name);
-					ActionManager.ExecuteAction(action);
-				}
-				catch(Exception ex)
-				{
-					Debug.WriteLine(ex.Message);	
-				}
-			});*/
-		}
 
 		/// <summary>
 		/// Convert Degree to radian.

@@ -312,13 +312,13 @@ namespace Ipheidi.iOS
 													Name = val
 												};
 												geo.SetIsInside(true);
-												if (pp.ContainsKey("ENTERACTIONNOSEQ"))
+												if (pp.ContainsKey("ENTERACTIONNAME"))
 												{
-													geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];
+													geo.EnterActionName = pp["ENTERACTIONNAME"];
 												}
-												if (pp.ContainsKey("EXITACTIONNOSEQ"))
+												if (pp.ContainsKey("EXITACTIONNAME"))
 												{
-													geo.EnterActionNoSeq = pp["EXITACTIONNOSEQ"];
+													geo.ExitActionName = pp["EXITACTIONNAME"];
 												}
 												geo.Radius= ApplicationConst.DefaultGeofenceRadius;
 												App.GeofenceManager.AddGeofence(geo);

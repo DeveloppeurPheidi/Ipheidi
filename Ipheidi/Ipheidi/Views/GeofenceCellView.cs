@@ -113,7 +113,7 @@ namespace Ipheidi
 					System.Diagnostics.Debug.WriteLine("Toggled " + Name + " " + ID);
 					var geo = App.GeofenceManager.GetGeofenceByID(ID);
 					geo.NotificationEnabled = notificationsSwitch.IsToggled;
-					App.GeofenceManager.LocalGeofenceUpdate(geo);
+					App.GeofenceManager.UpdateGeofence(geo);
 				}
 			};
 			btnDelete.IsVisible = false;

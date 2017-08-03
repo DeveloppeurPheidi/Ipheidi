@@ -114,13 +114,13 @@ namespace Ipheidi.Droid
 										Radius = ApplicationConst.DefaultGeofenceRadius
 									};
 									geo.SetIsInside(true);
-									if (pp.ContainsKey("ENTERACTIONNOSEQ"))
+									if (pp.ContainsKey("ENTERACTIONNAME"))
 									{
-										geo.EnterActionNoSeq = pp["ENTERACTIONNOSEQ"];
+										geo.EnterActionName = pp["ENTERACTIONNAME"];
 									}
 									if (pp.ContainsKey("EXITACTIONNOSEQ"))
 									{
-										geo.EnterActionNoSeq = pp["EXITACTIONNOSEQ"];
+										geo.ExitActionName = pp["EXITACTIONNAME"];
 									}
 									geo.Radius = ApplicationConst.DefaultGeofenceRadius;
 									App.GeofenceManager.AddGeofence(geo);

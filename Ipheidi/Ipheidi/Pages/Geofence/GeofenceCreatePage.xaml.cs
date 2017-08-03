@@ -171,9 +171,9 @@ namespace Ipheidi
 					EnterSoustypePicker.IsEnabled = EnterSoustypePicker.Items.Count != 0;
 					if (EnterSoustypePicker.IsEnabled)
 					{
-						if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
+						if (!string.IsNullOrEmpty(geofence.EnterActionName))
 						{
-							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == geofence.EnterActionNoSeq).Description);
+							EnterSoustypePicker.SelectedIndex = EnterSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.Name == geofence.EnterActionName).Description);
 						}
 						else
 						{
@@ -189,14 +189,11 @@ namespace Ipheidi
 					if (value != "")
 					{
 						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
-						if (geofence.EnterActionNoSeq != action.NoSeq)
-						{
-							geofence.EnterActionNoSeq = action.NoSeq;
-						}
+						geofence.EnterActionName = action.Name;
 					}
 					else
 					{
-						geofence.EnterActionNoSeq = "";
+						geofence.EnterActionName = "";
 					}
 				};
 
@@ -216,9 +213,9 @@ namespace Ipheidi
 					ExitSoustypePicker.IsEnabled = ExitSoustypePicker.Items.Count != 0;
 					if (ExitSoustypePicker.IsEnabled)
 					{
-						if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
+						if (!string.IsNullOrEmpty(geofence.ExitActionName))
 						{
-							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.NoSeq == geofence.ExitActionNoSeq).Description);
+							ExitSoustypePicker.SelectedIndex = ExitSoustypePicker.Items.IndexOf(ActionManager.GetActionList().First(a => a.Name == geofence.ExitActionName).Description);
 						}
 						else
 						{
@@ -234,59 +231,33 @@ namespace Ipheidi
 					if (value != "")
 					{
 						var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
-						if (geofence.ExitActionNoSeq != action.NoSeq)
-						{
-							geofence.ExitActionNoSeq = action.NoSeq;
-						}
+						geofence.ExitActionName = action.Name;
+
 					}
 					else
 					{
-						geofence.ExitActionNoSeq = "";
+						geofence.ExitActionName = "";
 					}
 				};
 
 				string category = ActionManager.Null;
 
-				if (!string.IsNullOrEmpty(geofence.EnterActionNoSeq))
+				if (!string.IsNullOrEmpty(geofence.EnterActionName))
 				{
-					var enterAction = ActionManager.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+					var enterAction = ActionManager.GetActionList().First(a => geofence.EnterActionName == a.Name);
 					category = enterAction.Category;
 				}
 				EnterTypePicker.SelectedItem = category;
 
 				category = ActionManager.Null;
 
-				if (!string.IsNullOrEmpty(geofence.ExitActionNoSeq))
+				if (!string.IsNullOrEmpty(geofence.ExitActionName))
 				{
-					var exitAction = ActionManager.GetActionList().First(a => geofence.EnterActionNoSeq == a.NoSeq);
+					var exitAction = ActionManager.GetActionList().First(a => geofence.EnterActionName == a.Name);
 					category = exitAction.Category;
 				}
 				ExitTypePicker.SelectedItem = category;
 
-				/*EventHandler<Xamarin.Forms.FocusEventArgs> ev = (sender, e) =>
-				{
-					uint m = 0;
-					uint s = 0;
-					uint.TryParse(minEntry.Text, out m);
-					uint.TryParse(secEntry.Text, out s);
-
-					System.Diagnostics.Debug.WriteLine("Secondes: " + s + " : " + secEntry.Text + ",Minutes: " + m + " : " + minEntry.Text);
-					m += s / 60;
-					System.Diagnostics.Debug.WriteLine("Secondes: " + s + " : " + secEntry.Text + ",Minutes: " + m + " : " + minEntry.Text);
-					s = s % 60;
-					System.Diagnostics.Debug.WriteLine("Secondes: " + s + " : " + secEntry.Text + ",Minutes: " + m + " : " + minEntry.Text);
-
-
-					secEntry.Text = s + "";
-					minEntry.Text = m + "";
-					if (Geofence.NotificationDelay != m * 60 + s)
-					{
-						Geofence.NotificationDelay = m * 60 + s;
-					}
-				};
-				minEntry.Unfocused += ev;
-				secEntry.Unfocused += ev;
-				secEntry.Text = ApplicationConst.DefaultGeofenceTriggerTime.ToString();*/
 
 				delayLabel = new Label() { Text = AppResources.DelaiNotificationLabel, VerticalTextAlignment = TextAlignment.Center };
 				delayLayout.Children.Add(delayLabel);
