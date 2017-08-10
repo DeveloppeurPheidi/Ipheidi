@@ -26,7 +26,7 @@ namespace Ipheidi
 			set { SetValue(LongitudeProperty, value); }
 		}
 
-		public	Double Latitude
+		public Double Latitude
 		{
 			get { return (Double)GetValue(LatitudeProperty); }
 			set { SetValue(LatitudeProperty, value); }

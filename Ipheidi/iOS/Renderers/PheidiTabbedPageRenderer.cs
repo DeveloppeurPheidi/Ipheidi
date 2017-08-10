@@ -1,6 +1,7 @@
 using System;
 using Ipheidi;
 using Ipheidi.iOS;
+using Plugin.Badge.iOS;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -8,7 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportRenderer(typeof(PheidiTabbedPage), typeof(PheidiTabbedPageRenderer))]
 namespace Ipheidi.iOS
 {
-	public class PheidiTabbedPageRenderer : TabbedRenderer
+	public class PheidiTabbedPageRenderer : BadgedTabbedPageRenderer
 	{
 		readonly nfloat imageYOffset = 6.0f;
 

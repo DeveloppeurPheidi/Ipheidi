@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -35,7 +35,8 @@ namespace Ipheidi
 					{
 						App.CredentialsManager.DeleteSystemCredentials();
 						App.CredentialsManager.SaveSystemCredentials(usernameEntry.Text, passwordEntry.Text);
-
+						DatabaseHelper.Database.DropTable<Geofence>();
+						DatabaseHelper.Database.CreateTable<Geofence>();
 						Device.BeginInvokeOnMainThread(App.Instance.GetLoginPage);
 					}
 					else
@@ -235,7 +236,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			base.OnSizeAllocated(width, height);
 		}

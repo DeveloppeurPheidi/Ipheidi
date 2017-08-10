@@ -13,23 +13,46 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
+	public interface IGeofenceUpdatingListener
+	{
+		void OnGeofenceUpdatingStateChanged(bool updating);
+	}
+
 	/// <summary>
 	/// Geofence manager.
 	/// </summary>
 	public class GeofenceManager : ILocationListener, INetworkStateListener
 	{
-		private ObservableCollection<Geofence> Geofences = new ObservableCollection<Geofence>();
-		private List<Geofence> ClosePositionGeofences = new List<Geofence>();
+
+		List<IGeofenceUpdatingListener> geofenceUpdatingListeners = new List<IGeofenceUpdatingListener>();
+		ObservableCollection<Geofence> Geofences = new ObservableCollection<Geofence>();
+		List<Geofence> ClosePositionGeofences = new List<Geofence>();
 		static public List<int> GeofenceRadius = new List<int>();
-		private Location LastClosePositionRefreshLocation;
-		private List<Geofence> RescheduledGeofenceUpdates = new List<Geofence>();
-		private List<Location> UnknownLocationList;
-		private Geofence PendingValidationGeofence;
-		private DateTime TimerStartTime;
-		private TimeSpan TimeDelay;
-		private Location lastLocation;
-		private double largestRadius = 0;
+		Location LastClosePositionRefreshLocation;
+		List<Geofence> RescheduledGeofenceUpdates = new List<Geofence>();
+		List<Location> UnknownLocationList;
+		Geofence PendingValidationGeofence;
+		DateTime TimerStartTime;
+		TimeSpan TimeDelay;
+		Location lastLocation;
+		double largestRadius = 0;
 		public static bool DeleteEnabled = false;
+		bool _isUpdatingGeofence;
+		public bool IsUpdatingGeofence
+		{
+			get
+			{
+				return _isUpdatingGeofence;
+			}
+			set
+			{
+				_isUpdatingGeofence = value;
+				foreach (var listener in geofenceUpdatingListeners)
+				{
+					listener.OnGeofenceUpdatingStateChanged(value);
+				}
+			}
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Ipheidi.GeofenceManager"/> class.
@@ -54,11 +77,20 @@ namespace Ipheidi
 					GeofenceRadius.Add(i);
 				}
 			}
+			IsUpdatingGeofence = true;
 			GetGeofenceFromDatabase();
 			Task.Run(async () =>
 			{
-				await GetGeofenceFromServer();
-				GetGeofenceFromDatabase();
+				try
+				{
+					await GetGeofenceUpdateFromServer();
+					GetGeofenceFromDatabase();
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e.Message);
+				}
+				IsUpdatingGeofence = false;
 			});
 
 
@@ -74,7 +106,7 @@ namespace Ipheidi
 		/// Timers the tick.
 		/// </summary>
 		/// <returns><c>true</c>, if the timer has to be kept alive, <c>false</c> otherwise.</returns>
-		private bool TimerTick()
+		bool TimerTick()
 		{
 			/*if (UnknownLocationList.Count > 0 && (DateTime.UtcNow - TimerStartTime) >= TimeDelay)
 			{
@@ -112,9 +144,9 @@ namespace Ipheidi
 		/// <summary>
 		/// Gets the geofence from database.
 		/// </summary>
-		void GetGeofenceFromDatabase()
+		public void GetGeofenceFromDatabase()
 		{
-			var data = DatabaseHelper.Database.GetAllItems<Geofence>().Result;
+			var data = DatabaseHelper.Database.GetUserSpecificItems<Geofence>().Result;
 			Geofences.Clear();
 			foreach (var geofence in data)
 			{
@@ -122,7 +154,7 @@ namespace Ipheidi
 				{
 					DeleteGeofence(geofence);
 				}
-				else if (!Geofences.Any((arg) => arg.NoSeq == geofence.NoSeq))
+				else if (!Geofences.ToList().Any((arg) => arg.NoSeq == geofence.NoSeq))
 				{
 					Geofences.Add(geofence);
 					if (geofence.SetRadiusInMeters())
@@ -142,6 +174,8 @@ namespace Ipheidi
 		{
 			try
 			{
+				geofence.User = App.UserNoseq;
+				geofence.ServerNoseq = App.ServerInfoNoseq;
 				await DatabaseHelper.Database.SaveItemAsync(geofence);
 				Geofences.Add(geofence);
 				RefreshClosePositionGeofencesList();
@@ -168,7 +202,7 @@ namespace Ipheidi
 		/// <param name="geofence">Geofence.</param>
 		public void UpdateGeofence(Geofence geofence)
 		{
-			RefreshClosePositionGeofencesList();
+
 			Task.Run(async () =>
 			{
 				await DatabaseHelper.Database.UpdateItem(geofence);
@@ -426,20 +460,34 @@ namespace Ipheidi
 		/// Refreshes the close position geofences list.
 		/// </summary>
 		/// <param name="location">Location.</param>
-		void RefreshClosePositionGeofencesList()
+		public void RefreshClosePositionGeofencesList()
 		{
+			Debug.WriteLine("======New Close Position Geofence List======");
 			LastClosePositionRefreshLocation = App.LocationService.GetLocation();
 			largestRadius = 0;
 			var data = Geofences.ToArray();
+			List<Geofence> AlreadyInside = new List<Geofence>();
+			foreach (var geofence in ClosePositionGeofences)
+			{
+				if (geofence.IsInside)
+				{
+					AlreadyInside.Add(geofence);
+				}
+			}
 			ClosePositionGeofences.Clear();
-			Debug.WriteLine("======New Close Position Geofence List======");
 			foreach (var geofence in data)
 			{
 				if (geofence.NotificationEnabled && geofence.DistanceFromCurrentPosition < ApplicationConst.ClosePositionDistance + ApplicationConst.GeofenceMaxRadius)
 				{
 					largestRadius = largestRadius < geofence.Radius ? geofence.Radius : largestRadius;
+					Debug.WriteLine("Adding " + geofence.Name + " in ClosePositionGeofences");
+					if (AlreadyInside.Any((arg) => arg.NoSeq == geofence.NoSeq))
+					{
+						geofence.IsInside = true;
+						Debug.WriteLine("Already inside of " + geofence.Name);
+					}
 					ClosePositionGeofences.Add(geofence);
-					Debug.WriteLine(geofence.Name);
+
 				}
 			}
 		}
@@ -450,40 +498,17 @@ namespace Ipheidi
 		/// <param name="location">Location.</param>
 		public void OnLocationUpdate(Location location)
 		{
-			//bool IsUnknowLocation = true;
-
 			if (LastClosePositionRefreshLocation == null || location.GetDistanceFromOtherLocation(LastClosePositionRefreshLocation) > ApplicationConst.ClosePositionDistance)
 			{
 				RefreshClosePositionGeofencesList();
 			}
-			if (lastLocation == null)
+
+			foreach (Geofence geo in ClosePositionGeofences)
 			{
-				lastLocation = location;
-			}
-			double dis = lastLocation.GetDistanceFromOtherLocation(location);
-			if ((dis <= 100 && dis >= 0))
-			{
-				foreach (Geofence geo in ClosePositionGeofences)
-				{
-					if (geo.CheckIfLocationInsideFence(location))
-					{
-						//IsUnknowLocation = false;
-					}
-				}
+				geo.CheckIfLocationInsideFence(location);
 			}
 
-			/*if (IsUnknowLocation)
-			{
-				if (location.IsLocationWithinRadius(UnknownLocationList, ApplicationConst.DefaultGeofenceRadius))
-				{
-					if (UnknownLocationList.Count == 0) TimerStartTime = DateTime.UtcNow;
-					UnknownLocationList.Add(location);
-				}
-				else
-				{
-					UnknownLocationList.Clear();
-				}
-			}*/
+			lastLocation = location;
 		}
 
 
@@ -539,6 +564,7 @@ namespace Ipheidi
 				{
 					UpdateGeofence(geofence);
 				}
+				RefreshClosePositionGeofencesList();
 			}
 		}
 
@@ -546,11 +572,11 @@ namespace Ipheidi
 		/// Gets the geofence from server.
 		/// </summary>
 		/// <returns><c>true</c>, if geofence from server was gotten, <c>false</c> otherwise.</returns>
-		async Task<bool> GetGeofenceFromServer()
+		public async Task<bool> GetGeofenceUpdateFromServer()
 		{
 			if (!Application.Current.Properties.ContainsKey("LastGeofenceSync"))
 			{
-				Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
+				Application.Current.Properties["LastGeofenceSync"] = "2000-01-01 00:00:00";
 			}
 			var parameters = new Dictionary<string, string> { { "pheidiaction", "complexaction" }, { "pheidiparams", "action**:**GetGeofenceUpdate**,**Last_Update_Date**:**" + Application.Current.Properties["LastGeofenceSync"] + "**,**" } };
 			HttpResponseMessage response = PheidiNetworkManager.SendHttpRequestAsync(parameters, new TimeSpan(0, 0, 30)).Result;
@@ -575,6 +601,7 @@ namespace Ipheidi
 							foreach (var field in fields)
 							{
 								geo = new Geofence();
+
 								geo.NoSeq = field.ContainsKey("GEO_A_NoSeq") ? field["GEO_A_NoSeq"]?.ToString() : string.Empty;
 
 								geo.EnterActionName = field.ContainsKey("GAR_ACO_A_Action_EnterAction") ? field["GAR_ACO_A_Action_EnterAction"]?.ToString() : string.Empty;
@@ -599,6 +626,9 @@ namespace Ipheidi
 
 								geo.Radius = field.ContainsKey("GEO_N_Radius") ? double.Parse(field["GEO_N_Radius"]?.ToString()) : ApplicationConst.DefaultGeofenceRadius;
 
+								geo.ServerNoseq = App.ServerInfoNoseq;
+
+								geo.User = App.UserNoseq;
 
 								list.Add(geo);
 							}
@@ -606,7 +636,7 @@ namespace Ipheidi
 						}
 						catch (Exception e)
 						{
-							Debug.WriteLine(e.Message);
+							Debug.WriteLine("GetGeofenceUpdate - Creating List: " + e.Message);
 						}
 						List<Geofence> toRemove = new List<Geofence>();
 						foreach (var geofence in list)
@@ -649,21 +679,33 @@ namespace Ipheidi
 							}
 							catch (Exception e)
 							{
-								Debug.WriteLine(e.Message);
+								Debug.WriteLine("GetGeofenceUpdate - Updating geofence: " + e.Message);
 							}
 						}
-						foreach (var geofence in toRemove)
+						Device.BeginInvokeOnMainThread(() =>
 						{
-							Geofences.Remove(Geofences.FirstOrDefault((arg) => arg.NoSeq == geofence.NoSeq));
-						}
+							foreach (var geofence in toRemove)
+							{
+								try
+								{
+									Geofences.Remove(Geofences.FirstOrDefault((arg) => arg.NoSeq == geofence.NoSeq));
+								}
+								catch (Exception e)
+								{
+									Debug.WriteLine("GetGeofenceUpdate - Removing deleted: " + e.Message);
+								}
+							}
+						});
+
 						Application.Current.Properties["LastGeofenceSync"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+						Debug.WriteLine("Geofence: Synch done");
 						await Application.Current.SavePropertiesAsync();
 
 						return true;
 					}
 					catch (Exception e)
 					{
-						Debug.WriteLine(e.Message);
+						Debug.WriteLine("GetGeofenceUpdate: " + e.Message);
 					}
 				}
 			}
@@ -691,6 +733,30 @@ namespace Ipheidi
 					};
 					ActionManager.ExecuteAction(action);
 				});
+			}
+		}
+
+		public void AddGeofenceUpdatingListener(IGeofenceUpdatingListener listener)
+		{
+			if (geofenceUpdatingListeners == null)
+			{
+				geofenceUpdatingListeners = new List<IGeofenceUpdatingListener>();
+			}
+			if (!geofenceUpdatingListeners.Contains(listener))
+			{
+				geofenceUpdatingListeners.Add(listener);
+			}
+		}
+
+		public void RemoveGeofenceUpdatingListener(IGeofenceUpdatingListener listener)
+		{
+			if (geofenceUpdatingListeners == null)
+			{
+				geofenceUpdatingListeners = new List<IGeofenceUpdatingListener>();
+			}
+			if (geofenceUpdatingListeners.Contains(listener))
+			{
+				geofenceUpdatingListeners.Remove(listener);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,13 +25,14 @@ namespace Ipheidi
 		BoxView FooterLayoutBorder = new BoxView();
 		Label FooterLabel = new Label();
 		LoginState loginState = LoginState.ServerAutoLogin;
-
+		string LastServerNoseq = "";
 
 		public ServerLoginPage()
 		{
 
 			NavigationPage.SetHasNavigationBar(this, false);
 			InitializeComponent();
+			LastServerNoseq = App.ServerInfoNoseq;
 			EntriesVisible(false);
 			demiCercle.Foreground = App.ColorPrimary;
 			//if (Device.RuntimePlatform == Device.iOS)
@@ -57,13 +58,6 @@ namespace Ipheidi
 							if (s != PheidiNetworkManager.GoodResult)
 							{
 								App.NotificationManager.DisplayAlert(s, AppResources.Erreur_Title, "Ok", () => { });
-							}
-							else
-							{
-								if (Application.Current.Properties.ContainsKey("LastGeofenceSync"))
-								{
-									Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
-								}
 							}
 						}
 						if (loginState == LoginState.ServerAutoLogin)
@@ -99,7 +93,15 @@ namespace Ipheidi
 
 						if (s == PheidiNetworkManager.GoodResult)
 						{
-
+							if (LastServerNoseq != App.ServerInfoNoseq)
+							{
+								DatabaseHelper.Database.DropTable<Geofence>();
+								DatabaseHelper.Database.CreateTable<Geofence>();
+								if (Application.Current.Properties.ContainsKey("LastGeofenceSync"))
+								{
+									Application.Current.Properties["LastGeofenceSync"] = "1753-01-01 00:00:00";
+								}
+							}
 							await PheidiNetworkManager.GetPMH();
 							if (App.PMH.Count > 1)
 							{
@@ -252,7 +254,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				mainLayout.Margin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			bottomButtonLayout.Padding = new Thickness(width * 0.1, 0);
 			base.OnSizeAllocated(width, height);

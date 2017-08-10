@@ -12,7 +12,7 @@ namespace Ipheidi
 	/// <summary>
 	/// Geofence page.
 	/// </summary>
-	public partial class GeofencePage : ContentPage
+	public partial class GeofencePage : ContentPage, IGeofenceUpdatingListener
 	{
 		List<string> filters = new List<string>()
 		{
@@ -31,9 +31,53 @@ namespace Ipheidi
 		public GeofencePage()
 		{
 			InitializeComponent();
+
+			btnDelete.IsVisible = false;
+			if (Device.RuntimePlatform == Device.Android)
+			{
+				listViewGeofence.BackgroundColor = Color.White;
+				listViewGeofence.SeparatorColor = Color.FromHex("#888888");
+			}
+
+
 			ToolbarItems.Add(new ToolbarItem("", "refresh.png", () =>
 			{
-				SortList();
+
+				Task.Run(async () =>
+				{
+					Device.BeginInvokeOnMainThread(() => { AppLoadingView.IsVisible = true; });
+					try
+					{
+						Debug.WriteLine("Refresh - GetGeofenceUpdate");
+						await App.GeofenceManager.GetGeofenceUpdateFromServer();
+
+						Device.BeginInvokeOnMainThread(() =>
+						{
+							try
+							{
+								Debug.WriteLine("Refresh - GetGeofenceFromDatabase");
+								App.GeofenceManager.GetGeofenceFromDatabase();
+								Debug.WriteLine("Refresh - SortList");
+								SortList();
+							}
+							catch (Exception e)
+							{
+								Debug.WriteLine("Refresh - GetGeofenceFromDatabase: " + e.Message);
+							}
+							Debug.WriteLine("Refresh - Done!!");
+							Device.BeginInvokeOnMainThread(() => { AppLoadingView.IsVisible = false; });
+						});
+
+
+
+
+					}
+					catch (Exception e)
+					{
+						Debug.WriteLine("Refresh: " + e.Message);
+						Device.BeginInvokeOnMainThread(() => { AppLoadingView.IsVisible = false; });
+					}
+				});
 			}));
 			geofenceCollection = App.GeofenceManager.GetGeofences();
 			RefreshTitle();
@@ -48,10 +92,7 @@ namespace Ipheidi
 			listViewGeofence.ItemTemplate = geofenceCell;
 			listViewGeofence.ItemsSource = geofenceCollection;
 
-			geofenceCollection.CollectionChanged += (sender, e) =>
-			{
-				RefreshTitle();
-			};
+
 			listViewGeofence.ItemAppearing += (sender, e) =>
 			{
 				RefreshTitle();
@@ -105,46 +146,67 @@ namespace Ipheidi
 			{
 				sortingPicker.Items.Add(filter);
 			}
-			sortingPicker.SelectedIndexChanged += (sender, e) =>
-						{
-							FilterIndex = sortingPicker.SelectedIndex;
-							SortList();
-						};
+			sortingPicker.Unfocused += (sender, e) =>
+			{
+				AppLoadingView.IsVisible = true;
+				Task.Run(() =>
+				{
+					try
+					{
+						FilterIndex = sortingPicker.SelectedIndex;
+						SortList();
+					}
+					catch (Exception ex)
+					{
+						Debug.WriteLine("Sort Picker: " + ex.Message);
+					}
+				});
+
+			};
 			sortingPicker.SelectedIndex = FilterIndex == -1 ? 0 : FilterIndex;
+
 		}
 
 		void SortList()
 		{
 			RefreshTitle();
-			if (!IsCurrentlySorting)
+			if (!IsCurrentlySorting && !App.GeofenceManager.IsUpdatingGeofence)
 			{
 				IsCurrentlySorting = true;
 				Task.Run(() =>
 				{
-					var list = new List<Geofence>();
-					string s = sortingPicker.SelectedItem.ToString();
-					if (s == AppResources.FilterNom)
+					try
 					{
-						list = geofenceCollection.OrderBy((arg) => arg.Name).ToList();
-					}
-					else if (s == AppResources.FilterProximite)
-					{
-						list = geofenceCollection.OrderBy((arg) => arg.DistanceFromCurrentPosition).ToList();
-					}
-					else if (s == AppResources.FilterNotificationActive)
-					{
-						list = geofenceCollection.OrderByDescending((arg) => arg.NotificationEnabled).ToList();
-					}
-					Device.BeginInvokeOnMainThread(() =>
-					{
-						geofenceCollection.Clear();
-						for (int i = 0; i < list.Count; i++)
+						var list = new List<Geofence>();
+						string s = sortingPicker.SelectedItem.ToString();
+						if (s == AppResources.FilterNom)
 						{
-							geofenceCollection.Insert(i, list[i]);
+							list = geofenceCollection.OrderBy((arg) => arg.Name).ToList();
 						}
-					});
-					Task.Delay(50);
+						else if (s == AppResources.FilterProximite)
+						{
+							list = geofenceCollection.OrderBy((arg) => arg.DistanceFromCurrentPosition).ToList();
+						}
+						else if (s == AppResources.FilterNotificationActive)
+						{
+							list = geofenceCollection.OrderByDescending((arg) => arg.NotificationEnabled).ToList();
+						}
+						Device.BeginInvokeOnMainThread(() =>
+						{
+							geofenceCollection.Clear();
+							for (int i = 0; i < list.Count; i++)
+							{
+								geofenceCollection.Insert(i, list[i]);
+							}
+						});
+						Task.Delay(50);
+					}
+					catch (Exception e)
+					{
+						Debug.WriteLine(e.Message);
+					}
 					IsCurrentlySorting = false;
+					Device.BeginInvokeOnMainThread(() => { AppLoadingView.IsVisible = false; });
 				});
 			}
 		}
@@ -156,6 +218,7 @@ namespace Ipheidi
 			btnDelete.TextColor = Color.Gray;
 			btnDelete.BackgroundColor = Color.White;
 			GeofenceCellView.ToggleDelete(GeofenceManager.DeleteEnabled);
+			App.GeofenceManager.RemoveGeofenceUpdatingListener(this);
 		}
 		void RefreshTitle()
 		{
@@ -167,7 +230,11 @@ namespace Ipheidi
 			base.OnAppearing();
 			btnAdd.WidthRequest = btnAdd.Height;
 			btnDelete.WidthRequest = btnDelete.Height;
+			App.GeofenceManager.AddGeofenceUpdatingListener(this);
+			AppLoadingView.IsVisible = App.GeofenceManager.IsUpdatingGeofence;
 		}
+
+
 		/// <summary>
 		/// On size allocation.
 		/// </summary>
@@ -178,11 +245,20 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				this.mainLayout.Margin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
 			btnAdd.WidthRequest = btnAdd.Height;
 			btnDelete.WidthRequest = btnDelete.Height;
 			base.OnSizeAllocated(width, height);
+		}
+
+
+		public void OnGeofenceUpdatingStateChanged(bool updating)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				AppLoadingView.IsVisible = updating;
+			});
 		}
 	}
 }

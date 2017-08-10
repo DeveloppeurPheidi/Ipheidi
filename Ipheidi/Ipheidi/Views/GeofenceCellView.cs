@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ipheidi.Resources;
 using Xamarin.Forms;
 
 namespace Ipheidi
@@ -25,6 +26,7 @@ namespace Ipheidi
 		static bool IsDarkBackground = false;
 		static List<GeofenceCellView> GeofenceCellViews = new List<GeofenceCellView>();
 		static bool _deleteEnabled = false;
+
 		public static void ToggleDelete(bool enabled)
 		{
 			_deleteEnabled = enabled;
@@ -45,6 +47,7 @@ namespace Ipheidi
 				GeofenceCellViews.RemoveAt(i);
 			}
 		}
+
 		public double Longitude
 		{
 			get { return (double)GetValue(LongitudeProperty); }
@@ -114,6 +117,7 @@ namespace Ipheidi
 					var geo = App.GeofenceManager.GetGeofenceByID(ID);
 					geo.NotificationEnabled = notificationsSwitch.IsToggled;
 					App.GeofenceManager.UpdateGeofence(geo);
+					App.GeofenceManager.RefreshClosePositionGeofencesList();
 				}
 			};
 			btnDelete.IsVisible = false;
@@ -124,7 +128,11 @@ namespace Ipheidi
 				//View = new StackLayout() { BackgroundColor = Color.Transparent };
 				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceByID(ID));
 			};
-			cellWrapper.BackgroundColor = Color.White;//IsDarkBackground ? Color.FromHex("#EEEEEE") : Color.White;
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				cellWrapper.BackgroundColor = Color.White;
+			}
+
 			cellWrapper.Spacing = 10;
 			cellWrapper.Padding = new Thickness(20, 0, 10, 0);
 			cellWrapper.Children.Add(lblName);
@@ -134,6 +142,19 @@ namespace Ipheidi
 			IsDarkBackground = !IsDarkBackground;
 			View = cellWrapper;
 			GeofenceCellView.GeofenceCellViews.Add(this);
+
+			var deleteAction = new MenuItem { Text = AppResources.SupprimerBouton, IsDestructive = true }; // red background
+			deleteAction.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
+			deleteAction.Clicked += (sender, e) =>
+			{
+				btnDelete.IsEnabled = false;
+				System.Diagnostics.Debug.WriteLine("Deleted " + Name + " " + ID);
+				//View = new StackLayout() { BackgroundColor = Color.Transparent };
+				App.GeofenceManager.DeleteGeofence(App.GeofenceManager.GetGeofenceByID(ID));
+			};
+
+			// add to the ViewCell's ContextActions property
+			ContextActions.Add(deleteAction);
 		}
 		protected override void OnBindingContextChanged()
 		{

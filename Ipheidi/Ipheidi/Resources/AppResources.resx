@@ -504,7 +504,6 @@
 		name="AppareilPartageLabel">
 		<value>Cette appareil est-il partagé?</value>
 	</data>
-
 	<data
 		name="Alerte_Info_SeulUsagerAppareil_Title">
 		<value>Êtes-vous la seule personne à utiliser cette appareil?</value>
@@ -517,5 +516,68 @@ Cela empêchera d'autres utilisateurs de se connecter automatiquement à votre c
 
 Le changement prendra effet lors de votre prochaine déconnexion.</value>
 	</data>
-	<data name="Erreur_AucunServeur"><value>Aucun serveur de disponible, veuillez réessayer plus tard.</value></data>
+	<data
+		name="Erreur_AucunServeur">
+		<value>Aucun serveur de disponible, veuillez réessayer plus tard.</value>
+	</data>
+	<data
+		name="TimeSpan_Maintenant">
+		<value>Maintenant</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MinuteSingulier">
+		<value>Il y a {0} minute</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MinutePluriel">
+		<value>Il y a {0} minutes</value>
+	</data>
+	<data
+		name="TimeSpan_Past_HeureSingulier">
+		<value>Il y a {0} heure</value>
+	</data>
+	<data
+		name="TimeSpan_Past_HeurePluriel">
+		<value>Il y a {0} heures</value>
+	</data>
+	<data
+		name="TimeSpan_Past_Hier">
+		<value>
+		</value>Hier</data>
+	<data
+		name="TimeSpan_Past_JourPluriel">
+		<value>Il y a {0} jours </value>
+	</data>
+	<data
+		name="TimeSpan_Past_SemaineSingulier">
+		<value>La semaine dernière</value>
+	</data>
+	<data
+		name="TimeSpan_Past_SemainePluriel">
+		<value>Il y a {0} semaines</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MoisSingulier">
+		<value>Il y a {0} mois</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MoisPluriel">
+		<value>Il y a {0} mois</value>
+	</data>
+	<data
+		name="TimeSpan_Past_AnneeSingulier">
+		<value>L'an dernier</value>
+	</data>
+	<data
+		name="TimeSpan_Past_AnneePluriel">
+		<value>Il y a {0} ans</value>
+	</data>
+	<data
+		name="SupprimerBouton">
+		<value>Supprimer</value>
+	</data>
+	<data
+		name="PasDeNotificationLabel">
+		<value>Pas de notification</value>
+	</data>
 </root>

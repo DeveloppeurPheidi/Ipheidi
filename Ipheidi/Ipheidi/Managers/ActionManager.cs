@@ -105,10 +105,12 @@ namespace Ipheidi
 
 								if (App.IsInBackground)
 								{
+									Debug.WriteLine("ActionManger - RunActionAnswer - SendNotification");
 									App.NotificationManager.SendNotification(message, title, "nearby_square", action);
 								}
 								else
 								{
+									Debug.WriteLine("ActionManger - RunActionAnswer - DisplayAlert");
 									System.Action confirm = () => { };
 									confirm = () =>
 									{

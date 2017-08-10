@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Ipheidi
 {
-	public interface IStatusBarService
+	public interface INativeUtilities
 	{
 		/// <summary>
 		/// Gets the status bar hidden property.
@@ -14,5 +14,7 @@ namespace Ipheidi
 		/// </summary>
 		/// <param name="hidden">If set to <c>true</c> hide.</param>
 		void SetStatusBarHidden(bool hidden);
+
+		void SetApplicationBadge(int value);
 	}
 }

@@ -148,8 +148,8 @@ background:#ccc;
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
-				BrowserWeb.HeightRequest = height - (App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? 0 : 20);
+				this.mainLayout.Margin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				BrowserWeb.HeightRequest = height - (App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? 0 : 20);
 			}
 			else
 			{

@@ -36,7 +36,2120 @@ namespace Ipheidi.Droid
 			global::Xamarin.Auth.Resource.Layout.activity_webview = global::Ipheidi.Droid.Resource.Layout.activity_webview;
 			global::Xamarin.Auth.Resource.String.ApplicationName = global::Ipheidi.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Auth.Resource.String.Hello = global::Ipheidi.Droid.Resource.String.Hello;
+			global::Xamarin.Auth.Resource.String.library_name = global::Ipheidi.Droid.Resource.String.library_name;
 			global::Xamarin.Auth.Resource.String.title_activity_webview = global::Ipheidi.Droid.Resource.String.title_activity_webview;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_fade_in = global::Ipheidi.Droid.Resource.Animation.abc_fade_in;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_fade_out = global::Ipheidi.Droid.Resource.Animation.abc_fade_out;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_grow_fade_in_from_bottom = global::Ipheidi.Droid.Resource.Animation.abc_grow_fade_in_from_bottom;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_popup_enter = global::Ipheidi.Droid.Resource.Animation.abc_popup_enter;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_popup_exit = global::Ipheidi.Droid.Resource.Animation.abc_popup_exit;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_shrink_fade_out_from_bottom = global::Ipheidi.Droid.Resource.Animation.abc_shrink_fade_out_from_bottom;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_slide_in_bottom = global::Ipheidi.Droid.Resource.Animation.abc_slide_in_bottom;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_slide_in_top = global::Ipheidi.Droid.Resource.Animation.abc_slide_in_top;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_slide_out_bottom = global::Ipheidi.Droid.Resource.Animation.abc_slide_out_bottom;
+			global::Plugin.Badge.Droid.Resource.Animation.abc_slide_out_top = global::Ipheidi.Droid.Resource.Animation.abc_slide_out_top;
+			global::Plugin.Badge.Droid.Resource.Animation.design_bottom_sheet_slide_in = global::Ipheidi.Droid.Resource.Animation.design_bottom_sheet_slide_in;
+			global::Plugin.Badge.Droid.Resource.Animation.design_bottom_sheet_slide_out = global::Ipheidi.Droid.Resource.Animation.design_bottom_sheet_slide_out;
+			global::Plugin.Badge.Droid.Resource.Animation.design_fab_in = global::Ipheidi.Droid.Resource.Animation.design_fab_in;
+			global::Plugin.Badge.Droid.Resource.Animation.design_fab_out = global::Ipheidi.Droid.Resource.Animation.design_fab_out;
+			global::Plugin.Badge.Droid.Resource.Animation.design_snackbar_in = global::Ipheidi.Droid.Resource.Animation.design_snackbar_in;
+			global::Plugin.Badge.Droid.Resource.Animation.design_snackbar_out = global::Ipheidi.Droid.Resource.Animation.design_snackbar_out;
+			global::Plugin.Badge.Droid.Resource.Animator.design_appbar_state_list_animator = global::Ipheidi.Droid.Resource.Animator.design_appbar_state_list_animator;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarDivider = global::Ipheidi.Droid.Resource.Attribute.actionBarDivider;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarItemBackground = global::Ipheidi.Droid.Resource.Attribute.actionBarItemBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarPopupTheme = global::Ipheidi.Droid.Resource.Attribute.actionBarPopupTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarSize = global::Ipheidi.Droid.Resource.Attribute.actionBarSize;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarSplitStyle = global::Ipheidi.Droid.Resource.Attribute.actionBarSplitStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarStyle = global::Ipheidi.Droid.Resource.Attribute.actionBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarTabBarStyle = global::Ipheidi.Droid.Resource.Attribute.actionBarTabBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarTabStyle = global::Ipheidi.Droid.Resource.Attribute.actionBarTabStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarTabTextStyle = global::Ipheidi.Droid.Resource.Attribute.actionBarTabTextStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarTheme = global::Ipheidi.Droid.Resource.Attribute.actionBarTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionBarWidgetTheme = global::Ipheidi.Droid.Resource.Attribute.actionBarWidgetTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionButtonStyle = global::Ipheidi.Droid.Resource.Attribute.actionButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionDropDownStyle = global::Ipheidi.Droid.Resource.Attribute.actionDropDownStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionLayout = global::Ipheidi.Droid.Resource.Attribute.actionLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionMenuTextAppearance = global::Ipheidi.Droid.Resource.Attribute.actionMenuTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionMenuTextColor = global::Ipheidi.Droid.Resource.Attribute.actionMenuTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeBackground = global::Ipheidi.Droid.Resource.Attribute.actionModeBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeCloseButtonStyle = global::Ipheidi.Droid.Resource.Attribute.actionModeCloseButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeCloseDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeCloseDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeCopyDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeCopyDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeCutDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeCutDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeFindDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeFindDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModePasteDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModePasteDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModePopupWindowStyle = global::Ipheidi.Droid.Resource.Attribute.actionModePopupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeSelectAllDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeSelectAllDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeShareDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeShareDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeSplitBackground = global::Ipheidi.Droid.Resource.Attribute.actionModeSplitBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeStyle = global::Ipheidi.Droid.Resource.Attribute.actionModeStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionModeWebSearchDrawable = global::Ipheidi.Droid.Resource.Attribute.actionModeWebSearchDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionOverflowButtonStyle = global::Ipheidi.Droid.Resource.Attribute.actionOverflowButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionOverflowMenuStyle = global::Ipheidi.Droid.Resource.Attribute.actionOverflowMenuStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionProviderClass = global::Ipheidi.Droid.Resource.Attribute.actionProviderClass;
+			global::Plugin.Badge.Droid.Resource.Attribute.actionViewClass = global::Ipheidi.Droid.Resource.Attribute.actionViewClass;
+			global::Plugin.Badge.Droid.Resource.Attribute.activityChooserViewStyle = global::Ipheidi.Droid.Resource.Attribute.activityChooserViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.alertDialogButtonGroupStyle = global::Ipheidi.Droid.Resource.Attribute.alertDialogButtonGroupStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.alertDialogCenterButtons = global::Ipheidi.Droid.Resource.Attribute.alertDialogCenterButtons;
+			global::Plugin.Badge.Droid.Resource.Attribute.alertDialogStyle = global::Ipheidi.Droid.Resource.Attribute.alertDialogStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.alertDialogTheme = global::Ipheidi.Droid.Resource.Attribute.alertDialogTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.allowStacking = global::Ipheidi.Droid.Resource.Attribute.allowStacking;
+			global::Plugin.Badge.Droid.Resource.Attribute.alpha = global::Ipheidi.Droid.Resource.Attribute.alpha;
+			global::Plugin.Badge.Droid.Resource.Attribute.arrowHeadLength = global::Ipheidi.Droid.Resource.Attribute.arrowHeadLength;
+			global::Plugin.Badge.Droid.Resource.Attribute.arrowShaftLength = global::Ipheidi.Droid.Resource.Attribute.arrowShaftLength;
+			global::Plugin.Badge.Droid.Resource.Attribute.autoCompleteTextViewStyle = global::Ipheidi.Droid.Resource.Attribute.autoCompleteTextViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.background = global::Ipheidi.Droid.Resource.Attribute.background;
+			global::Plugin.Badge.Droid.Resource.Attribute.backgroundSplit = global::Ipheidi.Droid.Resource.Attribute.backgroundSplit;
+			global::Plugin.Badge.Droid.Resource.Attribute.backgroundStacked = global::Ipheidi.Droid.Resource.Attribute.backgroundStacked;
+			global::Plugin.Badge.Droid.Resource.Attribute.backgroundTint = global::Ipheidi.Droid.Resource.Attribute.backgroundTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.backgroundTintMode = global::Ipheidi.Droid.Resource.Attribute.backgroundTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.barLength = global::Ipheidi.Droid.Resource.Attribute.barLength;
+			global::Plugin.Badge.Droid.Resource.Attribute.behavior_autoHide = global::Ipheidi.Droid.Resource.Attribute.behavior_autoHide;
+			global::Plugin.Badge.Droid.Resource.Attribute.behavior_hideable = global::Ipheidi.Droid.Resource.Attribute.behavior_hideable;
+			global::Plugin.Badge.Droid.Resource.Attribute.behavior_overlapTop = global::Ipheidi.Droid.Resource.Attribute.behavior_overlapTop;
+			global::Plugin.Badge.Droid.Resource.Attribute.behavior_peekHeight = global::Ipheidi.Droid.Resource.Attribute.behavior_peekHeight;
+			global::Plugin.Badge.Droid.Resource.Attribute.behavior_skipCollapsed = global::Ipheidi.Droid.Resource.Attribute.behavior_skipCollapsed;
+			global::Plugin.Badge.Droid.Resource.Attribute.borderWidth = global::Ipheidi.Droid.Resource.Attribute.borderWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.borderlessButtonStyle = global::Ipheidi.Droid.Resource.Attribute.borderlessButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.bottomSheetDialogTheme = global::Ipheidi.Droid.Resource.Attribute.bottomSheetDialogTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.bottomSheetStyle = global::Ipheidi.Droid.Resource.Attribute.bottomSheetStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonBarButtonStyle = global::Ipheidi.Droid.Resource.Attribute.buttonBarButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonBarNegativeButtonStyle = global::Ipheidi.Droid.Resource.Attribute.buttonBarNegativeButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonBarNeutralButtonStyle = global::Ipheidi.Droid.Resource.Attribute.buttonBarNeutralButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonBarPositiveButtonStyle = global::Ipheidi.Droid.Resource.Attribute.buttonBarPositiveButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonBarStyle = global::Ipheidi.Droid.Resource.Attribute.buttonBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonGravity = global::Ipheidi.Droid.Resource.Attribute.buttonGravity;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonPanelSideLayout = global::Ipheidi.Droid.Resource.Attribute.buttonPanelSideLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonStyle = global::Ipheidi.Droid.Resource.Attribute.buttonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonStyleSmall = global::Ipheidi.Droid.Resource.Attribute.buttonStyleSmall;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonTint = global::Ipheidi.Droid.Resource.Attribute.buttonTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.buttonTintMode = global::Ipheidi.Droid.Resource.Attribute.buttonTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardBackgroundColor = global::Ipheidi.Droid.Resource.Attribute.cardBackgroundColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardCornerRadius = global::Ipheidi.Droid.Resource.Attribute.cardCornerRadius;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardElevation = global::Ipheidi.Droid.Resource.Attribute.cardElevation;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardMaxElevation = global::Ipheidi.Droid.Resource.Attribute.cardMaxElevation;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardPreventCornerOverlap = global::Ipheidi.Droid.Resource.Attribute.cardPreventCornerOverlap;
+			global::Plugin.Badge.Droid.Resource.Attribute.cardUseCompatPadding = global::Ipheidi.Droid.Resource.Attribute.cardUseCompatPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.checkboxStyle = global::Ipheidi.Droid.Resource.Attribute.checkboxStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.checkedTextViewStyle = global::Ipheidi.Droid.Resource.Attribute.checkedTextViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.closeIcon = global::Ipheidi.Droid.Resource.Attribute.closeIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.closeItemLayout = global::Ipheidi.Droid.Resource.Attribute.closeItemLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.collapseContentDescription = global::Ipheidi.Droid.Resource.Attribute.collapseContentDescription;
+			global::Plugin.Badge.Droid.Resource.Attribute.collapseIcon = global::Ipheidi.Droid.Resource.Attribute.collapseIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.collapsedTitleGravity = global::Ipheidi.Droid.Resource.Attribute.collapsedTitleGravity;
+			global::Plugin.Badge.Droid.Resource.Attribute.collapsedTitleTextAppearance = global::Ipheidi.Droid.Resource.Attribute.collapsedTitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.color = global::Ipheidi.Droid.Resource.Attribute.color;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorAccent = global::Ipheidi.Droid.Resource.Attribute.colorAccent;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorBackgroundFloating = global::Ipheidi.Droid.Resource.Attribute.colorBackgroundFloating;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorButtonNormal = global::Ipheidi.Droid.Resource.Attribute.colorButtonNormal;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorControlActivated = global::Ipheidi.Droid.Resource.Attribute.colorControlActivated;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorControlHighlight = global::Ipheidi.Droid.Resource.Attribute.colorControlHighlight;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorControlNormal = global::Ipheidi.Droid.Resource.Attribute.colorControlNormal;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorPrimary = global::Ipheidi.Droid.Resource.Attribute.colorPrimary;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorPrimaryDark = global::Ipheidi.Droid.Resource.Attribute.colorPrimaryDark;
+			global::Plugin.Badge.Droid.Resource.Attribute.colorSwitchThumbNormal = global::Ipheidi.Droid.Resource.Attribute.colorSwitchThumbNormal;
+			global::Plugin.Badge.Droid.Resource.Attribute.commitIcon = global::Ipheidi.Droid.Resource.Attribute.commitIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetEnd = global::Ipheidi.Droid.Resource.Attribute.contentInsetEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetEndWithActions = global::Ipheidi.Droid.Resource.Attribute.contentInsetEndWithActions;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetLeft = global::Ipheidi.Droid.Resource.Attribute.contentInsetLeft;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetRight = global::Ipheidi.Droid.Resource.Attribute.contentInsetRight;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetStart = global::Ipheidi.Droid.Resource.Attribute.contentInsetStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentInsetStartWithNavigation = global::Ipheidi.Droid.Resource.Attribute.contentInsetStartWithNavigation;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentPadding = global::Ipheidi.Droid.Resource.Attribute.contentPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentPaddingBottom = global::Ipheidi.Droid.Resource.Attribute.contentPaddingBottom;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentPaddingLeft = global::Ipheidi.Droid.Resource.Attribute.contentPaddingLeft;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentPaddingRight = global::Ipheidi.Droid.Resource.Attribute.contentPaddingRight;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentPaddingTop = global::Ipheidi.Droid.Resource.Attribute.contentPaddingTop;
+			global::Plugin.Badge.Droid.Resource.Attribute.contentScrim = global::Ipheidi.Droid.Resource.Attribute.contentScrim;
+			global::Plugin.Badge.Droid.Resource.Attribute.controlBackground = global::Ipheidi.Droid.Resource.Attribute.controlBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.counterEnabled = global::Ipheidi.Droid.Resource.Attribute.counterEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.counterMaxLength = global::Ipheidi.Droid.Resource.Attribute.counterMaxLength;
+			global::Plugin.Badge.Droid.Resource.Attribute.counterOverflowTextAppearance = global::Ipheidi.Droid.Resource.Attribute.counterOverflowTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.counterTextAppearance = global::Ipheidi.Droid.Resource.Attribute.counterTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.customNavigationLayout = global::Ipheidi.Droid.Resource.Attribute.customNavigationLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.defaultQueryHint = global::Ipheidi.Droid.Resource.Attribute.defaultQueryHint;
+			global::Plugin.Badge.Droid.Resource.Attribute.dialogPreferredPadding = global::Ipheidi.Droid.Resource.Attribute.dialogPreferredPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.dialogTheme = global::Ipheidi.Droid.Resource.Attribute.dialogTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.displayOptions = global::Ipheidi.Droid.Resource.Attribute.displayOptions;
+			global::Plugin.Badge.Droid.Resource.Attribute.divider = global::Ipheidi.Droid.Resource.Attribute.divider;
+			global::Plugin.Badge.Droid.Resource.Attribute.dividerHorizontal = global::Ipheidi.Droid.Resource.Attribute.dividerHorizontal;
+			global::Plugin.Badge.Droid.Resource.Attribute.dividerPadding = global::Ipheidi.Droid.Resource.Attribute.dividerPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.dividerVertical = global::Ipheidi.Droid.Resource.Attribute.dividerVertical;
+			global::Plugin.Badge.Droid.Resource.Attribute.drawableSize = global::Ipheidi.Droid.Resource.Attribute.drawableSize;
+			global::Plugin.Badge.Droid.Resource.Attribute.drawerArrowStyle = global::Ipheidi.Droid.Resource.Attribute.drawerArrowStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.dropDownListViewStyle = global::Ipheidi.Droid.Resource.Attribute.dropDownListViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.dropdownListPreferredItemHeight = global::Ipheidi.Droid.Resource.Attribute.dropdownListPreferredItemHeight;
+			global::Plugin.Badge.Droid.Resource.Attribute.editTextBackground = global::Ipheidi.Droid.Resource.Attribute.editTextBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.editTextColor = global::Ipheidi.Droid.Resource.Attribute.editTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.editTextStyle = global::Ipheidi.Droid.Resource.Attribute.editTextStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.elevation = global::Ipheidi.Droid.Resource.Attribute.elevation;
+			global::Plugin.Badge.Droid.Resource.Attribute.errorEnabled = global::Ipheidi.Droid.Resource.Attribute.errorEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.errorTextAppearance = global::Ipheidi.Droid.Resource.Attribute.errorTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandActivityOverflowButtonDrawable = global::Ipheidi.Droid.Resource.Attribute.expandActivityOverflowButtonDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.expanded = global::Ipheidi.Droid.Resource.Attribute.expanded;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleGravity = global::Ipheidi.Droid.Resource.Attribute.expandedTitleGravity;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleMargin = global::Ipheidi.Droid.Resource.Attribute.expandedTitleMargin;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleMarginBottom = global::Ipheidi.Droid.Resource.Attribute.expandedTitleMarginBottom;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleMarginEnd = global::Ipheidi.Droid.Resource.Attribute.expandedTitleMarginEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleMarginStart = global::Ipheidi.Droid.Resource.Attribute.expandedTitleMarginStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleMarginTop = global::Ipheidi.Droid.Resource.Attribute.expandedTitleMarginTop;
+			global::Plugin.Badge.Droid.Resource.Attribute.expandedTitleTextAppearance = global::Ipheidi.Droid.Resource.Attribute.expandedTitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.externalRouteEnabledDrawable = global::Ipheidi.Droid.Resource.Attribute.externalRouteEnabledDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.fabSize = global::Ipheidi.Droid.Resource.Attribute.fabSize;
+			global::Plugin.Badge.Droid.Resource.Attribute.foregroundInsidePadding = global::Ipheidi.Droid.Resource.Attribute.foregroundInsidePadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.gapBetweenBars = global::Ipheidi.Droid.Resource.Attribute.gapBetweenBars;
+			global::Plugin.Badge.Droid.Resource.Attribute.goIcon = global::Ipheidi.Droid.Resource.Attribute.goIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.headerLayout = global::Ipheidi.Droid.Resource.Attribute.headerLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.height = global::Ipheidi.Droid.Resource.Attribute.height;
+			global::Plugin.Badge.Droid.Resource.Attribute.hideOnContentScroll = global::Ipheidi.Droid.Resource.Attribute.hideOnContentScroll;
+			global::Plugin.Badge.Droid.Resource.Attribute.hintAnimationEnabled = global::Ipheidi.Droid.Resource.Attribute.hintAnimationEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.hintEnabled = global::Ipheidi.Droid.Resource.Attribute.hintEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.hintTextAppearance = global::Ipheidi.Droid.Resource.Attribute.hintTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.homeAsUpIndicator = global::Ipheidi.Droid.Resource.Attribute.homeAsUpIndicator;
+			global::Plugin.Badge.Droid.Resource.Attribute.homeLayout = global::Ipheidi.Droid.Resource.Attribute.homeLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.icon = global::Ipheidi.Droid.Resource.Attribute.icon;
+			global::Plugin.Badge.Droid.Resource.Attribute.iconifiedByDefault = global::Ipheidi.Droid.Resource.Attribute.iconifiedByDefault;
+			global::Plugin.Badge.Droid.Resource.Attribute.imageButtonStyle = global::Ipheidi.Droid.Resource.Attribute.imageButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.indeterminateProgressStyle = global::Ipheidi.Droid.Resource.Attribute.indeterminateProgressStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.initialActivityCount = global::Ipheidi.Droid.Resource.Attribute.initialActivityCount;
+			global::Plugin.Badge.Droid.Resource.Attribute.insetForeground = global::Ipheidi.Droid.Resource.Attribute.insetForeground;
+			global::Plugin.Badge.Droid.Resource.Attribute.isLightTheme = global::Ipheidi.Droid.Resource.Attribute.isLightTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.itemBackground = global::Ipheidi.Droid.Resource.Attribute.itemBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.itemIconTint = global::Ipheidi.Droid.Resource.Attribute.itemIconTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.itemPadding = global::Ipheidi.Droid.Resource.Attribute.itemPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.itemTextAppearance = global::Ipheidi.Droid.Resource.Attribute.itemTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.itemTextColor = global::Ipheidi.Droid.Resource.Attribute.itemTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.keylines = global::Ipheidi.Droid.Resource.Attribute.keylines;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout = global::Ipheidi.Droid.Resource.Attribute.layout;
+			global::Plugin.Badge.Droid.Resource.Attribute.layoutManager = global::Ipheidi.Droid.Resource.Attribute.layoutManager;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_anchor = global::Ipheidi.Droid.Resource.Attribute.layout_anchor;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_anchorGravity = global::Ipheidi.Droid.Resource.Attribute.layout_anchorGravity;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_behavior = global::Ipheidi.Droid.Resource.Attribute.layout_behavior;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_collapseMode = global::Ipheidi.Droid.Resource.Attribute.layout_collapseMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_collapseParallaxMultiplier = global::Ipheidi.Droid.Resource.Attribute.layout_collapseParallaxMultiplier;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_dodgeInsetEdges = global::Ipheidi.Droid.Resource.Attribute.layout_dodgeInsetEdges;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_insetEdge = global::Ipheidi.Droid.Resource.Attribute.layout_insetEdge;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_keyline = global::Ipheidi.Droid.Resource.Attribute.layout_keyline;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_scrollFlags = global::Ipheidi.Droid.Resource.Attribute.layout_scrollFlags;
+			global::Plugin.Badge.Droid.Resource.Attribute.layout_scrollInterpolator = global::Ipheidi.Droid.Resource.Attribute.layout_scrollInterpolator;
+			global::Plugin.Badge.Droid.Resource.Attribute.listChoiceBackgroundIndicator = global::Ipheidi.Droid.Resource.Attribute.listChoiceBackgroundIndicator;
+			global::Plugin.Badge.Droid.Resource.Attribute.listDividerAlertDialog = global::Ipheidi.Droid.Resource.Attribute.listDividerAlertDialog;
+			global::Plugin.Badge.Droid.Resource.Attribute.listItemLayout = global::Ipheidi.Droid.Resource.Attribute.listItemLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.listLayout = global::Ipheidi.Droid.Resource.Attribute.listLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.listMenuViewStyle = global::Ipheidi.Droid.Resource.Attribute.listMenuViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPopupWindowStyle = global::Ipheidi.Droid.Resource.Attribute.listPopupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPreferredItemHeight = global::Ipheidi.Droid.Resource.Attribute.listPreferredItemHeight;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPreferredItemHeightLarge = global::Ipheidi.Droid.Resource.Attribute.listPreferredItemHeightLarge;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPreferredItemHeightSmall = global::Ipheidi.Droid.Resource.Attribute.listPreferredItemHeightSmall;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPreferredItemPaddingLeft = global::Ipheidi.Droid.Resource.Attribute.listPreferredItemPaddingLeft;
+			global::Plugin.Badge.Droid.Resource.Attribute.listPreferredItemPaddingRight = global::Ipheidi.Droid.Resource.Attribute.listPreferredItemPaddingRight;
+			global::Plugin.Badge.Droid.Resource.Attribute.logo = global::Ipheidi.Droid.Resource.Attribute.logo;
+			global::Plugin.Badge.Droid.Resource.Attribute.logoDescription = global::Ipheidi.Droid.Resource.Attribute.logoDescription;
+			global::Plugin.Badge.Droid.Resource.Attribute.maxActionInlineWidth = global::Ipheidi.Droid.Resource.Attribute.maxActionInlineWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.maxButtonHeight = global::Ipheidi.Droid.Resource.Attribute.maxButtonHeight;
+			global::Plugin.Badge.Droid.Resource.Attribute.measureWithLargestChild = global::Ipheidi.Droid.Resource.Attribute.measureWithLargestChild;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteAudioTrackDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteAudioTrackDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteButtonStyle = global::Ipheidi.Droid.Resource.Attribute.mediaRouteButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteCloseDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteCloseDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteControlPanelThemeOverlay = global::Ipheidi.Droid.Resource.Attribute.mediaRouteControlPanelThemeOverlay;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteDefaultIconDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteDefaultIconDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRoutePauseDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRoutePauseDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRoutePlayDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRoutePlayDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteSpeakerGroupIconDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteSpeakerGroupIconDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteSpeakerIconDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteSpeakerIconDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteStopDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteStopDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteTheme = global::Ipheidi.Droid.Resource.Attribute.mediaRouteTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.mediaRouteTvIconDrawable = global::Ipheidi.Droid.Resource.Attribute.mediaRouteTvIconDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.menu = global::Ipheidi.Droid.Resource.Attribute.menu;
+			global::Plugin.Badge.Droid.Resource.Attribute.multiChoiceItemLayout = global::Ipheidi.Droid.Resource.Attribute.multiChoiceItemLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.navigationContentDescription = global::Ipheidi.Droid.Resource.Attribute.navigationContentDescription;
+			global::Plugin.Badge.Droid.Resource.Attribute.navigationIcon = global::Ipheidi.Droid.Resource.Attribute.navigationIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.navigationMode = global::Ipheidi.Droid.Resource.Attribute.navigationMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.overlapAnchor = global::Ipheidi.Droid.Resource.Attribute.overlapAnchor;
+			global::Plugin.Badge.Droid.Resource.Attribute.paddingBottomNoButtons = global::Ipheidi.Droid.Resource.Attribute.paddingBottomNoButtons;
+			global::Plugin.Badge.Droid.Resource.Attribute.paddingEnd = global::Ipheidi.Droid.Resource.Attribute.paddingEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.paddingStart = global::Ipheidi.Droid.Resource.Attribute.paddingStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.paddingTopNoTitle = global::Ipheidi.Droid.Resource.Attribute.paddingTopNoTitle;
+			global::Plugin.Badge.Droid.Resource.Attribute.panelBackground = global::Ipheidi.Droid.Resource.Attribute.panelBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.panelMenuListTheme = global::Ipheidi.Droid.Resource.Attribute.panelMenuListTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.panelMenuListWidth = global::Ipheidi.Droid.Resource.Attribute.panelMenuListWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.passwordToggleContentDescription = global::Ipheidi.Droid.Resource.Attribute.passwordToggleContentDescription;
+			global::Plugin.Badge.Droid.Resource.Attribute.passwordToggleDrawable = global::Ipheidi.Droid.Resource.Attribute.passwordToggleDrawable;
+			global::Plugin.Badge.Droid.Resource.Attribute.passwordToggleEnabled = global::Ipheidi.Droid.Resource.Attribute.passwordToggleEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.passwordToggleTint = global::Ipheidi.Droid.Resource.Attribute.passwordToggleTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.passwordToggleTintMode = global::Ipheidi.Droid.Resource.Attribute.passwordToggleTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.popupMenuStyle = global::Ipheidi.Droid.Resource.Attribute.popupMenuStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.popupTheme = global::Ipheidi.Droid.Resource.Attribute.popupTheme;
+			global::Plugin.Badge.Droid.Resource.Attribute.popupWindowStyle = global::Ipheidi.Droid.Resource.Attribute.popupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.preserveIconSpacing = global::Ipheidi.Droid.Resource.Attribute.preserveIconSpacing;
+			global::Plugin.Badge.Droid.Resource.Attribute.pressedTranslationZ = global::Ipheidi.Droid.Resource.Attribute.pressedTranslationZ;
+			global::Plugin.Badge.Droid.Resource.Attribute.progressBarPadding = global::Ipheidi.Droid.Resource.Attribute.progressBarPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.progressBarStyle = global::Ipheidi.Droid.Resource.Attribute.progressBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.queryBackground = global::Ipheidi.Droid.Resource.Attribute.queryBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.queryHint = global::Ipheidi.Droid.Resource.Attribute.queryHint;
+			global::Plugin.Badge.Droid.Resource.Attribute.radioButtonStyle = global::Ipheidi.Droid.Resource.Attribute.radioButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.ratingBarStyle = global::Ipheidi.Droid.Resource.Attribute.ratingBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.ratingBarStyleIndicator = global::Ipheidi.Droid.Resource.Attribute.ratingBarStyleIndicator;
+			global::Plugin.Badge.Droid.Resource.Attribute.ratingBarStyleSmall = global::Ipheidi.Droid.Resource.Attribute.ratingBarStyleSmall;
+			global::Plugin.Badge.Droid.Resource.Attribute.reverseLayout = global::Ipheidi.Droid.Resource.Attribute.reverseLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.rippleColor = global::Ipheidi.Droid.Resource.Attribute.rippleColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.scrimAnimationDuration = global::Ipheidi.Droid.Resource.Attribute.scrimAnimationDuration;
+			global::Plugin.Badge.Droid.Resource.Attribute.scrimVisibleHeightTrigger = global::Ipheidi.Droid.Resource.Attribute.scrimVisibleHeightTrigger;
+			global::Plugin.Badge.Droid.Resource.Attribute.searchHintIcon = global::Ipheidi.Droid.Resource.Attribute.searchHintIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.searchIcon = global::Ipheidi.Droid.Resource.Attribute.searchIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.searchViewStyle = global::Ipheidi.Droid.Resource.Attribute.searchViewStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.seekBarStyle = global::Ipheidi.Droid.Resource.Attribute.seekBarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.selectableItemBackground = global::Ipheidi.Droid.Resource.Attribute.selectableItemBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.selectableItemBackgroundBorderless = global::Ipheidi.Droid.Resource.Attribute.selectableItemBackgroundBorderless;
+			global::Plugin.Badge.Droid.Resource.Attribute.showAsAction = global::Ipheidi.Droid.Resource.Attribute.showAsAction;
+			global::Plugin.Badge.Droid.Resource.Attribute.showDividers = global::Ipheidi.Droid.Resource.Attribute.showDividers;
+			global::Plugin.Badge.Droid.Resource.Attribute.showText = global::Ipheidi.Droid.Resource.Attribute.showText;
+			global::Plugin.Badge.Droid.Resource.Attribute.showTitle = global::Ipheidi.Droid.Resource.Attribute.showTitle;
+			global::Plugin.Badge.Droid.Resource.Attribute.singleChoiceItemLayout = global::Ipheidi.Droid.Resource.Attribute.singleChoiceItemLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.spanCount = global::Ipheidi.Droid.Resource.Attribute.spanCount;
+			global::Plugin.Badge.Droid.Resource.Attribute.spinBars = global::Ipheidi.Droid.Resource.Attribute.spinBars;
+			global::Plugin.Badge.Droid.Resource.Attribute.spinnerDropDownItemStyle = global::Ipheidi.Droid.Resource.Attribute.spinnerDropDownItemStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.spinnerStyle = global::Ipheidi.Droid.Resource.Attribute.spinnerStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.splitTrack = global::Ipheidi.Droid.Resource.Attribute.splitTrack;
+			global::Plugin.Badge.Droid.Resource.Attribute.srcCompat = global::Ipheidi.Droid.Resource.Attribute.srcCompat;
+			global::Plugin.Badge.Droid.Resource.Attribute.stackFromEnd = global::Ipheidi.Droid.Resource.Attribute.stackFromEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.state_above_anchor = global::Ipheidi.Droid.Resource.Attribute.state_above_anchor;
+			global::Plugin.Badge.Droid.Resource.Attribute.state_collapsed = global::Ipheidi.Droid.Resource.Attribute.state_collapsed;
+			global::Plugin.Badge.Droid.Resource.Attribute.state_collapsible = global::Ipheidi.Droid.Resource.Attribute.state_collapsible;
+			global::Plugin.Badge.Droid.Resource.Attribute.statusBarBackground = global::Ipheidi.Droid.Resource.Attribute.statusBarBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.statusBarScrim = global::Ipheidi.Droid.Resource.Attribute.statusBarScrim;
+			global::Plugin.Badge.Droid.Resource.Attribute.subMenuArrow = global::Ipheidi.Droid.Resource.Attribute.subMenuArrow;
+			global::Plugin.Badge.Droid.Resource.Attribute.submitBackground = global::Ipheidi.Droid.Resource.Attribute.submitBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.subtitle = global::Ipheidi.Droid.Resource.Attribute.subtitle;
+			global::Plugin.Badge.Droid.Resource.Attribute.subtitleTextAppearance = global::Ipheidi.Droid.Resource.Attribute.subtitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.subtitleTextColor = global::Ipheidi.Droid.Resource.Attribute.subtitleTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.subtitleTextStyle = global::Ipheidi.Droid.Resource.Attribute.subtitleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.suggestionRowLayout = global::Ipheidi.Droid.Resource.Attribute.suggestionRowLayout;
+			global::Plugin.Badge.Droid.Resource.Attribute.switchMinWidth = global::Ipheidi.Droid.Resource.Attribute.switchMinWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.switchPadding = global::Ipheidi.Droid.Resource.Attribute.switchPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.switchStyle = global::Ipheidi.Droid.Resource.Attribute.switchStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.switchTextAppearance = global::Ipheidi.Droid.Resource.Attribute.switchTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabBackground = global::Ipheidi.Droid.Resource.Attribute.tabBackground;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabContentStart = global::Ipheidi.Droid.Resource.Attribute.tabContentStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabGravity = global::Ipheidi.Droid.Resource.Attribute.tabGravity;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabIndicatorColor = global::Ipheidi.Droid.Resource.Attribute.tabIndicatorColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabIndicatorHeight = global::Ipheidi.Droid.Resource.Attribute.tabIndicatorHeight;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabMaxWidth = global::Ipheidi.Droid.Resource.Attribute.tabMaxWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabMinWidth = global::Ipheidi.Droid.Resource.Attribute.tabMinWidth;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabMode = global::Ipheidi.Droid.Resource.Attribute.tabMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabPadding = global::Ipheidi.Droid.Resource.Attribute.tabPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabPaddingBottom = global::Ipheidi.Droid.Resource.Attribute.tabPaddingBottom;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabPaddingEnd = global::Ipheidi.Droid.Resource.Attribute.tabPaddingEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabPaddingStart = global::Ipheidi.Droid.Resource.Attribute.tabPaddingStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabPaddingTop = global::Ipheidi.Droid.Resource.Attribute.tabPaddingTop;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabSelectedTextColor = global::Ipheidi.Droid.Resource.Attribute.tabSelectedTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabTextAppearance = global::Ipheidi.Droid.Resource.Attribute.tabTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.tabTextColor = global::Ipheidi.Droid.Resource.Attribute.tabTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAllCaps = global::Ipheidi.Droid.Resource.Attribute.textAllCaps;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceLargePopupMenu = global::Ipheidi.Droid.Resource.Attribute.textAppearanceLargePopupMenu;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceListItem = global::Ipheidi.Droid.Resource.Attribute.textAppearanceListItem;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceListItemSmall = global::Ipheidi.Droid.Resource.Attribute.textAppearanceListItemSmall;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearancePopupMenuHeader = global::Ipheidi.Droid.Resource.Attribute.textAppearancePopupMenuHeader;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceSearchResultSubtitle = global::Ipheidi.Droid.Resource.Attribute.textAppearanceSearchResultSubtitle;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceSearchResultTitle = global::Ipheidi.Droid.Resource.Attribute.textAppearanceSearchResultTitle;
+			global::Plugin.Badge.Droid.Resource.Attribute.textAppearanceSmallPopupMenu = global::Ipheidi.Droid.Resource.Attribute.textAppearanceSmallPopupMenu;
+			global::Plugin.Badge.Droid.Resource.Attribute.textColorAlertDialogListItem = global::Ipheidi.Droid.Resource.Attribute.textColorAlertDialogListItem;
+			global::Plugin.Badge.Droid.Resource.Attribute.textColorError = global::Ipheidi.Droid.Resource.Attribute.textColorError;
+			global::Plugin.Badge.Droid.Resource.Attribute.textColorSearchUrl = global::Ipheidi.Droid.Resource.Attribute.textColorSearchUrl;
+			global::Plugin.Badge.Droid.Resource.Attribute.theme = global::Ipheidi.Droid.Resource.Attribute.theme;
+			global::Plugin.Badge.Droid.Resource.Attribute.thickness = global::Ipheidi.Droid.Resource.Attribute.thickness;
+			global::Plugin.Badge.Droid.Resource.Attribute.thumbTextPadding = global::Ipheidi.Droid.Resource.Attribute.thumbTextPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.thumbTint = global::Ipheidi.Droid.Resource.Attribute.thumbTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.thumbTintMode = global::Ipheidi.Droid.Resource.Attribute.thumbTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.tickMark = global::Ipheidi.Droid.Resource.Attribute.tickMark;
+			global::Plugin.Badge.Droid.Resource.Attribute.tickMarkTint = global::Ipheidi.Droid.Resource.Attribute.tickMarkTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.tickMarkTintMode = global::Ipheidi.Droid.Resource.Attribute.tickMarkTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.title = global::Ipheidi.Droid.Resource.Attribute.title;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleEnabled = global::Ipheidi.Droid.Resource.Attribute.titleEnabled;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMargin = global::Ipheidi.Droid.Resource.Attribute.titleMargin;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMarginBottom = global::Ipheidi.Droid.Resource.Attribute.titleMarginBottom;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMarginEnd = global::Ipheidi.Droid.Resource.Attribute.titleMarginEnd;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMarginStart = global::Ipheidi.Droid.Resource.Attribute.titleMarginStart;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMarginTop = global::Ipheidi.Droid.Resource.Attribute.titleMarginTop;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleMargins = global::Ipheidi.Droid.Resource.Attribute.titleMargins;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleTextAppearance = global::Ipheidi.Droid.Resource.Attribute.titleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleTextColor = global::Ipheidi.Droid.Resource.Attribute.titleTextColor;
+			global::Plugin.Badge.Droid.Resource.Attribute.titleTextStyle = global::Ipheidi.Droid.Resource.Attribute.titleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.toolbarId = global::Ipheidi.Droid.Resource.Attribute.toolbarId;
+			global::Plugin.Badge.Droid.Resource.Attribute.toolbarNavigationButtonStyle = global::Ipheidi.Droid.Resource.Attribute.toolbarNavigationButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.toolbarStyle = global::Ipheidi.Droid.Resource.Attribute.toolbarStyle;
+			global::Plugin.Badge.Droid.Resource.Attribute.track = global::Ipheidi.Droid.Resource.Attribute.track;
+			global::Plugin.Badge.Droid.Resource.Attribute.trackTint = global::Ipheidi.Droid.Resource.Attribute.trackTint;
+			global::Plugin.Badge.Droid.Resource.Attribute.trackTintMode = global::Ipheidi.Droid.Resource.Attribute.trackTintMode;
+			global::Plugin.Badge.Droid.Resource.Attribute.useCompatPadding = global::Ipheidi.Droid.Resource.Attribute.useCompatPadding;
+			global::Plugin.Badge.Droid.Resource.Attribute.voiceIcon = global::Ipheidi.Droid.Resource.Attribute.voiceIcon;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowActionBar = global::Ipheidi.Droid.Resource.Attribute.windowActionBar;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowActionBarOverlay = global::Ipheidi.Droid.Resource.Attribute.windowActionBarOverlay;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowActionModeOverlay = global::Ipheidi.Droid.Resource.Attribute.windowActionModeOverlay;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowFixedHeightMajor = global::Ipheidi.Droid.Resource.Attribute.windowFixedHeightMajor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowFixedHeightMinor = global::Ipheidi.Droid.Resource.Attribute.windowFixedHeightMinor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowFixedWidthMajor = global::Ipheidi.Droid.Resource.Attribute.windowFixedWidthMajor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowFixedWidthMinor = global::Ipheidi.Droid.Resource.Attribute.windowFixedWidthMinor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowMinWidthMajor = global::Ipheidi.Droid.Resource.Attribute.windowMinWidthMajor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowMinWidthMinor = global::Ipheidi.Droid.Resource.Attribute.windowMinWidthMinor;
+			global::Plugin.Badge.Droid.Resource.Attribute.windowNoTitle = global::Ipheidi.Droid.Resource.Attribute.windowNoTitle;
+			global::Plugin.Badge.Droid.Resource.Boolean.abc_action_bar_embed_tabs = global::Ipheidi.Droid.Resource.Boolean.abc_action_bar_embed_tabs;
+			global::Plugin.Badge.Droid.Resource.Boolean.abc_allow_stacked_button_bar = global::Ipheidi.Droid.Resource.Boolean.abc_allow_stacked_button_bar;
+			global::Plugin.Badge.Droid.Resource.Boolean.abc_config_actionMenuItemAllCaps = global::Ipheidi.Droid.Resource.Boolean.abc_config_actionMenuItemAllCaps;
+			global::Plugin.Badge.Droid.Resource.Boolean.abc_config_closeDialogWhenTouchOutside = global::Ipheidi.Droid.Resource.Boolean.abc_config_closeDialogWhenTouchOutside;
+			global::Plugin.Badge.Droid.Resource.Boolean.abc_config_showMenuShortcutsWhenKeyboardPresent = global::Ipheidi.Droid.Resource.Boolean.abc_config_showMenuShortcutsWhenKeyboardPresent;
+			global::Plugin.Badge.Droid.Resource.Color.abc_background_cache_hint_selector_material_dark = global::Ipheidi.Droid.Resource.Color.abc_background_cache_hint_selector_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.abc_background_cache_hint_selector_material_light = global::Ipheidi.Droid.Resource.Color.abc_background_cache_hint_selector_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.abc_btn_colored_borderless_text_material = global::Ipheidi.Droid.Resource.Color.abc_btn_colored_borderless_text_material;
+			global::Plugin.Badge.Droid.Resource.Color.abc_btn_colored_text_material = global::Ipheidi.Droid.Resource.Color.abc_btn_colored_text_material;
+			global::Plugin.Badge.Droid.Resource.Color.abc_color_highlight_material = global::Ipheidi.Droid.Resource.Color.abc_color_highlight_material;
+			global::Plugin.Badge.Droid.Resource.Color.abc_hint_foreground_material_dark = global::Ipheidi.Droid.Resource.Color.abc_hint_foreground_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.abc_hint_foreground_material_light = global::Ipheidi.Droid.Resource.Color.abc_hint_foreground_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.abc_input_method_navigation_guard = global::Ipheidi.Droid.Resource.Color.abc_input_method_navigation_guard;
+			global::Plugin.Badge.Droid.Resource.Color.abc_primary_text_disable_only_material_dark = global::Ipheidi.Droid.Resource.Color.abc_primary_text_disable_only_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.abc_primary_text_disable_only_material_light = global::Ipheidi.Droid.Resource.Color.abc_primary_text_disable_only_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.abc_primary_text_material_dark = global::Ipheidi.Droid.Resource.Color.abc_primary_text_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.abc_primary_text_material_light = global::Ipheidi.Droid.Resource.Color.abc_primary_text_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.abc_search_url_text = global::Ipheidi.Droid.Resource.Color.abc_search_url_text;
+			global::Plugin.Badge.Droid.Resource.Color.abc_search_url_text_normal = global::Ipheidi.Droid.Resource.Color.abc_search_url_text_normal;
+			global::Plugin.Badge.Droid.Resource.Color.abc_search_url_text_pressed = global::Ipheidi.Droid.Resource.Color.abc_search_url_text_pressed;
+			global::Plugin.Badge.Droid.Resource.Color.abc_search_url_text_selected = global::Ipheidi.Droid.Resource.Color.abc_search_url_text_selected;
+			global::Plugin.Badge.Droid.Resource.Color.abc_secondary_text_material_dark = global::Ipheidi.Droid.Resource.Color.abc_secondary_text_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.abc_secondary_text_material_light = global::Ipheidi.Droid.Resource.Color.abc_secondary_text_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_btn_checkable = global::Ipheidi.Droid.Resource.Color.abc_tint_btn_checkable;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_default = global::Ipheidi.Droid.Resource.Color.abc_tint_default;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_edittext = global::Ipheidi.Droid.Resource.Color.abc_tint_edittext;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_seek_thumb = global::Ipheidi.Droid.Resource.Color.abc_tint_seek_thumb;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_spinner = global::Ipheidi.Droid.Resource.Color.abc_tint_spinner;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_switch_thumb = global::Ipheidi.Droid.Resource.Color.abc_tint_switch_thumb;
+			global::Plugin.Badge.Droid.Resource.Color.abc_tint_switch_track = global::Ipheidi.Droid.Resource.Color.abc_tint_switch_track;
+			global::Plugin.Badge.Droid.Resource.Color.accent_material_dark = global::Ipheidi.Droid.Resource.Color.accent_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.accent_material_light = global::Ipheidi.Droid.Resource.Color.accent_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.background_floating_material_dark = global::Ipheidi.Droid.Resource.Color.background_floating_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.background_floating_material_light = global::Ipheidi.Droid.Resource.Color.background_floating_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.background_material_dark = global::Ipheidi.Droid.Resource.Color.background_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.background_material_light = global::Ipheidi.Droid.Resource.Color.background_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_disabled_material_dark = global::Ipheidi.Droid.Resource.Color.bright_foreground_disabled_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_disabled_material_light = global::Ipheidi.Droid.Resource.Color.bright_foreground_disabled_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_inverse_material_dark = global::Ipheidi.Droid.Resource.Color.bright_foreground_inverse_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_inverse_material_light = global::Ipheidi.Droid.Resource.Color.bright_foreground_inverse_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_material_dark = global::Ipheidi.Droid.Resource.Color.bright_foreground_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.bright_foreground_material_light = global::Ipheidi.Droid.Resource.Color.bright_foreground_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.button_material_dark = global::Ipheidi.Droid.Resource.Color.button_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.button_material_light = global::Ipheidi.Droid.Resource.Color.button_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.cardview_dark_background = global::Ipheidi.Droid.Resource.Color.cardview_dark_background;
+			global::Plugin.Badge.Droid.Resource.Color.cardview_light_background = global::Ipheidi.Droid.Resource.Color.cardview_light_background;
+			global::Plugin.Badge.Droid.Resource.Color.cardview_shadow_end_color = global::Ipheidi.Droid.Resource.Color.cardview_shadow_end_color;
+			global::Plugin.Badge.Droid.Resource.Color.cardview_shadow_start_color = global::Ipheidi.Droid.Resource.Color.cardview_shadow_start_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_bottom_navigation_shadow_color = global::Ipheidi.Droid.Resource.Color.design_bottom_navigation_shadow_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_error = global::Ipheidi.Droid.Resource.Color.design_error;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_shadow_end_color = global::Ipheidi.Droid.Resource.Color.design_fab_shadow_end_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_shadow_mid_color = global::Ipheidi.Droid.Resource.Color.design_fab_shadow_mid_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_shadow_start_color = global::Ipheidi.Droid.Resource.Color.design_fab_shadow_start_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_stroke_end_inner_color = global::Ipheidi.Droid.Resource.Color.design_fab_stroke_end_inner_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_stroke_end_outer_color = global::Ipheidi.Droid.Resource.Color.design_fab_stroke_end_outer_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_stroke_top_inner_color = global::Ipheidi.Droid.Resource.Color.design_fab_stroke_top_inner_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_fab_stroke_top_outer_color = global::Ipheidi.Droid.Resource.Color.design_fab_stroke_top_outer_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_snackbar_background_color = global::Ipheidi.Droid.Resource.Color.design_snackbar_background_color;
+			global::Plugin.Badge.Droid.Resource.Color.design_textinput_error_color_dark = global::Ipheidi.Droid.Resource.Color.design_textinput_error_color_dark;
+			global::Plugin.Badge.Droid.Resource.Color.design_textinput_error_color_light = global::Ipheidi.Droid.Resource.Color.design_textinput_error_color_light;
+			global::Plugin.Badge.Droid.Resource.Color.design_tint_password_toggle = global::Ipheidi.Droid.Resource.Color.design_tint_password_toggle;
+			global::Plugin.Badge.Droid.Resource.Color.dim_foreground_disabled_material_dark = global::Ipheidi.Droid.Resource.Color.dim_foreground_disabled_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.dim_foreground_disabled_material_light = global::Ipheidi.Droid.Resource.Color.dim_foreground_disabled_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.dim_foreground_material_dark = global::Ipheidi.Droid.Resource.Color.dim_foreground_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.dim_foreground_material_light = global::Ipheidi.Droid.Resource.Color.dim_foreground_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.foreground_material_dark = global::Ipheidi.Droid.Resource.Color.foreground_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.foreground_material_light = global::Ipheidi.Droid.Resource.Color.foreground_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.highlighted_text_material_dark = global::Ipheidi.Droid.Resource.Color.highlighted_text_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.highlighted_text_material_light = global::Ipheidi.Droid.Resource.Color.highlighted_text_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.material_blue_grey_800 = global::Ipheidi.Droid.Resource.Color.material_blue_grey_800;
+			global::Plugin.Badge.Droid.Resource.Color.material_blue_grey_900 = global::Ipheidi.Droid.Resource.Color.material_blue_grey_900;
+			global::Plugin.Badge.Droid.Resource.Color.material_blue_grey_950 = global::Ipheidi.Droid.Resource.Color.material_blue_grey_950;
+			global::Plugin.Badge.Droid.Resource.Color.material_deep_teal_200 = global::Ipheidi.Droid.Resource.Color.material_deep_teal_200;
+			global::Plugin.Badge.Droid.Resource.Color.material_deep_teal_500 = global::Ipheidi.Droid.Resource.Color.material_deep_teal_500;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_100 = global::Ipheidi.Droid.Resource.Color.material_grey_100;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_300 = global::Ipheidi.Droid.Resource.Color.material_grey_300;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_50 = global::Ipheidi.Droid.Resource.Color.material_grey_50;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_600 = global::Ipheidi.Droid.Resource.Color.material_grey_600;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_800 = global::Ipheidi.Droid.Resource.Color.material_grey_800;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_850 = global::Ipheidi.Droid.Resource.Color.material_grey_850;
+			global::Plugin.Badge.Droid.Resource.Color.material_grey_900 = global::Ipheidi.Droid.Resource.Color.material_grey_900;
+			global::Plugin.Badge.Droid.Resource.Color.notification_action_color_filter = global::Ipheidi.Droid.Resource.Color.notification_action_color_filter;
+			global::Plugin.Badge.Droid.Resource.Color.notification_icon_bg_color = global::Ipheidi.Droid.Resource.Color.notification_icon_bg_color;
+			global::Plugin.Badge.Droid.Resource.Color.notification_material_background_media_default_color = global::Ipheidi.Droid.Resource.Color.notification_material_background_media_default_color;
+			global::Plugin.Badge.Droid.Resource.Color.primary_dark_material_dark = global::Ipheidi.Droid.Resource.Color.primary_dark_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.primary_dark_material_light = global::Ipheidi.Droid.Resource.Color.primary_dark_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.primary_material_dark = global::Ipheidi.Droid.Resource.Color.primary_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.primary_material_light = global::Ipheidi.Droid.Resource.Color.primary_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.primary_text_default_material_dark = global::Ipheidi.Droid.Resource.Color.primary_text_default_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.primary_text_default_material_light = global::Ipheidi.Droid.Resource.Color.primary_text_default_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.primary_text_disabled_material_dark = global::Ipheidi.Droid.Resource.Color.primary_text_disabled_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.primary_text_disabled_material_light = global::Ipheidi.Droid.Resource.Color.primary_text_disabled_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.ripple_material_dark = global::Ipheidi.Droid.Resource.Color.ripple_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.ripple_material_light = global::Ipheidi.Droid.Resource.Color.ripple_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.secondary_text_default_material_dark = global::Ipheidi.Droid.Resource.Color.secondary_text_default_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.secondary_text_default_material_light = global::Ipheidi.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.secondary_text_disabled_material_dark = global::Ipheidi.Droid.Resource.Color.secondary_text_disabled_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.secondary_text_disabled_material_light = global::Ipheidi.Droid.Resource.Color.secondary_text_disabled_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_disabled_material_dark = global::Ipheidi.Droid.Resource.Color.switch_thumb_disabled_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_disabled_material_light = global::Ipheidi.Droid.Resource.Color.switch_thumb_disabled_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_material_dark = global::Ipheidi.Droid.Resource.Color.switch_thumb_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_material_light = global::Ipheidi.Droid.Resource.Color.switch_thumb_material_light;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_normal_material_dark = global::Ipheidi.Droid.Resource.Color.switch_thumb_normal_material_dark;
+			global::Plugin.Badge.Droid.Resource.Color.switch_thumb_normal_material_light = global::Ipheidi.Droid.Resource.Color.switch_thumb_normal_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_content_inset_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_content_inset_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_content_inset_with_nav = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_content_inset_with_nav;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_default_height_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_default_height_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_default_padding_end_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_default_padding_end_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_default_padding_start_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_default_padding_start_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_elevation_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_elevation_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_icon_vertical_padding_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_icon_vertical_padding_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_overflow_padding_end_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_overflow_padding_end_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_overflow_padding_start_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_overflow_padding_start_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_progress_bar_size = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_progress_bar_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_stacked_max_height = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_stacked_max_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_stacked_tab_max_width = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_stacked_tab_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_bar_subtitle_top_margin_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_bar_subtitle_top_margin_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_button_min_height_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_button_min_height_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_button_min_width_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_button_min_width_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_action_button_min_width_overflow_material = global::Ipheidi.Droid.Resource.Dimension.abc_action_button_min_width_overflow_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_alert_dialog_button_bar_height = global::Ipheidi.Droid.Resource.Dimension.abc_alert_dialog_button_bar_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_button_inset_horizontal_material = global::Ipheidi.Droid.Resource.Dimension.abc_button_inset_horizontal_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_button_inset_vertical_material = global::Ipheidi.Droid.Resource.Dimension.abc_button_inset_vertical_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_button_padding_horizontal_material = global::Ipheidi.Droid.Resource.Dimension.abc_button_padding_horizontal_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_button_padding_vertical_material = global::Ipheidi.Droid.Resource.Dimension.abc_button_padding_vertical_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_cascading_menus_min_smallest_width = global::Ipheidi.Droid.Resource.Dimension.abc_cascading_menus_min_smallest_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_config_prefDialogWidth = global::Ipheidi.Droid.Resource.Dimension.abc_config_prefDialogWidth;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_control_corner_material = global::Ipheidi.Droid.Resource.Dimension.abc_control_corner_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_control_inset_material = global::Ipheidi.Droid.Resource.Dimension.abc_control_inset_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_control_padding_material = global::Ipheidi.Droid.Resource.Dimension.abc_control_padding_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_fixed_height_major = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_fixed_height_major;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_fixed_height_minor = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_fixed_height_minor;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_fixed_width_major = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_fixed_width_major;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_fixed_width_minor = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_fixed_width_minor;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_list_padding_bottom_no_buttons = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_list_padding_bottom_no_buttons;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_list_padding_top_no_title = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_list_padding_top_no_title;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_min_width_major = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_min_width_major;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_min_width_minor = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_min_width_minor;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_padding_material = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_padding_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_padding_top_material = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_padding_top_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dialog_title_divider_material = global::Ipheidi.Droid.Resource.Dimension.abc_dialog_title_divider_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_disabled_alpha_material_dark = global::Ipheidi.Droid.Resource.Dimension.abc_disabled_alpha_material_dark;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_disabled_alpha_material_light = global::Ipheidi.Droid.Resource.Dimension.abc_disabled_alpha_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dropdownitem_icon_width = global::Ipheidi.Droid.Resource.Dimension.abc_dropdownitem_icon_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dropdownitem_text_padding_left = global::Ipheidi.Droid.Resource.Dimension.abc_dropdownitem_text_padding_left;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_dropdownitem_text_padding_right = global::Ipheidi.Droid.Resource.Dimension.abc_dropdownitem_text_padding_right;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_edit_text_inset_bottom_material = global::Ipheidi.Droid.Resource.Dimension.abc_edit_text_inset_bottom_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_edit_text_inset_horizontal_material = global::Ipheidi.Droid.Resource.Dimension.abc_edit_text_inset_horizontal_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_edit_text_inset_top_material = global::Ipheidi.Droid.Resource.Dimension.abc_edit_text_inset_top_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_floating_window_z = global::Ipheidi.Droid.Resource.Dimension.abc_floating_window_z;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_list_item_padding_horizontal_material = global::Ipheidi.Droid.Resource.Dimension.abc_list_item_padding_horizontal_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_panel_menu_list_width = global::Ipheidi.Droid.Resource.Dimension.abc_panel_menu_list_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_progress_bar_height_material = global::Ipheidi.Droid.Resource.Dimension.abc_progress_bar_height_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_search_view_preferred_height = global::Ipheidi.Droid.Resource.Dimension.abc_search_view_preferred_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_search_view_preferred_width = global::Ipheidi.Droid.Resource.Dimension.abc_search_view_preferred_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_seekbar_track_background_height_material = global::Ipheidi.Droid.Resource.Dimension.abc_seekbar_track_background_height_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_seekbar_track_progress_height_material = global::Ipheidi.Droid.Resource.Dimension.abc_seekbar_track_progress_height_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_select_dialog_padding_start_material = global::Ipheidi.Droid.Resource.Dimension.abc_select_dialog_padding_start_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_switch_padding = global::Ipheidi.Droid.Resource.Dimension.abc_switch_padding;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_body_1_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_body_1_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_body_2_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_body_2_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_button_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_button_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_caption_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_caption_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_display_1_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_display_1_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_display_2_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_display_2_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_display_3_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_display_3_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_display_4_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_display_4_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_headline_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_headline_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_large_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_large_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_medium_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_medium_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_menu_header_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_menu_header_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_menu_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_menu_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_small_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_small_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_subhead_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_subhead_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_subtitle_material_toolbar = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_subtitle_material_toolbar;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_title_material = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_title_material;
+			global::Plugin.Badge.Droid.Resource.Dimension.abc_text_size_title_material_toolbar = global::Ipheidi.Droid.Resource.Dimension.abc_text_size_title_material_toolbar;
+			global::Plugin.Badge.Droid.Resource.Dimension.cardview_compat_inset_shadow = global::Ipheidi.Droid.Resource.Dimension.cardview_compat_inset_shadow;
+			global::Plugin.Badge.Droid.Resource.Dimension.cardview_default_elevation = global::Ipheidi.Droid.Resource.Dimension.cardview_default_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.cardview_default_radius = global::Ipheidi.Droid.Resource.Dimension.cardview_default_radius;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_appbar_elevation = global::Ipheidi.Droid.Resource.Dimension.design_appbar_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_active_item_max_width = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_active_item_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_active_text_size = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_active_text_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_elevation = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_height = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_item_max_width = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_item_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_item_min_width = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_item_min_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_margin = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_margin;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_shadow_height = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_shadow_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_navigation_text_size = global::Ipheidi.Droid.Resource.Dimension.design_bottom_navigation_text_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_sheet_modal_elevation = global::Ipheidi.Droid.Resource.Dimension.design_bottom_sheet_modal_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_bottom_sheet_peek_height_min = global::Ipheidi.Droid.Resource.Dimension.design_bottom_sheet_peek_height_min;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_border_width = global::Ipheidi.Droid.Resource.Dimension.design_fab_border_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_elevation = global::Ipheidi.Droid.Resource.Dimension.design_fab_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_image_size = global::Ipheidi.Droid.Resource.Dimension.design_fab_image_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_size_mini = global::Ipheidi.Droid.Resource.Dimension.design_fab_size_mini;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_size_normal = global::Ipheidi.Droid.Resource.Dimension.design_fab_size_normal;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_fab_translation_z_pressed = global::Ipheidi.Droid.Resource.Dimension.design_fab_translation_z_pressed;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_elevation = global::Ipheidi.Droid.Resource.Dimension.design_navigation_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_icon_padding = global::Ipheidi.Droid.Resource.Dimension.design_navigation_icon_padding;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_icon_size = global::Ipheidi.Droid.Resource.Dimension.design_navigation_icon_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_max_width = global::Ipheidi.Droid.Resource.Dimension.design_navigation_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_padding_bottom = global::Ipheidi.Droid.Resource.Dimension.design_navigation_padding_bottom;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_navigation_separator_vertical_padding = global::Ipheidi.Droid.Resource.Dimension.design_navigation_separator_vertical_padding;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_action_inline_max_width = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_action_inline_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_background_corner_radius = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_background_corner_radius;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_elevation = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_elevation;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_extra_spacing_horizontal = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_extra_spacing_horizontal;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_max_width = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_min_width = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_min_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_padding_horizontal = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_padding_horizontal;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_padding_vertical = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_padding_vertical;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_padding_vertical_2lines = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_padding_vertical_2lines;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_snackbar_text_size = global::Ipheidi.Droid.Resource.Dimension.design_snackbar_text_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_tab_max_width = global::Ipheidi.Droid.Resource.Dimension.design_tab_max_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_tab_scrollable_min_width = global::Ipheidi.Droid.Resource.Dimension.design_tab_scrollable_min_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_tab_text_size = global::Ipheidi.Droid.Resource.Dimension.design_tab_text_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.design_tab_text_size_2line = global::Ipheidi.Droid.Resource.Dimension.design_tab_text_size_2line;
+			global::Plugin.Badge.Droid.Resource.Dimension.disabled_alpha_material_dark = global::Ipheidi.Droid.Resource.Dimension.disabled_alpha_material_dark;
+			global::Plugin.Badge.Droid.Resource.Dimension.disabled_alpha_material_light = global::Ipheidi.Droid.Resource.Dimension.disabled_alpha_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.highlight_alpha_material_colored = global::Ipheidi.Droid.Resource.Dimension.highlight_alpha_material_colored;
+			global::Plugin.Badge.Droid.Resource.Dimension.highlight_alpha_material_dark = global::Ipheidi.Droid.Resource.Dimension.highlight_alpha_material_dark;
+			global::Plugin.Badge.Droid.Resource.Dimension.highlight_alpha_material_light = global::Ipheidi.Droid.Resource.Dimension.highlight_alpha_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.hint_alpha_material_dark = global::Ipheidi.Droid.Resource.Dimension.hint_alpha_material_dark;
+			global::Plugin.Badge.Droid.Resource.Dimension.hint_alpha_material_light = global::Ipheidi.Droid.Resource.Dimension.hint_alpha_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.hint_pressed_alpha_material_dark = global::Ipheidi.Droid.Resource.Dimension.hint_pressed_alpha_material_dark;
+			global::Plugin.Badge.Droid.Resource.Dimension.hint_pressed_alpha_material_light = global::Ipheidi.Droid.Resource.Dimension.hint_pressed_alpha_material_light;
+			global::Plugin.Badge.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::Ipheidi.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
+			global::Plugin.Badge.Droid.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity = global::Ipheidi.Droid.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity;
+			global::Plugin.Badge.Droid.Resource.Dimension.item_touch_helper_swipe_escape_velocity = global::Ipheidi.Droid.Resource.Dimension.item_touch_helper_swipe_escape_velocity;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_controller_volume_group_list_item_height = global::Ipheidi.Droid.Resource.Dimension.mr_controller_volume_group_list_item_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_controller_volume_group_list_item_icon_size = global::Ipheidi.Droid.Resource.Dimension.mr_controller_volume_group_list_item_icon_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_controller_volume_group_list_max_height = global::Ipheidi.Droid.Resource.Dimension.mr_controller_volume_group_list_max_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_controller_volume_group_list_padding_top = global::Ipheidi.Droid.Resource.Dimension.mr_controller_volume_group_list_padding_top;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_dialog_fixed_width_major = global::Ipheidi.Droid.Resource.Dimension.mr_dialog_fixed_width_major;
+			global::Plugin.Badge.Droid.Resource.Dimension.mr_dialog_fixed_width_minor = global::Ipheidi.Droid.Resource.Dimension.mr_dialog_fixed_width_minor;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_action_icon_size = global::Ipheidi.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_action_text_size = global::Ipheidi.Droid.Resource.Dimension.notification_action_text_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_big_circle_margin = global::Ipheidi.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_content_margin_start = global::Ipheidi.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_large_icon_height = global::Ipheidi.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_large_icon_width = global::Ipheidi.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_main_column_padding_top = global::Ipheidi.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_media_narrow_margin = global::Ipheidi.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_right_icon_size = global::Ipheidi.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_right_side_padding_top = global::Ipheidi.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_small_icon_background_padding = global::Ipheidi.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_small_icon_size_as_large = global::Ipheidi.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_subtext_size = global::Ipheidi.Droid.Resource.Dimension.notification_subtext_size;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_top_pad = global::Ipheidi.Droid.Resource.Dimension.notification_top_pad;
+			global::Plugin.Badge.Droid.Resource.Dimension.notification_top_pad_large_text = global::Ipheidi.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ab_share_pack_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ab_share_pack_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_action_bar_item_background_material = global::Ipheidi.Droid.Resource.Drawable.abc_action_bar_item_background_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_borderless_material = global::Ipheidi.Droid.Resource.Drawable.abc_btn_borderless_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_check_material = global::Ipheidi.Droid.Resource.Drawable.abc_btn_check_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_000 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_000;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_015 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_015;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_colored_material = global::Ipheidi.Droid.Resource.Drawable.abc_btn_colored_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_default_mtrl_shape = global::Ipheidi.Droid.Resource.Drawable.abc_btn_default_mtrl_shape;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_radio_material = global::Ipheidi.Droid.Resource.Drawable.abc_btn_radio_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_000 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_000;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_015 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_015;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012 = global::Ipheidi.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_cab_background_internal_bg = global::Ipheidi.Droid.Resource.Drawable.abc_cab_background_internal_bg;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_cab_background_top_material = global::Ipheidi.Droid.Resource.Drawable.abc_cab_background_top_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_cab_background_top_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_cab_background_top_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_control_background_material = global::Ipheidi.Droid.Resource.Drawable.abc_control_background_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_dialog_material_background = global::Ipheidi.Droid.Resource.Drawable.abc_dialog_material_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_edit_text_material = global::Ipheidi.Droid.Resource.Drawable.abc_edit_text_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_ab_back_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_ab_back_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_arrow_drop_right_black_24dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_arrow_drop_right_black_24dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_clear_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_clear_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_go_search_api_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_go_search_api_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_overflow_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_overflow_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_menu_share_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_ic_menu_share_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_search_api_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_search_api_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_black_16dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_black_16dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_black_36dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_black_36dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_black_48dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_black_48dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_half_black_16dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_half_black_16dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_half_black_36dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_half_black_36dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_star_half_black_48dp = global::Ipheidi.Droid.Resource.Drawable.abc_ic_star_half_black_48dp;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ic_voice_search_api_material = global::Ipheidi.Droid.Resource.Drawable.abc_ic_voice_search_api_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_item_background_holo_dark = global::Ipheidi.Droid.Resource.Drawable.abc_item_background_holo_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_item_background_holo_light = global::Ipheidi.Droid.Resource.Drawable.abc_item_background_holo_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_divider_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_list_divider_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_focused_holo = global::Ipheidi.Droid.Resource.Drawable.abc_list_focused_holo;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_longpressed_holo = global::Ipheidi.Droid.Resource.Drawable.abc_list_longpressed_holo;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_pressed_holo_dark = global::Ipheidi.Droid.Resource.Drawable.abc_list_pressed_holo_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_pressed_holo_light = global::Ipheidi.Droid.Resource.Drawable.abc_list_pressed_holo_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_dark = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_light = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_disabled_holo_dark = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_disabled_holo_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_disabled_holo_light = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_disabled_holo_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_holo_dark = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_holo_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_list_selector_holo_light = global::Ipheidi.Droid.Resource.Drawable.abc_list_selector_holo_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult = global::Ipheidi.Droid.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_popup_background_mtrl_mult = global::Ipheidi.Droid.Resource.Drawable.abc_popup_background_mtrl_mult;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ratingbar_indicator_material = global::Ipheidi.Droid.Resource.Drawable.abc_ratingbar_indicator_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ratingbar_material = global::Ipheidi.Droid.Resource.Drawable.abc_ratingbar_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_ratingbar_small_material = global::Ipheidi.Droid.Resource.Drawable.abc_ratingbar_small_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000 = global::Ipheidi.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005 = global::Ipheidi.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_scrubber_primary_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_scrubber_primary_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_scrubber_track_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_scrubber_track_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_seekbar_thumb_material = global::Ipheidi.Droid.Resource.Drawable.abc_seekbar_thumb_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_seekbar_tick_mark_material = global::Ipheidi.Droid.Resource.Drawable.abc_seekbar_tick_mark_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_seekbar_track_material = global::Ipheidi.Droid.Resource.Drawable.abc_seekbar_track_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_spinner_mtrl_am_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_spinner_mtrl_am_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_spinner_textfield_background_material = global::Ipheidi.Droid.Resource.Drawable.abc_spinner_textfield_background_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_switch_thumb_material = global::Ipheidi.Droid.Resource.Drawable.abc_switch_thumb_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_switch_track_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_switch_track_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_tab_indicator_material = global::Ipheidi.Droid.Resource.Drawable.abc_tab_indicator_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_tab_indicator_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_tab_indicator_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_cursor_material = global::Ipheidi.Droid.Resource.Drawable.abc_text_cursor_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_dark = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_light = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_dark = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_light = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_dark = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_light = global::Ipheidi.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_textfield_activated_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_textfield_activated_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_textfield_default_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_textfield_default_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_textfield_search_default_mtrl_alpha = global::Ipheidi.Droid.Resource.Drawable.abc_textfield_search_default_mtrl_alpha;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_textfield_search_material = global::Ipheidi.Droid.Resource.Drawable.abc_textfield_search_material;
+			global::Plugin.Badge.Droid.Resource.Drawable.abc_vector_test = global::Ipheidi.Droid.Resource.Drawable.abc_vector_test;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_hide_password = global::Ipheidi.Droid.Resource.Drawable.avd_hide_password;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_hide_password_1 = global::Ipheidi.Droid.Resource.Drawable.avd_hide_password_1;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_hide_password_2 = global::Ipheidi.Droid.Resource.Drawable.avd_hide_password_2;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_hide_password_3 = global::Ipheidi.Droid.Resource.Drawable.avd_hide_password_3;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_show_password = global::Ipheidi.Droid.Resource.Drawable.avd_show_password;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_show_password_1 = global::Ipheidi.Droid.Resource.Drawable.avd_show_password_1;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_show_password_2 = global::Ipheidi.Droid.Resource.Drawable.avd_show_password_2;
+			global::Plugin.Badge.Droid.Resource.Drawable.avd_show_password_3 = global::Ipheidi.Droid.Resource.Drawable.avd_show_password_3;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_bottom_navigation_item_background = global::Ipheidi.Droid.Resource.Drawable.design_bottom_navigation_item_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_fab_background = global::Ipheidi.Droid.Resource.Drawable.design_fab_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_ic_visibility = global::Ipheidi.Droid.Resource.Drawable.design_ic_visibility;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_ic_visibility_off = global::Ipheidi.Droid.Resource.Drawable.design_ic_visibility_off;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_password_eye = global::Ipheidi.Droid.Resource.Drawable.design_password_eye;
+			global::Plugin.Badge.Droid.Resource.Drawable.design_snackbar_background = global::Ipheidi.Droid.Resource.Drawable.design_snackbar_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_audiotrack_dark = global::Ipheidi.Droid.Resource.Drawable.ic_audiotrack_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_audiotrack_light = global::Ipheidi.Droid.Resource.Drawable.ic_audiotrack_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_dialog_close_dark = global::Ipheidi.Droid.Resource.Drawable.ic_dialog_close_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_dialog_close_light = global::Ipheidi.Droid.Resource.Drawable.ic_dialog_close_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_00 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_00;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_01 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_01;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_02 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_02;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_03 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_03;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_04 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_04;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_05 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_05;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_06 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_06;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_07 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_07;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_08 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_08;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_09 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_09;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_10 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_10;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_11 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_11;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_12 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_12;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_13 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_13;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_14 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_14;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_collapse_15 = global::Ipheidi.Droid.Resource.Drawable.ic_group_collapse_15;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_00 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_00;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_01 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_01;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_02 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_02;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_03 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_03;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_04 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_04;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_05 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_05;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_06 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_06;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_07 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_07;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_08 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_08;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_09 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_09;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_10 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_10;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_11 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_11;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_12 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_12;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_13 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_13;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_14 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_14;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_group_expand_15 = global::Ipheidi.Droid.Resource.Drawable.ic_group_expand_15;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_pause_dark = global::Ipheidi.Droid.Resource.Drawable.ic_media_pause_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_pause_light = global::Ipheidi.Droid.Resource.Drawable.ic_media_pause_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_play_dark = global::Ipheidi.Droid.Resource.Drawable.ic_media_play_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_play_light = global::Ipheidi.Droid.Resource.Drawable.ic_media_play_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_stop_dark = global::Ipheidi.Droid.Resource.Drawable.ic_media_stop_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_media_stop_light = global::Ipheidi.Droid.Resource.Drawable.ic_media_stop_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_00_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_00_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_00_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_00_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_01_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_01_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_01_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_01_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_02_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_02_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_02_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_02_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_03_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_03_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_03_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_03_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_04_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_04_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_04_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_04_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_05_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_05_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_05_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_05_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_06_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_06_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_06_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_06_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_07_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_07_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_07_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_07_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_08_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_08_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_08_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_08_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_09_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_09_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_09_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_09_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_10_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_10_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_10_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_10_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_11_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_11_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_11_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_11_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_12_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_12_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_12_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_12_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_13_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_13_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_13_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_13_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_14_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_14_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_14_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_14_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_15_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_15_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_15_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_15_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_16_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_16_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_16_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_16_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_17_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_17_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_17_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_17_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_18_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_18_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_18_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_18_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_19_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_19_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_19_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_19_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_20_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_20_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_20_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_20_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_21_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_21_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_21_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_21_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_22_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_22_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connected_22_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connected_22_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_00_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_00_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_00_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_00_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_01_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_01_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_01_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_01_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_02_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_02_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_02_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_02_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_03_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_03_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_03_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_03_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_04_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_04_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_04_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_04_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_05_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_05_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_05_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_05_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_06_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_06_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_06_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_06_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_07_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_07_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_07_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_07_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_08_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_08_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_08_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_08_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_09_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_09_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_09_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_09_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_10_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_10_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_10_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_10_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_11_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_11_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_11_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_11_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_12_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_12_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_12_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_12_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_13_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_13_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_13_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_13_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_14_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_14_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_14_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_14_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_15_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_15_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_15_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_15_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_16_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_16_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_16_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_16_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_17_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_17_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_17_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_17_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_18_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_18_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_18_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_18_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_19_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_19_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_19_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_19_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_20_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_20_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_20_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_20_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_21_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_21_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_21_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_21_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_22_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_22_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_connecting_22_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_connecting_22_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_disabled_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_disabled_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_disabled_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_disabled_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_disconnected_dark = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_disconnected_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_disconnected_light = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_disconnected_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_mr_button_grey = global::Ipheidi.Droid.Resource.Drawable.ic_mr_button_grey;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_speaker_dark = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_speaker_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_speaker_group_dark = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_speaker_group_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_speaker_group_light = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_speaker_group_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_speaker_light = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_speaker_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_tv_dark = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_tv_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.ic_vol_type_tv_light = global::Ipheidi.Droid.Resource.Drawable.ic_vol_type_tv_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_connected_dark = global::Ipheidi.Droid.Resource.Drawable.mr_button_connected_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_connected_light = global::Ipheidi.Droid.Resource.Drawable.mr_button_connected_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_connecting_dark = global::Ipheidi.Droid.Resource.Drawable.mr_button_connecting_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_connecting_light = global::Ipheidi.Droid.Resource.Drawable.mr_button_connecting_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_dark = global::Ipheidi.Droid.Resource.Drawable.mr_button_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_button_light = global::Ipheidi.Droid.Resource.Drawable.mr_button_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_dialog_close_dark = global::Ipheidi.Droid.Resource.Drawable.mr_dialog_close_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_dialog_close_light = global::Ipheidi.Droid.Resource.Drawable.mr_dialog_close_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_dialog_material_background_dark = global::Ipheidi.Droid.Resource.Drawable.mr_dialog_material_background_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_dialog_material_background_light = global::Ipheidi.Droid.Resource.Drawable.mr_dialog_material_background_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_group_collapse = global::Ipheidi.Droid.Resource.Drawable.mr_group_collapse;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_group_expand = global::Ipheidi.Droid.Resource.Drawable.mr_group_expand;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_pause_dark = global::Ipheidi.Droid.Resource.Drawable.mr_media_pause_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_pause_light = global::Ipheidi.Droid.Resource.Drawable.mr_media_pause_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_play_dark = global::Ipheidi.Droid.Resource.Drawable.mr_media_play_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_play_light = global::Ipheidi.Droid.Resource.Drawable.mr_media_play_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_stop_dark = global::Ipheidi.Droid.Resource.Drawable.mr_media_stop_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_media_stop_light = global::Ipheidi.Droid.Resource.Drawable.mr_media_stop_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_vol_type_audiotrack_dark = global::Ipheidi.Droid.Resource.Drawable.mr_vol_type_audiotrack_dark;
+			global::Plugin.Badge.Droid.Resource.Drawable.mr_vol_type_audiotrack_light = global::Ipheidi.Droid.Resource.Drawable.mr_vol_type_audiotrack_light;
+			global::Plugin.Badge.Droid.Resource.Drawable.navigation_empty_icon = global::Ipheidi.Droid.Resource.Drawable.navigation_empty_icon;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_action_background = global::Ipheidi.Droid.Resource.Drawable.notification_action_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg = global::Ipheidi.Droid.Resource.Drawable.notification_bg;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg_low = global::Ipheidi.Droid.Resource.Drawable.notification_bg_low;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg_low_normal = global::Ipheidi.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg_low_pressed = global::Ipheidi.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg_normal = global::Ipheidi.Droid.Resource.Drawable.notification_bg_normal;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_bg_normal_pressed = global::Ipheidi.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_icon_background = global::Ipheidi.Droid.Resource.Drawable.notification_icon_background;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_template_icon_bg = global::Ipheidi.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_template_icon_low_bg = global::Ipheidi.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Plugin.Badge.Droid.Resource.Drawable.notification_tile_bg = global::Ipheidi.Droid.Resource.Drawable.notification_tile_bg;
+			global::Plugin.Badge.Droid.Resource.Drawable.notify_panel_notification_icon_bg = global::Ipheidi.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Plugin.Badge.Droid.Resource.Id.action0 = global::Ipheidi.Droid.Resource.Id.action0;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar = global::Ipheidi.Droid.Resource.Id.action_bar;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_activity_content = global::Ipheidi.Droid.Resource.Id.action_bar_activity_content;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_container = global::Ipheidi.Droid.Resource.Id.action_bar_container;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_root = global::Ipheidi.Droid.Resource.Id.action_bar_root;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_spinner = global::Ipheidi.Droid.Resource.Id.action_bar_spinner;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_subtitle = global::Ipheidi.Droid.Resource.Id.action_bar_subtitle;
+			global::Plugin.Badge.Droid.Resource.Id.action_bar_title = global::Ipheidi.Droid.Resource.Id.action_bar_title;
+			global::Plugin.Badge.Droid.Resource.Id.action_container = global::Ipheidi.Droid.Resource.Id.action_container;
+			global::Plugin.Badge.Droid.Resource.Id.action_context_bar = global::Ipheidi.Droid.Resource.Id.action_context_bar;
+			global::Plugin.Badge.Droid.Resource.Id.action_divider = global::Ipheidi.Droid.Resource.Id.action_divider;
+			global::Plugin.Badge.Droid.Resource.Id.action_image = global::Ipheidi.Droid.Resource.Id.action_image;
+			global::Plugin.Badge.Droid.Resource.Id.action_menu_divider = global::Ipheidi.Droid.Resource.Id.action_menu_divider;
+			global::Plugin.Badge.Droid.Resource.Id.action_menu_presenter = global::Ipheidi.Droid.Resource.Id.action_menu_presenter;
+			global::Plugin.Badge.Droid.Resource.Id.action_mode_bar = global::Ipheidi.Droid.Resource.Id.action_mode_bar;
+			global::Plugin.Badge.Droid.Resource.Id.action_mode_bar_stub = global::Ipheidi.Droid.Resource.Id.action_mode_bar_stub;
+			global::Plugin.Badge.Droid.Resource.Id.action_mode_close_button = global::Ipheidi.Droid.Resource.Id.action_mode_close_button;
+			global::Plugin.Badge.Droid.Resource.Id.action_text = global::Ipheidi.Droid.Resource.Id.action_text;
+			global::Plugin.Badge.Droid.Resource.Id.actions = global::Ipheidi.Droid.Resource.Id.actions;
+			global::Plugin.Badge.Droid.Resource.Id.activity_chooser_view_content = global::Ipheidi.Droid.Resource.Id.activity_chooser_view_content;
+			global::Plugin.Badge.Droid.Resource.Id.add = global::Ipheidi.Droid.Resource.Id.add;
+			global::Plugin.Badge.Droid.Resource.Id.alertTitle = global::Ipheidi.Droid.Resource.Id.alertTitle;
+			global::Plugin.Badge.Droid.Resource.Id.all = global::Ipheidi.Droid.Resource.Id.all;
+			global::Plugin.Badge.Droid.Resource.Id.always = global::Ipheidi.Droid.Resource.Id.always;
+			global::Plugin.Badge.Droid.Resource.Id.auto = global::Ipheidi.Droid.Resource.Id.auto;
+			global::Plugin.Badge.Droid.Resource.Id.beginning = global::Ipheidi.Droid.Resource.Id.beginning;
+			global::Plugin.Badge.Droid.Resource.Id.bottom = global::Ipheidi.Droid.Resource.Id.bottom;
+			global::Plugin.Badge.Droid.Resource.Id.buttonPanel = global::Ipheidi.Droid.Resource.Id.buttonPanel;
+			global::Plugin.Badge.Droid.Resource.Id.cancel_action = global::Ipheidi.Droid.Resource.Id.cancel_action;
+			global::Plugin.Badge.Droid.Resource.Id.center = global::Ipheidi.Droid.Resource.Id.center;
+			global::Plugin.Badge.Droid.Resource.Id.center_horizontal = global::Ipheidi.Droid.Resource.Id.center_horizontal;
+			global::Plugin.Badge.Droid.Resource.Id.center_vertical = global::Ipheidi.Droid.Resource.Id.center_vertical;
+			global::Plugin.Badge.Droid.Resource.Id.checkbox = global::Ipheidi.Droid.Resource.Id.checkbox;
+			global::Plugin.Badge.Droid.Resource.Id.chronometer = global::Ipheidi.Droid.Resource.Id.chronometer;
+			global::Plugin.Badge.Droid.Resource.Id.clip_horizontal = global::Ipheidi.Droid.Resource.Id.clip_horizontal;
+			global::Plugin.Badge.Droid.Resource.Id.clip_vertical = global::Ipheidi.Droid.Resource.Id.clip_vertical;
+			global::Plugin.Badge.Droid.Resource.Id.collapseActionView = global::Ipheidi.Droid.Resource.Id.collapseActionView;
+			global::Plugin.Badge.Droid.Resource.Id.contentPanel = global::Ipheidi.Droid.Resource.Id.contentPanel;
+			global::Plugin.Badge.Droid.Resource.Id.custom = global::Ipheidi.Droid.Resource.Id.custom;
+			global::Plugin.Badge.Droid.Resource.Id.customPanel = global::Ipheidi.Droid.Resource.Id.customPanel;
+			global::Plugin.Badge.Droid.Resource.Id.decor_content_parent = global::Ipheidi.Droid.Resource.Id.decor_content_parent;
+			global::Plugin.Badge.Droid.Resource.Id.default_activity_button = global::Ipheidi.Droid.Resource.Id.default_activity_button;
+			global::Plugin.Badge.Droid.Resource.Id.design_bottom_sheet = global::Ipheidi.Droid.Resource.Id.design_bottom_sheet;
+			global::Plugin.Badge.Droid.Resource.Id.design_menu_item_action_area = global::Ipheidi.Droid.Resource.Id.design_menu_item_action_area;
+			global::Plugin.Badge.Droid.Resource.Id.design_menu_item_action_area_stub = global::Ipheidi.Droid.Resource.Id.design_menu_item_action_area_stub;
+			global::Plugin.Badge.Droid.Resource.Id.design_menu_item_text = global::Ipheidi.Droid.Resource.Id.design_menu_item_text;
+			global::Plugin.Badge.Droid.Resource.Id.design_navigation_view = global::Ipheidi.Droid.Resource.Id.design_navigation_view;
+			global::Plugin.Badge.Droid.Resource.Id.disableHome = global::Ipheidi.Droid.Resource.Id.disableHome;
+			global::Plugin.Badge.Droid.Resource.Id.edit_query = global::Ipheidi.Droid.Resource.Id.edit_query;
+			global::Plugin.Badge.Droid.Resource.Id.end = global::Ipheidi.Droid.Resource.Id.end;
+			global::Plugin.Badge.Droid.Resource.Id.end_padder = global::Ipheidi.Droid.Resource.Id.end_padder;
+			global::Plugin.Badge.Droid.Resource.Id.enterAlways = global::Ipheidi.Droid.Resource.Id.enterAlways;
+			global::Plugin.Badge.Droid.Resource.Id.enterAlwaysCollapsed = global::Ipheidi.Droid.Resource.Id.enterAlwaysCollapsed;
+			global::Plugin.Badge.Droid.Resource.Id.exitUntilCollapsed = global::Ipheidi.Droid.Resource.Id.exitUntilCollapsed;
+			global::Plugin.Badge.Droid.Resource.Id.expand_activities_button = global::Ipheidi.Droid.Resource.Id.expand_activities_button;
+			global::Plugin.Badge.Droid.Resource.Id.expanded_menu = global::Ipheidi.Droid.Resource.Id.expanded_menu;
+			global::Plugin.Badge.Droid.Resource.Id.fill = global::Ipheidi.Droid.Resource.Id.fill;
+			global::Plugin.Badge.Droid.Resource.Id.fill_horizontal = global::Ipheidi.Droid.Resource.Id.fill_horizontal;
+			global::Plugin.Badge.Droid.Resource.Id.fill_vertical = global::Ipheidi.Droid.Resource.Id.fill_vertical;
+			global::Plugin.Badge.Droid.Resource.Id.@fixed = global::Ipheidi.Droid.Resource.Id.@fixed;
+			global::Plugin.Badge.Droid.Resource.Id.home = global::Ipheidi.Droid.Resource.Id.home;
+			global::Plugin.Badge.Droid.Resource.Id.homeAsUp = global::Ipheidi.Droid.Resource.Id.homeAsUp;
+			global::Plugin.Badge.Droid.Resource.Id.icon = global::Ipheidi.Droid.Resource.Id.icon;
+			global::Plugin.Badge.Droid.Resource.Id.icon_group = global::Ipheidi.Droid.Resource.Id.icon_group;
+			global::Plugin.Badge.Droid.Resource.Id.ifRoom = global::Ipheidi.Droid.Resource.Id.ifRoom;
+			global::Plugin.Badge.Droid.Resource.Id.image = global::Ipheidi.Droid.Resource.Id.image;
+			global::Plugin.Badge.Droid.Resource.Id.info = global::Ipheidi.Droid.Resource.Id.info;
+			global::Plugin.Badge.Droid.Resource.Id.item_touch_helper_previous_elevation = global::Ipheidi.Droid.Resource.Id.item_touch_helper_previous_elevation;
+			global::Plugin.Badge.Droid.Resource.Id.largeLabel = global::Ipheidi.Droid.Resource.Id.largeLabel;
+			global::Plugin.Badge.Droid.Resource.Id.left = global::Ipheidi.Droid.Resource.Id.left;
+			global::Plugin.Badge.Droid.Resource.Id.line1 = global::Ipheidi.Droid.Resource.Id.line1;
+			global::Plugin.Badge.Droid.Resource.Id.line3 = global::Ipheidi.Droid.Resource.Id.line3;
+			global::Plugin.Badge.Droid.Resource.Id.listMode = global::Ipheidi.Droid.Resource.Id.listMode;
+			global::Plugin.Badge.Droid.Resource.Id.list_item = global::Ipheidi.Droid.Resource.Id.list_item;
+			global::Plugin.Badge.Droid.Resource.Id.masked = global::Ipheidi.Droid.Resource.Id.masked;
+			global::Plugin.Badge.Droid.Resource.Id.media_actions = global::Ipheidi.Droid.Resource.Id.media_actions;
+			global::Plugin.Badge.Droid.Resource.Id.middle = global::Ipheidi.Droid.Resource.Id.middle;
+			global::Plugin.Badge.Droid.Resource.Id.mini = global::Ipheidi.Droid.Resource.Id.mini;
+			global::Plugin.Badge.Droid.Resource.Id.mr_art = global::Ipheidi.Droid.Resource.Id.mr_art;
+			global::Plugin.Badge.Droid.Resource.Id.mr_chooser_list = global::Ipheidi.Droid.Resource.Id.mr_chooser_list;
+			global::Plugin.Badge.Droid.Resource.Id.mr_chooser_route_desc = global::Ipheidi.Droid.Resource.Id.mr_chooser_route_desc;
+			global::Plugin.Badge.Droid.Resource.Id.mr_chooser_route_icon = global::Ipheidi.Droid.Resource.Id.mr_chooser_route_icon;
+			global::Plugin.Badge.Droid.Resource.Id.mr_chooser_route_name = global::Ipheidi.Droid.Resource.Id.mr_chooser_route_name;
+			global::Plugin.Badge.Droid.Resource.Id.mr_chooser_title = global::Ipheidi.Droid.Resource.Id.mr_chooser_title;
+			global::Plugin.Badge.Droid.Resource.Id.mr_close = global::Ipheidi.Droid.Resource.Id.mr_close;
+			global::Plugin.Badge.Droid.Resource.Id.mr_control_divider = global::Ipheidi.Droid.Resource.Id.mr_control_divider;
+			global::Plugin.Badge.Droid.Resource.Id.mr_control_playback_ctrl = global::Ipheidi.Droid.Resource.Id.mr_control_playback_ctrl;
+			global::Plugin.Badge.Droid.Resource.Id.mr_control_subtitle = global::Ipheidi.Droid.Resource.Id.mr_control_subtitle;
+			global::Plugin.Badge.Droid.Resource.Id.mr_control_title = global::Ipheidi.Droid.Resource.Id.mr_control_title;
+			global::Plugin.Badge.Droid.Resource.Id.mr_control_title_container = global::Ipheidi.Droid.Resource.Id.mr_control_title_container;
+			global::Plugin.Badge.Droid.Resource.Id.mr_custom_control = global::Ipheidi.Droid.Resource.Id.mr_custom_control;
+			global::Plugin.Badge.Droid.Resource.Id.mr_default_control = global::Ipheidi.Droid.Resource.Id.mr_default_control;
+			global::Plugin.Badge.Droid.Resource.Id.mr_dialog_area = global::Ipheidi.Droid.Resource.Id.mr_dialog_area;
+			global::Plugin.Badge.Droid.Resource.Id.mr_expandable_area = global::Ipheidi.Droid.Resource.Id.mr_expandable_area;
+			global::Plugin.Badge.Droid.Resource.Id.mr_group_expand_collapse = global::Ipheidi.Droid.Resource.Id.mr_group_expand_collapse;
+			global::Plugin.Badge.Droid.Resource.Id.mr_media_main_control = global::Ipheidi.Droid.Resource.Id.mr_media_main_control;
+			global::Plugin.Badge.Droid.Resource.Id.mr_name = global::Ipheidi.Droid.Resource.Id.mr_name;
+			global::Plugin.Badge.Droid.Resource.Id.mr_playback_control = global::Ipheidi.Droid.Resource.Id.mr_playback_control;
+			global::Plugin.Badge.Droid.Resource.Id.mr_title_bar = global::Ipheidi.Droid.Resource.Id.mr_title_bar;
+			global::Plugin.Badge.Droid.Resource.Id.mr_volume_control = global::Ipheidi.Droid.Resource.Id.mr_volume_control;
+			global::Plugin.Badge.Droid.Resource.Id.mr_volume_group_list = global::Ipheidi.Droid.Resource.Id.mr_volume_group_list;
+			global::Plugin.Badge.Droid.Resource.Id.mr_volume_item_icon = global::Ipheidi.Droid.Resource.Id.mr_volume_item_icon;
+			global::Plugin.Badge.Droid.Resource.Id.mr_volume_slider = global::Ipheidi.Droid.Resource.Id.mr_volume_slider;
+			global::Plugin.Badge.Droid.Resource.Id.multiply = global::Ipheidi.Droid.Resource.Id.multiply;
+			global::Plugin.Badge.Droid.Resource.Id.navigation_header_container = global::Ipheidi.Droid.Resource.Id.navigation_header_container;
+			global::Plugin.Badge.Droid.Resource.Id.never = global::Ipheidi.Droid.Resource.Id.never;
+			global::Plugin.Badge.Droid.Resource.Id.none = global::Ipheidi.Droid.Resource.Id.none;
+			global::Plugin.Badge.Droid.Resource.Id.normal = global::Ipheidi.Droid.Resource.Id.normal;
+			global::Plugin.Badge.Droid.Resource.Id.notification_background = global::Ipheidi.Droid.Resource.Id.notification_background;
+			global::Plugin.Badge.Droid.Resource.Id.notification_main_column = global::Ipheidi.Droid.Resource.Id.notification_main_column;
+			global::Plugin.Badge.Droid.Resource.Id.notification_main_column_container = global::Ipheidi.Droid.Resource.Id.notification_main_column_container;
+			global::Plugin.Badge.Droid.Resource.Id.parallax = global::Ipheidi.Droid.Resource.Id.parallax;
+			global::Plugin.Badge.Droid.Resource.Id.parentPanel = global::Ipheidi.Droid.Resource.Id.parentPanel;
+			global::Plugin.Badge.Droid.Resource.Id.pin = global::Ipheidi.Droid.Resource.Id.pin;
+			global::Plugin.Badge.Droid.Resource.Id.progress_circular = global::Ipheidi.Droid.Resource.Id.progress_circular;
+			global::Plugin.Badge.Droid.Resource.Id.progress_horizontal = global::Ipheidi.Droid.Resource.Id.progress_horizontal;
+			global::Plugin.Badge.Droid.Resource.Id.radio = global::Ipheidi.Droid.Resource.Id.radio;
+			global::Plugin.Badge.Droid.Resource.Id.right = global::Ipheidi.Droid.Resource.Id.right;
+			global::Plugin.Badge.Droid.Resource.Id.right_icon = global::Ipheidi.Droid.Resource.Id.right_icon;
+			global::Plugin.Badge.Droid.Resource.Id.right_side = global::Ipheidi.Droid.Resource.Id.right_side;
+			global::Plugin.Badge.Droid.Resource.Id.screen = global::Ipheidi.Droid.Resource.Id.screen;
+			global::Plugin.Badge.Droid.Resource.Id.scroll = global::Ipheidi.Droid.Resource.Id.scroll;
+			global::Plugin.Badge.Droid.Resource.Id.scrollIndicatorDown = global::Ipheidi.Droid.Resource.Id.scrollIndicatorDown;
+			global::Plugin.Badge.Droid.Resource.Id.scrollIndicatorUp = global::Ipheidi.Droid.Resource.Id.scrollIndicatorUp;
+			global::Plugin.Badge.Droid.Resource.Id.scrollView = global::Ipheidi.Droid.Resource.Id.scrollView;
+			global::Plugin.Badge.Droid.Resource.Id.scrollable = global::Ipheidi.Droid.Resource.Id.scrollable;
+			global::Plugin.Badge.Droid.Resource.Id.search_badge = global::Ipheidi.Droid.Resource.Id.search_badge;
+			global::Plugin.Badge.Droid.Resource.Id.search_bar = global::Ipheidi.Droid.Resource.Id.search_bar;
+			global::Plugin.Badge.Droid.Resource.Id.search_button = global::Ipheidi.Droid.Resource.Id.search_button;
+			global::Plugin.Badge.Droid.Resource.Id.search_close_btn = global::Ipheidi.Droid.Resource.Id.search_close_btn;
+			global::Plugin.Badge.Droid.Resource.Id.search_edit_frame = global::Ipheidi.Droid.Resource.Id.search_edit_frame;
+			global::Plugin.Badge.Droid.Resource.Id.search_go_btn = global::Ipheidi.Droid.Resource.Id.search_go_btn;
+			global::Plugin.Badge.Droid.Resource.Id.search_mag_icon = global::Ipheidi.Droid.Resource.Id.search_mag_icon;
+			global::Plugin.Badge.Droid.Resource.Id.search_plate = global::Ipheidi.Droid.Resource.Id.search_plate;
+			global::Plugin.Badge.Droid.Resource.Id.search_src_text = global::Ipheidi.Droid.Resource.Id.search_src_text;
+			global::Plugin.Badge.Droid.Resource.Id.search_voice_btn = global::Ipheidi.Droid.Resource.Id.search_voice_btn;
+			global::Plugin.Badge.Droid.Resource.Id.select_dialog_listview = global::Ipheidi.Droid.Resource.Id.select_dialog_listview;
+			global::Plugin.Badge.Droid.Resource.Id.shortcut = global::Ipheidi.Droid.Resource.Id.shortcut;
+			global::Plugin.Badge.Droid.Resource.Id.showCustom = global::Ipheidi.Droid.Resource.Id.showCustom;
+			global::Plugin.Badge.Droid.Resource.Id.showHome = global::Ipheidi.Droid.Resource.Id.showHome;
+			global::Plugin.Badge.Droid.Resource.Id.showTitle = global::Ipheidi.Droid.Resource.Id.showTitle;
+			global::Plugin.Badge.Droid.Resource.Id.smallLabel = global::Ipheidi.Droid.Resource.Id.smallLabel;
+			global::Plugin.Badge.Droid.Resource.Id.snackbar_action = global::Ipheidi.Droid.Resource.Id.snackbar_action;
+			global::Plugin.Badge.Droid.Resource.Id.snackbar_text = global::Ipheidi.Droid.Resource.Id.snackbar_text;
+			global::Plugin.Badge.Droid.Resource.Id.snap = global::Ipheidi.Droid.Resource.Id.snap;
+			global::Plugin.Badge.Droid.Resource.Id.spacer = global::Ipheidi.Droid.Resource.Id.spacer;
+			global::Plugin.Badge.Droid.Resource.Id.split_action_bar = global::Ipheidi.Droid.Resource.Id.split_action_bar;
+			global::Plugin.Badge.Droid.Resource.Id.src_atop = global::Ipheidi.Droid.Resource.Id.src_atop;
+			global::Plugin.Badge.Droid.Resource.Id.src_in = global::Ipheidi.Droid.Resource.Id.src_in;
+			global::Plugin.Badge.Droid.Resource.Id.src_over = global::Ipheidi.Droid.Resource.Id.src_over;
+			global::Plugin.Badge.Droid.Resource.Id.start = global::Ipheidi.Droid.Resource.Id.start;
+			global::Plugin.Badge.Droid.Resource.Id.status_bar_latest_event_content = global::Ipheidi.Droid.Resource.Id.status_bar_latest_event_content;
+			global::Plugin.Badge.Droid.Resource.Id.submenuarrow = global::Ipheidi.Droid.Resource.Id.submenuarrow;
+			global::Plugin.Badge.Droid.Resource.Id.submit_area = global::Ipheidi.Droid.Resource.Id.submit_area;
+			global::Plugin.Badge.Droid.Resource.Id.tabMode = global::Ipheidi.Droid.Resource.Id.tabMode;
+			global::Plugin.Badge.Droid.Resource.Id.text = global::Ipheidi.Droid.Resource.Id.text;
+			global::Plugin.Badge.Droid.Resource.Id.text2 = global::Ipheidi.Droid.Resource.Id.text2;
+			global::Plugin.Badge.Droid.Resource.Id.textSpacerNoButtons = global::Ipheidi.Droid.Resource.Id.textSpacerNoButtons;
+			global::Plugin.Badge.Droid.Resource.Id.textSpacerNoTitle = global::Ipheidi.Droid.Resource.Id.textSpacerNoTitle;
+			global::Plugin.Badge.Droid.Resource.Id.text_input_password_toggle = global::Ipheidi.Droid.Resource.Id.text_input_password_toggle;
+			global::Plugin.Badge.Droid.Resource.Id.textinput_counter = global::Ipheidi.Droid.Resource.Id.textinput_counter;
+			global::Plugin.Badge.Droid.Resource.Id.textinput_error = global::Ipheidi.Droid.Resource.Id.textinput_error;
+			global::Plugin.Badge.Droid.Resource.Id.time = global::Ipheidi.Droid.Resource.Id.time;
+			global::Plugin.Badge.Droid.Resource.Id.title = global::Ipheidi.Droid.Resource.Id.title;
+			global::Plugin.Badge.Droid.Resource.Id.titleDividerNoCustom = global::Ipheidi.Droid.Resource.Id.titleDividerNoCustom;
+			global::Plugin.Badge.Droid.Resource.Id.title_template = global::Ipheidi.Droid.Resource.Id.title_template;
+			global::Plugin.Badge.Droid.Resource.Id.top = global::Ipheidi.Droid.Resource.Id.top;
+			global::Plugin.Badge.Droid.Resource.Id.topPanel = global::Ipheidi.Droid.Resource.Id.topPanel;
+			global::Plugin.Badge.Droid.Resource.Id.touch_outside = global::Ipheidi.Droid.Resource.Id.touch_outside;
+			global::Plugin.Badge.Droid.Resource.Id.transition_current_scene = global::Ipheidi.Droid.Resource.Id.transition_current_scene;
+			global::Plugin.Badge.Droid.Resource.Id.transition_scene_layoutid_cache = global::Ipheidi.Droid.Resource.Id.transition_scene_layoutid_cache;
+			global::Plugin.Badge.Droid.Resource.Id.up = global::Ipheidi.Droid.Resource.Id.up;
+			global::Plugin.Badge.Droid.Resource.Id.useLogo = global::Ipheidi.Droid.Resource.Id.useLogo;
+			global::Plugin.Badge.Droid.Resource.Id.view_offset_helper = global::Ipheidi.Droid.Resource.Id.view_offset_helper;
+			global::Plugin.Badge.Droid.Resource.Id.visible = global::Ipheidi.Droid.Resource.Id.visible;
+			global::Plugin.Badge.Droid.Resource.Id.volume_item_container = global::Ipheidi.Droid.Resource.Id.volume_item_container;
+			global::Plugin.Badge.Droid.Resource.Id.withText = global::Ipheidi.Droid.Resource.Id.withText;
+			global::Plugin.Badge.Droid.Resource.Id.wrap_content = global::Ipheidi.Droid.Resource.Id.wrap_content;
+			global::Plugin.Badge.Droid.Resource.Integer.abc_config_activityDefaultDur = global::Ipheidi.Droid.Resource.Integer.abc_config_activityDefaultDur;
+			global::Plugin.Badge.Droid.Resource.Integer.abc_config_activityShortDur = global::Ipheidi.Droid.Resource.Integer.abc_config_activityShortDur;
+			global::Plugin.Badge.Droid.Resource.Integer.app_bar_elevation_anim_duration = global::Ipheidi.Droid.Resource.Integer.app_bar_elevation_anim_duration;
+			global::Plugin.Badge.Droid.Resource.Integer.bottom_sheet_slide_duration = global::Ipheidi.Droid.Resource.Integer.bottom_sheet_slide_duration;
+			global::Plugin.Badge.Droid.Resource.Integer.cancel_button_image_alpha = global::Ipheidi.Droid.Resource.Integer.cancel_button_image_alpha;
+			global::Plugin.Badge.Droid.Resource.Integer.design_snackbar_text_max_lines = global::Ipheidi.Droid.Resource.Integer.design_snackbar_text_max_lines;
+			global::Plugin.Badge.Droid.Resource.Integer.hide_password_duration = global::Ipheidi.Droid.Resource.Integer.hide_password_duration;
+			global::Plugin.Badge.Droid.Resource.Integer.mr_controller_volume_group_list_animation_duration_ms = global::Ipheidi.Droid.Resource.Integer.mr_controller_volume_group_list_animation_duration_ms;
+			global::Plugin.Badge.Droid.Resource.Integer.mr_controller_volume_group_list_fade_in_duration_ms = global::Ipheidi.Droid.Resource.Integer.mr_controller_volume_group_list_fade_in_duration_ms;
+			global::Plugin.Badge.Droid.Resource.Integer.mr_controller_volume_group_list_fade_out_duration_ms = global::Ipheidi.Droid.Resource.Integer.mr_controller_volume_group_list_fade_out_duration_ms;
+			global::Plugin.Badge.Droid.Resource.Integer.show_password_duration = global::Ipheidi.Droid.Resource.Integer.show_password_duration;
+			global::Plugin.Badge.Droid.Resource.Integer.status_bar_notification_info_maxnum = global::Ipheidi.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Plugin.Badge.Droid.Resource.Interpolator.mr_fast_out_slow_in = global::Ipheidi.Droid.Resource.Interpolator.mr_fast_out_slow_in;
+			global::Plugin.Badge.Droid.Resource.Interpolator.mr_linear_out_slow_in = global::Ipheidi.Droid.Resource.Interpolator.mr_linear_out_slow_in;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_bar_title_item = global::Ipheidi.Droid.Resource.Layout.abc_action_bar_title_item;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_bar_up_container = global::Ipheidi.Droid.Resource.Layout.abc_action_bar_up_container;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_bar_view_list_nav_layout = global::Ipheidi.Droid.Resource.Layout.abc_action_bar_view_list_nav_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_menu_item_layout = global::Ipheidi.Droid.Resource.Layout.abc_action_menu_item_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_menu_layout = global::Ipheidi.Droid.Resource.Layout.abc_action_menu_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_mode_bar = global::Ipheidi.Droid.Resource.Layout.abc_action_mode_bar;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_action_mode_close_item_material = global::Ipheidi.Droid.Resource.Layout.abc_action_mode_close_item_material;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_activity_chooser_view = global::Ipheidi.Droid.Resource.Layout.abc_activity_chooser_view;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_activity_chooser_view_list_item = global::Ipheidi.Droid.Resource.Layout.abc_activity_chooser_view_list_item;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_alert_dialog_button_bar_material = global::Ipheidi.Droid.Resource.Layout.abc_alert_dialog_button_bar_material;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_alert_dialog_material = global::Ipheidi.Droid.Resource.Layout.abc_alert_dialog_material;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_alert_dialog_title_material = global::Ipheidi.Droid.Resource.Layout.abc_alert_dialog_title_material;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_dialog_title_material = global::Ipheidi.Droid.Resource.Layout.abc_dialog_title_material;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_expanded_menu_layout = global::Ipheidi.Droid.Resource.Layout.abc_expanded_menu_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_list_menu_item_checkbox = global::Ipheidi.Droid.Resource.Layout.abc_list_menu_item_checkbox;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_list_menu_item_icon = global::Ipheidi.Droid.Resource.Layout.abc_list_menu_item_icon;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_list_menu_item_layout = global::Ipheidi.Droid.Resource.Layout.abc_list_menu_item_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_list_menu_item_radio = global::Ipheidi.Droid.Resource.Layout.abc_list_menu_item_radio;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_popup_menu_header_item_layout = global::Ipheidi.Droid.Resource.Layout.abc_popup_menu_header_item_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_popup_menu_item_layout = global::Ipheidi.Droid.Resource.Layout.abc_popup_menu_item_layout;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_screen_content_include = global::Ipheidi.Droid.Resource.Layout.abc_screen_content_include;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_screen_simple = global::Ipheidi.Droid.Resource.Layout.abc_screen_simple;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_screen_simple_overlay_action_mode = global::Ipheidi.Droid.Resource.Layout.abc_screen_simple_overlay_action_mode;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_screen_toolbar = global::Ipheidi.Droid.Resource.Layout.abc_screen_toolbar;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_search_dropdown_item_icons_2line = global::Ipheidi.Droid.Resource.Layout.abc_search_dropdown_item_icons_2line;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_search_view = global::Ipheidi.Droid.Resource.Layout.abc_search_view;
+			global::Plugin.Badge.Droid.Resource.Layout.abc_select_dialog_material = global::Ipheidi.Droid.Resource.Layout.abc_select_dialog_material;
+			global::Plugin.Badge.Droid.Resource.Layout.design_bottom_navigation_item = global::Ipheidi.Droid.Resource.Layout.design_bottom_navigation_item;
+			global::Plugin.Badge.Droid.Resource.Layout.design_bottom_sheet_dialog = global::Ipheidi.Droid.Resource.Layout.design_bottom_sheet_dialog;
+			global::Plugin.Badge.Droid.Resource.Layout.design_layout_snackbar = global::Ipheidi.Droid.Resource.Layout.design_layout_snackbar;
+			global::Plugin.Badge.Droid.Resource.Layout.design_layout_snackbar_include = global::Ipheidi.Droid.Resource.Layout.design_layout_snackbar_include;
+			global::Plugin.Badge.Droid.Resource.Layout.design_layout_tab_icon = global::Ipheidi.Droid.Resource.Layout.design_layout_tab_icon;
+			global::Plugin.Badge.Droid.Resource.Layout.design_layout_tab_text = global::Ipheidi.Droid.Resource.Layout.design_layout_tab_text;
+			global::Plugin.Badge.Droid.Resource.Layout.design_menu_item_action_area = global::Ipheidi.Droid.Resource.Layout.design_menu_item_action_area;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_item = global::Ipheidi.Droid.Resource.Layout.design_navigation_item;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_item_header = global::Ipheidi.Droid.Resource.Layout.design_navigation_item_header;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_item_separator = global::Ipheidi.Droid.Resource.Layout.design_navigation_item_separator;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_item_subheader = global::Ipheidi.Droid.Resource.Layout.design_navigation_item_subheader;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_menu = global::Ipheidi.Droid.Resource.Layout.design_navigation_menu;
+			global::Plugin.Badge.Droid.Resource.Layout.design_navigation_menu_item = global::Ipheidi.Droid.Resource.Layout.design_navigation_menu_item;
+			global::Plugin.Badge.Droid.Resource.Layout.design_text_input_password_icon = global::Ipheidi.Droid.Resource.Layout.design_text_input_password_icon;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_chooser_dialog = global::Ipheidi.Droid.Resource.Layout.mr_chooser_dialog;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_chooser_list_item = global::Ipheidi.Droid.Resource.Layout.mr_chooser_list_item;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_controller_material_dialog_b = global::Ipheidi.Droid.Resource.Layout.mr_controller_material_dialog_b;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_controller_volume_item = global::Ipheidi.Droid.Resource.Layout.mr_controller_volume_item;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_playback_control = global::Ipheidi.Droid.Resource.Layout.mr_playback_control;
+			global::Plugin.Badge.Droid.Resource.Layout.mr_volume_control = global::Ipheidi.Droid.Resource.Layout.mr_volume_control;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_action = global::Ipheidi.Droid.Resource.Layout.notification_action;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_action_tombstone = global::Ipheidi.Droid.Resource.Layout.notification_action_tombstone;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_media_action = global::Ipheidi.Droid.Resource.Layout.notification_media_action;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_media_cancel_action = global::Ipheidi.Droid.Resource.Layout.notification_media_cancel_action;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_big_media = global::Ipheidi.Droid.Resource.Layout.notification_template_big_media;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_big_media_custom = global::Ipheidi.Droid.Resource.Layout.notification_template_big_media_custom;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_big_media_narrow = global::Ipheidi.Droid.Resource.Layout.notification_template_big_media_narrow;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_big_media_narrow_custom = global::Ipheidi.Droid.Resource.Layout.notification_template_big_media_narrow_custom;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_custom_big = global::Ipheidi.Droid.Resource.Layout.notification_template_custom_big;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_icon_group = global::Ipheidi.Droid.Resource.Layout.notification_template_icon_group;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_lines_media = global::Ipheidi.Droid.Resource.Layout.notification_template_lines_media;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_media = global::Ipheidi.Droid.Resource.Layout.notification_template_media;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_media_custom = global::Ipheidi.Droid.Resource.Layout.notification_template_media_custom;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_part_chronometer = global::Ipheidi.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Plugin.Badge.Droid.Resource.Layout.notification_template_part_time = global::Ipheidi.Droid.Resource.Layout.notification_template_part_time;
+			global::Plugin.Badge.Droid.Resource.Layout.select_dialog_item_material = global::Ipheidi.Droid.Resource.Layout.select_dialog_item_material;
+			global::Plugin.Badge.Droid.Resource.Layout.select_dialog_multichoice_material = global::Ipheidi.Droid.Resource.Layout.select_dialog_multichoice_material;
+			global::Plugin.Badge.Droid.Resource.Layout.select_dialog_singlechoice_material = global::Ipheidi.Droid.Resource.Layout.select_dialog_singlechoice_material;
+			global::Plugin.Badge.Droid.Resource.Layout.support_simple_spinner_dropdown_item = global::Ipheidi.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_bar_home_description = global::Ipheidi.Droid.Resource.String.abc_action_bar_home_description;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_bar_home_description_format = global::Ipheidi.Droid.Resource.String.abc_action_bar_home_description_format;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_bar_home_subtitle_description_format = global::Ipheidi.Droid.Resource.String.abc_action_bar_home_subtitle_description_format;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_bar_up_description = global::Ipheidi.Droid.Resource.String.abc_action_bar_up_description;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_menu_overflow_description = global::Ipheidi.Droid.Resource.String.abc_action_menu_overflow_description;
+			global::Plugin.Badge.Droid.Resource.String.abc_action_mode_done = global::Ipheidi.Droid.Resource.String.abc_action_mode_done;
+			global::Plugin.Badge.Droid.Resource.String.abc_activity_chooser_view_see_all = global::Ipheidi.Droid.Resource.String.abc_activity_chooser_view_see_all;
+			global::Plugin.Badge.Droid.Resource.String.abc_activitychooserview_choose_application = global::Ipheidi.Droid.Resource.String.abc_activitychooserview_choose_application;
+			global::Plugin.Badge.Droid.Resource.String.abc_capital_off = global::Ipheidi.Droid.Resource.String.abc_capital_off;
+			global::Plugin.Badge.Droid.Resource.String.abc_capital_on = global::Ipheidi.Droid.Resource.String.abc_capital_on;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_body_1_material = global::Ipheidi.Droid.Resource.String.abc_font_family_body_1_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_body_2_material = global::Ipheidi.Droid.Resource.String.abc_font_family_body_2_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_button_material = global::Ipheidi.Droid.Resource.String.abc_font_family_button_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_caption_material = global::Ipheidi.Droid.Resource.String.abc_font_family_caption_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_display_1_material = global::Ipheidi.Droid.Resource.String.abc_font_family_display_1_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_display_2_material = global::Ipheidi.Droid.Resource.String.abc_font_family_display_2_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_display_3_material = global::Ipheidi.Droid.Resource.String.abc_font_family_display_3_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_display_4_material = global::Ipheidi.Droid.Resource.String.abc_font_family_display_4_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_headline_material = global::Ipheidi.Droid.Resource.String.abc_font_family_headline_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_menu_material = global::Ipheidi.Droid.Resource.String.abc_font_family_menu_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_subhead_material = global::Ipheidi.Droid.Resource.String.abc_font_family_subhead_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_font_family_title_material = global::Ipheidi.Droid.Resource.String.abc_font_family_title_material;
+			global::Plugin.Badge.Droid.Resource.String.abc_search_hint = global::Ipheidi.Droid.Resource.String.abc_search_hint;
+			global::Plugin.Badge.Droid.Resource.String.abc_searchview_description_clear = global::Ipheidi.Droid.Resource.String.abc_searchview_description_clear;
+			global::Plugin.Badge.Droid.Resource.String.abc_searchview_description_query = global::Ipheidi.Droid.Resource.String.abc_searchview_description_query;
+			global::Plugin.Badge.Droid.Resource.String.abc_searchview_description_search = global::Ipheidi.Droid.Resource.String.abc_searchview_description_search;
+			global::Plugin.Badge.Droid.Resource.String.abc_searchview_description_submit = global::Ipheidi.Droid.Resource.String.abc_searchview_description_submit;
+			global::Plugin.Badge.Droid.Resource.String.abc_searchview_description_voice = global::Ipheidi.Droid.Resource.String.abc_searchview_description_voice;
+			global::Plugin.Badge.Droid.Resource.String.abc_shareactionprovider_share_with = global::Ipheidi.Droid.Resource.String.abc_shareactionprovider_share_with;
+			global::Plugin.Badge.Droid.Resource.String.abc_shareactionprovider_share_with_application = global::Ipheidi.Droid.Resource.String.abc_shareactionprovider_share_with_application;
+			global::Plugin.Badge.Droid.Resource.String.abc_toolbar_collapse_description = global::Ipheidi.Droid.Resource.String.abc_toolbar_collapse_description;
+			global::Plugin.Badge.Droid.Resource.String.appbar_scrolling_view_behavior = global::Ipheidi.Droid.Resource.String.appbar_scrolling_view_behavior;
+			global::Plugin.Badge.Droid.Resource.String.bottom_sheet_behavior = global::Ipheidi.Droid.Resource.String.bottom_sheet_behavior;
+			global::Plugin.Badge.Droid.Resource.String.character_counter_pattern = global::Ipheidi.Droid.Resource.String.character_counter_pattern;
+			global::Plugin.Badge.Droid.Resource.String.library_name = global::Ipheidi.Droid.Resource.String.library_name;
+			global::Plugin.Badge.Droid.Resource.String.mr_button_content_description = global::Ipheidi.Droid.Resource.String.mr_button_content_description;
+			global::Plugin.Badge.Droid.Resource.String.mr_cast_button_connected = global::Ipheidi.Droid.Resource.String.mr_cast_button_connected;
+			global::Plugin.Badge.Droid.Resource.String.mr_cast_button_connecting = global::Ipheidi.Droid.Resource.String.mr_cast_button_connecting;
+			global::Plugin.Badge.Droid.Resource.String.mr_cast_button_disconnected = global::Ipheidi.Droid.Resource.String.mr_cast_button_disconnected;
+			global::Plugin.Badge.Droid.Resource.String.mr_chooser_searching = global::Ipheidi.Droid.Resource.String.mr_chooser_searching;
+			global::Plugin.Badge.Droid.Resource.String.mr_chooser_title = global::Ipheidi.Droid.Resource.String.mr_chooser_title;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_album_art = global::Ipheidi.Droid.Resource.String.mr_controller_album_art;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_casting_screen = global::Ipheidi.Droid.Resource.String.mr_controller_casting_screen;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_close_description = global::Ipheidi.Droid.Resource.String.mr_controller_close_description;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_collapse_group = global::Ipheidi.Droid.Resource.String.mr_controller_collapse_group;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_disconnect = global::Ipheidi.Droid.Resource.String.mr_controller_disconnect;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_expand_group = global::Ipheidi.Droid.Resource.String.mr_controller_expand_group;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_no_info_available = global::Ipheidi.Droid.Resource.String.mr_controller_no_info_available;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_no_media_selected = global::Ipheidi.Droid.Resource.String.mr_controller_no_media_selected;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_pause = global::Ipheidi.Droid.Resource.String.mr_controller_pause;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_play = global::Ipheidi.Droid.Resource.String.mr_controller_play;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_stop = global::Ipheidi.Droid.Resource.String.mr_controller_stop;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_stop_casting = global::Ipheidi.Droid.Resource.String.mr_controller_stop_casting;
+			global::Plugin.Badge.Droid.Resource.String.mr_controller_volume_slider = global::Ipheidi.Droid.Resource.String.mr_controller_volume_slider;
+			global::Plugin.Badge.Droid.Resource.String.mr_system_route_name = global::Ipheidi.Droid.Resource.String.mr_system_route_name;
+			global::Plugin.Badge.Droid.Resource.String.mr_user_route_category_name = global::Ipheidi.Droid.Resource.String.mr_user_route_category_name;
+			global::Plugin.Badge.Droid.Resource.String.password_toggle_content_description = global::Ipheidi.Droid.Resource.String.password_toggle_content_description;
+			global::Plugin.Badge.Droid.Resource.String.path_password_eye = global::Ipheidi.Droid.Resource.String.path_password_eye;
+			global::Plugin.Badge.Droid.Resource.String.path_password_eye_mask_strike_through = global::Ipheidi.Droid.Resource.String.path_password_eye_mask_strike_through;
+			global::Plugin.Badge.Droid.Resource.String.path_password_eye_mask_visible = global::Ipheidi.Droid.Resource.String.path_password_eye_mask_visible;
+			global::Plugin.Badge.Droid.Resource.String.path_password_strike_through = global::Ipheidi.Droid.Resource.String.path_password_strike_through;
+			global::Plugin.Badge.Droid.Resource.String.search_menu_title = global::Ipheidi.Droid.Resource.String.search_menu_title;
+			global::Plugin.Badge.Droid.Resource.String.status_bar_notification_info_overflow = global::Ipheidi.Droid.Resource.String.status_bar_notification_info_overflow;
+			global::Plugin.Badge.Droid.Resource.Style.AlertDialog_AppCompat = global::Ipheidi.Droid.Resource.Style.AlertDialog_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.AlertDialog_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.AlertDialog_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Animation_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Animation_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Animation_AppCompat_DropDownUp = global::Ipheidi.Droid.Resource.Style.Animation_AppCompat_DropDownUp;
+			global::Plugin.Badge.Droid.Resource.Style.Animation_Design_BottomSheetDialog = global::Ipheidi.Droid.Resource.Style.Animation_Design_BottomSheetDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_AlertDialog_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_AlertDialog_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Animation_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Animation_AppCompat_DropDownUp = global::Ipheidi.Droid.Resource.Style.Base_Animation_AppCompat_DropDownUp;
+			global::Plugin.Badge.Droid.Resource.Style.Base_CardView = global::Ipheidi.Droid.Resource.Style.Base_CardView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_DialogWindowTitle_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_DialogWindowTitle_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_DialogWindowTitleBackground_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_DialogWindowTitleBackground_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body1 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body1;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body2 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body2;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Button = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Button;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Caption = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Caption;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display1 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display1;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display2 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display2;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display3 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display3;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display4 = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display4;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Headline = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Headline;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Menu = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Colored = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Header = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Header;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title = global::Ipheidi.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_CompactMenu = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_CompactMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge = global::Ipheidi.Droid.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V11_Theme_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V11_Theme_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V11_Theme_AppCompat_Light_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V11_Theme_AppCompat_Light_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V11_ThemeOverlay_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V11_ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView = global::Ipheidi.Droid.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V12_Widget_AppCompat_EditText = global::Ipheidi.Droid.Resource.Style.Base_V12_Widget_AppCompat_EditText;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V21_Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_V21_Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V22_Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_V22_Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V22_Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_V22_Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V23_Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_V23_Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V23_Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_V23_Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Base_V7_Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView = global::Ipheidi.Droid.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_V7_Widget_AppCompat_EditText = global::Ipheidi.Droid.Resource.Style.Base_V7_Widget_AppCompat_EditText;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActionMode = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActionMode;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ActivityChooserView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ActivityChooserView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button_Colored = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Button_Small = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Button_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_EditText = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_EditText;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ImageButton = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ImageButton;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ListMenuView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ListMenuView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ListPopupWindow = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ListPopupWindow;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ListView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ListView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ListView_DropDown = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ListView_DropDown;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ListView_Menu = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ListView_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_PopupWindow = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_PopupWindow;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Small = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_SearchView = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_SearchView;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Spinner = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation = global::Ipheidi.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_Design_AppBarLayout = global::Ipheidi.Droid.Resource.Style.Base_Widget_Design_AppBarLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Base_Widget_Design_TabLayout = global::Ipheidi.Droid.Resource.Style.Base_Widget_Design_TabLayout;
+			global::Plugin.Badge.Droid.Resource.Style.CardView = global::Ipheidi.Droid.Resource.Style.CardView;
+			global::Plugin.Badge.Droid.Resource.Style.CardView_Dark = global::Ipheidi.Droid.Resource.Style.CardView_Dark;
+			global::Plugin.Badge.Droid.Resource.Style.CardView_Light = global::Ipheidi.Droid.Resource.Style.CardView_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark = global::Ipheidi.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V11_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_V11_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V11_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_V11_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V14_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_V14_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V14_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_V14_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V21_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_V21_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V21_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_V21_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V25_AppCompat = global::Ipheidi.Droid.Resource.Style.Platform_V25_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_V25_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Platform_V25_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Platform_Widget_AppCompat_Spinner = global::Ipheidi.Droid.Resource.Style.Platform_Widget_AppCompat_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat = global::Ipheidi.Droid.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2 = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
+			global::Plugin.Badge.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon = global::Ipheidi.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon;
+			global::Plugin.Badge.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::Ipheidi.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
+			global::Plugin.Badge.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::Ipheidi.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Body1 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Body1;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Body2 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Body2;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Button = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Button;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Caption = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Caption;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Display1 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Display1;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Display2 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Display2;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Display3 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Display3;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Display4 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Display4;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Headline = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Headline;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Large = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Large;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Large_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Large_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Medium = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Medium;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Medium_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Medium_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Menu = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Info = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Info;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Info_Media = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Info_Media;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Line2 = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Line2;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Line2_Media = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Line2_Media;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Media = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Media;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Time = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Time;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Time_Media = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Time_Media;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Title_Media = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Notification_Title_Media;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Small = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Small;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Small_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Small_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Subhead = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Subhead;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Title_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Title_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Colored = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Header = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Header;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Switch = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Switch;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::Ipheidi.Droid.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_CollapsingToolbar_Expanded = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_CollapsingToolbar_Expanded;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Counter = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Counter;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Counter_Overflow = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Counter_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Error = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Error;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Hint = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Hint;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Snackbar_Message = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Snackbar_Message;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Design_Tab = global::Ipheidi.Droid.Resource.Style.TextAppearance_Design_Tab;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_MediaRouter_PrimaryText = global::Ipheidi.Droid.Resource.Style.TextAppearance_MediaRouter_PrimaryText;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_MediaRouter_SecondaryText = global::Ipheidi.Droid.Resource.Style.TextAppearance_MediaRouter_SecondaryText;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_MediaRouter_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_MediaRouter_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_StatusBar_EventContent = global::Ipheidi.Droid.Resource.Style.TextAppearance_StatusBar_EventContent;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Info = global::Ipheidi.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Info;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Line2 = global::Ipheidi.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Line2;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Time = global::Ipheidi.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Time;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_StatusBar_EventContent_Title;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::Ipheidi.Droid.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::Ipheidi.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
+			global::Plugin.Badge.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title = global::Ipheidi.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_CompactMenu = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_CompactMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DayNight_NoActionBar = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DayNight_NoActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Dialog_MinWidth = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Dialog_MinWidth;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_DialogWhenLarge = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_DialogWhenLarge;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_DarkActionBar = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_DarkActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_Dialog = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_Light_NoActionBar = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_Light_NoActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_AppCompat_NoActionBar = global::Ipheidi.Droid.Resource.Style.Theme_AppCompat_NoActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design = global::Ipheidi.Droid.Resource.Style.Theme_Design;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design_BottomSheetDialog = global::Ipheidi.Droid.Resource.Style.Theme_Design_BottomSheetDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design_Light = global::Ipheidi.Droid.Resource.Style.Theme_Design_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design_Light_BottomSheetDialog = global::Ipheidi.Droid.Resource.Style.Theme_Design_Light_BottomSheetDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design_Light_NoActionBar = global::Ipheidi.Droid.Resource.Style.Theme_Design_Light_NoActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_Design_NoActionBar = global::Ipheidi.Droid.Resource.Style.Theme_Design_NoActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_MediaRouter = global::Ipheidi.Droid.Resource.Style.Theme_MediaRouter;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_MediaRouter_Light = global::Ipheidi.Droid.Resource.Style.Theme_MediaRouter_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_MediaRouter_Light_DarkControlPanel = global::Ipheidi.Droid.Resource.Style.Theme_MediaRouter_Light_DarkControlPanel;
+			global::Plugin.Badge.Droid.Resource.Style.Theme_MediaRouter_LightControlPanel = global::Ipheidi.Droid.Resource.Style.Theme_MediaRouter_LightControlPanel;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_ActionBar = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_AppCompat_Light = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_AppCompat_Light;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_MediaRouter_Dark = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_MediaRouter_Dark;
+			global::Plugin.Badge.Droid.Resource.Style.ThemeOverlay_MediaRouter_Light = global::Ipheidi.Droid.Resource.Style.ThemeOverlay_MediaRouter_Light;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionBar_Solid = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionBar_Solid;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabText = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabText;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionButton = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionButton_CloseMode = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionButton_CloseMode;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionButton_Overflow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionButton_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActionMode = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActionMode;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ActivityChooserView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ActivityChooserView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_AutoCompleteTextView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_AutoCompleteTextView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button_Borderless = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button_Borderless;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button_Borderless_Colored = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button_Borderless_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button_Colored = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button_Colored;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Button_Small = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Button_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ButtonBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ButtonBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_CompoundButton_Switch = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_CompoundButton_Switch;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_DrawerArrowToggle = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_DrawerArrowToggle;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_DropDownItem_Spinner = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_DropDownItem_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_EditText = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_EditText;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ImageButton = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ImageButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ActivityChooserView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ActivityChooserView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ListPopupWindow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ListPopupWindow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_ListView_DropDown = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_ListView_DropDown;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_SearchView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_SearchView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ListMenuView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ListMenuView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ListPopupWindow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ListPopupWindow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ListView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ListView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ListView_DropDown = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ListView_DropDown;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ListView_Menu = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ListView_Menu;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_NotificationActionContainer = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_NotificationActionContainer;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_NotificationActionText = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_NotificationActionText;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_PopupMenu = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_PopupMenu;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_PopupMenu_Overflow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_PopupMenu_Overflow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_PopupWindow = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_PopupWindow;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ProgressBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ProgressBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_RatingBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_RatingBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_RatingBar_Indicator = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_RatingBar_Indicator;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_RatingBar_Small = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_RatingBar_Small;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_SearchView = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_SearchView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_SearchView_ActionBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_SearchView_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_SeekBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_SeekBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_SeekBar_Discrete = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_SeekBar_Discrete;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Spinner = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Spinner;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Spinner_Underlined = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Spinner_Underlined;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_TextView_SpinnerItem = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_TextView_SpinnerItem;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Toolbar = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Toolbar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation = global::Ipheidi.Droid.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_AppBarLayout = global::Ipheidi.Droid.Resource.Style.Widget_Design_AppBarLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_BottomNavigationView = global::Ipheidi.Droid.Resource.Style.Widget_Design_BottomNavigationView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_BottomSheet_Modal = global::Ipheidi.Droid.Resource.Style.Widget_Design_BottomSheet_Modal;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_CollapsingToolbar = global::Ipheidi.Droid.Resource.Style.Widget_Design_CollapsingToolbar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_CoordinatorLayout = global::Ipheidi.Droid.Resource.Style.Widget_Design_CoordinatorLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_FloatingActionButton = global::Ipheidi.Droid.Resource.Style.Widget_Design_FloatingActionButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_NavigationView = global::Ipheidi.Droid.Resource.Style.Widget_Design_NavigationView;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_ScrimInsetsFrameLayout = global::Ipheidi.Droid.Resource.Style.Widget_Design_ScrimInsetsFrameLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_Snackbar = global::Ipheidi.Droid.Resource.Style.Widget_Design_Snackbar;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_TabLayout = global::Ipheidi.Droid.Resource.Style.Widget_Design_TabLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_Design_TextInputLayout = global::Ipheidi.Droid.Resource.Style.Widget_Design_TextInputLayout;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_MediaRouter_Light_MediaRouteButton = global::Ipheidi.Droid.Resource.Style.Widget_MediaRouter_Light_MediaRouteButton;
+			global::Plugin.Badge.Droid.Resource.Style.Widget_MediaRouter_MediaRouteButton = global::Ipheidi.Droid.Resource.Style.Widget_MediaRouter_MediaRouteButton;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar = global::Ipheidi.Droid.Resource.Styleable.ActionBar;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_background = global::Ipheidi.Droid.Resource.Styleable.ActionBar_background;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_backgroundSplit = global::Ipheidi.Droid.Resource.Styleable.ActionBar_backgroundSplit;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_backgroundStacked = global::Ipheidi.Droid.Resource.Styleable.ActionBar_backgroundStacked;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetEnd = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetEndWithActions = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetEndWithActions;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetLeft = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetLeft;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetRight = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetRight;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetStart = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_contentInsetStartWithNavigation = global::Ipheidi.Droid.Resource.Styleable.ActionBar_contentInsetStartWithNavigation;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_customNavigationLayout = global::Ipheidi.Droid.Resource.Styleable.ActionBar_customNavigationLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_displayOptions = global::Ipheidi.Droid.Resource.Styleable.ActionBar_displayOptions;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_divider = global::Ipheidi.Droid.Resource.Styleable.ActionBar_divider;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_elevation = global::Ipheidi.Droid.Resource.Styleable.ActionBar_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_height = global::Ipheidi.Droid.Resource.Styleable.ActionBar_height;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_hideOnContentScroll = global::Ipheidi.Droid.Resource.Styleable.ActionBar_hideOnContentScroll;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_homeAsUpIndicator = global::Ipheidi.Droid.Resource.Styleable.ActionBar_homeAsUpIndicator;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_homeLayout = global::Ipheidi.Droid.Resource.Styleable.ActionBar_homeLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_icon = global::Ipheidi.Droid.Resource.Styleable.ActionBar_icon;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_indeterminateProgressStyle = global::Ipheidi.Droid.Resource.Styleable.ActionBar_indeterminateProgressStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_itemPadding = global::Ipheidi.Droid.Resource.Styleable.ActionBar_itemPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_logo = global::Ipheidi.Droid.Resource.Styleable.ActionBar_logo;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_navigationMode = global::Ipheidi.Droid.Resource.Styleable.ActionBar_navigationMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_popupTheme = global::Ipheidi.Droid.Resource.Styleable.ActionBar_popupTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_progressBarPadding = global::Ipheidi.Droid.Resource.Styleable.ActionBar_progressBarPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_progressBarStyle = global::Ipheidi.Droid.Resource.Styleable.ActionBar_progressBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_subtitle = global::Ipheidi.Droid.Resource.Styleable.ActionBar_subtitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_subtitleTextStyle = global::Ipheidi.Droid.Resource.Styleable.ActionBar_subtitleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_title = global::Ipheidi.Droid.Resource.Styleable.ActionBar_title;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBar_titleTextStyle = global::Ipheidi.Droid.Resource.Styleable.ActionBar_titleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBarLayout = global::Ipheidi.Droid.Resource.Styleable.ActionBarLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionBarLayout_android_layout_gravity = global::Ipheidi.Droid.Resource.Styleable.ActionBarLayout_android_layout_gravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMenuItemView = global::Ipheidi.Droid.Resource.Styleable.ActionMenuItemView;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMenuItemView_android_minWidth = global::Ipheidi.Droid.Resource.Styleable.ActionMenuItemView_android_minWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMenuView = global::Ipheidi.Droid.Resource.Styleable.ActionMenuView;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode = global::Ipheidi.Droid.Resource.Styleable.ActionMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_background = global::Ipheidi.Droid.Resource.Styleable.ActionMode_background;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_backgroundSplit = global::Ipheidi.Droid.Resource.Styleable.ActionMode_backgroundSplit;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_closeItemLayout = global::Ipheidi.Droid.Resource.Styleable.ActionMode_closeItemLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_height = global::Ipheidi.Droid.Resource.Styleable.ActionMode_height;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_subtitleTextStyle = global::Ipheidi.Droid.Resource.Styleable.ActionMode_subtitleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActionMode_titleTextStyle = global::Ipheidi.Droid.Resource.Styleable.ActionMode_titleTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActivityChooserView = global::Ipheidi.Droid.Resource.Styleable.ActivityChooserView;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable = global::Ipheidi.Droid.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.ActivityChooserView_initialActivityCount = global::Ipheidi.Droid.Resource.Styleable.ActivityChooserView_initialActivityCount;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog = global::Ipheidi.Droid.Resource.Styleable.AlertDialog;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_android_layout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_android_layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_buttonPanelSideLayout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_buttonPanelSideLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_listItemLayout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_listItemLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_listLayout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_listLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_multiChoiceItemLayout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_multiChoiceItemLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_showTitle = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_showTitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout = global::Ipheidi.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_android_background = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_android_background;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_elevation = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_expanded = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_expanded;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayoutStates = global::Ipheidi.Droid.Resource.Styleable.AppBarLayoutStates;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsed = global::Ipheidi.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsed;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsible = global::Ipheidi.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsible;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_Layout = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollFlags = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollFlags;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollInterpolator = global::Ipheidi.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollInterpolator;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatImageView = global::Ipheidi.Droid.Resource.Styleable.AppCompatImageView;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatImageView_android_src = global::Ipheidi.Droid.Resource.Styleable.AppCompatImageView_android_src;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatImageView_srcCompat = global::Ipheidi.Droid.Resource.Styleable.AppCompatImageView_srcCompat;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatSeekBar = global::Ipheidi.Droid.Resource.Styleable.AppCompatSeekBar;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatSeekBar_android_thumb = global::Ipheidi.Droid.Resource.Styleable.AppCompatSeekBar_android_thumb;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatSeekBar_tickMark = global::Ipheidi.Droid.Resource.Styleable.AppCompatSeekBar_tickMark;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTint = global::Ipheidi.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTintMode = global::Ipheidi.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableBottom = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableBottom;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableEnd = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableLeft = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableLeft;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableRight = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableRight;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableStart = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableTop = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextHelper_android_textAppearance = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextHelper_android_textAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextView = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextView;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextView_android_textAppearance = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextView_android_textAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTextView_textAllCaps = global::Ipheidi.Droid.Resource.Styleable.AppCompatTextView_textAllCaps;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarItemBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarItemBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarPopupTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarPopupTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarSize = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarSize;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarSplitStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarSplitStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarTabStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarTabStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionDropDownStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionDropDownStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextColor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeCutDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeCutDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeFindDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeFindDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModePasteDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModePasteDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeShareDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeShareDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeSplitBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeSplitBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_activityChooserViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_activityChooserViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_alertDialogStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_alertDialogStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_alertDialogTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_alertDialogTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_android_windowIsFloating = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_android_windowIsFloating;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_borderlessButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_borderlessButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonBarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_buttonStyleSmall = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_buttonStyleSmall;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_checkboxStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_checkboxStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_checkedTextViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_checkedTextViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorAccent = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorAccent;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorBackgroundFloating = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorBackgroundFloating;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorButtonNormal = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorButtonNormal;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorControlActivated = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorControlActivated;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorControlHighlight = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorControlHighlight;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorControlNormal = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorControlNormal;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorPrimary = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorPrimary;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_controlBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_controlBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dialogPreferredPadding = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dialogPreferredPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dialogTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dialogTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dividerHorizontal = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dividerHorizontal;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dividerVertical = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dividerVertical;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dropDownListViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dropDownListViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_editTextBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_editTextBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_editTextColor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_editTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_editTextStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_editTextStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_homeAsUpIndicator = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_homeAsUpIndicator;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_imageButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_imageButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listDividerAlertDialog = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listDividerAlertDialog;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listMenuViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listMenuViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPopupWindowStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPopupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeight = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_panelBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_panelBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_panelMenuListTheme = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_panelMenuListTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_panelMenuListWidth = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_panelMenuListWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_popupMenuStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_popupMenuStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_popupWindowStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_popupWindowStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_radioButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_radioButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_searchViewStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_searchViewStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_seekBarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_seekBarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackground = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_spinnerStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_spinnerStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_switchStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_switchStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItem = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItem;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearancePopupMenuHeader = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearancePopupMenuHeader;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_textColorSearchUrl = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_textColorSearchUrl;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowActionBar = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowActionBar;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMajor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMajor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMinor = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMinor;
+			global::Plugin.Badge.Droid.Resource.Styleable.AppCompatTheme_windowNoTitle = global::Ipheidi.Droid.Resource.Styleable.AppCompatTheme_windowNoTitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView_elevation = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView_itemBackground = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView_itemBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView_itemIconTint = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView_itemIconTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView_itemTextColor = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView_itemTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomNavigationView_menu = global::Ipheidi.Droid.Resource.Styleable.BottomNavigationView_menu;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomSheetBehavior_Layout = global::Ipheidi.Droid.Resource.Styleable.BottomSheetBehavior_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_hideable = global::Ipheidi.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_hideable;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_peekHeight = global::Ipheidi.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_peekHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_skipCollapsed = global::Ipheidi.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_skipCollapsed;
+			global::Plugin.Badge.Droid.Resource.Styleable.ButtonBarLayout = global::Ipheidi.Droid.Resource.Styleable.ButtonBarLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ButtonBarLayout_allowStacking = global::Ipheidi.Droid.Resource.Styleable.ButtonBarLayout_allowStacking;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView = global::Ipheidi.Droid.Resource.Styleable.CardView;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_android_minHeight = global::Ipheidi.Droid.Resource.Styleable.CardView_android_minHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_android_minWidth = global::Ipheidi.Droid.Resource.Styleable.CardView_android_minWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardBackgroundColor = global::Ipheidi.Droid.Resource.Styleable.CardView_cardBackgroundColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardCornerRadius = global::Ipheidi.Droid.Resource.Styleable.CardView_cardCornerRadius;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardElevation = global::Ipheidi.Droid.Resource.Styleable.CardView_cardElevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardMaxElevation = global::Ipheidi.Droid.Resource.Styleable.CardView_cardMaxElevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardPreventCornerOverlap = global::Ipheidi.Droid.Resource.Styleable.CardView_cardPreventCornerOverlap;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_cardUseCompatPadding = global::Ipheidi.Droid.Resource.Styleable.CardView_cardUseCompatPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_contentPadding = global::Ipheidi.Droid.Resource.Styleable.CardView_contentPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_contentPaddingBottom = global::Ipheidi.Droid.Resource.Styleable.CardView_contentPaddingBottom;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_contentPaddingLeft = global::Ipheidi.Droid.Resource.Styleable.CardView_contentPaddingLeft;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_contentPaddingRight = global::Ipheidi.Droid.Resource.Styleable.CardView_contentPaddingRight;
+			global::Plugin.Badge.Droid.Resource.Styleable.CardView_contentPaddingTop = global::Ipheidi.Droid.Resource.Styleable.CardView_contentPaddingTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleGravity = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleTextAppearance = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_contentScrim = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_contentScrim;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleGravity = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMargin = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMargin;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginBottom = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginBottom;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginEnd = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginStart = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginTop = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleMarginTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleTextAppearance = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_expandedTitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_scrimAnimationDuration = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_scrimAnimationDuration;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_scrimVisibleHeightTrigger = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_scrimVisibleHeightTrigger;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_statusBarScrim = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_statusBarScrim;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_title = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_title;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_titleEnabled = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_titleEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_toolbarId = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_toolbarId;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout_layout_collapseMode = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout_layout_collapseMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier = global::Ipheidi.Droid.Resource.Styleable.CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier;
+			global::Plugin.Badge.Droid.Resource.Styleable.ColorStateListItem = global::Ipheidi.Droid.Resource.Styleable.ColorStateListItem;
+			global::Plugin.Badge.Droid.Resource.Styleable.ColorStateListItem_alpha = global::Ipheidi.Droid.Resource.Styleable.ColorStateListItem_alpha;
+			global::Plugin.Badge.Droid.Resource.Styleable.ColorStateListItem_android_alpha = global::Ipheidi.Droid.Resource.Styleable.ColorStateListItem_android_alpha;
+			global::Plugin.Badge.Droid.Resource.Styleable.ColorStateListItem_android_color = global::Ipheidi.Droid.Resource.Styleable.ColorStateListItem_android_color;
+			global::Plugin.Badge.Droid.Resource.Styleable.CompoundButton = global::Ipheidi.Droid.Resource.Styleable.CompoundButton;
+			global::Plugin.Badge.Droid.Resource.Styleable.CompoundButton_android_button = global::Ipheidi.Droid.Resource.Styleable.CompoundButton_android_button;
+			global::Plugin.Badge.Droid.Resource.Styleable.CompoundButton_buttonTint = global::Ipheidi.Droid.Resource.Styleable.CompoundButton_buttonTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.CompoundButton_buttonTintMode = global::Ipheidi.Droid.Resource.Styleable.CompoundButton_buttonTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_keylines = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_keylines;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_statusBarBackground = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_statusBarBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge;
+			global::Plugin.Badge.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline = global::Ipheidi.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline;
+			global::Plugin.Badge.Droid.Resource.Styleable.DesignTheme = global::Ipheidi.Droid.Resource.Styleable.DesignTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.DesignTheme_bottomSheetDialogTheme = global::Ipheidi.Droid.Resource.Styleable.DesignTheme_bottomSheetDialogTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.DesignTheme_bottomSheetStyle = global::Ipheidi.Droid.Resource.Styleable.DesignTheme_bottomSheetStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.DesignTheme_textColorError = global::Ipheidi.Droid.Resource.Styleable.DesignTheme_textColorError;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_arrowHeadLength = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_arrowHeadLength;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_arrowShaftLength = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_arrowShaftLength;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_barLength = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_barLength;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_color = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_color;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_drawableSize = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_drawableSize;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_gapBetweenBars = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_gapBetweenBars;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_spinBars = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_spinBars;
+			global::Plugin.Badge.Droid.Resource.Styleable.DrawerArrowToggle_thickness = global::Ipheidi.Droid.Resource.Styleable.DrawerArrowToggle_thickness;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_backgroundTint = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_backgroundTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_backgroundTintMode = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_backgroundTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_borderWidth = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_borderWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_elevation = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_fabSize = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_fabSize;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_pressedTranslationZ = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_pressedTranslationZ;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_rippleColor = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_rippleColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_useCompatPadding = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_useCompatPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide = global::Ipheidi.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide;
+			global::Plugin.Badge.Droid.Resource.Styleable.ForegroundLinearLayout = global::Ipheidi.Droid.Resource.Styleable.ForegroundLinearLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground = global::Ipheidi.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground;
+			global::Plugin.Badge.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity = global::Ipheidi.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding = global::Ipheidi.Droid.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_android_gravity = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_android_gravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_android_orientation = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_android_orientation;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_android_weightSum = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_android_weightSum;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_divider = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_divider;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_dividerPadding = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_dividerPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_showDividers = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_showDividers;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_Layout = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight;
+			global::Plugin.Badge.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width = global::Ipheidi.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width;
+			global::Plugin.Badge.Droid.Resource.Styleable.ListPopupWindow = global::Ipheidi.Droid.Resource.Styleable.ListPopupWindow;
+			global::Plugin.Badge.Droid.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset = global::Ipheidi.Droid.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset;
+			global::Plugin.Badge.Droid.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset = global::Ipheidi.Droid.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset;
+			global::Plugin.Badge.Droid.Resource.Styleable.MediaRouteButton = global::Ipheidi.Droid.Resource.Styleable.MediaRouteButton;
+			global::Plugin.Badge.Droid.Resource.Styleable.MediaRouteButton_android_minHeight = global::Ipheidi.Droid.Resource.Styleable.MediaRouteButton_android_minHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.MediaRouteButton_android_minWidth = global::Ipheidi.Droid.Resource.Styleable.MediaRouteButton_android_minWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.MediaRouteButton_buttonTint = global::Ipheidi.Droid.Resource.Styleable.MediaRouteButton_buttonTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.MediaRouteButton_externalRouteEnabledDrawable = global::Ipheidi.Droid.Resource.Styleable.MediaRouteButton_externalRouteEnabledDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup = global::Ipheidi.Droid.Resource.Styleable.MenuGroup;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_enabled = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_enabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_id = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_id;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_menuCategory = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_menuCategory;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_orderInCategory = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_orderInCategory;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuGroup_android_visible = global::Ipheidi.Droid.Resource.Styleable.MenuGroup_android_visible;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem = global::Ipheidi.Droid.Resource.Styleable.MenuItem;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_actionLayout = global::Ipheidi.Droid.Resource.Styleable.MenuItem_actionLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_actionProviderClass = global::Ipheidi.Droid.Resource.Styleable.MenuItem_actionProviderClass;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_actionViewClass = global::Ipheidi.Droid.Resource.Styleable.MenuItem_actionViewClass;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_alphabeticShortcut = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_alphabeticShortcut;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_checkable = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_checkable;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_checked = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_checked;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_enabled = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_enabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_icon = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_icon;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_id = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_id;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_menuCategory = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_menuCategory;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_numericShortcut = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_numericShortcut;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_onClick = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_onClick;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_orderInCategory = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_orderInCategory;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_title = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_title;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_titleCondensed = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_titleCondensed;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_android_visible = global::Ipheidi.Droid.Resource.Styleable.MenuItem_android_visible;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuItem_showAsAction = global::Ipheidi.Droid.Resource.Styleable.MenuItem_showAsAction;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView = global::Ipheidi.Droid.Resource.Styleable.MenuView;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_headerBackground = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_headerBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_horizontalDivider = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_horizontalDivider;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_itemBackground = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_itemBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_itemIconDisabledAlpha = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_itemIconDisabledAlpha;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_itemTextAppearance = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_itemTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_verticalDivider = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_verticalDivider;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_android_windowAnimationStyle = global::Ipheidi.Droid.Resource.Styleable.MenuView_android_windowAnimationStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_preserveIconSpacing = global::Ipheidi.Droid.Resource.Styleable.MenuView_preserveIconSpacing;
+			global::Plugin.Badge.Droid.Resource.Styleable.MenuView_subMenuArrow = global::Ipheidi.Droid.Resource.Styleable.MenuView_subMenuArrow;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView = global::Ipheidi.Droid.Resource.Styleable.NavigationView;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_android_background = global::Ipheidi.Droid.Resource.Styleable.NavigationView_android_background;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_android_fitsSystemWindows = global::Ipheidi.Droid.Resource.Styleable.NavigationView_android_fitsSystemWindows;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_android_maxWidth = global::Ipheidi.Droid.Resource.Styleable.NavigationView_android_maxWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_elevation = global::Ipheidi.Droid.Resource.Styleable.NavigationView_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_headerLayout = global::Ipheidi.Droid.Resource.Styleable.NavigationView_headerLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_itemBackground = global::Ipheidi.Droid.Resource.Styleable.NavigationView_itemBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_itemIconTint = global::Ipheidi.Droid.Resource.Styleable.NavigationView_itemIconTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_itemTextAppearance = global::Ipheidi.Droid.Resource.Styleable.NavigationView_itemTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_itemTextColor = global::Ipheidi.Droid.Resource.Styleable.NavigationView_itemTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.NavigationView_menu = global::Ipheidi.Droid.Resource.Styleable.NavigationView_menu;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindow = global::Ipheidi.Droid.Resource.Styleable.PopupWindow;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindow_android_popupAnimationStyle = global::Ipheidi.Droid.Resource.Styleable.PopupWindow_android_popupAnimationStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindow_android_popupBackground = global::Ipheidi.Droid.Resource.Styleable.PopupWindow_android_popupBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindow_overlapAnchor = global::Ipheidi.Droid.Resource.Styleable.PopupWindow_overlapAnchor;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindowBackgroundState = global::Ipheidi.Droid.Resource.Styleable.PopupWindowBackgroundState;
+			global::Plugin.Badge.Droid.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor = global::Ipheidi.Droid.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecycleListView = global::Ipheidi.Droid.Resource.Styleable.RecycleListView;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecycleListView_paddingBottomNoButtons = global::Ipheidi.Droid.Resource.Styleable.RecycleListView_paddingBottomNoButtons;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecycleListView_paddingTopNoTitle = global::Ipheidi.Droid.Resource.Styleable.RecycleListView_paddingTopNoTitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView = global::Ipheidi.Droid.Resource.Styleable.RecyclerView;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_android_descendantFocusability = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_android_descendantFocusability;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_android_orientation = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_android_orientation;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_layoutManager = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_layoutManager;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_reverseLayout = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_reverseLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_spanCount = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_spanCount;
+			global::Plugin.Badge.Droid.Resource.Styleable.RecyclerView_stackFromEnd = global::Ipheidi.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.ScrimInsetsFrameLayout = global::Ipheidi.Droid.Resource.Styleable.ScrimInsetsFrameLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground = global::Ipheidi.Droid.Resource.Styleable.ScrimInsetsFrameLayout_insetForeground;
+			global::Plugin.Badge.Droid.Resource.Styleable.ScrollingViewBehavior_Layout = global::Ipheidi.Droid.Resource.Styleable.ScrollingViewBehavior_Layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop = global::Ipheidi.Droid.Resource.Styleable.ScrollingViewBehavior_Layout_behavior_overlapTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView = global::Ipheidi.Droid.Resource.Styleable.SearchView;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_android_focusable = global::Ipheidi.Droid.Resource.Styleable.SearchView_android_focusable;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_android_imeOptions = global::Ipheidi.Droid.Resource.Styleable.SearchView_android_imeOptions;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_android_inputType = global::Ipheidi.Droid.Resource.Styleable.SearchView_android_inputType;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_android_maxWidth = global::Ipheidi.Droid.Resource.Styleable.SearchView_android_maxWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_closeIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_closeIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_commitIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_commitIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_defaultQueryHint = global::Ipheidi.Droid.Resource.Styleable.SearchView_defaultQueryHint;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_goIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_goIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_iconifiedByDefault = global::Ipheidi.Droid.Resource.Styleable.SearchView_iconifiedByDefault;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_layout = global::Ipheidi.Droid.Resource.Styleable.SearchView_layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_queryBackground = global::Ipheidi.Droid.Resource.Styleable.SearchView_queryBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_queryHint = global::Ipheidi.Droid.Resource.Styleable.SearchView_queryHint;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_searchHintIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_searchHintIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_searchIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_searchIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_submitBackground = global::Ipheidi.Droid.Resource.Styleable.SearchView_submitBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_suggestionRowLayout = global::Ipheidi.Droid.Resource.Styleable.SearchView_suggestionRowLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.SearchView_voiceIcon = global::Ipheidi.Droid.Resource.Styleable.SearchView_voiceIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.SnackbarLayout = global::Ipheidi.Droid.Resource.Styleable.SnackbarLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.SnackbarLayout_android_maxWidth = global::Ipheidi.Droid.Resource.Styleable.SnackbarLayout_android_maxWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.SnackbarLayout_elevation = global::Ipheidi.Droid.Resource.Styleable.SnackbarLayout_elevation;
+			global::Plugin.Badge.Droid.Resource.Styleable.SnackbarLayout_maxActionInlineWidth = global::Ipheidi.Droid.Resource.Styleable.SnackbarLayout_maxActionInlineWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner = global::Ipheidi.Droid.Resource.Styleable.Spinner;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner_android_dropDownWidth = global::Ipheidi.Droid.Resource.Styleable.Spinner_android_dropDownWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner_android_entries = global::Ipheidi.Droid.Resource.Styleable.Spinner_android_entries;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner_android_popupBackground = global::Ipheidi.Droid.Resource.Styleable.Spinner_android_popupBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner_android_prompt = global::Ipheidi.Droid.Resource.Styleable.Spinner_android_prompt;
+			global::Plugin.Badge.Droid.Resource.Styleable.Spinner_popupTheme = global::Ipheidi.Droid.Resource.Styleable.Spinner_popupTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_android_textOff = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_android_textOff;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_android_textOn = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_android_textOn;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_android_thumb = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_android_thumb;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_showText = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_showText;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_splitTrack = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_splitTrack;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_switchMinWidth = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_switchMinWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_switchPadding = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_switchPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_switchTextAppearance = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_switchTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_thumbTextPadding = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_thumbTextPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_thumbTint = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_thumbTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_thumbTintMode = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_thumbTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_track = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_track;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_trackTint = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_trackTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.SwitchCompat_trackTintMode = global::Ipheidi.Droid.Resource.Styleable.SwitchCompat_trackTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabItem = global::Ipheidi.Droid.Resource.Styleable.TabItem;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabItem_android_icon = global::Ipheidi.Droid.Resource.Styleable.TabItem_android_icon;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabItem_android_layout = global::Ipheidi.Droid.Resource.Styleable.TabItem_android_layout;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabItem_android_text = global::Ipheidi.Droid.Resource.Styleable.TabItem_android_text;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout = global::Ipheidi.Droid.Resource.Styleable.TabLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabBackground = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabBackground;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabContentStart = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabContentStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabGravity = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabIndicatorColor = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabIndicatorColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabIndicatorHeight = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabIndicatorHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabMaxWidth = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabMaxWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabMinWidth = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabMinWidth;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabMode = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabPadding = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabPadding;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabPaddingBottom = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabPaddingBottom;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabPaddingEnd = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabPaddingEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabPaddingStart = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabPaddingStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabPaddingTop = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabPaddingTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabSelectedTextColor = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabSelectedTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabTextAppearance = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TabLayout_tabTextColor = global::Ipheidi.Droid.Resource.Styleable.TabLayout_tabTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance = global::Ipheidi.Droid.Resource.Styleable.TextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_shadowColor = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_shadowColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_shadowDx = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_shadowDx;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_shadowDy = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_shadowDy;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_shadowRadius = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_shadowRadius;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_textColor = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_textColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_textColorHint = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_textColorHint;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_textSize = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_textSize;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_textStyle = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_textStyle;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_android_typeface = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_android_typeface;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextAppearance_textAllCaps = global::Ipheidi.Droid.Resource.Styleable.TextAppearance_textAllCaps;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_android_hint = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_android_hint;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_android_textColorHint = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_android_textColorHint;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_counterEnabled = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_counterEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_counterMaxLength = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_counterMaxLength;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_counterOverflowTextAppearance = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_counterOverflowTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_counterTextAppearance = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_counterTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_errorEnabled = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_errorEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_errorTextAppearance = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_errorTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_hintAnimationEnabled = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_hintAnimationEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_hintEnabled = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_hintEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_hintTextAppearance = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_hintTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_passwordToggleContentDescription = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_passwordToggleContentDescription;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_passwordToggleDrawable = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_passwordToggleDrawable;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_passwordToggleEnabled = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_passwordToggleEnabled;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_passwordToggleTint = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_passwordToggleTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.TextInputLayout_passwordToggleTintMode = global::Ipheidi.Droid.Resource.Styleable.TextInputLayout_passwordToggleTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar = global::Ipheidi.Droid.Resource.Styleable.Toolbar;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_android_gravity = global::Ipheidi.Droid.Resource.Styleable.Toolbar_android_gravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_android_minHeight = global::Ipheidi.Droid.Resource.Styleable.Toolbar_android_minHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_buttonGravity = global::Ipheidi.Droid.Resource.Styleable.Toolbar_buttonGravity;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_collapseContentDescription = global::Ipheidi.Droid.Resource.Styleable.Toolbar_collapseContentDescription;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_collapseIcon = global::Ipheidi.Droid.Resource.Styleable.Toolbar_collapseIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetEnd = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetEndWithActions = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetEndWithActions;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetLeft = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetLeft;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetRight = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetRight;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetStart = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_contentInsetStartWithNavigation = global::Ipheidi.Droid.Resource.Styleable.Toolbar_contentInsetStartWithNavigation;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_logo = global::Ipheidi.Droid.Resource.Styleable.Toolbar_logo;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_logoDescription = global::Ipheidi.Droid.Resource.Styleable.Toolbar_logoDescription;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_maxButtonHeight = global::Ipheidi.Droid.Resource.Styleable.Toolbar_maxButtonHeight;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_navigationContentDescription = global::Ipheidi.Droid.Resource.Styleable.Toolbar_navigationContentDescription;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_navigationIcon = global::Ipheidi.Droid.Resource.Styleable.Toolbar_navigationIcon;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_popupTheme = global::Ipheidi.Droid.Resource.Styleable.Toolbar_popupTheme;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_subtitle = global::Ipheidi.Droid.Resource.Styleable.Toolbar_subtitle;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_subtitleTextAppearance = global::Ipheidi.Droid.Resource.Styleable.Toolbar_subtitleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_subtitleTextColor = global::Ipheidi.Droid.Resource.Styleable.Toolbar_subtitleTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_title = global::Ipheidi.Droid.Resource.Styleable.Toolbar_title;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMargin = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMargin;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMarginBottom = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMarginBottom;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMarginEnd = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMarginEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMarginStart = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMarginStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMarginTop = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMarginTop;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleMargins = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleMargins;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleTextAppearance = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleTextAppearance;
+			global::Plugin.Badge.Droid.Resource.Styleable.Toolbar_titleTextColor = global::Ipheidi.Droid.Resource.Styleable.Toolbar_titleTextColor;
+			global::Plugin.Badge.Droid.Resource.Styleable.View = global::Ipheidi.Droid.Resource.Styleable.View;
+			global::Plugin.Badge.Droid.Resource.Styleable.View_android_focusable = global::Ipheidi.Droid.Resource.Styleable.View_android_focusable;
+			global::Plugin.Badge.Droid.Resource.Styleable.View_android_theme = global::Ipheidi.Droid.Resource.Styleable.View_android_theme;
+			global::Plugin.Badge.Droid.Resource.Styleable.View_paddingEnd = global::Ipheidi.Droid.Resource.Styleable.View_paddingEnd;
+			global::Plugin.Badge.Droid.Resource.Styleable.View_paddingStart = global::Ipheidi.Droid.Resource.Styleable.View_paddingStart;
+			global::Plugin.Badge.Droid.Resource.Styleable.View_theme = global::Ipheidi.Droid.Resource.Styleable.View_theme;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewBackgroundHelper = global::Ipheidi.Droid.Resource.Styleable.ViewBackgroundHelper;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewBackgroundHelper_android_background = global::Ipheidi.Droid.Resource.Styleable.ViewBackgroundHelper_android_background;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTint = global::Ipheidi.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTint;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode = global::Ipheidi.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewStubCompat = global::Ipheidi.Droid.Resource.Styleable.ViewStubCompat;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewStubCompat_android_id = global::Ipheidi.Droid.Resource.Styleable.ViewStubCompat_android_id;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Ipheidi.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
+			global::Plugin.Badge.Droid.Resource.Styleable.ViewStubCompat_android_layout = global::Ipheidi.Droid.Resource.Styleable.ViewStubCompat_android_layout;
 		}
 		
 		public partial class Animation
@@ -2214,638 +4327,641 @@ namespace Ipheidi.Droid
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f020122
-			public const int avd_hide_password_1 = 2130837794;
-			
 			// aapt resource value: 0x7f020123
-			public const int avd_hide_password_2 = 2130837795;
+			public const int avd_hide_password_1 = 2130837795;
 			
 			// aapt resource value: 0x7f020124
-			public const int avd_hide_password_3 = 2130837796;
+			public const int avd_hide_password_2 = 2130837796;
+			
+			// aapt resource value: 0x7f020125
+			public const int avd_hide_password_3 = 2130837797;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f020125
-			public const int avd_show_password_1 = 2130837797;
-			
 			// aapt resource value: 0x7f020126
-			public const int avd_show_password_2 = 2130837798;
+			public const int avd_show_password_1 = 2130837798;
 			
 			// aapt resource value: 0x7f020127
-			public const int avd_show_password_3 = 2130837799;
+			public const int avd_show_password_2 = 2130837799;
+			
+			// aapt resource value: 0x7f020128
+			public const int avd_show_password_3 = 2130837800;
 			
 			// aapt resource value: 0x7f020056
-			public const int bluetooth = 2130837590;
+			public const int bell = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int camera = 2130837591;
+			public const int bluetooth = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int cogwheel = 2130837592;
+			public const int camera = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int contact = 2130837593;
+			public const int cogwheel = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int cursor = 2130837594;
+			public const int contact = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int demi_cercle_vert = 2130837595;
+			public const int cursor = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int design_bottom_navigation_item_background = 2130837596;
+			public const int demi_cercle_vert = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int design_fab_background = 2130837597;
+			public const int design_bottom_navigation_item_background = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int design_ic_visibility = 2130837598;
+			public const int design_fab_background = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int design_ic_visibility_off = 2130837599;
+			public const int design_ic_visibility = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int design_password_eye = 2130837600;
+			public const int design_ic_visibility_off = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int design_snackbar_background = 2130837601;
+			public const int design_password_eye = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int home = 2130837602;
+			public const int design_snackbar_background = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int ic_arrow_back = 2130837603;
+			public const int home = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int ic_audiotrack_dark = 2130837604;
+			public const int ic_arrow_back = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int ic_audiotrack_light = 2130837605;
+			public const int ic_audiotrack_dark = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int ic_dialog_close_dark = 2130837606;
+			public const int ic_audiotrack_light = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int ic_dialog_close_light = 2130837607;
+			public const int ic_dialog_close_dark = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int ic_group_collapse_00 = 2130837608;
+			public const int ic_dialog_close_light = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int ic_group_collapse_01 = 2130837609;
+			public const int ic_group_collapse_00 = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int ic_group_collapse_02 = 2130837610;
+			public const int ic_group_collapse_01 = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int ic_group_collapse_03 = 2130837611;
+			public const int ic_group_collapse_02 = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int ic_group_collapse_04 = 2130837612;
+			public const int ic_group_collapse_03 = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int ic_group_collapse_05 = 2130837613;
+			public const int ic_group_collapse_04 = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int ic_group_collapse_06 = 2130837614;
+			public const int ic_group_collapse_05 = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int ic_group_collapse_07 = 2130837615;
+			public const int ic_group_collapse_06 = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int ic_group_collapse_08 = 2130837616;
+			public const int ic_group_collapse_07 = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int ic_group_collapse_09 = 2130837617;
+			public const int ic_group_collapse_08 = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int ic_group_collapse_10 = 2130837618;
+			public const int ic_group_collapse_09 = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int ic_group_collapse_11 = 2130837619;
+			public const int ic_group_collapse_10 = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int ic_group_collapse_12 = 2130837620;
+			public const int ic_group_collapse_11 = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int ic_group_collapse_13 = 2130837621;
+			public const int ic_group_collapse_12 = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int ic_group_collapse_14 = 2130837622;
+			public const int ic_group_collapse_13 = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int ic_group_collapse_15 = 2130837623;
+			public const int ic_group_collapse_14 = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int ic_group_expand_00 = 2130837624;
+			public const int ic_group_collapse_15 = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int ic_group_expand_01 = 2130837625;
+			public const int ic_group_expand_00 = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int ic_group_expand_02 = 2130837626;
+			public const int ic_group_expand_01 = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int ic_group_expand_03 = 2130837627;
+			public const int ic_group_expand_02 = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int ic_group_expand_04 = 2130837628;
+			public const int ic_group_expand_03 = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int ic_group_expand_05 = 2130837629;
+			public const int ic_group_expand_04 = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int ic_group_expand_06 = 2130837630;
+			public const int ic_group_expand_05 = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int ic_group_expand_07 = 2130837631;
+			public const int ic_group_expand_06 = 2130837631;
 			
 			// aapt resource value: 0x7f020080
-			public const int ic_group_expand_08 = 2130837632;
+			public const int ic_group_expand_07 = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int ic_group_expand_09 = 2130837633;
+			public const int ic_group_expand_08 = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int ic_group_expand_10 = 2130837634;
+			public const int ic_group_expand_09 = 2130837634;
 			
 			// aapt resource value: 0x7f020083
-			public const int ic_group_expand_11 = 2130837635;
+			public const int ic_group_expand_10 = 2130837635;
 			
 			// aapt resource value: 0x7f020084
-			public const int ic_group_expand_12 = 2130837636;
+			public const int ic_group_expand_11 = 2130837636;
 			
 			// aapt resource value: 0x7f020085
-			public const int ic_group_expand_13 = 2130837637;
+			public const int ic_group_expand_12 = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int ic_group_expand_14 = 2130837638;
+			public const int ic_group_expand_13 = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int ic_group_expand_15 = 2130837639;
+			public const int ic_group_expand_14 = 2130837639;
 			
 			// aapt resource value: 0x7f020088
-			public const int ic_launcher = 2130837640;
+			public const int ic_group_expand_15 = 2130837640;
 			
 			// aapt resource value: 0x7f020089
-			public const int ic_media_pause_dark = 2130837641;
+			public const int ic_launcher = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int ic_media_pause_light = 2130837642;
+			public const int ic_media_pause_dark = 2130837642;
 			
 			// aapt resource value: 0x7f02008b
-			public const int ic_media_play_dark = 2130837643;
+			public const int ic_media_pause_light = 2130837643;
 			
 			// aapt resource value: 0x7f02008c
-			public const int ic_media_play_light = 2130837644;
+			public const int ic_media_play_dark = 2130837644;
 			
 			// aapt resource value: 0x7f02008d
-			public const int ic_media_stop_dark = 2130837645;
+			public const int ic_media_play_light = 2130837645;
 			
 			// aapt resource value: 0x7f02008e
-			public const int ic_media_stop_light = 2130837646;
+			public const int ic_media_stop_dark = 2130837646;
 			
 			// aapt resource value: 0x7f02008f
-			public const int ic_mr_button_connected_00_dark = 2130837647;
+			public const int ic_media_stop_light = 2130837647;
 			
 			// aapt resource value: 0x7f020090
-			public const int ic_mr_button_connected_00_light = 2130837648;
+			public const int ic_mr_button_connected_00_dark = 2130837648;
 			
 			// aapt resource value: 0x7f020091
-			public const int ic_mr_button_connected_01_dark = 2130837649;
+			public const int ic_mr_button_connected_00_light = 2130837649;
 			
 			// aapt resource value: 0x7f020092
-			public const int ic_mr_button_connected_01_light = 2130837650;
+			public const int ic_mr_button_connected_01_dark = 2130837650;
 			
 			// aapt resource value: 0x7f020093
-			public const int ic_mr_button_connected_02_dark = 2130837651;
+			public const int ic_mr_button_connected_01_light = 2130837651;
 			
 			// aapt resource value: 0x7f020094
-			public const int ic_mr_button_connected_02_light = 2130837652;
+			public const int ic_mr_button_connected_02_dark = 2130837652;
 			
 			// aapt resource value: 0x7f020095
-			public const int ic_mr_button_connected_03_dark = 2130837653;
+			public const int ic_mr_button_connected_02_light = 2130837653;
 			
 			// aapt resource value: 0x7f020096
-			public const int ic_mr_button_connected_03_light = 2130837654;
+			public const int ic_mr_button_connected_03_dark = 2130837654;
 			
 			// aapt resource value: 0x7f020097
-			public const int ic_mr_button_connected_04_dark = 2130837655;
+			public const int ic_mr_button_connected_03_light = 2130837655;
 			
 			// aapt resource value: 0x7f020098
-			public const int ic_mr_button_connected_04_light = 2130837656;
+			public const int ic_mr_button_connected_04_dark = 2130837656;
 			
 			// aapt resource value: 0x7f020099
-			public const int ic_mr_button_connected_05_dark = 2130837657;
+			public const int ic_mr_button_connected_04_light = 2130837657;
 			
 			// aapt resource value: 0x7f02009a
-			public const int ic_mr_button_connected_05_light = 2130837658;
+			public const int ic_mr_button_connected_05_dark = 2130837658;
 			
 			// aapt resource value: 0x7f02009b
-			public const int ic_mr_button_connected_06_dark = 2130837659;
+			public const int ic_mr_button_connected_05_light = 2130837659;
 			
 			// aapt resource value: 0x7f02009c
-			public const int ic_mr_button_connected_06_light = 2130837660;
+			public const int ic_mr_button_connected_06_dark = 2130837660;
 			
 			// aapt resource value: 0x7f02009d
-			public const int ic_mr_button_connected_07_dark = 2130837661;
+			public const int ic_mr_button_connected_06_light = 2130837661;
 			
 			// aapt resource value: 0x7f02009e
-			public const int ic_mr_button_connected_07_light = 2130837662;
+			public const int ic_mr_button_connected_07_dark = 2130837662;
 			
 			// aapt resource value: 0x7f02009f
-			public const int ic_mr_button_connected_08_dark = 2130837663;
+			public const int ic_mr_button_connected_07_light = 2130837663;
 			
 			// aapt resource value: 0x7f0200a0
-			public const int ic_mr_button_connected_08_light = 2130837664;
+			public const int ic_mr_button_connected_08_dark = 2130837664;
 			
 			// aapt resource value: 0x7f0200a1
-			public const int ic_mr_button_connected_09_dark = 2130837665;
+			public const int ic_mr_button_connected_08_light = 2130837665;
 			
 			// aapt resource value: 0x7f0200a2
-			public const int ic_mr_button_connected_09_light = 2130837666;
+			public const int ic_mr_button_connected_09_dark = 2130837666;
 			
 			// aapt resource value: 0x7f0200a3
-			public const int ic_mr_button_connected_10_dark = 2130837667;
+			public const int ic_mr_button_connected_09_light = 2130837667;
 			
 			// aapt resource value: 0x7f0200a4
-			public const int ic_mr_button_connected_10_light = 2130837668;
+			public const int ic_mr_button_connected_10_dark = 2130837668;
 			
 			// aapt resource value: 0x7f0200a5
-			public const int ic_mr_button_connected_11_dark = 2130837669;
+			public const int ic_mr_button_connected_10_light = 2130837669;
 			
 			// aapt resource value: 0x7f0200a6
-			public const int ic_mr_button_connected_11_light = 2130837670;
+			public const int ic_mr_button_connected_11_dark = 2130837670;
 			
 			// aapt resource value: 0x7f0200a7
-			public const int ic_mr_button_connected_12_dark = 2130837671;
+			public const int ic_mr_button_connected_11_light = 2130837671;
 			
 			// aapt resource value: 0x7f0200a8
-			public const int ic_mr_button_connected_12_light = 2130837672;
+			public const int ic_mr_button_connected_12_dark = 2130837672;
 			
 			// aapt resource value: 0x7f0200a9
-			public const int ic_mr_button_connected_13_dark = 2130837673;
+			public const int ic_mr_button_connected_12_light = 2130837673;
 			
 			// aapt resource value: 0x7f0200aa
-			public const int ic_mr_button_connected_13_light = 2130837674;
+			public const int ic_mr_button_connected_13_dark = 2130837674;
 			
 			// aapt resource value: 0x7f0200ab
-			public const int ic_mr_button_connected_14_dark = 2130837675;
+			public const int ic_mr_button_connected_13_light = 2130837675;
 			
 			// aapt resource value: 0x7f0200ac
-			public const int ic_mr_button_connected_14_light = 2130837676;
+			public const int ic_mr_button_connected_14_dark = 2130837676;
 			
 			// aapt resource value: 0x7f0200ad
-			public const int ic_mr_button_connected_15_dark = 2130837677;
+			public const int ic_mr_button_connected_14_light = 2130837677;
 			
 			// aapt resource value: 0x7f0200ae
-			public const int ic_mr_button_connected_15_light = 2130837678;
+			public const int ic_mr_button_connected_15_dark = 2130837678;
 			
 			// aapt resource value: 0x7f0200af
-			public const int ic_mr_button_connected_16_dark = 2130837679;
+			public const int ic_mr_button_connected_15_light = 2130837679;
 			
 			// aapt resource value: 0x7f0200b0
-			public const int ic_mr_button_connected_16_light = 2130837680;
+			public const int ic_mr_button_connected_16_dark = 2130837680;
 			
 			// aapt resource value: 0x7f0200b1
-			public const int ic_mr_button_connected_17_dark = 2130837681;
+			public const int ic_mr_button_connected_16_light = 2130837681;
 			
 			// aapt resource value: 0x7f0200b2
-			public const int ic_mr_button_connected_17_light = 2130837682;
+			public const int ic_mr_button_connected_17_dark = 2130837682;
 			
 			// aapt resource value: 0x7f0200b3
-			public const int ic_mr_button_connected_18_dark = 2130837683;
+			public const int ic_mr_button_connected_17_light = 2130837683;
 			
 			// aapt resource value: 0x7f0200b4
-			public const int ic_mr_button_connected_18_light = 2130837684;
+			public const int ic_mr_button_connected_18_dark = 2130837684;
 			
 			// aapt resource value: 0x7f0200b5
-			public const int ic_mr_button_connected_19_dark = 2130837685;
+			public const int ic_mr_button_connected_18_light = 2130837685;
 			
 			// aapt resource value: 0x7f0200b6
-			public const int ic_mr_button_connected_19_light = 2130837686;
+			public const int ic_mr_button_connected_19_dark = 2130837686;
 			
 			// aapt resource value: 0x7f0200b7
-			public const int ic_mr_button_connected_20_dark = 2130837687;
+			public const int ic_mr_button_connected_19_light = 2130837687;
 			
 			// aapt resource value: 0x7f0200b8
-			public const int ic_mr_button_connected_20_light = 2130837688;
+			public const int ic_mr_button_connected_20_dark = 2130837688;
 			
 			// aapt resource value: 0x7f0200b9
-			public const int ic_mr_button_connected_21_dark = 2130837689;
+			public const int ic_mr_button_connected_20_light = 2130837689;
 			
 			// aapt resource value: 0x7f0200ba
-			public const int ic_mr_button_connected_21_light = 2130837690;
+			public const int ic_mr_button_connected_21_dark = 2130837690;
 			
 			// aapt resource value: 0x7f0200bb
-			public const int ic_mr_button_connected_22_dark = 2130837691;
+			public const int ic_mr_button_connected_21_light = 2130837691;
 			
 			// aapt resource value: 0x7f0200bc
-			public const int ic_mr_button_connected_22_light = 2130837692;
+			public const int ic_mr_button_connected_22_dark = 2130837692;
 			
 			// aapt resource value: 0x7f0200bd
-			public const int ic_mr_button_connecting_00_dark = 2130837693;
+			public const int ic_mr_button_connected_22_light = 2130837693;
 			
 			// aapt resource value: 0x7f0200be
-			public const int ic_mr_button_connecting_00_light = 2130837694;
+			public const int ic_mr_button_connecting_00_dark = 2130837694;
 			
 			// aapt resource value: 0x7f0200bf
-			public const int ic_mr_button_connecting_01_dark = 2130837695;
+			public const int ic_mr_button_connecting_00_light = 2130837695;
 			
 			// aapt resource value: 0x7f0200c0
-			public const int ic_mr_button_connecting_01_light = 2130837696;
+			public const int ic_mr_button_connecting_01_dark = 2130837696;
 			
 			// aapt resource value: 0x7f0200c1
-			public const int ic_mr_button_connecting_02_dark = 2130837697;
+			public const int ic_mr_button_connecting_01_light = 2130837697;
 			
 			// aapt resource value: 0x7f0200c2
-			public const int ic_mr_button_connecting_02_light = 2130837698;
+			public const int ic_mr_button_connecting_02_dark = 2130837698;
 			
 			// aapt resource value: 0x7f0200c3
-			public const int ic_mr_button_connecting_03_dark = 2130837699;
+			public const int ic_mr_button_connecting_02_light = 2130837699;
 			
 			// aapt resource value: 0x7f0200c4
-			public const int ic_mr_button_connecting_03_light = 2130837700;
+			public const int ic_mr_button_connecting_03_dark = 2130837700;
 			
 			// aapt resource value: 0x7f0200c5
-			public const int ic_mr_button_connecting_04_dark = 2130837701;
+			public const int ic_mr_button_connecting_03_light = 2130837701;
 			
 			// aapt resource value: 0x7f0200c6
-			public const int ic_mr_button_connecting_04_light = 2130837702;
+			public const int ic_mr_button_connecting_04_dark = 2130837702;
 			
 			// aapt resource value: 0x7f0200c7
-			public const int ic_mr_button_connecting_05_dark = 2130837703;
+			public const int ic_mr_button_connecting_04_light = 2130837703;
 			
 			// aapt resource value: 0x7f0200c8
-			public const int ic_mr_button_connecting_05_light = 2130837704;
+			public const int ic_mr_button_connecting_05_dark = 2130837704;
 			
 			// aapt resource value: 0x7f0200c9
-			public const int ic_mr_button_connecting_06_dark = 2130837705;
+			public const int ic_mr_button_connecting_05_light = 2130837705;
 			
 			// aapt resource value: 0x7f0200ca
-			public const int ic_mr_button_connecting_06_light = 2130837706;
+			public const int ic_mr_button_connecting_06_dark = 2130837706;
 			
 			// aapt resource value: 0x7f0200cb
-			public const int ic_mr_button_connecting_07_dark = 2130837707;
+			public const int ic_mr_button_connecting_06_light = 2130837707;
 			
 			// aapt resource value: 0x7f0200cc
-			public const int ic_mr_button_connecting_07_light = 2130837708;
+			public const int ic_mr_button_connecting_07_dark = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int ic_mr_button_connecting_08_dark = 2130837709;
+			public const int ic_mr_button_connecting_07_light = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int ic_mr_button_connecting_08_light = 2130837710;
+			public const int ic_mr_button_connecting_08_dark = 2130837710;
 			
 			// aapt resource value: 0x7f0200cf
-			public const int ic_mr_button_connecting_09_dark = 2130837711;
+			public const int ic_mr_button_connecting_08_light = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
-			public const int ic_mr_button_connecting_09_light = 2130837712;
+			public const int ic_mr_button_connecting_09_dark = 2130837712;
 			
 			// aapt resource value: 0x7f0200d1
-			public const int ic_mr_button_connecting_10_dark = 2130837713;
+			public const int ic_mr_button_connecting_09_light = 2130837713;
 			
 			// aapt resource value: 0x7f0200d2
-			public const int ic_mr_button_connecting_10_light = 2130837714;
+			public const int ic_mr_button_connecting_10_dark = 2130837714;
 			
 			// aapt resource value: 0x7f0200d3
-			public const int ic_mr_button_connecting_11_dark = 2130837715;
+			public const int ic_mr_button_connecting_10_light = 2130837715;
 			
 			// aapt resource value: 0x7f0200d4
-			public const int ic_mr_button_connecting_11_light = 2130837716;
+			public const int ic_mr_button_connecting_11_dark = 2130837716;
 			
 			// aapt resource value: 0x7f0200d5
-			public const int ic_mr_button_connecting_12_dark = 2130837717;
+			public const int ic_mr_button_connecting_11_light = 2130837717;
 			
 			// aapt resource value: 0x7f0200d6
-			public const int ic_mr_button_connecting_12_light = 2130837718;
+			public const int ic_mr_button_connecting_12_dark = 2130837718;
 			
 			// aapt resource value: 0x7f0200d7
-			public const int ic_mr_button_connecting_13_dark = 2130837719;
+			public const int ic_mr_button_connecting_12_light = 2130837719;
 			
 			// aapt resource value: 0x7f0200d8
-			public const int ic_mr_button_connecting_13_light = 2130837720;
+			public const int ic_mr_button_connecting_13_dark = 2130837720;
 			
 			// aapt resource value: 0x7f0200d9
-			public const int ic_mr_button_connecting_14_dark = 2130837721;
+			public const int ic_mr_button_connecting_13_light = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int ic_mr_button_connecting_14_light = 2130837722;
+			public const int ic_mr_button_connecting_14_dark = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int ic_mr_button_connecting_15_dark = 2130837723;
+			public const int ic_mr_button_connecting_14_light = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int ic_mr_button_connecting_15_light = 2130837724;
+			public const int ic_mr_button_connecting_15_dark = 2130837724;
 			
 			// aapt resource value: 0x7f0200dd
-			public const int ic_mr_button_connecting_16_dark = 2130837725;
+			public const int ic_mr_button_connecting_15_light = 2130837725;
 			
 			// aapt resource value: 0x7f0200de
-			public const int ic_mr_button_connecting_16_light = 2130837726;
+			public const int ic_mr_button_connecting_16_dark = 2130837726;
 			
 			// aapt resource value: 0x7f0200df
-			public const int ic_mr_button_connecting_17_dark = 2130837727;
+			public const int ic_mr_button_connecting_16_light = 2130837727;
 			
 			// aapt resource value: 0x7f0200e0
-			public const int ic_mr_button_connecting_17_light = 2130837728;
+			public const int ic_mr_button_connecting_17_dark = 2130837728;
 			
 			// aapt resource value: 0x7f0200e1
-			public const int ic_mr_button_connecting_18_dark = 2130837729;
+			public const int ic_mr_button_connecting_17_light = 2130837729;
 			
 			// aapt resource value: 0x7f0200e2
-			public const int ic_mr_button_connecting_18_light = 2130837730;
+			public const int ic_mr_button_connecting_18_dark = 2130837730;
 			
 			// aapt resource value: 0x7f0200e3
-			public const int ic_mr_button_connecting_19_dark = 2130837731;
+			public const int ic_mr_button_connecting_18_light = 2130837731;
 			
 			// aapt resource value: 0x7f0200e4
-			public const int ic_mr_button_connecting_19_light = 2130837732;
+			public const int ic_mr_button_connecting_19_dark = 2130837732;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int ic_mr_button_connecting_20_dark = 2130837733;
+			public const int ic_mr_button_connecting_19_light = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int ic_mr_button_connecting_20_light = 2130837734;
+			public const int ic_mr_button_connecting_20_dark = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int ic_mr_button_connecting_21_dark = 2130837735;
+			public const int ic_mr_button_connecting_20_light = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
-			public const int ic_mr_button_connecting_21_light = 2130837736;
+			public const int ic_mr_button_connecting_21_dark = 2130837736;
 			
 			// aapt resource value: 0x7f0200e9
-			public const int ic_mr_button_connecting_22_dark = 2130837737;
+			public const int ic_mr_button_connecting_21_light = 2130837737;
 			
 			// aapt resource value: 0x7f0200ea
-			public const int ic_mr_button_connecting_22_light = 2130837738;
+			public const int ic_mr_button_connecting_22_dark = 2130837738;
 			
 			// aapt resource value: 0x7f0200eb
-			public const int ic_mr_button_disabled_dark = 2130837739;
+			public const int ic_mr_button_connecting_22_light = 2130837739;
 			
 			// aapt resource value: 0x7f0200ec
-			public const int ic_mr_button_disabled_light = 2130837740;
+			public const int ic_mr_button_disabled_dark = 2130837740;
 			
 			// aapt resource value: 0x7f0200ed
-			public const int ic_mr_button_disconnected_dark = 2130837741;
+			public const int ic_mr_button_disabled_light = 2130837741;
 			
 			// aapt resource value: 0x7f0200ee
-			public const int ic_mr_button_disconnected_light = 2130837742;
+			public const int ic_mr_button_disconnected_dark = 2130837742;
 			
 			// aapt resource value: 0x7f0200ef
-			public const int ic_mr_button_grey = 2130837743;
+			public const int ic_mr_button_disconnected_light = 2130837743;
 			
 			// aapt resource value: 0x7f0200f0
-			public const int ic_vol_type_speaker_dark = 2130837744;
+			public const int ic_mr_button_grey = 2130837744;
 			
 			// aapt resource value: 0x7f0200f1
-			public const int ic_vol_type_speaker_group_dark = 2130837745;
+			public const int ic_vol_type_speaker_dark = 2130837745;
 			
 			// aapt resource value: 0x7f0200f2
-			public const int ic_vol_type_speaker_group_light = 2130837746;
+			public const int ic_vol_type_speaker_group_dark = 2130837746;
 			
 			// aapt resource value: 0x7f0200f3
-			public const int ic_vol_type_speaker_light = 2130837747;
+			public const int ic_vol_type_speaker_group_light = 2130837747;
 			
 			// aapt resource value: 0x7f0200f4
-			public const int ic_vol_type_tv_dark = 2130837748;
+			public const int ic_vol_type_speaker_light = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int ic_vol_type_tv_light = 2130837749;
+			public const int ic_vol_type_tv_dark = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int info_icon = 2130837750;
+			public const int ic_vol_type_tv_light = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int logo = 2130837751;
+			public const int info_icon = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int logout = 2130837752;
+			public const int logo = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int menu_hamburger = 2130837753;
+			public const int logout = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int mr_button_connected_dark = 2130837754;
+			public const int menu_hamburger = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int mr_button_connected_light = 2130837755;
+			public const int mr_button_connected_dark = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int mr_button_connecting_dark = 2130837756;
+			public const int mr_button_connected_light = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int mr_button_connecting_light = 2130837757;
+			public const int mr_button_connecting_dark = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int mr_button_dark = 2130837758;
+			public const int mr_button_connecting_light = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int mr_button_light = 2130837759;
+			public const int mr_button_dark = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int mr_dialog_close_dark = 2130837760;
+			public const int mr_button_light = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int mr_dialog_close_light = 2130837761;
+			public const int mr_dialog_close_dark = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int mr_dialog_material_background_dark = 2130837762;
+			public const int mr_dialog_close_light = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int mr_dialog_material_background_light = 2130837763;
+			public const int mr_dialog_material_background_dark = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int mr_group_collapse = 2130837764;
+			public const int mr_dialog_material_background_light = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int mr_group_expand = 2130837765;
+			public const int mr_group_collapse = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int mr_media_pause_dark = 2130837766;
+			public const int mr_group_expand = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int mr_media_pause_light = 2130837767;
+			public const int mr_media_pause_dark = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int mr_media_play_dark = 2130837768;
+			public const int mr_media_pause_light = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int mr_media_play_light = 2130837769;
+			public const int mr_media_play_dark = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int mr_media_stop_dark = 2130837770;
+			public const int mr_media_play_light = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int mr_media_stop_light = 2130837771;
+			public const int mr_media_stop_dark = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int mr_vol_type_audiotrack_dark = 2130837772;
+			public const int mr_media_stop_light = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int mr_vol_type_audiotrack_light = 2130837773;
+			public const int mr_vol_type_audiotrack_dark = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int navigation_empty_icon = 2130837774;
+			public const int mr_vol_type_audiotrack_light = 2130837774;
 			
 			// aapt resource value: 0x7f02010f
-			public const int nearby_square = 2130837775;
+			public const int navigation_empty_icon = 2130837775;
 			
 			// aapt resource value: 0x7f020110
-			public const int notification_action_background = 2130837776;
+			public const int nearby_square = 2130837776;
 			
 			// aapt resource value: 0x7f020111
-			public const int notification_bg = 2130837777;
+			public const int notification_action_background = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int notification_bg_low = 2130837778;
+			public const int notification_bg = 2130837778;
 			
 			// aapt resource value: 0x7f020113
-			public const int notification_bg_low_normal = 2130837779;
+			public const int notification_bg_low = 2130837779;
 			
 			// aapt resource value: 0x7f020114
-			public const int notification_bg_low_pressed = 2130837780;
+			public const int notification_bg_low_normal = 2130837780;
 			
 			// aapt resource value: 0x7f020115
-			public const int notification_bg_normal = 2130837781;
+			public const int notification_bg_low_pressed = 2130837781;
 			
 			// aapt resource value: 0x7f020116
-			public const int notification_bg_normal_pressed = 2130837782;
+			public const int notification_bg_normal = 2130837782;
 			
 			// aapt resource value: 0x7f020117
-			public const int notification_icon_background = 2130837783;
-			
-			// aapt resource value: 0x7f020120
-			public const int notification_template_icon_bg = 2130837792;
-			
-			// aapt resource value: 0x7f020121
-			public const int notification_template_icon_low_bg = 2130837793;
+			public const int notification_bg_normal_pressed = 2130837783;
 			
 			// aapt resource value: 0x7f020118
-			public const int notification_tile_bg = 2130837784;
+			public const int notification_icon_background = 2130837784;
+			
+			// aapt resource value: 0x7f020121
+			public const int notification_template_icon_bg = 2130837793;
+			
+			// aapt resource value: 0x7f020122
+			public const int notification_template_icon_low_bg = 2130837794;
 			
 			// aapt resource value: 0x7f020119
-			public const int notify_panel_notification_icon_bg = 2130837785;
+			public const int notification_tile_bg = 2130837785;
 			
 			// aapt resource value: 0x7f02011a
-			public const int refresh = 2130837786;
+			public const int notify_panel_notification_icon_bg = 2130837786;
 			
 			// aapt resource value: 0x7f02011b
-			public const int rounded_rectangle = 2130837787;
+			public const int refresh = 2130837787;
 			
 			// aapt resource value: 0x7f02011c
-			public const int rounded_rectangle_dark = 2130837788;
+			public const int rounded_rectangle = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
-			public const int rounded_rectangle_primary = 2130837789;
+			public const int rounded_rectangle_dark = 2130837789;
 			
 			// aapt resource value: 0x7f02011e
-			public const int sort = 2130837790;
+			public const int rounded_rectangle_primary = 2130837790;
 			
 			// aapt resource value: 0x7f02011f
-			public const int splash_screen = 2130837791;
+			public const int sort = 2130837791;
+			
+			// aapt resource value: 0x7f020120
+			public const int splash_screen = 2130837792;
 			
 			static Drawable()
 			{
@@ -3725,200 +5841,203 @@ namespace Ipheidi.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f070041
+			public const int ApplicationName = 2131165249;
+			
 			// aapt resource value: 0x7f070040
-			public const int ApplicationName = 2131165248;
-			
-			// aapt resource value: 0x7f07003f
-			public const int Hello = 2131165247;
-			
-			// aapt resource value: 0x7f07001e
-			public const int abc_action_bar_home_description = 2131165214;
+			public const int Hello = 2131165248;
 			
 			// aapt resource value: 0x7f07001f
-			public const int abc_action_bar_home_description_format = 2131165215;
+			public const int abc_action_bar_home_description = 2131165215;
 			
 			// aapt resource value: 0x7f070020
-			public const int abc_action_bar_home_subtitle_description_format = 2131165216;
+			public const int abc_action_bar_home_description_format = 2131165216;
 			
 			// aapt resource value: 0x7f070021
-			public const int abc_action_bar_up_description = 2131165217;
+			public const int abc_action_bar_home_subtitle_description_format = 2131165217;
 			
 			// aapt resource value: 0x7f070022
-			public const int abc_action_menu_overflow_description = 2131165218;
+			public const int abc_action_bar_up_description = 2131165218;
 			
 			// aapt resource value: 0x7f070023
-			public const int abc_action_mode_done = 2131165219;
+			public const int abc_action_menu_overflow_description = 2131165219;
 			
 			// aapt resource value: 0x7f070024
-			public const int abc_activity_chooser_view_see_all = 2131165220;
+			public const int abc_action_mode_done = 2131165220;
 			
 			// aapt resource value: 0x7f070025
-			public const int abc_activitychooserview_choose_application = 2131165221;
+			public const int abc_activity_chooser_view_see_all = 2131165221;
 			
 			// aapt resource value: 0x7f070026
-			public const int abc_capital_off = 2131165222;
+			public const int abc_activitychooserview_choose_application = 2131165222;
 			
 			// aapt resource value: 0x7f070027
-			public const int abc_capital_on = 2131165223;
-			
-			// aapt resource value: 0x7f070033
-			public const int abc_font_family_body_1_material = 2131165235;
-			
-			// aapt resource value: 0x7f070034
-			public const int abc_font_family_body_2_material = 2131165236;
-			
-			// aapt resource value: 0x7f070035
-			public const int abc_font_family_button_material = 2131165237;
-			
-			// aapt resource value: 0x7f070036
-			public const int abc_font_family_caption_material = 2131165238;
-			
-			// aapt resource value: 0x7f070037
-			public const int abc_font_family_display_1_material = 2131165239;
-			
-			// aapt resource value: 0x7f070038
-			public const int abc_font_family_display_2_material = 2131165240;
-			
-			// aapt resource value: 0x7f070039
-			public const int abc_font_family_display_3_material = 2131165241;
-			
-			// aapt resource value: 0x7f07003a
-			public const int abc_font_family_display_4_material = 2131165242;
-			
-			// aapt resource value: 0x7f07003b
-			public const int abc_font_family_headline_material = 2131165243;
-			
-			// aapt resource value: 0x7f07003c
-			public const int abc_font_family_menu_material = 2131165244;
-			
-			// aapt resource value: 0x7f07003d
-			public const int abc_font_family_subhead_material = 2131165245;
-			
-			// aapt resource value: 0x7f07003e
-			public const int abc_font_family_title_material = 2131165246;
+			public const int abc_capital_off = 2131165223;
 			
 			// aapt resource value: 0x7f070028
-			public const int abc_search_hint = 2131165224;
+			public const int abc_capital_on = 2131165224;
+			
+			// aapt resource value: 0x7f070034
+			public const int abc_font_family_body_1_material = 2131165236;
+			
+			// aapt resource value: 0x7f070035
+			public const int abc_font_family_body_2_material = 2131165237;
+			
+			// aapt resource value: 0x7f070036
+			public const int abc_font_family_button_material = 2131165238;
+			
+			// aapt resource value: 0x7f070037
+			public const int abc_font_family_caption_material = 2131165239;
+			
+			// aapt resource value: 0x7f070038
+			public const int abc_font_family_display_1_material = 2131165240;
+			
+			// aapt resource value: 0x7f070039
+			public const int abc_font_family_display_2_material = 2131165241;
+			
+			// aapt resource value: 0x7f07003a
+			public const int abc_font_family_display_3_material = 2131165242;
+			
+			// aapt resource value: 0x7f07003b
+			public const int abc_font_family_display_4_material = 2131165243;
+			
+			// aapt resource value: 0x7f07003c
+			public const int abc_font_family_headline_material = 2131165244;
+			
+			// aapt resource value: 0x7f07003d
+			public const int abc_font_family_menu_material = 2131165245;
+			
+			// aapt resource value: 0x7f07003e
+			public const int abc_font_family_subhead_material = 2131165246;
+			
+			// aapt resource value: 0x7f07003f
+			public const int abc_font_family_title_material = 2131165247;
 			
 			// aapt resource value: 0x7f070029
-			public const int abc_searchview_description_clear = 2131165225;
+			public const int abc_search_hint = 2131165225;
 			
 			// aapt resource value: 0x7f07002a
-			public const int abc_searchview_description_query = 2131165226;
+			public const int abc_searchview_description_clear = 2131165226;
 			
 			// aapt resource value: 0x7f07002b
-			public const int abc_searchview_description_search = 2131165227;
+			public const int abc_searchview_description_query = 2131165227;
 			
 			// aapt resource value: 0x7f07002c
-			public const int abc_searchview_description_submit = 2131165228;
+			public const int abc_searchview_description_search = 2131165228;
 			
 			// aapt resource value: 0x7f07002d
-			public const int abc_searchview_description_voice = 2131165229;
+			public const int abc_searchview_description_submit = 2131165229;
 			
 			// aapt resource value: 0x7f07002e
-			public const int abc_shareactionprovider_share_with = 2131165230;
+			public const int abc_searchview_description_voice = 2131165230;
 			
 			// aapt resource value: 0x7f07002f
-			public const int abc_shareactionprovider_share_with_application = 2131165231;
+			public const int abc_shareactionprovider_share_with = 2131165231;
 			
 			// aapt resource value: 0x7f070030
-			public const int abc_toolbar_collapse_description = 2131165232;
-			
-			// aapt resource value: 0x7f070016
-			public const int appbar_scrolling_view_behavior = 2131165206;
-			
-			// aapt resource value: 0x7f070017
-			public const int bottom_sheet_behavior = 2131165207;
-			
-			// aapt resource value: 0x7f070018
-			public const int character_counter_pattern = 2131165208;
-			
-			// aapt resource value: 0x7f070001
-			public const int mr_button_content_description = 2131165185;
-			
-			// aapt resource value: 0x7f070002
-			public const int mr_cast_button_connected = 2131165186;
-			
-			// aapt resource value: 0x7f070003
-			public const int mr_cast_button_connecting = 2131165187;
-			
-			// aapt resource value: 0x7f070004
-			public const int mr_cast_button_disconnected = 2131165188;
-			
-			// aapt resource value: 0x7f070005
-			public const int mr_chooser_searching = 2131165189;
-			
-			// aapt resource value: 0x7f070006
-			public const int mr_chooser_title = 2131165190;
-			
-			// aapt resource value: 0x7f070007
-			public const int mr_controller_album_art = 2131165191;
-			
-			// aapt resource value: 0x7f070008
-			public const int mr_controller_casting_screen = 2131165192;
-			
-			// aapt resource value: 0x7f070009
-			public const int mr_controller_close_description = 2131165193;
-			
-			// aapt resource value: 0x7f07000a
-			public const int mr_controller_collapse_group = 2131165194;
-			
-			// aapt resource value: 0x7f07000b
-			public const int mr_controller_disconnect = 2131165195;
-			
-			// aapt resource value: 0x7f07000c
-			public const int mr_controller_expand_group = 2131165196;
-			
-			// aapt resource value: 0x7f07000d
-			public const int mr_controller_no_info_available = 2131165197;
-			
-			// aapt resource value: 0x7f07000e
-			public const int mr_controller_no_media_selected = 2131165198;
-			
-			// aapt resource value: 0x7f07000f
-			public const int mr_controller_pause = 2131165199;
-			
-			// aapt resource value: 0x7f070010
-			public const int mr_controller_play = 2131165200;
-			
-			// aapt resource value: 0x7f070015
-			public const int mr_controller_stop = 2131165205;
-			
-			// aapt resource value: 0x7f070011
-			public const int mr_controller_stop_casting = 2131165201;
-			
-			// aapt resource value: 0x7f070012
-			public const int mr_controller_volume_slider = 2131165202;
-			
-			// aapt resource value: 0x7f070013
-			public const int mr_system_route_name = 2131165203;
-			
-			// aapt resource value: 0x7f070014
-			public const int mr_user_route_category_name = 2131165204;
-			
-			// aapt resource value: 0x7f070019
-			public const int password_toggle_content_description = 2131165209;
-			
-			// aapt resource value: 0x7f07001a
-			public const int path_password_eye = 2131165210;
-			
-			// aapt resource value: 0x7f07001b
-			public const int path_password_eye_mask_strike_through = 2131165211;
-			
-			// aapt resource value: 0x7f07001c
-			public const int path_password_eye_mask_visible = 2131165212;
-			
-			// aapt resource value: 0x7f07001d
-			public const int path_password_strike_through = 2131165213;
+			public const int abc_shareactionprovider_share_with_application = 2131165232;
 			
 			// aapt resource value: 0x7f070031
-			public const int search_menu_title = 2131165233;
+			public const int abc_toolbar_collapse_description = 2131165233;
 			
-			// aapt resource value: 0x7f070032
-			public const int status_bar_notification_info_overflow = 2131165234;
+			// aapt resource value: 0x7f070017
+			public const int appbar_scrolling_view_behavior = 2131165207;
+			
+			// aapt resource value: 0x7f070018
+			public const int bottom_sheet_behavior = 2131165208;
+			
+			// aapt resource value: 0x7f070019
+			public const int character_counter_pattern = 2131165209;
 			
 			// aapt resource value: 0x7f070000
-			public const int title_activity_webview = 2131165184;
+			public const int library_name = 2131165184;
+			
+			// aapt resource value: 0x7f070002
+			public const int mr_button_content_description = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int mr_cast_button_connected = 2131165187;
+			
+			// aapt resource value: 0x7f070004
+			public const int mr_cast_button_connecting = 2131165188;
+			
+			// aapt resource value: 0x7f070005
+			public const int mr_cast_button_disconnected = 2131165189;
+			
+			// aapt resource value: 0x7f070006
+			public const int mr_chooser_searching = 2131165190;
+			
+			// aapt resource value: 0x7f070007
+			public const int mr_chooser_title = 2131165191;
+			
+			// aapt resource value: 0x7f070008
+			public const int mr_controller_album_art = 2131165192;
+			
+			// aapt resource value: 0x7f070009
+			public const int mr_controller_casting_screen = 2131165193;
+			
+			// aapt resource value: 0x7f07000a
+			public const int mr_controller_close_description = 2131165194;
+			
+			// aapt resource value: 0x7f07000b
+			public const int mr_controller_collapse_group = 2131165195;
+			
+			// aapt resource value: 0x7f07000c
+			public const int mr_controller_disconnect = 2131165196;
+			
+			// aapt resource value: 0x7f07000d
+			public const int mr_controller_expand_group = 2131165197;
+			
+			// aapt resource value: 0x7f07000e
+			public const int mr_controller_no_info_available = 2131165198;
+			
+			// aapt resource value: 0x7f07000f
+			public const int mr_controller_no_media_selected = 2131165199;
+			
+			// aapt resource value: 0x7f070010
+			public const int mr_controller_pause = 2131165200;
+			
+			// aapt resource value: 0x7f070011
+			public const int mr_controller_play = 2131165201;
+			
+			// aapt resource value: 0x7f070016
+			public const int mr_controller_stop = 2131165206;
+			
+			// aapt resource value: 0x7f070012
+			public const int mr_controller_stop_casting = 2131165202;
+			
+			// aapt resource value: 0x7f070013
+			public const int mr_controller_volume_slider = 2131165203;
+			
+			// aapt resource value: 0x7f070014
+			public const int mr_system_route_name = 2131165204;
+			
+			// aapt resource value: 0x7f070015
+			public const int mr_user_route_category_name = 2131165205;
+			
+			// aapt resource value: 0x7f07001a
+			public const int password_toggle_content_description = 2131165210;
+			
+			// aapt resource value: 0x7f07001b
+			public const int path_password_eye = 2131165211;
+			
+			// aapt resource value: 0x7f07001c
+			public const int path_password_eye_mask_strike_through = 2131165212;
+			
+			// aapt resource value: 0x7f07001d
+			public const int path_password_eye_mask_visible = 2131165213;
+			
+			// aapt resource value: 0x7f07001e
+			public const int path_password_strike_through = 2131165214;
+			
+			// aapt resource value: 0x7f070032
+			public const int search_menu_title = 2131165234;
+			
+			// aapt resource value: 0x7f070033
+			public const int status_bar_notification_info_overflow = 2131165235;
+			
+			// aapt resource value: 0x7f070001
+			public const int title_activity_webview = 2131165185;
 			
 			static String()
 			{

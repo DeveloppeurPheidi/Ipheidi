@@ -796,5 +796,95 @@ namespace Ipheidi.Resources {
                 return ResourceManager.GetString("Erreur_AucunServeur", resourceCulture);
             }
         }
+        
+        public static string TimeSpan_Maintenant {
+            get {
+                return ResourceManager.GetString("TimeSpan_Maintenant", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_MinuteSingulier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_MinuteSingulier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_MinutePluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_MinutePluriel", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_HeureSingulier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_HeureSingulier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_HeurePluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_HeurePluriel", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_Hier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_Hier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_JourPluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_JourPluriel", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_SemaineSingulier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_SemaineSingulier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_SemainePluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_SemainePluriel", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_MoisSingulier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_MoisSingulier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_MoisPluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_MoisPluriel", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_AnneeSingulier {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_AnneeSingulier", resourceCulture);
+            }
+        }
+        
+        public static string TimeSpan_Past_AnneePluriel {
+            get {
+                return ResourceManager.GetString("TimeSpan_Past_AnneePluriel", resourceCulture);
+            }
+        }
+        
+        public static string SupprimerBouton {
+            get {
+                return ResourceManager.GetString("SupprimerBouton", resourceCulture);
+            }
+        }
+        
+        public static string PasDeNotificationLabel {
+            get {
+                return ResourceManager.GetString("PasDeNotificationLabel", resourceCulture);
+            }
+        }
     }
 }

@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns ="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="Ipheidi.GeofencePage">
+	xmlns:local="clr-namespace:Ipheidi;assembly=Ipheidi"
+	xmlns     ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x    ="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class    ="Ipheidi.GeofencePage">
 	<ContentPage.Content>
-		<StackLayout
-			x:Name="mainLayout">
-			<ListView
-				x:Name="listViewGeofence">
-			</ListView>
+		<RelativeLayout>
 			<StackLayout
-				Orientation="Horizontal"
-				Padding    ="5,0,5,5">
-				<Picker
-					x:Name           ="sortingPicker"
-					HorizontalOptions="FillAndExpand"
-					VerticalOptions  ="FillAndExpand" />
-				<Button
-					x:Name         ="btnAdd"
-					TextColor      ="White"
-					BackgroundColor="Green"
-					Text           ="+"
-					FontAttributes ="Bold"
-					FontSize       ="30"
-					VerticalOptions="FillAndExpand" />
-				<Button
-					x:Name         ="btnDelete"
-					TextColor      ="Gray"
-					BackgroundColor="White"
-					Text           ="x"
-					FontAttributes ="Bold"
-					FontSize       ="30"
-					VerticalOptions="FillAndExpand" />
+				x:Name                         ="mainLayout"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}">
+				<ListView
+					x:Name="listViewGeofence">
+				</ListView>
+				<StackLayout
+					Orientation="Horizontal"
+					Padding    ="5,0,5,5">
+					<Picker
+						x:Name           ="sortingPicker"
+						HorizontalOptions="FillAndExpand"
+						VerticalOptions  ="FillAndExpand" />
+					<Button
+						x:Name         ="btnAdd"
+						TextColor      ="White"
+						BackgroundColor="Green"
+						Text           ="+"
+						FontAttributes ="Bold"
+						FontSize       ="30"
+						VerticalOptions="FillAndExpand" />
+					<Button
+						x:Name         ="btnDelete"
+						TextColor      ="Gray"
+						BackgroundColor="White"
+						Text           ="x"
+						FontAttributes ="Bold"
+						FontSize       ="30"
+						VerticalOptions="FillAndExpand" />
+				</StackLayout>
 			</StackLayout>
-		</StackLayout>
+			<local:AppLoadingView
+				x:Name                         ="AppLoadingView"
+				RelativeLayout.WidthConstraint ="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+				RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1,Constant=0}" />
+		</RelativeLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Plugin.Badge.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
@@ -29,7 +30,7 @@ namespace Ipheidi
 			BrowserPage browser = new BrowserPage();
 			SettingPage setting = new SettingPage();
 			LocationPage location = new LocationPage();
-			BluetoothPage bluetooth = new BluetoothPage();
+			NotificationPage notification = new NotificationPage();
 			MenuPage menu = new MenuPage();
 			PropertyChanged += (sender, e) => Debug.WriteLine("TabbedPage: " + e.PropertyName + " changed");
 			Children.Add(browser);
@@ -37,7 +38,7 @@ namespace Ipheidi
 #if DEBUG
 			App.LocationManager.Page = location;
 			Children.Add(location);
-			Children.Add(bluetooth);
+			Children.Add(notification);
 #endif
 			Children.Add(menu);
 			ClearTitles();

@@ -11,17 +11,46 @@ using Xamarin.Forms;
 
 namespace Ipheidi
 {
-	public class Action
+	public class Action : DatabaseData
 	{
-		public string NoSeq { get; set; }
 		public string Name { get; set; }
 		public string Value { get; set; }
 		public string Description { get; set; }
 		public string Category { get; set; }
-		public int DeleteFlag { get; set; }
 
 		public string ActionAnswer { get; set; }
-		public Dictionary<string, string> Params { get; set; }
+
+		Dictionary<string, string> _params;
+		[SQLite.Ignore]
+		public Dictionary<string, string> Params
+		{
+
+			get
+			{
+				if (_params == null && !string.IsNullOrEmpty(SerializedParams))
+				{
+					try
+					{
+						_params = JsonConvert.DeserializeObject<Dictionary<string, string>>(SerializedParams);
+					}
+					catch (Exception e)
+					{
+						Debug.WriteLine(e.Message);
+					}
+				}
+				return _params;
+			}
+
+			set
+			{
+				_params = value;
+				SerializedParams = JsonConvert.SerializeObject(value);
+			}
+		}
+
+		[JsonIgnore]
+		public string SerializedParams { get; set;}
+
 		public string Event { get; set; }
 	}
 }

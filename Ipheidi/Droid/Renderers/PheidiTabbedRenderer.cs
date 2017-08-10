@@ -3,6 +3,7 @@ using System.Reflection;
 using Android.Support.Design.Widget;
 using Ipheidi;
 using Ipheidi.Droid;
+using Plugin.Badge.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
@@ -10,7 +11,7 @@ using Xamarin.Forms.Platform.Android.AppCompat;
 [assembly: ExportRenderer(typeof(PheidiTabbedPage), typeof(PheidiTabbedRenderer))]
 namespace Ipheidi.Droid
 {
-	public class PheidiTabbedRenderer: TabbedPageRenderer
+	public class PheidiTabbedRenderer: BadgedTabbedPageRenderer
 	{
 		public PheidiTabbedRenderer():base()
 		{

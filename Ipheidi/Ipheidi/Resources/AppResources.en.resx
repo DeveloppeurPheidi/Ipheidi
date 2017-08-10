@@ -516,6 +516,64 @@ It will prevent other users from auto login into your account.
 
 The change will be applied when you log out.</value>
 	</data>
+	<data
+		name="Erreur_AucunServeur">
+		<value>No server available, try again later.</value>
+	</data>
+	<data
+		name="TimeSpan_Maintenant">
+		<value>Now</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MinuteSingulier">
+		<value>{0} minute ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MinutePluriel">
+		<value>{0} minutes ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_HeureSingulier">
+		<value>{0} hour ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_HeurePluriel">
+		<value>{0} hours ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_Hier">
+		<value>Yesterday</value>
+	</data>
+	<data
+		name="TimeSpan_Past_Jours">
+		<value>{0} days ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_SemaineSingulier">
+		<value>Last week</value>
+	</data>
+	<data
+		name="TimeSpan_Past_SemainePluriel">
+		<value>{0} weeks ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MoisSingulier">
+		<value>{0} month ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_MoisPluriel">
+		<value>{0} months ago</value>
+	</data>
+	<data
+		name="TimeSpan_Past_AnneeSingulier">
+		<value>Last year</value>
+	</data>
+	<data
+		name="TimeSpan_Past_AnneePluriel">
+		<value>{0} years ago</value>
+	</data>
 
-	<data name="Erreur_AucunServeur"><value>No server available, try again later.</value></data>
+	<data name="SupprimerBouton"><value>Delete</value></data>
+
+	<data name="PasDeNotificationLabel"><value>No notification</value></data>
 </root>

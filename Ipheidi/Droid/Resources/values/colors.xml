@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<color name="ListViewSelected">#C0000000</color>
-	<color name="ListViewHighlighted">#C0000000</color>
+	<color name="ListViewSelected">#88888888</color>
+	<color name="ListViewHighlighted">#88BBBBBB</color>
 	<color name="PheidiGreen">#92c851</color>
 	<color name="DarkPheidiGreen">#577830</color>
 </resources>

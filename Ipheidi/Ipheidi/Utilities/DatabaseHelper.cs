@@ -54,6 +54,20 @@ namespace Ipheidi
 		}
 
 		/// <summary>
+		/// Deletes all items async for a specific user.
+		/// </summary>
+		/// <returns>The items.</returns>
+		public async void DeleteUserSpecificItems<T>() where T : DatabaseData, new()
+		{
+			CheckIfTableIsValid<T>();
+			var toDelete = await database.Table<T>().Where(l => l.ServerNoseq == App.ServerInfoNoseq && l.User == App.UserNoseq).ToListAsync();
+			foreach (var item in toDelete)
+			{
+				await database.DeleteAsync(item);
+			}
+		}
+
+		/// <summary>
 		/// Gets the items async.
 		/// </summary>
 		/// <returns>The items.</returns>

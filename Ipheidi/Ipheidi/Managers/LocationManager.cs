@@ -448,6 +448,10 @@ namespace Ipheidi
 				{
 					Device.StartTimer(new TimeSpan(0, 0, 1), () =>
 					{
+						if (lastLocation == null)
+						{
+							return false;
+						}
 						if (ChangingDistanceFilter == false)
 						{
 							return false;

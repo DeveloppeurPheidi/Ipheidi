@@ -212,9 +212,11 @@ namespace Ipheidi
 				if (value != "")
 				{
 					var action = ActionManager.GetActionList().FirstOrDefault((a) => a.Description == value);
-
+					if (geofence.ExitActionName != action.Name)
+					{
 						geofence.ExitActionName = action.Name;
-
+						didChange = true;
+					}
 				}
 				else
 				{
@@ -315,6 +317,7 @@ namespace Ipheidi
 			ScrollView scrollview = new ScrollView();
 			scrollview.Content = layout;
 			Content = scrollview;
+			didChange = false;
 		}
 
 		protected override void OnAppearing()
@@ -328,6 +331,7 @@ namespace Ipheidi
 			if (didChange)
 			{
 				App.GeofenceManager.UpdateGeofence(data);
+				App.GeofenceManager.RefreshClosePositionGeofencesList();
 			}
 		}
 

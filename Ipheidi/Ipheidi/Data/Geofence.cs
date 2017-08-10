@@ -16,7 +16,9 @@ namespace Ipheidi
 	}
 	public class Geofence : DatabaseData
 	{
-		protected bool IsInside = false;
+		[SQLite.Ignore,JsonIgnore]
+		public bool IsInside { get; set;}
+
 		protected bool timerRunning = false;
 
 
@@ -95,7 +97,7 @@ namespace Ipheidi
 				{
 
 					//System.Diagnostics.Debug.WriteLine(Name + " " + ID + ": " + "Sending " + (IsInside ? "entering" : "leaving") + " (" + Type.ToString() + ") notification in: " + (NotificationDelay - time) + "s");
-					if (time >= NotificationDelay && wasInside == IsInside)
+					if (time >= NotificationDelay && wasInside == IsInside && App.GeofenceManager != null)
 					{
 						Device.BeginInvokeOnMainThread(() =>
 						{
@@ -103,11 +105,11 @@ namespace Ipheidi
 							{
 								if (IsInside)
 								{
-									App.GeofenceManager.ExecuteAction(EnterActionName, GeofenceEvent.Entering,this);
+									App.GeofenceManager.ExecuteAction(EnterActionName, GeofenceEvent.Entering, this);
 								}
 								else
 								{
-App.GeofenceManager.ExecuteAction(ExitActionName, GeofenceEvent.Leaving,this);
+									App.GeofenceManager.ExecuteAction(ExitActionName, GeofenceEvent.Leaving, this);
 								}
 							}
 						});
@@ -115,8 +117,8 @@ App.GeofenceManager.ExecuteAction(ExitActionName, GeofenceEvent.Leaving,this);
 						return false;
 					}
 					time++;
-					timerRunning = wasInside == IsInside;
-					return wasInside == IsInside;
+					timerRunning = wasInside == IsInside && App.GeofenceManager != null;
+					return timerRunning;
 				});
 			}
 		}

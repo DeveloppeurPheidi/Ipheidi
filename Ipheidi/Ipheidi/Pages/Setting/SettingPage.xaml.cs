@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
@@ -23,6 +24,63 @@ namespace Ipheidi
 		{
 			this.Icon = "cogwheel.png";
 			InitializeComponent();
+
+#if DEBUG
+			//btnTest.IsVisible = true;
+#endif
+			btnTest.Clicked += (sender, e) =>
+			{
+
+				System.Action resend = () =>
+				{
+					App.NotificationManager.DisplayAlert("TEST", "another message right after", "ok", "nop", () => { }, () => { });
+				};
+
+
+				var a1 = new Action();
+				a1.Name = "Depense_Create";
+				a1.Params = new Dictionary<string, string>();
+				a1.Params.Add("GEOFENCENAME", "Allo 1");
+				a1.Params = new Dictionary<string, string>();
+				a1.Params.Add("GEOFENCENAME", "Allo 1");
+				App.NotificationManager.SendNotification("test this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long text", "First", "cogwheel.png", a1);
+
+				var a2 = new Action();
+				a2.Name = "Depense_Create";
+				a2.Params = new Dictionary<string, string>();
+				a2.Params.Add("GEOFENCENAME", "Allo 1");
+				a2.Params = new Dictionary<string, string>();
+				a2.Params.Add("GEOFENCENAME", "AllO 2");
+
+				App.NotificationManager.SendNotification("test", "Second", "cogwheel.png", a2);
+
+				Task.Run(async () =>
+				{
+					DatabaseHelper.Database.DeleteUserSpecificItems<Notification>();
+					int minutesToAdd = 1;
+					for (int i = 0; i < 25; i++)
+					{
+						DateTime date = DateTime.Now.AddMinutes(1 - minutesToAdd);
+
+
+						var notif = new Notification()
+						{
+							Name = "Depense_Create",
+							Params = new Dictionary<string, string>() { { "GEOFENCENAME", "Test " + i } },
+							Icon = "refresh.png",
+							Title = "Title #" + i,
+							Message = date.ToString()
+						};
+
+						notif.Date = date;
+						minutesToAdd *= 2;
+						Debug.WriteLine("Notif.Date: " + date.ToString());
+						await DatabaseHelper.Database.SaveItemAsync(notif);
+					}
+				});
+
+			};
+
 
 
 			btnGeofences.Clicked += (sender, e) =>
@@ -93,6 +151,7 @@ namespace Ipheidi
 		{
 			System.Action onConfirm = () =>
 			{
+				DatabaseHelper.Database.DeleteUserSpecificItems<Geofence>();
 				if (App.ServerInfoList.Count > 1)
 				{
 					App.CredentialsManager.DeleteUser(App.UserNoseq);
@@ -138,10 +197,10 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				this.mainLayout.Margin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
+				this.mainLayout.Margin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? new Thickness(0, 0, 0, 0) : new Thickness(0, 20, 0, 0);
 			}
-			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height/2;
-			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height/2;
+			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height / 2;
+			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height / 2;
 			base.OnSizeAllocated(width, height);
 		}
 
@@ -150,8 +209,8 @@ namespace Ipheidi
 		/// </summary>
 		protected override void OnAppearing()
 		{
-			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height/2;
-			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height/2;
+			imgDeviceIsSharedInfo.HeightRequest = lblDeviceIsShared.Height / 2;
+			imgDeviceIsSharedInfo.WidthRequest = lblDeviceIsShared.Height / 2;
 			base.OnAppearing();
 		}
 

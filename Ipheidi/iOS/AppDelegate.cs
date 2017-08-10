@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Foundation;
 using Newtonsoft.Json;
 using UIKit;
 using UserNotifications;
+using Xamarin.Forms;
 
 namespace Ipheidi.iOS
 {
@@ -42,16 +43,16 @@ namespace Ipheidi.iOS
 			// Request notification permissions from the user
 			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
 			{
-				UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert|UNAuthorizationOptions.Sound|UNAuthorizationOptions.Badge|UNAuthorizationOptions.CarPlay, (approved, err) =>
-				{
-					// Handle approval
-				});
+				UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge | UNAuthorizationOptions.CarPlay, (approved, err) =>
+					  {
+						  // Handle approval
+					  });
 
 			}
 			else
 			{
 				var settings = UIUserNotificationSettings.GetSettingsForTypes(
-					UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound 
+					UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
 				, null);
 				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
 			}
@@ -62,12 +63,42 @@ namespace Ipheidi.iOS
 
 		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
 		{
-			// reset our badge
-			UIApplication.SharedApplication.ApplicationIconBadgeNumber -= 1;
 
-			var action = JsonConvert.DeserializeObject<Action>(notification.UserInfo[new NSString("Action")] as NSString);
+			System.Diagnostics.Debug.WriteLine("ReceivedLocalNotification");
 
-			ActionManager.RunActionAnswer(action);
+			if (notification.UserInfo.ContainsKey(new NSString("Action")))
+			{
+				var noti = JsonConvert.DeserializeObject<Notification>(notification.UserInfo[new NSString("Action")] as NSString);
+				App.NotificationManager.ReceivedNotification(noti);
+			}
 		}
+
+
+		public override void OnActivated(UIApplication uiApplication)
+		{
+			Console.WriteLine("OnActivated called, App is active.");
+			App.IsInBackground = false;
+		}
+		public override void WillEnterForeground(UIApplication uiApplication)
+		{
+			Console.WriteLine("App will enter foreground");
+			App.IsInBackground = false;
+		}
+		public override void OnResignActivation(UIApplication uiApplication)
+		{
+			Console.WriteLine("OnResignActivation called, App moving to inactive state.");
+			App.IsInBackground = false;
+		}
+		public override void DidEnterBackground(UIApplication uiApplication)
+		{
+			Console.WriteLine("App entering background state.");
+			App.IsInBackground = true;
+		}
+		// not guaranteed that this will run
+		public override void WillTerminate(UIApplication uiApplication)
+		{
+			Console.WriteLine("App is terminating.");
+		}
+
 	}
 }

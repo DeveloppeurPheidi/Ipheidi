@@ -46,10 +46,9 @@
 							x:Name               ="lblDeviceIsShared"
 							VerticalTextAlignment="Center" />
 						<local:IconView
-							x:Name         ="imgDeviceIsSharedInfo"
-							VerticalOptions="Center"
-							HorizontalOptions="Start"
-						/>
+							x:Name           ="imgDeviceIsSharedInfo"
+							VerticalOptions  ="Center"
+							HorizontalOptions="Start" />
 					</StackLayout>
 					<Switch
 						x:Name           ="switchDeviceIsShared"
@@ -64,6 +63,13 @@
 					IsVisible="false"
 					x:Name   ="lblHostServerState"
 					Text     ="Host Server State: " />
+				<Button
+					x:Name         ="btnTest"
+					IsVisible      ="false"
+					Text           ="Test"
+					TextColor      ="Red"
+					BorderColor    ="Red"
+					BackgroundColor="White" />
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

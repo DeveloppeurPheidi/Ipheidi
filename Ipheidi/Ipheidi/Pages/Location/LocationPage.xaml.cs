@@ -236,7 +236,7 @@ namespace Ipheidi
 			//Permet d'afficher correctement la bar de status sur iOS
 			if (Device.RuntimePlatform == Device.iOS)
 			{
-				bool toMargin = App.StatusBarManager.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? false : true;
+				bool toMargin = App.NativeUtilities.GetStatusBarHidden() || NavigationPage.GetHasNavigationBar(this) ? false : true;
 				mainLayout.Margin = toMargin ? new Thickness(0, 20, 0, 0) : new Thickness(0, 0, 0, 0);
 			}
 		}

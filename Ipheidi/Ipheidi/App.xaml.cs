@@ -173,7 +173,7 @@ namespace Ipheidi
 		static public IContactService ContactManager;
 		static public ICookieService CookieManager;
 		static public ICredentialsService CredentialsManager;
-		static public IStatusBarService StatusBarManager;
+		static public INativeUtilities NativeUtilities;
 		static public ILocationService LocationService;
 		static public ISettingHelper SettingHelper;
 		static public LocationManager LocationManager;
@@ -240,7 +240,7 @@ namespace Ipheidi
 				ContactManager = DependencyService.Get<IContactService>();
 				CookieManager = DependencyService.Get<ICookieService>();
 				CredentialsManager = DependencyService.Get<ICredentialsService>();
-				StatusBarManager = DependencyService.Get<IStatusBarService>();
+				NativeUtilities = DependencyService.Get<INativeUtilities>();
 				LocationService = DependencyService.Get<ILocationService>();
 				NotificationManager = DependencyService.Get<INotificationService>();
 				FileHelper = DependencyService.Get<IFileHelper>();
@@ -487,6 +487,7 @@ namespace Ipheidi
 			LocationService.RemoveLocationListener(GeofenceManager);
 			GeofenceManager = null;
 			LocationService.RemoveLocationListener(LocationManager);
+			NotificationManager.RemoveAllNotificationListener();
 			NetworkManager.RemoveNetworkStateListener(ImageHelper);
 
 			MainPage.Navigation.PopToRootAsync();
@@ -515,19 +516,29 @@ namespace Ipheidi
 
 		protected override void OnStart()
 		{
-			Debug.WriteLine("App: Start");
+			if (Device.RuntimePlatform == Device.Android)
+			{
+				Debug.WriteLine("App: Start");
+				IsInBackground = false;
+			}
 		}
 
 		protected override void OnSleep()
 		{
-			Debug.WriteLine("App: Sleep");
-			IsInBackground = true;
+			if (Device.RuntimePlatform == Device.Android)
+			{
+				Debug.WriteLine("App: Sleep");
+				IsInBackground = true;
+			}
 		}
 
 		protected override void OnResume()
 		{
-			Debug.WriteLine("App: Resume");
-			IsInBackground = false;
+			if (Device.RuntimePlatform == Device.Android)
+			{
+				Debug.WriteLine("App: Resume");
+				IsInBackground = false;
+			}
 		}
 
 		protected override void OnPropertyChanged(string propertyName = null)

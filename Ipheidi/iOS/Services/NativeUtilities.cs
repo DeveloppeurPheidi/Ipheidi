@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using Ipheidi.iOS;
 using UIKit;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(StatusBarManager))]
+[assembly: Dependency(typeof(NativeUtilities))]
 namespace Ipheidi.iOS
 {
-	public class StatusBarManager:IStatusBarService
+	public class NativeUtilities:INativeUtilities
 	{
 		/// <summary>
 		/// Gets the status bar hidden property.
@@ -15,6 +15,14 @@ namespace Ipheidi.iOS
 		public bool GetStatusBarHidden()
 		{
 			return UIApplication.SharedApplication.StatusBarHidden;
+		}
+
+		public void SetApplicationBadge(int value)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				UIApplication.SharedApplication.ApplicationIconBadgeNumber = value;
+			});
 		}
 
 		/// <summary>
