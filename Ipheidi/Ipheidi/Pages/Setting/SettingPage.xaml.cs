@@ -26,8 +26,8 @@ namespace Ipheidi
 			InitializeComponent();
 
 #if DEBUG
-			//btnTest.IsVisible = true;
-#endif
+			btnTest.IsVisible = true;
+
 			btnTest.Clicked += (sender, e) =>
 			{
 
@@ -35,8 +35,6 @@ namespace Ipheidi
 				{
 					App.NotificationManager.DisplayAlert("TEST", "another message right after", "ok", "nop", () => { }, () => { });
 				};
-
-
 				var a1 = new Action();
 				a1.Name = "Depense_Create";
 				a1.Params = new Dictionary<string, string>();
@@ -79,7 +77,9 @@ namespace Ipheidi
 					}
 				});
 
+
 			};
+#endif
 
 
 

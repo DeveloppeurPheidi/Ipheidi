@@ -284,10 +284,17 @@ namespace Ipheidi
 			var listViewStyle = new Style(typeof(ListView))
 			{
 				Setters = {
-					new Setter{ Property = VisualElement.BackgroundColorProperty, Value =  Color.FromHex("#BBBBBB")}
+					new Setter{ Property = VisualElement.BackgroundColorProperty, Value =  Color.FromHex("#BBBBBB")},
 				}
 			};
-
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				listViewStyle.Setters.Add(new Setter { Property = ListView.SeparatorColorProperty, Value = Color.Transparent });
+			}
+			else if (Device.RuntimePlatform == Device.Android)
+			{
+				listViewStyle.Setters.Add(new Setter { Property = ListView.SeparatorColorProperty, Value =  Color.FromHex("#BBBBBB")});
+			}
 			var HMSTimePickerStyle = new Style(typeof(HMSTimePicker))
 			{
 				Setters = {

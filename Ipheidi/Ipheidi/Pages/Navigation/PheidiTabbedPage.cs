@@ -38,8 +38,8 @@ namespace Ipheidi
 #if DEBUG
 			App.LocationManager.Page = location;
 			Children.Add(location);
-			Children.Add(notification);
 #endif
+			Children.Add(notification);
 			Children.Add(menu);
 			ClearTitles();
 			foreach (var p in Children)

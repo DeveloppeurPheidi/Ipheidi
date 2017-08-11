@@ -90,7 +90,7 @@ namespace Ipheidi
 
 
 			var deleteAction = new MenuItem { Text = AppResources.SupprimerBouton, IsDestructive = true }; // red background
-			deleteAction.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
+			deleteAction.SetBinding(MenuItem.CommandParameterProperty, new Binding("notificationDeleteAction"));
 			deleteAction.Clicked += async (sender, e) =>
 			{
 				try

@@ -144,7 +144,7 @@ namespace Ipheidi
 			GeofenceCellView.GeofenceCellViews.Add(this);
 
 			var deleteAction = new MenuItem { Text = AppResources.SupprimerBouton, IsDestructive = true }; // red background
-			deleteAction.SetBinding(MenuItem.CommandParameterProperty, new Binding("."));
+			deleteAction.SetBinding(MenuItem.CommandParameterProperty, new Binding("geofenceDeleteAction"));
 			deleteAction.Clicked += (sender, e) =>
 			{
 				btnDelete.IsEnabled = false;
