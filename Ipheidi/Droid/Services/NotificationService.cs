@@ -148,17 +148,24 @@ namespace Ipheidi.Droid
 			count++;
 			notificationManager.Notify(count, builder.Build());
 
-			Task.Run(async () =>
-			{
-				try
-				{
-					await DatabaseHelper.Database.SaveItemAsync(notification);
-				}
-				catch (Exception e)
-				{
-					Debug.WriteLine("SavingNotification: " + e.Message);
-				}
-			});
+			Task.Run(async() =>
+					{
+						try
+						{
+							await DatabaseHelper.Database.SaveItemAsync(notification);
+							if (Listeners != null)
+							{
+								foreach (var listener in Listeners)
+								{
+									listener.OnNotificationSent(notification);
+								}
+							}
+						}
+						catch (Exception e)
+						{
+							Debug.WriteLine("SavingNotification: " + e.Message);
+						}
+					});
 		}
 
 		public void SendNotification(string message, string title, string icon, Action action)
