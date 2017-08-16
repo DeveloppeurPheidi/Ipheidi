@@ -26,7 +26,7 @@
 	</data>
 	<data
 		name="FilterNotificationActive">
-		<value>Notification Activé</value>
+		<value>Notification Activée</value>
 	</data>
 	<data
 		name="GeofencePageTitle">
@@ -118,11 +118,11 @@
 	</data>
 	<data
 		name="ArreterBouton">
-		<value>
-		</value>Arrêter</data>
+		<value>Arrêter</value>
+	</data>
 	<data
 		name="EnvoieDonneesBouton">
-		<value>Envoie des donnée</value>
+		<value>Envoie des données</value>
 	</data>
 	<data
 		name="DonneesBouton">
@@ -158,7 +158,7 @@
 	</data>
 	<data
 		name="BatterieUtiliseeLabel">
-		<value>Batterie utilisé: </value>
+		<value>Batterie utilisée: </value>
 	</data>
 	<data
 		name="BatterieStatusLabel">
@@ -242,7 +242,7 @@
 	</data>
 	<data
 		name="Erreur_MauvaisEmailOuMdp">
-		<value>L'adresse courriel ou le mot de passe saisi sont incorecte</value>
+		<value>L'adresse courriel ou le mot de passe saisi sont incorectes</value>
 	</data>
 	<data
 		name="Erreur_ProblemeConnexionServeur">
@@ -346,11 +346,11 @@
 	</data>
 	<data
 		name="Alerte_ImageUploadHoteInacessibleMessage">
-		<value>L'image sera envoyé lorsque la connexion sera récupérée</value>
+		<value>L'image sera envoyée lorsque la connexion sera récupérée</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadPasDeWifiTitle">
-		<value>L'image sera envoyer au serveur lorsque vous récupérerez du réseau Wifi.</value>
+		<value>L'image sera envoyée au serveur lorsque vous récupérerez du réseau Wifi.</value>
 	</data>
 	<data
 		name="Alerte_ImageUploadPasDeWifiMessage">
@@ -438,7 +438,7 @@
 	</data>
 	<data
 		name="IntervalLocalisationLabel">
-		<value>Interval d'envoie de données</value>
+		<value>Intervalle d'envoi de données</value>
 	</data>
 	<data
 		name="LocalisationPrecisionLabel">
@@ -494,23 +494,23 @@
 	</data>
 	<data
 		name="Alerte_SeulUsagerAppareil_Title">
-		<value>Êtes-vous la seule personne à utiliser cette appareil?</value>
+		<value>Êtes-vous la seule personne à utiliser cet appareil?</value>
 	</data>
 	<data
 		name="Alerte_SeulUsagerAppareil_Message">
-		<value>Si vous partager cette appareil avec d'autres usagers, choisissez "Non".</value>
+		<value>Si vous partager cet appareil avec d'autres usagers, choisissez "Non".</value>
 	</data>
 	<data
 		name="AppareilPartageLabel">
-		<value>Cette appareil est-il partagé?</value>
+		<value>Cet appareil est-il partagé?</value>
 	</data>
 	<data
 		name="Alerte_Info_SeulUsagerAppareil_Title">
-		<value>Êtes-vous la seule personne à utiliser cette appareil?</value>
+		<value>Êtes-vous la seule personne à utiliser cet appareil?</value>
 	</data>
 	<data
 		name="Alerte_Info_SeulUsagerAppareil_Message">
-		<value>Si vous partager cette appareil avec d'autres usagers, activez ce paramètre en ajustant le levier.
+		<value>Si vous partager cet appareil avec d'autres usagers, activez ce paramètre en ajustant le levier.
 
 Cela empêchera d'autres utilisateurs de se connecter automatiquement à votre compte.
 

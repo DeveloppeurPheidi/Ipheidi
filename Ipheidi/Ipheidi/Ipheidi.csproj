@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<PropertyGroup>
+ <Configuration Condition="'$(Configuration)'==''">Debug</Configuration>
+ <Platform Condition="'$(Platform)'==''">AnyCPU</Platform>
+ <ProjectGuid>{0B6BE1C6-E745-45D1-83A8-B136551AE724}</ProjectGuid>
+<ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+<OutputType>Library</OutputType>
+<RootNamespace>Ipheidi</RootNamespace>
+<AssemblyName>Ipheidi</AssemblyName>
+<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+<TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+</PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+<DebugSymbols>true</DebugSymbols>
+<DebugType>full</DebugType>
+<Optimize>false</Optimize>
+<OutputPath>bin\Debug</OutputPath>
+<DefineConstants>DEBUG;</DefineConstants>
+<ErrorReport>prompt</ErrorReport>
+<WarningLevel>4</WarningLevel>
+</PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+<Optimize>true</Optimize>
+<OutputPath>bin\Release</OutputPath>
+<ErrorReport>prompt</ErrorReport>
+<WarningLevel>4</WarningLevel>
+</PropertyGroup>
+<ItemGroup>
+<EmbeddedResource Include="App.xaml" />
+<EmbeddedResource Include="Pages\Geofence\GeofenceCreatePage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Geofence\GeofencePage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Generic\MessagePage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Generic\ListPickingPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Setting\SettingPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Login\LoginPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Navigation\MenuPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Location\LocationPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Location\MapPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Contact\ContactPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Bluetooth\BluetoothPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Browser\BrowserPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Media\ImageEditPage.xaml">
+ <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Resources\AppResources.en.resx">
+  <Generator>PublicResXFileCodeGenerator</Generator>
+  <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+</EmbeddedResource>
+<EmbeddedResource Include="Resources\AppResources.resx">
+  <Generator>PublicResXFileCodeGenerator</Generator>
+  <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Login\SystemLoginPage.xaml">
+  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Login\ServerLoginPage.xaml">
+  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+<EmbeddedResource Include="Pages\Login\PmhPage.xaml">
+  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+</EmbeddedResource>
+</ItemGroup>
+<ItemGroup>
+<Compile Include="App.xaml.cs">
+ <DependentUpon>App.xaml</DependentUpon>
+</Compile>
+<Compile Include="Properties\AssemblyInfo.cs" />
+<Compile Include="Views\PheidiWebView.cs" />
+<Compile Include="Data\Location.cs" />
+<Compile Include="Views\LocationCellView.cs" />
+<Compile Include="Views\MenuCellView.cs" />
+<Compile Include="Data\Contact.cs" />
+<Compile Include="Views\ContactCellView.cs" />
+<Compile Include="Data\Geofence.cs" />
+<Compile Include="Data\DatabaseData.cs" />
+<Compile Include="Utilities\Interfaces\IBattery.cs" />
+<Compile Include="Utilities\Interfaces\IContactService.cs" />
+<Compile Include="Utilities\Interfaces\ICookieService.cs" />
+<Compile Include="Utilities\Interfaces\ICredentialsService.cs" />
+<Compile Include="Utilities\Interfaces\IFileHelper.cs" />
+<Compile Include="Utilities\Interfaces\ILocationListener.cs" />
+<Compile Include="Utilities\Interfaces\ILocationService.cs" />
+<Compile Include="Utilities\Interfaces\INetworkService.cs" />
+<Compile Include="Utilities\Interfaces\INetworkStateListener.cs" />
+<Compile Include="Utilities\Interfaces\INotificationService.cs" />
+<Compile Include="Utilities\Interfaces\INativeUtilities.cs" />
+<Compile Include="Utilities\NetworkService.cs" />
+<Compile Include="Views\GeofenceCellView.cs" />
+<Compile Include="Views\BasicTextCellView.cs" />
+<Compile Include="Utilities\NoSeqGenerator.cs" />
+<Compile Include="Views\AppLoadingView.cs" />
+<Compile Include="Utilities\DatabaseHelper.cs" />
+<Compile Include="Utilities\ThreadHelper.cs" />
+<Compile Include="Data\Action.cs" />
+<Compile Include="Utilities\PheidiParams.cs" />
+<Compile Include="Pages\Geofence\GeofenceCreatePage.xaml.cs">
+ <DependentUpon>GeofenceCreatePage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Geofence\GeofenceEditPage.cs" />
+<Compile Include="Pages\Geofence\GeofencePage.xaml.cs">
+ <DependentUpon>GeofencePage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Generic\MessagePage.xaml.cs">
+ <DependentUpon>MessagePage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Generic\ListPickingPage.xaml.cs">
+ <DependentUpon>ListPickingPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Setting\SettingPage.xaml.cs">
+ <DependentUpon>SettingPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Login\LoginPage.xaml.cs">
+ <DependentUpon>LoginPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Navigation\MenuPage.xaml.cs">
+ <DependentUpon>MenuPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Navigation\PheidiTabbedPage.cs" />
+<Compile Include="Pages\Location\LocationPage.xaml.cs">
+ <DependentUpon>LocationPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Location\MapPage.xaml.cs">
+ <DependentUpon>MapPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Contact\ContactPage.xaml.cs">
+ <DependentUpon>ContactPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Bluetooth\BluetoothPage.xaml.cs">
+ <DependentUpon>BluetoothPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Browser\BrowserPage.xaml.cs">
+ <DependentUpon>BrowserPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Media\ImageEditPage.xaml.cs">
+ <DependentUpon>ImageEditPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Utilities\Interfaces\IImageEditor.cs" />
+<Compile Include="Utilities\Interfaces\ILocalization.cs" />
+<Compile Include="Utilities\PlatformCulture.cs" />
+<Compile Include="Utilities\CustomJsonConverter.cs" />
+<Compile Include="Utilities\JsonHelper.cs" />
+<Compile Include="Utilities\Utilities.cs" />
+<Compile Include="Utilities\ApplicationConst.cs" />
+<Compile Include="Managers\PheidiNetworkManager.cs" />
+<Compile Include="Managers\GeofenceManager.cs" />
+<Compile Include="Managers\ActionManager.cs" />
+<Compile Include="Data\ImageUpload.cs" />
+<Compile Include="Utilities\Interfaces\IImageHelper.cs" />
+<Compile Include="Managers\LocationManager.cs" />
+<Compile Include="Utilities\Interfaces\ISettingHelper.cs" />
+<Compile Include="Views\PheidiPicker.cs" />
+<Compile Include="Pages\Location\LocationSettingsPage.cs" />
+<Compile Include="Resources\AppResources.en.Designer.cs">
+  <DependentUpon>AppResources.en.resx</DependentUpon>
+</Compile>
+<Compile Include="Views\ChoiceSwitch.cs" />
+<Compile Include="Views\HMSTimePicker.cs" />
+<Compile Include="Data\ServerInfo.cs" />
+<Compile Include="Pages\Login\SystemLoginPage.xaml.cs">
+  <DependentUpon>SystemLoginPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Login\ServerLoginPage.xaml.cs">
+  <DependentUpon>ServerLoginPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Pages\Login\PmhPage.xaml.cs">
+  <DependentUpon>PmhPage.xaml</DependentUpon>
+</Compile>
+<Compile Include="Views\IconView.cs" />
+<Compile Include="Pages\Notification\NotificationPage.cs" />
+<Compile Include="Utilities\SerializableAction.cs" />
+<Compile Include="Data\Notification.cs" />
+<Compile Include="Views\NotificationCellView.cs" />
+<Compile Include="Utilities\NotificationService.cs" />
+<Compile Include="Utilities\Interfaces\INotificationListener.cs" />
+<Compile Include="Resources\AppResources.Designer.cs">
+  <DependentUpon>AppResources.resx</DependentUpon>
+</Compile>
+</ItemGroup>
+<ItemGroup>
+<Reference Include="System.Net.Http">
+ <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+</Reference>
+<Reference Include="System.Net.Http.Extensions">
+ <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+</Reference>
+<Reference Include="System.Net.Http.Primitives">
+ <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+</Reference>
+<Reference Include="PCLCrypto">
+ <HintPath>..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
+</Reference>
+<Reference Include="Validation">
+ <HintPath>..\packages\Validation.2.4.15\lib\portable-net45+win8+wp8+wpa81\Validation.dll</HintPath>
+</Reference>
+<Reference Include="Newtonsoft.Json">
+  <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+</Reference>
+<Reference Include="Xamarin.Auth">
+  <HintPath>..\packages\Xamarin.Auth.1.5.0.3\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+XamarinIOS10\Xamarin.Auth.dll</HintPath>
+</Reference>
+<Reference Include="Plugin.Badge.Abstractions">
+  <HintPath>..\packages\Plugin.Badge.1.1.3\lib\portable-net45+win8+wpa81+wp8\Plugin.Badge.Abstractions.dll</HintPath>
+</Reference>
+<Reference Include="SQLitePCLRaw.core">
+  <HintPath>..\packages\SQLitePCLRaw.core.1.1.8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+</Reference>
+<Reference Include="SQLitePCLRaw.batteries_green">
+  <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
+</Reference>
+<Reference Include="SQLitePCLRaw.batteries_v2">
+  <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+</Reference>
+<Reference Include="SQLite-net">
+  <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+</Reference>
+<Reference Include="Xamarin.Forms.Core">
+  <HintPath>..\packages\Xamarin.Forms.2.3.5.256-pre6\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+</Reference>
+<Reference Include="Xamarin.Forms.Platform">
+  <HintPath>..\packages\Xamarin.Forms.2.3.5.256-pre6\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+</Reference>
+<Reference Include="Xamarin.Forms.Xaml">
+  <HintPath>..\packages\Xamarin.Forms.2.3.5.256-pre6\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+</Reference>
+</ItemGroup>
+<ItemGroup>
+<None Include="packages.config" />
+</ItemGroup>
+<ItemGroup>
+<Folder Include="Pages\" />
+<Folder Include="Views\" />
+<Folder Include="Data\" />
+<Folder Include="Utilities\" />
+<Folder Include="Utilities\Interfaces\" />
+<Folder Include="Pages\Geofence\" />
+<Folder Include="Pages\Generic\" />
+<Folder Include="Pages\Setting\" />
+<Folder Include="Pages\Login\" />
+<Folder Include="Pages\Navigation\" />
+<Folder Include="Pages\Location\" />
+<Folder Include="Pages\Contact\" />
+<Folder Include="Pages\Bluetooth\" />
+<Folder Include="Pages\Browser\" />
+<Folder Include="Pages\Media\" />
+<Folder Include="Managers\" />
+<Folder Include="Resources\" />
+<Folder Include="Pages\Notification\" />
+</ItemGroup>
+<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+<Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+<Import Project="..\packages\Xamarin.Forms.2.3.5.256-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.5.256-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+</Project>

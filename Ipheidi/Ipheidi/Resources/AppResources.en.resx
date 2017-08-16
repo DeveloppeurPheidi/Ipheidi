@@ -94,7 +94,7 @@
 	</data>
 	<data
 		name="SauvegarderBouton">
-		<value>Sauvegarder</value>
+		<value>Save</value>
 	</data>
 	<data
 		name="EnregistrerBouton">
@@ -118,8 +118,8 @@
 	</data>
 	<data
 		name="ArreterBouton">
-		<value>
-		</value>Stop</data>
+		<value>Stop</value>
+	</data>
 	<data
 		name="EnvoieDonneesBouton">
 		<value>Send data</value>
@@ -182,7 +182,7 @@
 	</data>
 	<data
 		name="MoinsDeDixMetresOptionPrecision">
-		<value>Less then ten meters</value>
+		<value>Nearest ten meters</value>
 	</data>
 	<data
 		name="CentMetresOptionPrecision">
@@ -258,7 +258,7 @@
 	</data>
 	<data
 		name="TransfertDonneesWifiLabel">
-		<value>Data transfert under Wifi</value>
+		<value>Data transfer under Wifi only</value>
 	</data>
 	<data
 		name="EtatDuReseauLabel">
@@ -354,7 +354,7 @@
 	</data>
 	<data
 		name="Alerte_ImageUploadPasDeWifiMessage">
-		<value>You can turn it off in the setting menu by disabling \"Data transfert under Wifi\"</value>
+		<value>You can turn it off in the setting menu by disabling \"Data transfer under Wifi only\"</value>
 	</data>
 	<data
 		name="CameraFileChooser">
@@ -512,7 +512,7 @@
 		name="Alerte_Info_SeulUsagerAppareil_Message">
 		<value>If you share this device with other users, you can enable this parameter by toggling the switch.
 
-It will prevent other users from auto login into your account.
+It will prevent other users from log in into your account automatically.
 
 The change will be applied when you log out.</value>
 	</data>
@@ -572,8 +572,12 @@ The change will be applied when you log out.</value>
 		name="TimeSpan_Past_AnneePluriel">
 		<value>{0} years ago</value>
 	</data>
-
-	<data name="SupprimerBouton"><value>Delete</value></data>
-
-	<data name="PasDeNotificationLabel"><value>No notification</value></data>
+	<data
+		name="SupprimerBouton">
+		<value>Delete</value>
+	</data>
+	<data
+		name="PasDeNotificationLabel">
+		<value>No notification</value>
+	</data>
 </root>

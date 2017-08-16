@@ -160,10 +160,14 @@ namespace Ipheidi
 				{
 					App.CredentialsManager.DeleteCredentials();
 					App.CredentialsManager.DeleteSystemCredentials();
-					App.UserNoseq = "";
 				}
+				App.SystemCredentials = new KeyValuePair<string, Dictionary<string,string>>();
 				App.UserNoseq = "";
-
+				Task.Run(async() =>
+					{
+						Application.Current.Properties["LastGeofenceSync"] = "2000-01-01 00:00:00";
+						await Application.Current.SavePropertiesAsync();
+					});
 				App.Instance.Logout();
 			};
 
